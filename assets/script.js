@@ -64,18 +64,28 @@ document.addEventListener('DOMContentLoaded', () => {
                         token = 'LOCALHOST_BYPASS_TOKEN';
                         console.info('Using localhost reCAPTCHA bypass token.');
                     } else {
-                        await grecaptcha.enterprise.ready();
-                        token = await grecaptcha.enterprise.execute('6Lf9ZcYrAAAAAFxtek4rvHis08KQbC6Wzo49AjO5', { action: 'homepage_form_submission' });
+                        token = await new Promise((resolve, reject) => {
+                            grecaptcha.enterprise.ready(async function() {
+                                try {
+                                    const t = await grecaptcha.enterprise.execute('6Lf9ZcYrAAAAAFxtek4rvHis08KQbC6Wzo49AjO5', { action: 'homepage_form_submission' });
+                                    resolve(t);
+                                } catch (err) {
+                                    reject(err);
+                                }
+                            });
+                        });
                     }
+                    console.debug('[ContactForm] reCAPTCHA token:', token);
                 } catch (rcErr) {
                     console.warn('reCAPTCHA error, proceeding without token on localhost if applicable:', rcErr);
                     if (!token && window.location && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
                         token = 'LOCALHOST_BYPASS_TOKEN';
                     } else {
+                        console.error('[ContactForm] reCAPTCHA error (not localhost):', rcErr);
                         throw rcErr;
                     }
                 }
-
+    
                 const payload = {
                     name,
                     email,
@@ -83,25 +93,33 @@ document.addEventListener('DOMContentLoaded', () => {
                     'g-recaptcha-response': token,
                     schema_version: "1.0"
                 };
-
-                const response = await fetch('https://n8n.clearlea.se/webhook/homepage-form-submission', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(payload),
-                });
-
-                if (response.ok) {
+                console.debug('[ContactForm] Payload to be sent:', payload);
+    
+                let response;
+                try {
+                    response = await fetch('https://n8n.clearlea.se/webhook/homepage-form-submission', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(payload),
+                    });
+                } catch (fetchErr) {
+                    console.error('[ContactForm] Fetch/network error:', fetchErr);
+                    throw fetchErr;
+                }
+    
+                if (response && response.ok) {
                     alert('Vielen Dank für Ihre Anfrage! Wir werden uns in Kürze bei Ihnen melden.');
                     form.reset();
                 } else {
                     let msg = 'Bitte versuchen Sie es später erneut.';
                     try {
-                        const data = await response.json();
+                        const data = response ? await response.json() : null;
                         if (data && data.message) msg = data.message;
+                        console.error('[ContactForm] Server error response:', data);
                     } catch (err) {
-                        // ignore JSON parse errors
+                        console.error('[ContactForm] Error parsing error response JSON:', err);
                     }
                     alert(`Fehler beim Senden des Formulars: ${msg}`);
                 }
