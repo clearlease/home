@@ -104,6 +104,35 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCalConfig();
     }
 
+    // Reveal animated cards on scroll (fixes sections that look empty due to CSS .animated-card starting hidden)
+    (function revealAnimatedCards() {
+        const animatedCards = document.querySelectorAll('.animated-card');
+        if (!animatedCards || animatedCards.length === 0) return;
+
+        // Honor reduced-motion preference by revealing immediately
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion) {
+            animatedCards.forEach(el => el.classList.add('is-visible'));
+            return;
+        }
+
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            animatedCards.forEach(el => observer.observe(el));
+        } else {
+            // Fallback for older browsers
+            animatedCards.forEach(el => el.classList.add('is-visible'));
+        }
+    })();
+
     // Lucide Icons
     lucide.createIcons();
 });
