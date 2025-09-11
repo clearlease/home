@@ -201,7 +201,7 @@
                 </div>
                 <div class="max-w-3xl mx-auto bg-gray-50 p-8 rounded-xl border border-gray-200">
                     <p class="text-xl md:text-2xl italic text-gray-700">"Vor Clearlea.se haben wir im Vier-Augen-Prinzip ewig gebraucht, um Daten zu pflegen. Jetzt macht eine Person das in 2-3 Minuten pro Standort!"</p>
-                    <p class="mt-6 font-semibold text-gray-800">– Senior Property Manager, Nationale Einzelhandelskette (200+ Standorte)</p>
+                    <p class="mt-6 font-semibold text-gray-800">– Senior Property Manager für Versicherung (450+ Standorte in Europa)</p>
                 </div>
                 <div class="mt-16">
                     <h3 class="text-lg text-gray-500 font-semibold mb-6">Unterstützt und vertraut von starken Partnern</h3>
@@ -491,34 +491,59 @@
                     <!-- Accordion Item 6 -->
                     <div class="border-b border-gray-200 py-4">
                         <button @click="open = (open === 6 ? 0 : 6)" class="faq-question">
-                            <span>Wie lange dauert die Implementierung?</span>
+                            <span>Welche Hosting-Optionen bieten Sie an?</span>
                             <i data-lucide="chevron-down" class="transform transition-transform duration-300" :class="{'rotate-180': open === 6}"></i>
                         </button>
                         <div x-show="open === 6" x-collapse class="mt-4 text-gray-600 leading-relaxed">
-                            <p>Die Implementierung ist denkbar einfach und dauert nur wenige Minuten. Clearlea.se ist eine web-basierte SaaS-Plattform, die keine komplexe IT-Installation erfordert. Nach der Registrierung können Sie sofort per Drag-and-Drop Ihre ersten Dokumente hochladen und live erleben, wie unsere KI die Daten für Sie aufbereitet.</p>
+                            <p>Wir verstehen, dass größere Unternehmen spezielle Anforderungen an Datensicherheit und Infrastruktur haben. Deshalb bieten wir neben unserer Standard-Cloud-Lösung auch dedizierte Hosting-Optionen an:</p>
+                            <ul class="list-disc list-inside mt-2 space-y-2">
+                                <li><strong>Standard (Secure SaaS Cloud Deutschland):</strong> Hochsichere, nach ISO-27001-Prinzipien aufgebaute und DSGVO-konforme Infrastruktur mit Server-Standort ausschließlich in Deutschland.</li>
+                                <li><strong>Enterprise (Private Cloud / VPC):</strong> Eine vollständig isolierte Umgebung auf exklusiv für Sie reservierten Ressourcen für maximale Kontrolle und Compliance.</li>
+                                <li><strong>On-Premise (Auf Anfrage):</strong> Für Kunden mit höchsten Sicherheits- oder regulatorischen Auflagen bieten wir nach Absprache auch eine Installation in Ihrem eigenen Rechenzentrum an.</li>
+                            </ul>
                         </div>
                     </div>
                     <!-- Accordion Item 7 -->
                     <div class="border-b border-gray-200 py-4">
                         <button @click="open = (open === 7 ? 0 : 7)" class="faq-question">
-                            <span>Was ist der Unterschied zu einem allgemeinen KI-Tool oder "Chat with PDF"?</span>
+                            <span>Wie lange dauert die Implementierung?</span>
                             <i data-lucide="chevron-down" class="transform transition-transform duration-300" :class="{'rotate-180': open === 7}"></i>
                         </button>
                         <div x-show="open === 7" x-collapse class="mt-4 text-gray-600 leading-relaxed">
-                            <p>Während Chat-Tools eine einzelne Frage zu einem Dokument beantworten können, geht Clearlea.se einen entscheidenden Schritt weiter. Wir erstellen keine temporäre Antwort, sondern eine permanente, strukturierte und skalierbare Datenbank für Ihr gesamtes Portfolio. Das bedeutet, Sie können Daten über hunderte Standorte hinweg vergleichen, filtern, sortieren und als saubere Datensätze für Ihre Reportings exportieren. Kurz gesagt: Ein Chatbot gibt Ihnen eine einzelne Antwort. Wir geben Ihnen den strategischen Überblick.</p>
+                            <p>Die Implementierung ist denkbar einfach und dauert nur wenige Minuten. Clearlea.se ist eine web-basierte SaaS-Plattform, die keine komplexe IT-Installation erfordert. Nach der Registrierung können Sie sofort per Drag-and-Drop Ihre ersten Dokumente hochladen und live erleben, wie unsere KI die Daten für Sie aufbereitet.</p>
                         </div>
                     </div>
                     <!-- Accordion Item 8 -->
                     <div class="border-b border-gray-200 py-4">
                         <button @click="open = (open === 8 ? 0 : 8)" class="faq-question">
-                            <span>Wie sieht Ihr Preismodell aus?</span>
+                            <span>Was ist der Unterschied zu einem allgemeinen KI-Tool oder Co-Piloten?</span>
                             <i data-lucide="chevron-down" class="transform transition-transform duration-300" :class="{'rotate-180': open === 8}"></i>
                         </button>
                         <div x-show="open === 8" x-collapse class="mt-4 text-gray-600 leading-relaxed">
+                            <p>Während Chat-Tools eine einzelne Frage zu einem Dokument beantworten können, geht Clearlea.se einen entscheidenden Schritt weiter. Wir erstellen keine temporäre Antwort, sondern eine permanente, strukturierte und skalierbare Datenbank für Ihr gesamtes Portfolio. Das bedeutet, Sie können Daten über hunderte Standorte hinweg vergleichen, filtern, sortieren und als saubere Datensätze für Ihre Reportings exportieren. Kurz gesagt: Ein Chatbot gibt Ihnen eine einzelne Antwort. Wir geben Ihnen den strategischen Überblick.</p>
+                        </div>
+                    </div>
+                    <!-- Accordion Item 9 -->
+                    <div class="border-b border-gray-200 py-4">
+                        <button @click="open = (open === 9 ? 0 : 9)" class="faq-question">
+                            <span>Wie sieht Ihr Preismodell aus?</span>
+                            <i data-lucide="chevron-down" class="transform transition-transform duration-300" :class="{'rotate-180': open === 9}"></i>
+                        </button>
+                        <div x-show="open === 9" x-collapse class="mt-4 text-gray-600 leading-relaxed">
                             <p>Wir bieten ein transparentes und flexibles Hybridmodell, das sich an Ihre Bedürfnisse anpasst.<br>
                             <strong>SaaS-Abonnement:</strong> Für die laufende Verwaltung Ihres Portfolios nutzen wir ein monatliches Abonnement, dessen Preis sich fair nach der Anzahl der verwalteten Standorte richtet.<br>
                             <strong>Projektpreise:</strong> Für einmalige Großprojekte, wie die Datenextraktion im Rahmen einer Due Diligence oder die initiale Digitalisierung eines Datenraums, bieten wir feste und transparente Projektpreise an.<br>
                             Gerne erstellen wir Ihnen in einem persönlichen Gespräch ein individuelles Angebot, das genau auf Ihre Anforderungen zugeschnitten ist.</p>
+                        </div>
+                    </div>
+                    <!-- Accordion Item 10 -->
+                    <div class="border-b border-gray-200 py-4">
+                        <button @click="open = (open === 10 ? 0 : 10)" class="faq-question">
+                            <span>Wie sieht die langfristige Vision für Clearlea.se aus?</span>
+                            <i data-lucide="chevron-down" class="transform transition-transform duration-300" :class="{'rotate-180': open === 10}"></i>
+                        </button>
+                        <div x-show="open === 10" x-collapse class="mt-4 text-gray-600 leading-relaxed">
+                            <p>Unsere Vision ist es, der zentrale "Daten-Motor" für die europäische Immobilienwirtschaft zu werden. Kurzfristig erweitern wir unsere Automatisierungsmodule und vertiefen Integrationen in Kernsysteme wie SAP. Langfristig arbeiten wir an einem neutralen, datengestützten Marktplatz, der die Zusammenarbeit zwischen Mietern und Vermietern revolutioniert. Unsere Kunden sind unsere Partner auf dieser Reise – ihre Herausforderungen von heute definieren unsere Innovationen von morgen.</p>
                         </div>
                     </div>
                 </div>
