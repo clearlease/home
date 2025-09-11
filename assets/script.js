@@ -84,8 +84,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const config = {
             name: name,
             email: email,
-            // The key here must match the 'identifier' in your Cal.com booking questions.
-            // Based on the screenshot, 'Unternehmen' is the field name. Let's assume the identifier is 'unternehmen'.
             company: company,
             layout: 'month_view'
         };
@@ -95,12 +93,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (nameInput && emailInput && companyInput && calButton) {
-        // Update on any input change
         [nameInput, emailInput, companyInput].forEach(input => {
             input.addEventListener('input', updateCalConfig);
         });
-
-        // Initial update in case of browser autofill
         updateCalConfig();
     }
 
@@ -133,6 +128,81 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     })();
 
-    // Lucide Icons
-    lucide.createIcons();
+    // Markdown rendering for pages using data-md attributes
+    // Finds any element with a data-md attribute, fetches the referenced markdown file,
+    // loads the marked parser dynamically if needed, converts markdown to HTML and injects it.
+    // Uses encodeURI to handle spaces in filenames.
+    async function renderDataMdElements() {
+        const elems = document.querySelectorAll('[data-md]');
+        if (!elems || elems.length === 0) return;
+
+        // helper to actually render using marked
+        const doRender = async () => {
+            elems.forEach(async (el) => {
+                const mdPath = el.getAttribute('data-md');
+                if (!mdPath) return;
+                try {
+                    const res = await fetch(encodeURI(mdPath));
+                    if (!res.ok) {
+                        el.innerHTML = '<p class="text-red-600">Fehler beim Laden des Inhalts.</p>';
+                        return;
+                    }
+                    const md = await res.text();
+                    // marked.parse is the current API
+                    const html = window.marked && typeof window.marked.parse === 'function'
+                        ? window.marked.parse(md)
+                        : (window.marked ? window.marked(md) : md);
+                    el.innerHTML = html;
+                } catch (err) {
+                    console.error('Error loading markdown:', err);
+                    el.innerHTML = '<p class="text-red-600">Fehler beim Laden des Inhalts.</p>';
+                }
+            });
+        };
+
+        if (window.marked && typeof window.marked.parse === 'function') {
+            await doRender();
+            return;
+        }
+
+        // Dynamically load marked from CDN then render
+        try {
+            await new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/marked/marked.min.js';
+                script.defer = true;
+                script.onload = resolve;
+                script.onerror = (e) => { console.error('Failed to load marked.js', e); reject(e); };
+                document.head.appendChild(script);
+            });
+            await doRender();
+        } catch (err) {
+            // As fallback, inject raw markdown inside a <pre>
+            elems.forEach(async (el) => {
+                try {
+                    const res = await fetch(encodeURI(el.getAttribute('data-md')));
+                    const md = await res.text();
+                    el.innerHTML = '<pre>' + escapeHtml(md) + '</pre>';
+                } catch {
+                    el.innerHTML = '<p class="text-red-600">Fehler beim Laden des Inhalts.</p>';
+                }
+            });
+        }
+
+        // small helper to escape HTML for fallback
+        function escapeHtml(str) {
+            // Use DOM textContent to safely escape without manual mapping
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+    }
+
+    // Kick off markdown rendering (do this after other DOM initialization)
+    renderDataMdElements();
+
+    // Lucide Icons (guarded — some pages don't load lucide)
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons();
+    }
 });
