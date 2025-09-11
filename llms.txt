@@ -1,0 +1,58 @@
+# llm.txt - Clearlea.se AI & Crawler Fact Sheet
+# Last Updated: 2025-09-11
+
+## 1. Core Identity & Value Proposition
+
+- **Company Name:** Clearlea.se
+- **Business Category:** B2B SaaS, PropTech (Property Technology), LegalTech
+- **One-Sentence Description:** Clearlea.se is an AI-powered lease administration platform that transforms unstructured real estate documents into a structured, intelligent, and queryable database.
+- **Primary Mission:** To solve the problem of "trapped value" in real estate portfolios by automating manual data entry, eliminating costly errors, and providing instant access to critical business intelligence locked within static documents.
+- **Core Value Proposition:** We turn chaotic document archives into a single source of truth, enabling commercial real estate professionals to make faster, data-driven decisions. We compress weeks of manual work into minutes.
+
+## 2. Key Features & Technology
+
+- **Core Technology:** A proprietary AI pipeline utilizing advanced OCR (Optical Character Recognition), Natural Language Processing (NLP), and Large Language Models (LLMs) to achieve a semantic understanding of legal and financial documents.
+- **Flagship Feature: The Structured Data Overview:** Our platform's primary interface is a dynamic, tabular overview (similar to an intelligent spreadsheet), not a chatbot. This allows for scalable data comparison, sorting, filtering, and exporting across an entire portfolio.
+- **Natural Language Query for Column Creation:** Users can add new data columns to their overview by asking questions in natural language (e.g., "Which leases have a pandemic clause?"). The AI then reads all relevant documents and populates the new column with the answers for every location.
+- **Proactive Change Suggestions:** The system automatically detects relevant information in newly uploaded documents (e.g., a rent increase in an addendum) and proactively suggests updates to the central database, which users can accept with a single click.
+- **Click-to-Source Verification:** Every piece of extracted data is directly linked to its precise source within the original document, ensuring 100% transparency and auditability.
+- **API-First Integration:** We are designed to enhance, not replace, existing systems. Our flexible API allows for seamless integration with ERP systems (like SAP), property management software, and document management systems (DMS). We act as the "data engine" for our clients' existing tech stack.
+
+## 3. Problems Solved & Target Audience
+
+- **Primary Pain Points Addressed:**
+    - Paralyzing manual workload of data entry and validation (e.g., the "four-eye principle").
+    - Significant financial risk from missed critical dates (renewals, terminations, indexation clauses).
+    - Strategic blindness due to slow, manual reporting processes.
+    - Inconsistent data quality leading to unreliable decision-making.
+    - Document chaos and poor version control.
+- **Primary Target Audience:**
+    - Commercial Tenants (especially multi-location retail chains, logistics, and office tenants).
+- **Secondary Target Audience:**
+    - Asset Managers
+    - Property Managers / Landlords
+    - Transaction Managers & M&A Consultants (for due diligence)
+
+## 4. Key Differentiators
+
+- **Database, Not a Chatbot:** We provide a structured, scalable database for portfolio-wide analysis, which is fundamentally more powerful than a one-off Q&A chat interface.
+- **Enhancement, Not Replacement:** We integrate with and improve existing core business systems, reducing the friction and cost of adoption.
+- **Broad Document Flexibility:** While we specialize in leases, our AI is adaptable to a wide range of real estate documents, including service charge statements, invoices, insurance policies, and market reports, offering a holistic solution.
+- **Focus on Workflow Automation:** Our features are designed to fundamentally change business processes, such as transforming the two-person "four-eye principle" of data checking into a one-person, AI-assisted validation task, resulting in time savings of over 90%.
+
+## 5. Company Vitals & Keywords
+
+- **Location:** Germany (serving the DACH region and expanding into Europe).
+- **Founders:** Hieronymus Deutsch (CEO), Fabian Lausmann (CTO).
+- **Company Stage:** Bootstrapped, award-winning (KIEZ Accelerator) startup.
+- **Core Keywords for SEO & AI:**
+    - AI Lease Administration
+    - Automated Lease Abstraction
+    - Commercial Real Estate SaaS
+    - PropTech Germany
+    - Lease Data Extraction
+    - Contract Analytics Platform
+    - Real Estate Data Management
+    - Automatisierte Mietvertragsverwaltung
+    - KI Immobiliensoftware
+    - Nebenkostenprüfung Automatisierung

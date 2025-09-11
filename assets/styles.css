@@ -1,0 +1,319 @@
+/* Project styles for Clearlea.se */
+
+:root {
+    --clr-primary: #13293D;       /* Deep Blue */
+    --clr-primary-hover: #0f2230; /* Darker Blue */
+    --clr-accent: #247BA0;        /* Bright Blue */
+    --clr-accent-light: #EBF4FF;  /* Light Blue BG */
+    --clr-bg: #F8F9FA;            /* Off-white */
+    --clr-bg-secondary: #FFFFFF;   /* White */
+    --clr-text-primary: #1f2937;  /* gray-800 */
+    --clr-text-secondary: #4b5563;/* gray-600 */
+    --clr-border: #E5E7EB;        /* gray-200 */
+    /* Accessibility: highlight color used for focused elements */
+    --clr-highlight: rgba(36,123,160,0.18);
+}
+
+/* Page background */
+body {
+    background-color: var(--clr-bg);
+    color: var(--clr-text-primary);
+    font-family: 'Inter', sans-serif;
+}
+
+/* Gradient text used in headings */
+.gradient-text {
+    background: linear-gradient(90deg, var(--clr-accent), var(--clr-primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* CTA button */
+.btn-cta {
+    background-color: var(--clr-primary);
+    color: white;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem; /* Increased padding */
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+    display: inline-block;
+    border: 1px solid transparent;
+}
+.btn-cta:hover {
+    background-color: var(--clr-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Cards / secondary backgrounds */
+.card {
+    background-color: white;
+}
+
+/* Secondary panels */
+.panel-secondary {
+    background-color: var(--clr-bg-secondary);
+}
+
+/* Small helpers */
+.text-highlight { color: var(--clr-highlight); }
+
+/* Accessibility: focus outlines */
+a:focus, button:focus, input:focus, textarea:focus {
+    outline: 3px solid rgba(36, 123, 160, 0.18);
+    outline-offset: 2px;
+}
+
+/* Responsive partner logo (size + behavior consolidated) */
+.partner-logo {
+    height: 40px;
+    max-height: 40px;
+    width: auto;
+    object-fit: contain;
+    /* keep logos desaturated by default; no rotation */
+    filter: grayscale(100%);
+    transition: filter 200ms ease, transform 200ms ease;
+    display: inline-block;
+}
+.partner-logo:hover {
+    filter: grayscale(0%);
+    transform: scale(1.03);
+}
+img[src*="integrationimage"] {
+    filter: none;
+    max-height: none;
+}
+
+/* Removed individual logo spin animation; marquee handles horizontal motion. */
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .partner-logo {
+        animation: none;
+        transition: none;
+    }
+}
+/* Marquee-style partner row (one continuous row that scrolls left) */
+.partner-marquee {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding: 0.75rem 0;
+    /* soft fade at edges */
+    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 8%, rgba(0,0,0,1) 92%, rgba(0,0,0,0));
+    mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 8%, rgba(0,0,0,1) 92%, rgba(0,0,0,0));
+}
+
+/* The moving track — duplicated logos inside for seamless loop */
+.marquee-track {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+    white-space: nowrap;
+    animation: marquee 22s linear infinite;
+}
+
+/* If user prefers reduced motion, stop animation */
+@media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+        animation: none;
+    }
+}
+
+/* Keyframes move the track left by 50% (we duplicated items in markup) */
+@keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+/* Soft, rounded site shell to create fading/corner softness */
+.site-shell {
+    margin-top: 72px; /* account for fixed header */
+    border-radius: 28px;
+    overflow: hidden;
+    background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(247,247,247,0.95));
+    box-shadow: 0 30px 80px rgba(16,24,40,0.08);
+}
+
+/* Optionally slightly blur the edges for a softer fade */
+.site-shell::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: 28px;
+    box-shadow: inset 0 0 80px rgba(255,255,255,0.9);
+    mix-blend-mode: normal;
+    opacity: 0.5;
+}
+
+/* partner logo sizing consolidated above */
+
+/* On hover we keep desaturation removal but pause marquee for clarity */
+.partner-marquee:hover .marquee-track { animation-play-state: paused; }
+/* Tab component styles */
+[role="tablist"] {
+    display: flex;
+    background-color: #fff;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+[role="tab"] {
+    flex: 1;
+    text-align: center;
+    padding: 0.75rem 1rem;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+
+[role="tab"][aria-selected="true"] {
+    background-color: #2563eb;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+[role="tabpanel"] {
+    transition: opacity 0.5s ease-in-out;
+}
+/* Accordion Styles */
+#faq button:focus {
+    outline: 2px solid var(--clr-highlight);
+    outline-offset: 2px;
+}
+
+#faq [x-collapse] {
+    transition: height 0.3s ease-in-out;
+}
+.challenge-card,
+.persona-card,
+.security-card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.challenge-card:hover,
+.persona-card:hover,
+.security-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Animation for cards on scroll */
+.animated-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.animated-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* Navigation link styles */
+.nav-link {
+    color: var(--clr-text-secondary);
+    transition: color 0.2s ease-in-out;
+    position: relative;
+    padding-bottom: 4px;
+}
+.nav-link:hover {
+    color: var(--clr-accent);
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--clr-accent);
+    transition: width 0.2s ease-in-out;
+}
+.nav-link:hover::after {
+    width: 100%;
+}
+/* Feature icon styles */
+.feature-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4rem; /* 64px */
+    width: 4rem; /* 64px */
+    background-color: var(--clr-accent-light);
+    border-radius: 9999px; /* full */
+    margin-bottom: 1.5rem; /* mb-6 */
+}
+.feature-icon i {
+    width: 2rem; /* 32px */
+    height: 2rem; /* 32px */
+    color: var(--clr-accent);
+}
+/* FAQ question button styles */
+.faq-question {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    font-size: 1.25rem; /* xl */
+    font-weight: 600;
+    color: var(--clr-text-primary);
+    transition: color 0.2s ease-in-out;
+}
+.faq-question:hover {
+    color: var(--clr-accent);
+}
+/* Hero animation container with soft edges */
+.hero-animation-container {
+    -webkit-mask-image: radial-gradient(ellipse at center, black 45%, transparent 100%);
+    mask-image: radial-gradient(ellipse at center, black 45%, transparent 100%);
+}
+.lottie-container {
+    aspect-ratio: 16 / 9;
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+.persona-card .image-container {
+    aspect-ratio: 9 / 16;
+    overflow: hidden;
+}
+
+.persona-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+/* Carousel styles */
+.persona-card .relative .absolute {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.persona-card .relative:hover .absolute {
+    opacity: 1;
+}
+
+.persona-card {
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.persona-card:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+/* Accessibility & anchor offset fixes (prevents fixed header from covering anchored sections) */
+section[id] {
+    scroll-margin-top: 96px; /* matches header height + spacing */
+}
+
+/* Ensure focus outlines use the theme highlight variable (override if needed) */
+a:focus, button:focus, input:focus, textarea:focus {
+    outline: 3px solid var(--clr-highlight);
+    outline-offset: 2px;
+}

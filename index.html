@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clearlea.se | KI-gestützte Lease Administration</title>
+
+    <!-- Basic SEO -->
+    <meta name="description" content="Clearlea.se - KI-gestützte Lease Administration: Automatische Extraktion & Strukturierung von Immobiliendokumenten.">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content="Clearlea.se | KI-gestützte Lease Administration">
+    <meta property="og:description" content="Automatische Extraktion & Strukturierung von Immobiliendokumenten.">
+    <meta property="og:image" content="resources/logos/clearlease_logo_rgb (flattened).svg">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon / Web App -->
+    <link rel="icon" href="resources/favicon/favicon.ico">
+    <link rel="apple-touch-icon" href="resources/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="resources/favicon/site.webmanifest">
+
+    <!-- Tailwind (CDN for now) and Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Lucide icons (kept as CDN) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Alpine.js for component interactivity -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    <!-- Project styles (moved from inline) -->
+    <link rel="stylesheet" href="assets/styles.css">
+    <!-- Lottie Player -->
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6Lf9ZcYrAAAAAFxtek4rvHis08KQbC6Wzo49AjO5"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 border-b border-gray-200">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center">
+                <img src="resources/clearlease_logo_rgb (flattened).svg" alt="Clearlea.se" class="h-8">
+            </a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#herausforderung" class="nav-link">Die Herausforderung</a>
+                <a href="#workflow" class="nav-link">Workflow</a>
+                <a href="#anwendungsfaelle" class="nav-link">Anwendungsfälle</a>
+                <a href="#sicherheit" class="nav-link">Sicherheit</a>
+            </nav>
+            <a href="#cta" class="btn-cta">
+                Demo anfordern
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Section 1: Hero -->
+        <section class="pt-32 pb-20 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">
+                    Manuelle Datenpflege? <br class="hidden md:block">
+                    <span class="gradient-text">In 3 Minuten pro Standort erledigt.</span>
+                </h1>
+                <p class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-gray-600">
+                    Clearlea.se ist die KI-Plattform, die Ihre Immobilien-Dokumente – von Mietverträgen bis Rechnungen – automatisch liest, strukturiert und für Ihre Systeme nutzbar macht. Machen Sie Ihr Team schneller und Ihre Daten besser.
+                </p>
+                <a href="#cta" class="btn-cta mt-10">
+                    Demo anfordern & Zeit sparen
+                </a>
+                <div class="mt-8 text-center">
+                    <p class="text-sm text-gray-500">Unterstütz von:</p>
+                    <div class="flex justify-center items-center space-x-8 mt-4">
+                        <img src="resources/logos/zia-logo.svg" alt="ZIA Logo" class="h-6">
+                        <img src="resources/logos/d7c52f63358bebbf1ee6e8c58fb13ccaeb12b39f125d2c599a422cc747268d04-L.png" alt="GPTI Logo" class="h-6">
+                        <img src="resources/logos/KI-Park-und-Rise-of-AI-Mitgliedschaft-2048x817.png" alt="KI Park Logo" class="h-6">
+                        <img src="resources/logos/63a75b0d9304ed50871e75c2e20c120510bc62b00c29770d69908a6aefcf581e-L.png" alt="Partner Logo" class="h-6">
+                    </div>
+                </div>
+                <div class="mt-12 mx-auto max-w-5xl rounded-2xl overflow-hidden hero-animation-container">
+                    <dotlottie-player src="resources/lottie/Hero-vid.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop autoplay></dotlottie-player>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: The Shared Challenge -->
+        <section id="herausforderung" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Kommt Ihnen das bekannt vor?</h2>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Column 1 -->
+                    <div class="challenge-card animated-card bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+                        <div class="feature-icon">
+                            <i data-lucide="users"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Das Vier-Augen-Prinzip</h3>
+                        <p class="text-gray-600">Kritische Daten müssen von zwei Personen manuell geprüft werden. Das ist sicher, aber auch langsam und teuer. Ihr Fachpersonal ist mit Abtippen statt mit wertvoller Analyse beschäftigt.</p>
+                    </div>
+                    <!-- Column 2 -->
+                    <div class="challenge-card animated-card bg-white p-8 rounded-xl shadow-lg border border-gray-100" style="animation-delay: 0.1s;">
+                        <div class="feature-icon">
+                            <i data-lucide="search"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Die Suche nach der Nadel im Heuhaufen</h3>
+                        <p class="text-gray-600">Eine simple Frage zur Kündigungsfrist eines Nachtrags? Das bedeutet: Ordner öffnen, Dokumente durchsuchen, Versionen vergleichen. Wertvolle Zeit geht verloren.</p>
+                    </div>
+                    <!-- Column 3 -->
+                    <div class="challenge-card animated-card bg-white p-8 rounded-xl shadow-lg border border-gray-100" style="animation-delay: 0.2s;">
+                        <div class="feature-icon">
+                            <i data-lucide="database-zap"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Mangelnde Datenqualität</h3>
+                        <p class="text-gray-600">Trotz aller Mühe führen manuelle Übertragungsfehler zu inkonsistenten Daten in Ihren Kernsystemen. Strategische Entscheidungen basieren auf einer wackeligen Grundlage.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: The Clearlea.se Method -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+                <div class="md:pr-10">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Die neue Art der Datenpflege: <br><span class="gradient-text">KI als Ihr erstes Augenpaar.</span></h2>
+                    <p class="mt-6 text-lg text-gray-600">Wir haben Clearlea.se als intelligenten Co-Piloten für Ihr Team entwickelt. Unsere KI übernimmt die mühsame Erst-Erfassung und Validierung Ihrer Portfoliodaten. Ihr Team prüft nur noch, bestätigt mit einem Klick und kann sich auf das Wesentliche konzentrieren.</p>
+                    <p class="mt-6 text-xl text-gray-900 font-bold">Das Ergebnis: 100% Kontrolle, 90% weniger Aufwand.</p>
+                </div>
+                <div class="lottie-container">
+                    <dotlottie-player src="resources/lottie/extraction-and-validation-vid.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop autoplay></dotlottie-player>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: A Workflow That Inspires -->
+        <section id="workflow" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Von der Information zur Entscheidung in Sekunden.</h2>
+                </div>
+                <!-- Feature 1 -->
+                <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+                    <div class="md:order-2">
+                        <h3 class="text-2xl font-semibold mb-2">Strukturierte Übersicht statt Dokumenten-Stapel</h3>
+                        <p class="text-lg italic text-gray-500 mb-4">Ihr gesamtes Portfolio auf einen Blick.</p>
+                        <p class="text-gray-600 text-lg">Unsere KI erkennt automatisch Dokumententypen, fasst sie pro Standort zusammen und erstellt eine zentrale, interaktive Übersichtstabelle.</p>
+                    </div>
+                    <div class="md:order-1 lottie-container">
+                        <dotlottie-player src="resources/lottie/structured-overview-vid.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop autoplay></dotlottie-player>
+                    </div>
+                </div>
+                <!-- Feature 2 -->
+                <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-2">Mit einem Klick zur Quelle</h3>
+                        <p class="text-lg italic text-gray-500 mb-4">"Nie wieder in PDFs nach der richtigen Stelle suchen."</p>
+                        <p class="text-gray-600 text-lg">Klicken Sie auf einen beliebigen Datenpunkt in der Tabelle und Clearlea.se zeigt Ihnen sofort die exakte Stelle im Originaldokument.</p>
+                    </div>
+                    <div class="lottie-container">
+                        <dotlottie-player src="resources/lottie/click-to-source-vid.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop autoplay></dotlottie-player>
+                    </div>
+                </div>
+                <!-- Feature 3 -->
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="md:order-2">
+                        <h3 class="text-2xl font-semibold mb-2">Proaktive Vorschläge bei neuen Dokumenten</h3>
+                        <p class="text-lg italic text-gray-500 mb-4">"So bleiben Ihre Daten mühelos aktuell."</p>
+                        <p class="text-gray-600 text-lg">Laden Sie einen neuen Nachtrag hoch und unsere KI schlägt automatisch die Aktualisierung vor – z.B. die neue Miete. So bleiben Ihre Daten mühelos aktuell und konsistent.</p>
+                    </div>
+                    <div class="md:order-1 lottie-container">
+                        <dotlottie-player src="resources/lottie/proactive-suggestions-vid.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop autoplay></dotlottie-player>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Social Proof -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 max-w-4xl mx-auto">Was früher zwei Leute beschäftigte, erledigt jetzt eine:r – in Rekordzeit.</h2>
+                <div class="my-10">
+                    <p class="text-7xl md:text-9xl font-extrabold gradient-text">2-3 Minuten</p>
+                    <p class="text-2xl md:text-3xl font-semibold text-gray-800 mt-2">pro Standort für die vollständige Datenpflege.</p>
+                </div>
+                <div class="max-w-3xl mx-auto bg-gray-50 p-8 rounded-xl border border-gray-200">
+                    <p class="text-xl md:text-2xl italic text-gray-700">"Vor Clearlea.se haben wir im Vier-Augen-Prinzip ewig gebraucht, um Daten zu pflegen. Jetzt macht eine Person das in 2-3 Minuten pro Standort!"</p>
+                    <p class="mt-6 font-semibold text-gray-800">– Senior Property Manager, Nationale Einzelhandelskette (200+ Standorte)</p>
+                </div>
+                <div class="mt-16">
+                    <h3 class="text-lg text-gray-500 font-semibold mb-6">Unterstützt und vertraut von starken Partnern</h3>
+                    <div class="partner-marquee">
+                        <div class="marquee-track" aria-hidden="false">
+                            <img src="resources/logos/zia-logo.svg" alt="ZIA" class="partner-logo opacity-80">
+                            <img src="resources/logos/202201_KIEZ_Logo_RGB_Black.svg" alt="KIEZ" class="partner-logo opacity-80">
+                            <img src="resources/logos/gpti_Logo_FINAL_einzeln.svg" alt="GPTI" class="partner-logo opacity-80">
+                            <img src="resources/logos/mistral-ai-seeklogo.svg" alt="Mistral AI" class="partner-logo opacity-80">
+                            <img src="resources/logos/KI-Park-und-Rise-of-AI-Mitgliedschaft-2048x817.png" alt="KI Park / Rise of AI" class="partner-logo opacity-80">
+                            <img src="resources/logos/google-for-startups-1000x960.jpg" alt="Google for Startups" class="partner-logo opacity-80">
+                            <img src="resources/logos/MS_Startups_Celebration_Badge_Light.png" alt="Microsoft Startups" class="partner-logo opacity-80">
+                            <img src="resources/logos/63a75b0d9304ed50871e75c2e20c120510bc62b00c29770d69908a6aefcf581e-L.png" alt="Partner" class="partner-logo opacity-80">
+                            <img src="resources/logos/d7c52f63358bebbf1ee6e8c58fb13ccaeb12b39f125d2c599a422cc747268d04-L.png" alt="Partner" class="partner-logo opacity-80">
+                            <img src="resources/logos/bb6a255ad28cced895c9c9beed7a9f4bba57e09f1a20a545d71c85498b80b7ca-L.jpg" alt="Partner" class="partner-logo opacity-80">
+                            <!-- Repeat for seamless loop -->
+                            <img src="resources/logos/zia-logo.svg" alt="ZIA" class="partner-logo opacity-80">
+                            <img src="resources/logos/202201_KIEZ_Logo_RGB_Black.svg" alt="KIEZ" class="partner-logo opacity-80">
+                            <img src="resources/logos/gpti_Logo_FINAL_einzeln.svg" alt="GPTI" class="partner-logo opacity-80">
+                            <img src="resources/logos/mistral-ai-seeklogo.svg" alt="Mistral AI" class="partner-logo opacity-80">
+                            <img src="resources/logos/KI-Park-und-Rise-of-AI-Mitgliedschaft-2048x817.png" alt="KI Park / Rise of AI" class="partner-logo opacity-80">
+                            <img src="resources/logos/google-for-startups-1000x960.jpg" alt="Google for Startups" class="partner-logo opacity-80">
+                            <img src="resources/logos/MS_Startups_Celebration_Badge_Light.png" alt="Microsoft Startups" class="partner-logo opacity-80">
+                            <img src="resources/logos/63a75b0d9304ed50871e75c2e20c120510bc62b00c29770d69908a6aefcf581e-L.png" alt="Partner" class="partner-logo opacity-80">
+                            <img src="resources/logos/d7c52f63358bebbf1ee6e8c58fb13ccaeb12b39f125d2c599a422cc747268d04-L.png" alt="Partner" class="partner-logo opacity-80">
+                            <img src="resources/logos/bb6a255ad28cced895c9c9beed7a9f4bba57e09f1a20a545d71c85498b80b7ca-L.jpg" alt="Partner" class="partner-logo opacity-80">
+                        </div>
+                    </div>
+               </div>
+            </div>
+        </section>
+        
+        <!-- Section 6: Built for Your World -->
+        <section id="anwendungsfaelle" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Eine Plattform, viele Anwendungsfälle.</h2>
+                </div>
+                <div x-data="carousel()" x-init="init()" class="relative">
+                    <div class="overflow-hidden">
+                        <div x-ref="slider" class="flex transition-transform duration-500 ease-in-out">
+                            <!-- Card 1: Gewerbemieter -->
+                            <div class="w-full md:w-1/3 lg:w-1/4 flex-shrink-0 p-4">
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-800 text-center">Für Gewerbemieter</h3>
+                                    <p class="text-sm text-gray-500 mb-2 text-center">Portfolio-Kontrolle gewinnen</p>
+                                    <div @mouseenter="pause()" @mouseleave="resume()" class="persona-card bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 flex flex-col h-full">
+                                        <div class="relative">
+                                            <img src="resources/images/PM-of-tenant.png" alt="Gewerbemieter" class="w-full h-64 object-cover">
+                                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center p-6 text-white opacity-0 hover:opacity-100 transition-opacity duration-300">
+                                                <div>
+                                                    <p class="italic mb-4">"Ich muss den Überblick über hunderte von Mietverträgen behalten und darf keine Frist verpassen."</p>
+                                                    <p class="font-semibold">Behalten Sie die volle Kontrolle über alle Standorte, managen Sie Fristen und optimieren Sie Ihr Portfolio.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 2: Asset & Property Manager -->
+                            <div class="w-full md:w-1/3 lg:w-1/4 flex-shrink-0 p-4">
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-800 text-center">Für Asset & Property Manager</h3>
+                                    <p class="text-sm text-gray-500 mb-2 text-center">Aufwand drastisch reduzieren</p>
+                                    <div @mouseenter="pause()" @mouseleave="resume()" class="persona-card bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 flex flex-col h-full">
+                                        <div class="relative">
+                                            <img src="resources/images/asset-and-property-manager.png" alt="Asset & Property Manager" class="w-full h-64 object-cover">
+                                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center p-6 text-white opacity-0 hover:opacity-100 transition-opacity duration-300">
+                                                <div>
+                                                    <p class="italic mb-4">"Mein Team ist mit der manuellen Dateneingabe überlastet und macht Fehler. Wir brauchen mehr Zeit für wertschöpfende Aufgaben."</p>
+                                                    <p class="font-semibold">Reduzieren Sie den manuellen Aufwand drastisch und steigern Sie die Datenqualität, damit Ihr Team sich auf das Wesentliche konzentrieren kann.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 3: Transaktionsmanager -->
+                            <div class="w-full md:w-1/3 lg:w-1/4 flex-shrink-0 p-4">
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-800 text-center">Für Transaktionsmanager</h3>
+                                    <p class="text-sm text-gray-500 mb-2 text-center">Due Diligence beschleunigen</p>
+                                    <div @mouseenter="pause()" @mouseleave="resume()" class="persona-card bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 flex flex-col h-full">
+                                        <div class="relative">
+                                            <img src="resources/images/transaction-manager.png" alt="Transaktionsmanager" class="w-full h-64 object-cover">
+                                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center p-6 text-white opacity-0 hover:opacity-100 transition-opacity duration-300">
+                                                <div>
+                                                    <p class="italic mb-4">"Die Due Diligence dauert Wochen und bindet enorme Ressourcen. Wir müssen schneller sein, um uns die besten Deals zu sichern."</p>
+                                                    <p class="font-semibold">Beschleunigen Sie Due-Diligence-Prozesse um ein Vielfaches und analysieren Sie Datenräume in Stunden statt Wochen.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 4: Flexibilität -->
+                            <div class="w-full md:w-1/3 lg:w-1/4 flex-shrink-0 p-4">
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-800 text-center">Für individuelle Anforderungen</h3>
+                                    <p class="text-sm text-gray-500 mb-2 text-center">Maximale Flexibilität</p>
+                                    <div @mouseenter="pause()" @mouseleave="resume()" class="persona-card bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 flex flex-col h-full">
+                                        <div class="relative">
+                                            <img src="resources/images/max-flexibility.png" alt="Maximale Flexibilität" class="w-full h-64 object-cover">
+                                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center p-6 text-white opacity-0 hover:opacity-100 transition-opacity duration-300">
+                                                <div>
+                                                    <p class="italic mb-4">"Wir haben nicht nur Mietverträge, sondern auch Serviceverträge, Rechnungen und Gutachten. Wir brauchen eine Lösung, die alles kann."</p>
+                                                    <p class="font-semibold"><b>Profitieren Sie</b> von einer flexiblen KI, die für jeden Dokumententyp trainierbar ist – Sie definieren, was für Ihr Geschäft wichtig ist.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button @click="prev()" class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white/50 hover:bg-white rounded-full p-2 transition-colors">
+                        <i data-lucide="chevron-left"></i>
+                    </button>
+                    <button @click="next()" class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white/50 hover:bg-white rounded-full p-2 transition-colors">
+                        <i data-lucide="chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: The Integration Bridge -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+                <div class="text-center md:text-left">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Der Motor für Ihre bestehenden Systeme.</h2>
+                    <p class="mt-6 text-lg text-gray-600">
+                        Clearlea.se ist als zentrale Daten-Drehscheibe konzipiert. Dank unserer flexiblen API integrieren wir uns nahtlos in Ihre bestehende IT-Landschaft. Wir liefern perfekt aufbereitete, validierte Daten an Ihr Property Management Tool, Ihr ERP-System wie SAP oder Ihr DMS. Sie arbeiten in Ihrer gewohnten Umgebung – nur mit besseren Daten.
+                    </p>
+                    <p class="mt-4 text-gray-500 font-semibold">Nahtlose Anbindung an Ihre Systeme.</p>
+                </div>
+                <div>
+                    <img src="resources/images/integrationimage.png" alt="Integration" class="w-full h-auto max-w-lg mx-auto opacity-90">
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 8: Security & Trust -->
+        <section id="sicherheit" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Sicherheit und Vertrauen. <br class="sm:hidden"> Entwickelt in Deutschland.</h2>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <!-- Column 1 -->
+                    <div class="security-card animated-card bg-white text-center p-8 rounded-xl shadow-lg border border-gray-100">
+                        <div class="feature-icon mx-auto">
+                            <i data-lucide="server"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Hosting in Deutschland</h3>
+                        <p class="text-gray-600">Ihre Daten werden ausschließlich auf Servern in Deutschland verarbeitet und gespeichert.</p>
+                    </div>
+                    <!-- Column 2 -->
+                    <div class="security-card animated-card bg-white text-center p-8 rounded-xl shadow-lg border border-gray-100" style="animation-delay: 0.1s;">
+                        <div class="feature-icon mx-auto">
+                            <i data-lucide="shield-check"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">DSGVO-Konformität</h3>
+                        <p class="text-gray-600">Unsere Plattform erfüllt die strengen Anforderungen der europäischen Datenschutz-Grundverordnung.</p>
+                    </div>
+                    <!-- Column 3 -->
+                    <div class="security-card animated-card bg-white text-center p-8 rounded-xl shadow-lg border border-gray-100" style="animation-delay: 0.2s;">
+                        <div class="feature-icon mx-auto">
+                            <i data-lucide="lock"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Modernste Verschlüsselung</h3>
+                        <p class="text-gray-600">Wir schützen Ihre sensiblen Daten zu jeder Zeit mit End-to-End-Verschlüsselung nach Bankenstandard.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 9: Final CTA -->
+        <section id="cta" class="py-20 bg-gray-900 text-white">
+            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+                <div class="text-center md:text-left">
+                    <h2 class="text-3xl md:text-4xl font-bold">Bereit für den nächsten Schritt?</h2>
+                    <p class="mt-4 text-lg text-gray-300">Buchen Sie Ihre persönliche 1-zu-1-Demo mit unseren Gründern und erleben Sie live, wie Sie Wochen an Arbeit in Minuten verwandeln.</p>
+                    <div class="flex justify-center md:justify-start space-x-6 mt-8">
+                        <div class="text-center">
+                            <img src="resources/images/hiero.png" alt="Hieronymus Deutsch, Gründer" class="rounded-full mx-auto w-24 h-24 border-2 border-blue-400 object-cover" role="img">
+                            <p class="mt-2 font-semibold">Hieronymus Deutsch</p>
+                            <p class="text-sm text-gray-400">CEO</p>
+                        </div>
+                        <div class="text-center">
+                            <img src="resources/images/fabian.png" alt="Fabian Laussmann, Gründer" class="rounded-full mx-auto w-24 h-24 border-2 border-blue-400 object-cover" role="img">
+                            <p class="mt-2 font-semibold">Fabian Laussmann</p>
+                            <p class="text-sm text-gray-400">CTO</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white text-gray-800 p-8 rounded-xl shadow-2xl">
+                    <h3 class="text-2xl font-bold mb-6 text-center">Persönliche Demo anfragen</h3>
+                    <form id="demo-form" aria-label="Demo request form" method="post" novalidate>
+                        <input type="hidden" name="schema_version" value="1.0">
+                        <!-- Honeypot field (hidden from users). Bots will often fill this; block submission if non-empty -->
+                        <div style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+                            <label for="hp_phone">Do not fill</label>
+                            <input type="text" id="hp_phone" name="hp_phone" tabindex="-1" autocomplete="off" />
+                        </div>
+                        <div class="mb-4">
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Ihr Name</label>
+                            <input type="text" id="name" name="name" placeholder="Max Mustermann" aria-required="true" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Geschäftliche E-Mail</label>
+                            <input type="email" id="email" name="email" placeholder="max.mustermann@firma.de" aria-required="true" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                        </div>
+                         <div class="mb-6">
+                            <label for="company" class="block text-sm font-medium text-gray-700 mb-1">Unternehmen</label>
+                            <input type="text" id="company" name="company" placeholder="Firma GmbH" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <button type="submit" class="w-full btn-cta">
+                            Persönliche Demo buchen
+                        </button>
+                        <noscript>
+                            <p class="mt-4 text-sm text-gray-600">JavaScript wird benötigt, um dieses Formular interaktiv zu senden. Bitte aktivieren Sie JavaScript oder kontaktieren Sie uns per E-Mail: <a href="mailto:hello@clearlea.se">hello@clearlea.se</a>.</p>
+                        </noscript>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <!-- Section Q&A -->
+        <section id="faq" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Häufig gestellte Fragen (FAQ)</h2>
+                </div>
+                <div class="max-w-3xl mx-auto" x-data="{ open: 0 }">
+                    <!-- Accordion Item 1 -->
+                    <div class="border-b border-gray-200 py-4">
+                        <button @click="open = (open === 1 ? 0 : 1)" class="faq-question">
+                            <span>Wie genau ist die KI? Muss ich die Daten trotzdem noch selbst prüfen?</span>
+                            <i data-lucide="chevron-down" class="transform transition-transform duration-300" :class="{'rotate-180': open === 1}"></i>
+                        </button>
+                        <div x-show="open === 1" x-collapse class="mt-4 text-gray-600 leading-relaxed">
+                            <p>Unsere KI erreicht eine sehr hohe Genauigkeit bei der Datenextraktion und ist darauf trainiert, selbst komplexe Klauseln und Zusammenhänge in Dokumenten zu verstehen. Wir positionieren unsere Technologie bewusst als Ihr "erstes Paar Augen". Das bedeutet, Ihr Fachpersonal wird vom mühsamen Abtippen befreit und übernimmt die wertvollere Rolle des Prüfers. Dieser von der KI unterstützte Prozess eliminiert die Notwendigkeit des traditionellen Vier-Augen-Prinzips (zwei manuelle Prüfer) und reduziert den Gesamtaufwand für die Datenpflege um bis zu 90%.</p>
+                        </div>
+                    </div>
+                    <!-- Accordion Item 2 -->
+                    <div class="border-b border-gray-200 py-4">
+                        <button @click="open = (open === 2 ? 0 : 2)" class="faq-question">
+                            <span>Was passiert, wenn die KI einen Fehler macht?</span>
+                            <i data-lucide="chevron-down" class="transform transition-transform duration-300" :class="{'rotate-180': open === 2}"></i>
+                        </button>
+                        <div x-show="open === 2" x-collapse class="mt-4 text-gray-600 leading-relaxed">
+                            <p>Transparenz ist der Kern unseres Systems. Jeder einzelne Datenpunkt, den unsere KI extrahiert, ist direkt mit der exakten Stelle im Originaldokument verknüpft. Mit nur einem Klick können Sie jede Angabe sofort im Kontext verifizieren, ohne das Dokument selbst durchsuchen zu müssen. So behalten Sie stets die 100%ige Kontrolle und können sich auf die Richtigkeit Ihrer Daten verlassen.</p>
+                        </div>
+                    </div>
+                    <!-- Accordion Item 3 -->
+                    <div class="border-b border-gray-200 py-4">
+                        <button @click="open = (open === 3 ? 0 : 3)" class="faq-question">
+                            <span>Welche Arten von Dokumenten können Sie verarbeiten? Funktionieren auch alte Scans?</span>
+                            <i data-lucide="chevron-down" class="transform transition-transform duration-300" :class="{'rotate-180': open === 3}"></i>
+                        </button>
+                        <div x-show="open === 3" x-collapse class="mt-4 text-gray-600 leading-relaxed">
+                            <p>Unsere Plattform ist darauf ausgelegt, eine breite Palette von Immobiliendokumenten zu verarbeiten und funktioniert dank unserer fortschrittlichen OCR-Technologie auch mit älteren Scans oder Dokumenten unterschiedlicher Qualität. Neben Mietverträgen und deren Nachträgen analysieren wir routinemäßig Nebenkostenabrechnungen, Rechnungen, Serviceverträge, Energieausweise und Marktreports. Unsere Stärke liegt in der Flexibilität – die KI kann für praktisch jeden Dokumententyp konfiguriert werden, der für Ihr Geschäft relevant ist.</p>
+                        </div>
+                    </div>
+                    <!-- Accordion Item 4 -->
+                    <div class="border-b border-gray-200 py-4">
+                        <button @click="open = (open === 4 ? 0 : 4)" class="faq-question">
+                            <span>Ersetzt Clearlea.se unsere bestehende Immobiliensoftware (z.B. SAP, Yardi)?</span>
+                            <i data-lucide="chevron-down" class="transform transition-transform duration-300" :class="{'rotate-180': open === 4}"></i>
+                        </button>
+                        <div x-show="open === 4" x-collapse class="mt-4 text-gray-600 leading-relaxed">
+                            <p>Nein, ganz im Gegenteil. Clearlea.se ist als der intelligente "Motor" für Ihre bestehende Systemlandschaft konzipiert. Wir ersetzen keine Property- oder Asset-Management-Tools. Stattdessen liefern wir perfekt aufbereitete und validierte Daten über unsere flexible API an Ihre Kernsysteme. Sie arbeiten weiter in Ihrer gewohnten Umgebung – nur mit deutlich besseren, zuverlässigeren und stets aktuellen Daten.</p>
+                        </div>
+                    </div>
+                    <!-- Accordion Item 5 -->
+                    <div class="border-b border-gray-200 py-4">
+                        <button @click="open = (open === 5 ? 0 : 5)" class="faq-question">
+                            <span>Wo werden unsere sensiblen Vertragsdaten gespeichert? Ist die Plattform DSGVO-konform?</span>
+                            <i data-lucide="chevron-down" class="transform transition-transform duration-300" :class="{'rotate-180': open === 5}"></i>
+                        </button>
+                        <div x-show="open === 5" x-collapse class="mt-4 text-gray-600 leading-relaxed">
+                            <p>Ja. Datensicherheit und Datenschutz nach höchsten europäischen Standards haben für uns absolute Priorität.<br>
+                            <strong>Server-Standort Deutschland:</strong> Ihre Daten werden ausschließlich auf zertifizierten Servern in Deutschland verarbeitet und gespeichert.<br>
+                            <strong>Strenge DSGVO-Konformität:</strong> Unsere Plattform und alle unsere Prozesse sind vollständig konform mit der europäischen Datenschutz-Grundverordnung.<br>
+                            <strong>Modernste Verschlüsselung:</strong> Wir schützen Ihre sensiblen Daten zu jeder Zeit mit End-to-End-Verschlüsselung nach Bankenstandard.</p>
+                        </div>
+                    </div>
+                    <!-- Accordion Item 6 -->
+                    <div class="border-b border-gray-200 py-4">
+                        <button @click="open = (open === 6 ? 0 : 6)" class="faq-question">
+                            <span>Wie lange dauert die Implementierung?</span>
+                            <i data-lucide="chevron-down" class="transform transition-transform duration-300" :class="{'rotate-180': open === 6}"></i>
+                        </button>
+                        <div x-show="open === 6" x-collapse class="mt-4 text-gray-600 leading-relaxed">
+                            <p>Die Implementierung ist denkbar einfach und dauert nur wenige Minuten. Clearlea.se ist eine web-basierte SaaS-Plattform, die keine komplexe IT-Installation erfordert. Nach der Registrierung können Sie sofort per Drag-and-Drop Ihre ersten Dokumente hochladen und live erleben, wie unsere KI die Daten für Sie aufbereitet.</p>
+                        </div>
+                    </div>
+                    <!-- Accordion Item 7 -->
+                    <div class="border-b border-gray-200 py-4">
+                        <button @click="open = (open === 7 ? 0 : 7)" class="faq-question">
+                            <span>Was ist der Unterschied zu einem allgemeinen KI-Tool oder "Chat with PDF"?</span>
+                            <i data-lucide="chevron-down" class="transform transition-transform duration-300" :class="{'rotate-180': open === 7}"></i>
+                        </button>
+                        <div x-show="open === 7" x-collapse class="mt-4 text-gray-600 leading-relaxed">
+                            <p>Während Chat-Tools eine einzelne Frage zu einem Dokument beantworten können, geht Clearlea.se einen entscheidenden Schritt weiter. Wir erstellen keine temporäre Antwort, sondern eine permanente, strukturierte und skalierbare Datenbank für Ihr gesamtes Portfolio. Das bedeutet, Sie können Daten über hunderte Standorte hinweg vergleichen, filtern, sortieren und als saubere Datensätze für Ihre Reportings exportieren. Kurz gesagt: Ein Chatbot gibt Ihnen eine einzelne Antwort. Wir geben Ihnen den strategischen Überblick.</p>
+                        </div>
+                    </div>
+                    <!-- Accordion Item 8 -->
+                    <div class="border-b border-gray-200 py-4">
+                        <button @click="open = (open === 8 ? 0 : 8)" class="faq-question">
+                            <span>Wie sieht Ihr Preismodell aus?</span>
+                            <i data-lucide="chevron-down" class="transform transition-transform duration-300" :class="{'rotate-180': open === 8}"></i>
+                        </button>
+                        <div x-show="open === 8" x-collapse class="mt-4 text-gray-600 leading-relaxed">
+                            <p>Wir bieten ein transparentes und flexibles Hybridmodell, das sich an Ihre Bedürfnisse anpasst.<br>
+                            <strong>SaaS-Abonnement:</strong> Für die laufende Verwaltung Ihres Portfolios nutzen wir ein monatliches Abonnement, dessen Preis sich fair nach der Anzahl der verwalteten Standorte richtet.<br>
+                            <strong>Projektpreise:</strong> Für einmalige Großprojekte, wie die Datenextraktion im Rahmen einer Due Diligence oder die initiale Digitalisierung eines Datenraums, bieten wir feste und transparente Projektpreise an.<br>
+                            Gerne erstellen wir Ihnen in einem persönlichen Gespräch ein individuelles Angebot, das genau auf Ihre Anforderungen zugeschnitten ist.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-400">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p>&copy; 2025 clearlea.se. Alle Rechte vorbehalten.</p>
+            <div class="mt-4 space-x-6">
+                <a href="impressum.html" class="hover:text-white transition-colors">Impressum</a>
+                <a href="privacy.html" class="hover:text-white transition-colors">Datenschutz</a>
+                <a href="terms.html" class="hover:text-white transition-colors">AGB</a>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="assets/script.js"></script>
+</body>
+</html>
