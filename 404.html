@@ -1,26 +1,70 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Seite nicht gefunden — Clearlea.se</title>
-  <meta name="description" content="Die angeforderte Seite wurde nicht gefunden. Zurück zur Startseite von Clearlea.se.">
-  <link rel="stylesheet" href="assets/styles.css">
-  <link rel="icon" href="resources/favicon/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seite nicht gefunden — Clearlea.se</title>
+    <meta name="description" content="Die angeforderte Seite wurde nicht gefunden. Zurück zur Startseite von Clearlea.se.">
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Favicon -->
+    <link rel="icon" href="resources/favicon/favicon.ico">
+    <link rel="apple-touch-icon" href="resources/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="resources/favicon/site.webmanifest">
+
+    <!-- Tailwind CSS, Fonts, and Icons (from index.html) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+
+    <!-- Project styles -->
+    <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body class="bg-gray-50 text-gray-800">
-  <main class="min-h-screen flex items-center justify-center">
-    <div class="text-center p-8">
-      <h1 class="text-6xl font-extrabold text-gray-900">404</h1>
-      <p class="mt-4 text-xl text-gray-700">Die angeforderte Seite wurde nicht gefunden.</p>
-      <p class="mt-2 text-gray-600">Möglicherweise wurde die URL falsch eingegeben oder die Seite wurde verschoben.</p>
-      <div class="mt-6">
-        <a href="20250909.html" class="btn-cta">Zur Startseite</a>
-      </div>
-      <div class="mt-8 text-sm text-gray-500">
-        Falls Sie Hilfe benötigen, kontaktieren Sie uns: <a href="mailto:hello@clearlea.se" class="text-highlight">hello@clearlea.se</a>
-      </div>
-    </div>
-  </main>
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 border-b border-gray-200">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center">
+                <img src="resources/clearlease_logo_rgb (flattened).svg" alt="Clearlea.se Logo" class="h-8">
+            </a>
+            <a href="index.html" class="btn-cta hidden sm:inline-block">Zur Startseite</a>
+        </div>
+    </header>
+
+    <main class="min-h-screen flex items-center justify-center pt-20 pb-10">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto p-8 md:p-12 bg-white rounded-2xl shadow-xl border border-gray-100">
+                <div class="grid md:grid-cols-2 items-center gap-8 md:gap-12">
+                    <div class="text-center md:text-left">
+                        <h1 class="text-7xl md:text-8xl font-extrabold gradient-text">404</h1>
+                        <p class="mt-4 text-xl md:text-2xl text-gray-800 font-semibold">Seite nicht gefunden</p>
+                        <p class="mt-2 text-gray-600">Die von Ihnen gesuchte Seite existiert nicht oder wurde verschoben.</p>
+                        <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                            <a href="index.html" class="btn-cta">Zurück zur Startseite</a>
+                            <a href="mailto:hello@clearlea.se" class="btn-cta" style="background:transparent;color:var(--clr-primary);border:1px solid var(--clr-border);box-shadow:none;">Hilfe anfordern</a>
+                        </div>
+                    </div>
+                    <div class="flex justify-center">
+                        <div class="w-48 h-48 md:w-64 md:h-64 error-illustration" aria-hidden="true">
+                            <dotlottie-player src="resources/lottie/Lonely 404.json" background="transparent" speed="1" style="width:100%;height:100%;" loop autoplay></dotlottie-player>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-8 text-center text-sm text-gray-500">
+        &copy; 2025 Clearlea.se — <a href="impressum.html" class="nav-link">Impressum</a> — <a href="privacy.html" class="nav-link">Datenschutz</a>
+    </footer>
+    
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
 </body>
 </html>
