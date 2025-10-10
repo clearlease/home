@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clearlea.se: Intelligentes Mietvertragsmanagement</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+    <link rel="stylesheet" href="../assets/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-blue: var(--clr-accent);
+            --brand-dark: var(--clr-text-primary);
+            --brand-gray: var(--clr-text-secondary);
+            --brand-light-gray: var(--clr-bg);
+            --brand-border: var(--clr-border);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: var(--clr-bg);
+            color: var(--clr-text-primary);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Full-page subtle aurora overlay (increased visibility) */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background-image:
+                radial-gradient(circle at 8% 18%, rgba(99, 102, 241, 0.20), transparent 30%),
+                radial-gradient(circle at 82% 72%, rgba(124, 58, 237, 0.16), transparent 30%),
+                radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.10), transparent 20%);
+            /* sharper, more visible aurora while still soft */
+            filter: blur(60px);
+            opacity: 1;
+            mix-blend-mode: screen;
+            background-size: 250% 200%, 250% 200%, 200% 200%;
+            animation: auroraMove 40s ease-in-out infinite;
+        }
+
+        @keyframes auroraMove {
+            0% {
+                background-position: 0% 50%, 100% 50%, 50% 0%;
+            }
+            50% {
+                background-position: 100% 50%, 0% 50%, 50% 100%;
+            }
+            100% {
+                background-position: 0% 50%, 100% 50%, 50% 0%;
+            }
+        }
+
+        /* Ensure every slide (except the hero/aurora slide) uses the same light-gray background */
+        .slide:not(.aurora-background) {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            width: 100%;
+            height: 100%;
+        }
+        .slide:not(.aurora-background).active {
+            display: flex;
+            opacity: 1;
+        }
+        /* For safety, keep a default for any slide class that might not match the selector */
+        .slide {
+            display: none;
+            opacity: 0;
+            /* transition: opacity 0.5s ease-in-out; */
+            width: 100%;
+            height: 100%;
+        }
+        .slide.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 12px;
+            width: 12px;
+            margin: 0 4px;
+            background-color: #D1D5DB; /* Gray-300 */
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+        .dot.active {
+            background-color: var(--brand-blue);
+        }
+
+        /* Aurora/hero slide should keep a distinct (white) background */
+        .aurora-background {
+            position: relative;
+            background-color: white;
+            overflow: hidden;
+        }
+        .aurora-background::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 120%;
+            background-image: radial-gradient(circle at 20% 20%, rgba(0, 98, 255, 0.18), transparent 40%),
+                              radial-gradient(circle at 80% 70%, rgba(124, 58, 237, 0.12), transparent 40%);
+            filter: blur(60px);
+            z-index: 0;
+            opacity: 0.95;
+            animation: auroraMove 36s ease-in-out infinite;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        /* Style für die SVG-Linien auf Folie 9 */
+        .connector-svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+       .animated-bar {
+           transition: width 1.5s ease-in-out;
+       }
+       #contact-button-container {
+            opacity: 0;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: all 0.5s ease-in-out;
+            z-index: 10;
+            pointer-events: none;
+       }
+       #contact-button-container.visible {
+            opacity: 1;
+            bottom: -70px;
+            pointer-events: auto;
+       }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-4 md:p-8">
+
+    <div class="relative">
+        <div id="presentation-container" class="w-full max-w-5xl bg-white rounded-2xl shadow-2xl aspect-[16/9] flex flex-col relative overflow-hidden">
+            
+            <!-- Slide 1: Titel -->
+            <div class="slide active aurora-background">
+                <div class="slide-content text-center p-12 md:p-20">
+                    <img src="../resources/clearlease_logo_rgb (flattened).svg" alt="clearlea.se Logo" class="w-70 h-auto mb-6">
+                    
+                    <!-- <h1 class="text-4xl md:text-6xl font-extrabold text-[var(--brand-dark)]">clearlea.se</h1> -->
+                    <h2 class="text-2xl md:text-4xl font-semibold text-[var(--brand-dark)] mt-2">Mietvertragsintelligenz für den operativen Alltag</h2>
+                    
+                    <p class="mt-6 text-base md:text-lg text-[var(--brand-gray)] max-w-3xl">Wie wir aus statischen Dokumentenarchiven eine lebendige Wissensbasis für den operativen Alltag im Portfolio- & Property-Management machen.</p>
+                </div>
+            </div>
+
+            <!-- Slide 2: Problem -->
+            <div class="slide bg-[var(--brand-light-gray)]">
+                <div class="slide-content text-center p-12 md:p-20">
+                    <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-12">Wo versickert wertvolle Zeit im Tagesgeschäft?</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 w-full max-w-5xl">
+                        
+                        <div class="flex flex-col items-center p-4 bg-white border border-[var(--brand-border)] rounded-xl">
+                            <div class="w-16 h-16 bg-blue-50 text-[var(--brand-blue)] rounded-full flex items-center justify-center mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 10l.01.01" /></svg>
+                            </div>
+                            <p class="text-[var(--brand-gray)] font-medium text-sm">Ständiges Suchen nach der EINEN gültigen Information über diverse Nachträge hinweg.</p>
+                        </div>
+                        
+                        <div class="flex flex-col items-center p-4 bg-white border border-[var(--brand-border)] rounded-xl">
+                            <div class="w-16 h-16 bg-blue-50 text-[var(--brand-blue)] rounded-full flex items-center justify-center mb-4">
+                               <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M12 8h.01M15 8h.01M15 5h.01M12 5h.01M9 5h.01M4 7h16a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V8a1 1 0 011-1z" /></svg>
+                            </div>
+                            <p class="text-[var(--brand-gray)] font-medium text-sm">Manuelle Datenübertragung in fehleranfällige Excel-Listen.</p>
+                        </div>
+                        
+                        <div class="flex flex-col items-center p-4 bg-white border border-[var(--brand-border)] rounded-xl">
+                            <div class="w-16 h-16 bg-blue-50 text-[var(--brand-blue)] rounded-full flex items-center justify-center mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                            </div>
+                            <p class="text-[var(--brand-gray)] font-medium text-sm">Hohes Risiko, kritische Fristen und Klauseln zu übersehen.</p>
+                        </div>
+                        
+                        <div class="flex flex-col items-center p-4 bg-white border border-[var(--brand-border)] rounded-xl">
+                            <div class="w-16 h-16 bg-blue-50 text-[var(--brand-blue)] rounded-full flex items-center justify-center mb-4">
+                                
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2zM9 14h6m-3-3v6" /></svg>
+                            </div>
+                            <p class="text-[var(--brand-gray)] font-medium text-sm">Mühsames Onboarding neuer Mandate aus unsortierten Datenräumen und physischen Akten.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Vision -->
+            <div class="slide bg-[var(--brand-light-gray)]">
+                <div class="slide-content text-center p-12 md:p-20">
+                    <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-4">Wir glauben, Dokumente sollten für Sie arbeiten</h2>
+                    <p class="text-xl md:text-2xl text-[var(--brand-gray)] mb-16">– nicht umgekehrt.</p>
+                    <div class="w-full flex items-center justify-around max-w-4xl">
+                        <div class="flex flex-col items-center w-1/3 text-center">
+                            <img src="../resources/images/pile-of-leases.svg" alt="Pile of unsorted leases" class="h-48 mb-4">
+                            <span class="font-bold text-[var(--brand-dark)]">Unsortierte Dokumentenberge</span>
+                            <p class="text-sm text-[var(--brand-gray)]">PDFs, Scans, E-Mails – eine unstrukturierte Datenflut.</p>
+                        </div>
+                        <div class="text-gray-400 px-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                        </div>
+                        <div class="flex flex-col items-center w-1/3 text-center">
+                            <img src="../resources/images/dashboard.svg" alt="Clearlease dashboard" class="h-48 mb-4">
+                            <span class="font-bold text-[var(--brand-dark)]">Klarheit auf einen Blick</span>
+                            <p class="text-sm text-[var(--brand-gray)]">Alle relevanten Datenpunkte sofort verfügbar und verständlich.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Feature (Historie) -->
+            <div class="slide bg-[var(--brand-light-gray)]">
+                 <div class="slide-content flex-row items-center justify-center p-12 md:p-20 space-x-12">
+                    
+                    <div class="text-left w-1/2 max-w-md">
+                        <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-6">Eine Frage – eine einzige, korrekte Antwort.</h2>
+                        <p class="text-lg text-[var(--brand-gray)] max-w-sm">Unsere KI versteht die Historie Ihrer Dokumente und liefert immer die aktuell gültige Information, egal wie viele Nachträge es gibt.</p>
+                    </div>
+
+                    <!-- Visuelle Darstellung des Historienverlaufs -->
+                    <div class="w-1/2 max-w-md p-4 md:p-6 bg-[var(--brand-light-gray)] rounded-2xl shadow-xl border border-[var(--brand-border)]">
+                        
+                        <!-- Aktueller Wert Header -->
+                        <div class="flex justify-between items-center p-3 mb-6 bg-white rounded-lg border border-[var(--brand-blue)] shadow-md">
+                            <p class="text-xl font-bold text-[var(--brand-dark)]">Hauptmietfläche</p>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-2xl font-mono text-[var(--brand-blue)]">574 m²</span>
+                                <!-- Edit Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Start -->
+                        <div class="text-left relative pl-6">
+                            
+                            <!-- Vertikale Linie (Timeline) -->
+                            <div class="absolute top-0 bottom-0 left-3 w-1 bg-gray-200"></div>
+
+                            <!-- 1. Eintrag (Aktuell/Gültig) -->
+                            <div class="mb-4 relative">
+                                <!-- Punkt -->
+                                <div class="absolute -left-4 w-3 h-3 bg-[var(--brand-blue)] rounded-full mt-2"></div>
+                                <div class="bg-white rounded-xl border border-[var(--brand-border)] shadow-sm ml-6 p-3">
+                                    <p class="text-sm font-semibold text-[var(--brand-dark)] mb-1">15.12.2024 (Nachtrag 3) - <span class="text-[var(--brand-blue)]">Gültige Korrektur</span></p>
+                                    
+                                    <p class="text-lg font-mono text-green-600 mt-1">574 m²</p>
+                                </div>
+                            </div>
+
+                            <!-- 2. Eintrag (Überschrieben/Ungültig) -->
+                            <div class="mb-4 relative opacity-80">
+                                <!-- Punkt -->
+                                <div class="absolute -left-4 w-3 h-3 bg-gray-400 rounded-full mt-2"></div>
+                                <div class="bg-white rounded-xl border border-[var(--brand-border)] shadow-sm ml-6 p-3">
+                                    <p class="text-sm text-[var(--brand-gray)] mb-1">05.04.2024 (Nachtrag 2)</p>
+                                     <p class="text-lg font-mono text-[var(--brand-gray)] mt-1">unbekannt</p>
+                                </div>
+                            </div>
+                            
+                            <!-- 3. Eintrag (Original) -->
+                            <div class="mb-0 relative opacity-60">
+                                <!-- Punkt -->
+                                <div class="absolute -left-4 w-3 h-3 bg-gray-400 rounded-full mt-2"></div>
+                                <div class="bg-white rounded-xl border border-[var(--brand-border)] shadow-sm ml-6 p-3">
+                                    <p class="text-sm text-[var(--brand-gray)] mb-1">10.12.2019 (Hauptdokument)</p>
+                                    <p class="text-lg font-mono text-[var(--brand-gray)] mt-1">550 m²</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- Timeline Ende -->
+                        
+                    </div>
+                    <!-- Visuelle Darstellung Ende -->
+                </div>
+            </div>
+            
+            <!-- NEUE Slide 5: Operative Exzellenz (Effizienz-Boost) -->
+            <div class="slide bg-[var(--brand-light-gray)]">
+                <div class="slide-content p-12 md:p-20">
+                    <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-12">Ihr Gewinn im operativen Alltag: Sicherheit und Geschwindigkeit</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
+                        
+                        <!-- Linke Spalte: Suchen & Finden -->
+                        <div class="p-6 text-center bg-white border border-[var(--brand-border)] rounded-xl shadow-lg">
+                            <lottie-player src="../resources/lottie/click-to-source-vid.json" background="transparent" speed="1" loop autoplay style="width:100%;height:220px;" class="object-contain mb-4 rounded-lg border border-gray-100" aria-label="Structured overview animation"></lottie-player>
+                            <h3 class="font-bold text-[var(--brand-blue)] text-xl mb-2">Kein Suchen, nur Finden.</h3>
+                            <p class="text-[var(--brand-gray)] text-sm">Unsere KI liefert nicht nur die Daten, sondern zeigt Ihnen auf Klick die exakte Textstelle im Originaldokument. Das endlose Scrollen zur Verifizierung hat ein Ende.</p>
+                        </div>
+                        
+                        <!-- Rechte Spalte: Datenqualität & Kontrolle -->
+                        <div class="p-6 text-center bg-white border border-[var(--brand-border)] rounded-xl shadow-lg">
+                            <lottie-player src="../resources/lottie/proactive-suggestions-vid.json" background="transparent" speed="1" loop autoplay style="width:100%;height:220px;" class="object-contain mb-4 rounded-lg border border-gray-100" aria-label="Proactive suggestions animation"></lottie-player>
+                            <h3 class="font-bold text-[var(--brand-blue)] text-xl mb-2">KI-Vorschlag, menschliche Kontrolle.</h3>
+                            <p class="text-[var(--brand-gray)] text-sm">Das System schlägt Änderungen intelligent vor, aber Sie behalten die volle Kontrolle. Jeder extrahierte Wert kann validiert werden – für 100% revisionssichere Datenqualität.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NEUE Slide 6: Strategischer Vorteil (Flexibilität) -->
+            <div class="slide bg-[var(--brand-light-gray)]">
+                <div class="slide-content p-12 md:p-20">
+                    <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-12">Bereit für morgen: Reagieren Sie auf jeden neuen Markttrend.</h2>
+                    
+                    <div class="w-full max-w-2xl text-center">
+                        <!-- Bild: Natural Language Query -->
+                        <div class="bg-white p-4 rounded-full shadow-2xl border border-gray-200 flex items-center w-full max-w-lg mx-auto">
+                            <span id="search-text" class="text-gray-400 text-lg pl-4 pr-2"></span>
+                            <button id="add-question-btn" class="ml-auto bg-[var(--brand-blue)] text-white rounded-full w-12 h-12 flex items-center justify-center hover:opacity-90 transition-opacity">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <p class="mt-12 text-lg text-[var(--brand-gray)] max-w-xl mx-auto">
+                            Der Markt verändert sich ständig: Neue ESG-Richtlinien, geänderte Gesetze, neue Reporting-Anforderungen. Mit unserer flexiblen Abfragesprache stellen Sie Ihrem Portfolio einfach neue Fragen, ohne auf teure Software-Updates warten zu müssen. 
+                            <span class="font-bold text-[var(--brand-blue)] block mt-2">Das ist Ihre Zukunfts- und Investitionssicherheit.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Slide 7 (vorher 6): Aufräum-Projekt -->
+            <div class="slide bg-[var(--brand-light-gray)]">
+                <div class="slide-content items-center p-12 md:p-20">
+                    <div class="w-full max-w-5xl">
+                        <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] text-center">Für den Start: Das Aufräum-Projekt</h2>
+                        <p class="text-lg text-[var(--brand-gray)] mt-2 mb-8 text-center">Ideal für Onboarding neuer Mandate, Due Diligence, Systemmigrationen.</p>
+                        
+                        <div class="flex flex-row items-start justify-center gap-8 mt-8">
+                            <!-- Left Column -->
+                            <div class="w-1/2 space-y-4">
+                                <div class="p-6 bg-white rounded-lg border border-[var(--brand-border)] shadow-md h-full">
+                                    <h4 class="font-semibold text-[var(--brand-blue)]">Was wir tun:</h4>
+                                    <p class="text-[var(--brand-gray)]">Wir nehmen Ihre unsortierten Akten (digital oder physisch) und extrahieren einmalig alle relevanten Daten.</p>
+                                </div>
+                                <div class="p-6 bg-[var(--brand-light-gray)] rounded-lg shadow-md h-full">
+                                    <h4 class="font-semibold text-[var(--brand-blue)]">Ihr Ergebnis:</h4>
+                                    <p class="text-[var(--brand-gray)]">Eine saubere, strukturierte Datengrundlage für Ihr ERP-System in Rekordzeit.</p>
+                                </div>
+                            </div>
+
+                            <!-- Right Column (Social Proof) -->
+                            <div class="w-1/2">
+                                <div class="p-6 bg-white rounded-lg border border-[var(--brand-border)] shadow-md h-full">
+                                    <h4 class="font-semibold text-green-600">Praxis-Beispiel: Versicherungskonzern</h4>
+                                    <p class="text-[var(--brand-gray)] mt-2">Reduzierung der Onboarding-Zeit für <span class="font-bold text-[var(--brand-dark)]">500+ Standorte</span>.</p>
+                                    <div class="mt-4 space-y-3">
+                                        <div class="w-full">
+                                            <div class="flex justify-between items-center mb-1">
+                                                <span class="text-sm font-medium text-[var(--brand-gray)]">Vorher</span>
+                                                <span class="text-sm font-bold text-[var(--brand-dark)]">3 Monate</span>
+                                            </div>
+                                            <div class="w-full bg-gray-200 rounded-full h-4">
+                                                <div class="bg-red-400 h-4 rounded-full animated-bar" data-width="100%" style="width: 0;"></div>
+                                            </div>
+                                        </div>
+                                        <div class="w-full">
+                                            <div class="flex justify-between items-center mb-1">
+                                                <span class="text-sm font-medium text-[var(--brand-gray)]">Nachher</span>
+                                                <span class="text-sm font-bold text-green-600">3 Tage</span>
+                                            </div>
+                                            <div class="w-full bg-gray-200 rounded-full h-4">
+                                                <div class="bg-green-500 h-4 rounded-full animated-bar" data-width="3.3%" style="width: 0;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8 (vorher 7): SaaS-Plattform -->
+            <div class="slide bg-[var(--brand-light-gray)]">
+                <div class="slide-content items-center p-12 md:p-20">
+                    <div class="w-full max-w-5xl">
+                        <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] text-center">Für den Dauerbetrieb: Die SaaS-Plattform</h2>
+                        <p class="text-lg text-[var(--brand-gray)] mt-2 mb-8 text-center">Ideal für laufendes, aktives Property Management.</p>
+                        
+                        <div class="flex flex-row items-start justify-center gap-8 mt-8">
+                            <!-- Left Column -->
+                            <div class="w-1/2 space-y-4">
+                                <div class="p-6 bg-white rounded-lg border border-[var(--brand-border)] shadow-md h-full">
+                                    <h4 class="font-semibold text-[var(--brand-blue)]">Was wir tun:</h4>
+                                    <p class="text-[var(--brand-gray)]">Ihre zentrale Anlaufstelle für alle Fragen rund um Ihre Mietverträge.</p>
+                                </div>
+                                <div class="p-6 bg-gray-100 rounded-lg shadow-md h-full">
+                                    <h4 class="font-semibold text-[var(--brand-blue)]">Ihr Ergebnis:</h4>
+                                    <p class="text-[var(--brand-gray)]">Eine immer aktuelle Wissensbasis, die mit Ihrem Portfolio wächst und Ihr Team jeden Tag intelligenter macht.</p>
+                                </div>
+                            </div>
+
+                            <!-- Right Column (Social Proof) -->
+                            <div class="w-1/2">
+                                <div class="p-6 bg-white rounded-lg border border-[var(--brand-border)] shadow-md h-full">
+                                    <h4 class="font-semibold text-green-600">Praxis-Beispiel: Full-Service Provider</h4>
+                                    <p class="text-[var(--brand-gray)] mt-2">Aufwand für zukünftige Suchen: <span class="font-bold text-green-600">> 95% Zeitersparnis</span>.</p>
+                                    <p class="text-sm text-[var(--brand-gray)] mt-2">Nach dem Onboarding dauert das Nachschlagen einer Information (z.B. "Reparaturklausel") weniger als 30 Sekunden statt der bisherigen 15 Minuten pro Anfrage.</p>
+                                    <div class="mt-4 space-y-3">
+                                        <div class="w-full">
+                                            <div class="flex justify-between items-center mb-1">
+                                                <span class="text-sm font-medium text-[var(--brand-gray)]">Vorher</span>
+                                                <span class="text-sm font-bold text-[var(--brand-dark)]">15 Minuten</span>
+                                            </div>
+                                            <div class="w-full bg-gray-200 rounded-full h-4">
+                                                <div class="bg-red-400 h-4 rounded-full animated-bar" data-width="100%" style="width: 0;"></div>
+                                            </div>
+                                        </div>
+                                        <div class="w-full">
+                                            <div class="flex justify-between items-center mb-1">
+                                                <span class="text-sm font-medium text-[var(--brand-gray)]">Nachher</span>
+                                                <span class="text-sm font-bold text-green-600">< 30 Sekunden</span>
+                                            </div>
+                                            <div class="w-full bg-gray-200 rounded-full h-4">
+                                                <div class="bg-green-500 h-4 rounded-full animated-bar" data-width="3.3%" style="width: 0;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9 (vorher 8): Integration/Ökosystem -->
+            <div class="slide bg-[var(--brand-light-gray)]">
+                <div class="slide-content text-center p-12 md:p-20">
+                    <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-12">Wir sind die intelligente Ergänzung, kein Ersatz.</h2>
+                    
+                    <div class="w-full max-w-5xl flex items-center justify-between">
+                        <!-- Column 1: Data Sources -->
+                        <div class="w-1/4 space-y-4">
+                            <div class="p-4 bg-white rounded-lg border border-[var(--brand-border)] shadow-md text-center">
+                                <h4 class="font-semibold text-[var(--brand-dark)]">E-Mails (Outlook)</h4>
+                            </div>
+                            <div class="p-4 bg-white rounded-lg border border-[var(--brand-border)] shadow-md text-center">
+                                <h4 class="font-semibold text-[var(--brand-dark)]">PDFs & Scans</h4>
+                            </div>
+                            <div class="p-4 bg-white rounded-lg border border-[var(--brand-border)] shadow-md text-center">
+                                <h4 class="font-semibold text-[var(--brand-dark)]">DMS</h4>
+                            </div>
+                        </div>
+
+                        <!-- Arrow Right -->
+                        <svg class="w-12 h-12 text-[var(--brand-blue)] mx-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+
+                        <!-- Column 2: ClearLease -->
+                        <div class="w-1/3">
+                            <div class="p-6 bg-[var(--brand-blue)] text-white rounded-2xl shadow-xl text-center">
+                                <h3 class="font-bold text-xl">clearlea.se</h3>
+                                <p class="text-sm">Intelligent Extraction & Validation</p>
+                            </div>
+                        </div>
+
+                        <!-- Arrow Right -->
+                        <svg class="w-12 h-12 text-[var(--brand-blue)] mx-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+
+                        <!-- Column 3: Destination Systems -->
+                        <div class="w-1/4 space-y-4">
+                            <div class="p-3 bg-white rounded-lg border border-[var(--brand-border)] shadow-md text-center">
+                                <h4 class="font-semibold text-[var(--brand-dark)]">ERP</h4>
+                            </div>
+                            <div class="p-3 bg-white rounded-lg border border-[var(--brand-border)] shadow-md text-center">
+                                <h4 class="font-semibold text-[var(--brand-dark)]">SAP / SAP-REFX</h4>
+                            </div>
+                            <div class="p-3 bg-white rounded-lg border border-[var(--brand-border)] shadow-md text-center">
+                                <h4 class="font-semibold text-[var(--brand-dark)]">Excel</h4>
+                            </div>
+                            <div class="p-3 bg-white rounded-lg border border-[var(--brand-border)] shadow-md text-center">
+                                <h4 class="font-semibold text-[var(--brand-dark)]">API</h4>
+                            </div>
+                        </div>
+                    </div>
+                     <p class="mt-12 text-[var(--brand-gray)] max-w-3xl">Über unsere flexible API binden wir uns nahtlos an Ihre bestehende Systemlandschaft an und liefern qualitätsgesicherte Daten dorthin, wo Sie sie brauchen.</p>
+                </div>
+            </div>
+            <!-- Slide 10 (vorher 9): Referenzen (Text geschärft) -->
+            <div class="slide bg-[var(--brand-light-gray)]">
+                <div class="slide-content text-center p-12 md:p-20">
+                    <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-12">In der Praxis entwickelt, von Experten geschätzt.</h2>
+                    <div class="partner-marquee">
+                        <div class="marquee-track" aria-hidden="false">
+                            <img src="../resources/logos/zia-logo.svg" alt="ZIA" class="partner-logo opacity-80">
+                            <img src="../resources/logos/202201_KIEZ_Logo_RGB_Black.svg" alt="KIEZ" class="partner-logo opacity-80">
+                            <img src="../resources/logos/gpti_Logo_FINAL_einzeln.svg" alt="GPTI" class="partner-logo opacity-80">
+                            <img src="../resources/logos/mistral-ai-seeklogo.svg" alt="Mistral AI" class="partner-logo opacity-80">
+                            <img src="../resources/logos/KI-Park-und-Rise-of-AI-Mitgliedschaft-2048x817.png" alt="KI Park / Rise of AI" class="partner-logo opacity-80">
+                            <img src="../resources/logos/google-for-startups-1000x960.jpg" alt="Google for Startups" class="partner-logo opacity-80">
+                            <img src="../resources/logos/MS_Startups_Celebration_Badge_Light.png" alt="Microsoft Startups" class="partner-logo opacity-80">
+                            <img src="../resources/logos/63a75b0d9304ed50871e75c2e20c120510bc62b00c29770d69908a6aefcf581e-L.png" alt="Partner" class="partner-logo opacity-80">
+                            <img src="../resources/logos/d7c52f63358bebbf1ee6e8c58fb13ccaeb12b39f125d2c599a422cc747268d04-L.png" alt="Partner" class="partner-logo opacity-80">
+                            <img src="../resources/logos/bb6a255ad28cced895c9c9beed7a9f4bba57e09f1a20a545d71c85498b80b7ca-L.jpg" alt="Partner" class="partner-logo opacity-80">
+                            <!-- Repeat for seamless loop -->
+                            <img src="../resources/logos/zia-logo.svg" alt="ZIA" class="partner-logo opacity-80">
+                            <img src="../resources/logos/202201_KIEZ_Logo_RGB_Black.svg" alt="KIEZ" class="partner-logo opacity-80">
+                            <img src="../resources/logos/gpti_Logo_FINAL_einzeln.svg" alt="GPTI" class="partner-logo opacity-80">
+                            <img src="../resources/logos/mistral-ai-seeklogo.svg" alt="Mistral AI" class="partner-logo opacity-80">
+                            <img src="../resources/logos/KI-Park-und-Rise-of-AI-Mitgliedschaft-2048x817.png" alt="KI Park / Rise of AI" class="partner-logo opacity-80">
+                            <img src="../resources/logos/google-for-startups-1000x960.jpg" alt="Google for Startups" class="partner-logo opacity-80">
+                            <img src="../resources/logos/MS_Startups_Celebration_Badge_Light.png" alt="Microsoft Startups" class="partner-logo opacity-80">
+                            <img src="../resources/logos/63a75b0d9304ed50871e75c2e20c120510bc62b00c29770d69908a6aefcf581e-L.png" alt="Partner" class="partner-logo opacity-80">
+                            <img src="../resources/logos/d7c52f63358bebbf1ee6e8c58fb13ccaeb12b39f125d2c599a422cc747268d04-L.png" alt="Partner" class="partner-logo opacity-80">
+                            <img src="../resources/logos/bb6a255ad28cced895c9c9beed7a9f4bba57e09f1a20a545d71c85498b80b7ca-L.jpg" alt="Partner" class="partner-logo opacity-80">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 11 (vorher 10): Team -->
+            <div class="slide bg-[var(--brand-light-gray)]">
+                <div class="slide-content text-center p-12 md:p-20">
+                    <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-12">Gebaut von Experten, die beide Welten verstehen.</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-4xl">
+                        <div class="flex flex-col items-center">
+                            <img src="../resources/images/hiero.png" alt="Hieronymus Deutsch Foto" class="w-32 h-32 rounded-full mb-4 object-cover shadow-lg">
+                            <h4 class="font-bold text-lg text-[var(--brand-dark)]">Hieronymus Deutsch</h4>
+                            <p class="text-[var(--brand-blue)]">Business-Strategie & Prozessverständnis</p>
+                        </div>
+                         <div class="flex flex-col items-center">
+                            <img src="../resources/images/fabian.png" alt="Fabian Lausmann Foto" class="w-32 h-32 rounded-full mb-4 object-cover shadow-lg">
+                            <h4 class="font-bold text-lg text-[var(--brand-dark)]">Fabian Lausmann</h4>
+                            <p class="text-[var(--brand-blue)]">Enterprise-Tech & KI-Architektur</p>
+                        </div>
+                         <div class="flex flex-col items-center">
+                            <div class="w-32 h-32 rounded-full mb-4 bg-gray-100 text-gray-500 flex items-center justify-center object-cover shadow-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.124-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.124-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                            </div>
+                            
+                            <h4 class="font-bold text-lg text-[var(--brand-dark)]">Die Stimme des Kunden</h4>
+                            <p class="text-[var(--brand-blue)]">Verankert im echten PM-Alltag</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 12 (vorher 11): Call to Action -->
+            <div class="slide bg-[var(--clr-primary)] text-white">
+                 <div class="slide-content text-center p-12 md:p-20">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">Lassen Sie uns über Ihre konkreten Herausforderungen sprechen.</h2>
+                    <p class="text-lg md:text-xl text-gray-300 mb-10">Buchen Sie eine unverbindliche 15-Minuten Live-Demo.</p>
+                    
+                    <a data-cal-link="deutsch/demo" data-cal-namespace="demo" data-cal-config='{"layout":"month_view"}' class="bg-[var(--brand-blue)] hover:opacity-90 text-white font-bold py-4 px-8 rounded-full text-xl transition duration-300 shadow-lg">
+                        Jetzt Demo buchen
+                    </a>
+
+                    <div class="mt-12 border-t border-gray-600 pt-8 w-full max-w-lg flex items-center justify-center space-x-6">
+                        <img src="../resources/images/hiero.png" alt="Foto Hieronymus Deutsch" class="w-24 h-24 rounded-full object-cover shadow-lg border-2 border-[var(--brand-blue)]">
+                        <div class="text-left">
+                            <p class="font-bold text-lg">Hieronymus Deutsch</p>
+                            <p class="text-gray-300">Gründer & CEO</p>
+                            <p class="text-gray-300 mt-1"><a href="mailto:deutsch@clearlea.se?subject=Anfrage%20über%20clearlea.se&body=Sehr%20geehrter%20Herr%20Deutsch,%0A%0Aich%20habe%20Ihre%20Präsentation%20gesehen%20und%20hätte%20eine%20Frage.%0A%0AMit%20freundlichen%20Grüßen,">deutsch@clearlea.se</a></p>
+                            <p class="text-gray-300"><a href="tel:+4917634571313">+49 176 345 713 13</a></p>
+                        </div>
+                    </div>
+                     <p class="mt-6 text-sm text-gray-400">Keine Standardpräsentation. Wir schauen uns live an, wie wir eine Ihrer täglichen Aufgaben lösen.</p>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Contact Button Container -->
+        <div id="contact-button-container">
+            <a href="mailto:deutsch@clearlea.se" class="bg-[var(--brand-blue)] hover:opacity-90 text-white font-bold py-3 px-6 rounded-full text-lg transition duration-300 shadow-lg">
+                Kontakt aufnehmen
+            </a>
+        </div>
+    </div>
+
+    <!-- Navigation und Zähler -->
+    <div class="absolute bottom-0 left-0 right-0 p-4 flex items-center justify-center space-x-4 z-20">
+         <button id="prev-btn" class="p-2 rounded-full bg-white/80 hover:bg-white transition shadow-md backdrop-blur-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+        </button>
+        <div id="dot-navigation" class="text-center flex items-center bg-white/80 px-3 py-2 rounded-full shadow-md backdrop-blur-sm"></div>
+         <button id="next-btn" class="p-2 rounded-full bg-white/80 hover:bg-white transition shadow-md backdrop-blur-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </button>
+    </div>
+    <div class="absolute bottom-4 right-4 text-xs text-gray-400 z-20">
+        <span id="current-slide">1</span> / <span id="total-slides">12</span>
+    </div>
+
+<!-- Cal element-click embed code begins -->
+<script type="text/javascript">
+  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+Cal("init", "demo", {origin:"https://app.cal.com"});
+
+  
+  // Important: Please add the following attributes to the element that should trigger the calendar to open upon clicking.
+  // `data-cal-link="deutsch/demo"`
+  // data-cal-namespace="demo"
+  // `data-cal-config='{"layout":"month_view"}'`
+
+  Cal.ns.demo("ui", {"cssVarsPerTheme":{"light":{"cal-brand":"#13293D"}},"hideEventTypeDetails":false,"layout":"month_view"});
+  </script>
+  <!-- Cal element-click embed code ends -->
+</body>
+</html>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const dotContainer = document.getElementById('dot-navigation');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const currentSlideEl = document.getElementById('current-slide');
+            const totalSlidesEl = document.getElementById('total-slides');
+            
+            // WICHTIG: Gesamtzahl der Folien auf 12 aktualisiert
+            let currentSlide = 0;
+            const totalSlides = slides.length; // Wird jetzt 12 sein
+
+            totalSlidesEl.textContent = totalSlides;
+
+            function createDots() {
+                // Erst die alten Dots entfernen, falls vorhanden
+                dotContainer.innerHTML = ''; 
+                for (let i = 0; i < totalSlides; i++) {
+                    const dot = document.createElement('span');
+                    dot.classList.add('dot');
+                    dot.setAttribute('data-slide', i);
+                    dotContainer.appendChild(dot);
+                }
+            }
+
+            function updateSlide() {
+                const contactButtonContainer = document.getElementById('contact-button-container');
+                const totalSlides = slides.length;
+                if (currentSlide >= 5 && currentSlide < totalSlides - 1) {
+                    contactButtonContainer.classList.add('visible');
+                } else {
+                    contactButtonContainer.classList.remove('visible');
+                }
+            slides.forEach((slide, index) => {
+                const isActive = index === currentSlide;
+                slide.classList.toggle('active', isActive);
+
+                // Animate the social proof bars on slide 7 (index 6) and slide 8 (index 7)
+                if (index === 6 || index === 7) {
+                    const animatedBars = slide.querySelectorAll('.animated-bar');
+                    if (isActive) {
+                        // A short delay ensures the transition is visible
+                        setTimeout(() => {
+                            animatedBars.forEach(bar => {
+                                bar.style.width = bar.dataset.width;
+                            });
+                        }, 100);
+                    } else {
+                        // Reset when the slide is not active
+                        animatedBars.forEach(bar => {
+                            bar.style.width = '0';
+                        });
+                    }
+                }
+            });
+                
+                const dots = document.querySelectorAll('.dot');
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                });
+                const searchElement = document.getElementById('search-text');
+                const questions = [
+                    "Welche Verträge deckeln die Wartung?",
+                    "Gibt es eine 'Change of Control' Klausel?",
+                    "Welche Nebenkosten sind umlegbar?",
+                    "Mieter zur Zählerablesung verpflichtet?"
+                ];
+                
+                // -- Konfiguration der Schreibanimation --
+                const typeSpeed = 50; // Geschwindigkeit des Schreibens (in ms)
+                const deletingSpeed = 30; // Geschwindigkeit des Löschens (in ms)
+                const pauseBeforeDelete = 2000; // Pause am Ende eines Wortes (in ms)
+
+                let questionIndex = 0;
+                let charIndex = 0;
+                let isDeleting = false;
+                let typingTimeoutId = null;
+
+                function typeSearch() {
+                    const currentQuestion = questions[questionIndex];
+                    let timeout = isDeleting ? deletingSpeed : typeSpeed;
+
+                    if (isDeleting) {
+                        searchElement.textContent = currentQuestion.substring(0, charIndex - 1);
+                        charIndex--;
+                        if (charIndex === 0) {
+                            isDeleting = false;
+                            questionIndex = (questionIndex + 1) % questions.length;
+                        }
+                    } else {
+                        searchElement.textContent = currentQuestion.substring(0, charIndex + 1);
+                        charIndex++;
+                        if (charIndex === currentQuestion.length) {
+                            isDeleting = true;
+                            timeout = pauseBeforeDelete;
+                        }
+                    }
+                    typingTimeoutId = setTimeout(typeSearch, timeout);
+                }
+
+                function stopTypingAnimation() {
+                    if (typingTimeoutId) {
+                        clearTimeout(typingTimeoutId);
+                        typingTimeoutId = null;
+                    }
+                }
+
+                function startTypingAnimation() {
+                    stopTypingAnimation();
+                    questionIndex = 0;
+                    charIndex = 0;
+                    isDeleting = false;
+                    searchElement.textContent = '';
+                    typeSearch();
+                }
+
+                // Start/Stop animation when the slide becomes active/inactive
+                const observer = new MutationObserver((mutations) => {
+                    mutations.forEach((mutation) => {
+                        if (mutation.attributeName === 'class') {
+                            const slideElement = mutation.target;
+                            if (slideElement.contains(searchElement)) {
+                                if (slideElement.classList.contains('active')) {
+                                    startTypingAnimation();
+                                } else {
+                                    stopTypingAnimation();
+                                }
+                            }
+                        }
+                    });
+                });
+
+                const slide6 = searchElement.closest('.slide');
+                if (slide6) {
+                    observer.observe(slide6, { attributes: true });
+                }
+                currentSlideEl.textContent = currentSlide + 1;
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateSlide();
+            }
+
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                updateSlide();
+            }
+
+            // Event Listeners
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+            dotContainer.addEventListener('click', function(e) {
+                if (e.target.classList.contains('dot')) {
+                    currentSlide = parseInt(e.target.getAttribute('data-slide'));
+                    updateSlide();
+                }
+            });
+            const presentationContainer = document.getElementById('presentation-container');
+
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+
+            // Swipe navigation
+            const hammer = new Hammer(presentationContainer);
+            hammer.on('swipeleft', nextSlide);
+            hammer.on('swiperight', prevSlide);
+
+            // Scroll wheel navigation (with debouncing)
+            let isScrolling = false;
+            presentationContainer.addEventListener('wheel', function(e) {
+                if (isScrolling) return;
+                isScrolling = true;
+
+                // Determine scroll direction
+                if (e.deltaY > 0 || e.deltaX > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+
+                // Prevent rapid slide changes
+                setTimeout(() => {
+                    isScrolling = false;
+                }, 500);
+            });
+
+            // Click navigation
+            presentationContainer.addEventListener('click', function(e) {
+                // Ignore clicks on interactive elements like buttons or dots
+                if (e.target.closest('button, .dot, a')) {
+                    return;
+                }
+
+                const rect = presentationContainer.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                
+                // Click on right half to go next, left half to go prev
+                if (clickX > rect.width / 2) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            });
+
+
+            // Initialisierung
+            createDots();
+            updateSlide();
+            const addBtn = document.getElementById('add-question-btn');
+            addBtn.addEventListener('click', () => {
+                confetti({
+                    particleCount: 150,
+                    spread: 90,
+                    origin: { y: 0.6 },
+                    colors: ['#0062FF', '#FFFFFF', '#d1d5db']
+                });
+            });
+        });
+    </script>
