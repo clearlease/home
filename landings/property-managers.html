@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>clearlea.se: Intelligentes Mietvertragsmanagement</title>
+    <title data-i18n="pmLanding.meta.title">clearlea.se: Intelligentes Mietvertragsmanagement</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+    <!-- Lucide icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Alpine.js for component interactivity -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- i18n -->
+    <script src="../assets/i18n.js"></script>
     <link rel="stylesheet" href="../assets/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
     <style>
@@ -193,9 +199,6 @@
                 margin: 0 auto;
             }
             /* Hide slideshow navigation on mobile */
-            .absolute.bottom-0, .absolute.bottom-4 {
-                display: none !important;
-            }
 
             /* Fix layouts */
             .slide .flex-row, .slide .flex-col {
@@ -277,8 +280,8 @@
        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
            <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
        </svg>
-       <h2 class="text-2xl font-bold mb-2">Bitte drehen Sie Ihr Gerät</h2>
-       <p>Für eine optimale Darstellung, verwenden Sie bitte das Querformat.</p>
+       <h2 class="text-2xl font-bold mb-2" data-i18n="pmLanding.rotate.title">Bitte drehen Sie Ihr Gerät</h2>
+       <p data-i18n="pmLanding.rotate.text">Für eine optimale Darstellung, verwenden Sie bitte das Querformat.</p>
    </div>
 
     <div class="relative">
@@ -290,37 +293,37 @@
                     <img src="../resources/clearlease_logo_rgb (flattened).svg" alt="clearlea.se Logo" class="w-70 h-auto mb-6">
                     
                     <!-- <h1 class="text-4xl md:text-6xl font-extrabold text-[var(--brand-dark)]">clearlea.se</h1> -->
-                    <h2 class="text-2xl md:text-4xl font-semibold text-[var(--brand-dark)] mt-2">Mietvertragsintelligenz für den operativen Alltag</h2>
+                    <h2 class="text-2xl md:text-4xl font-semibold text-[var(--brand-dark)] mt-2" data-i18n="pmLanding.slide1.title">Mietvertragsintelligenz für den operativen Alltag</h2>
                     
-                    <p class="mt-6 text-base md:text-lg text-[var(--brand-gray)] max-w-3xl">Wie wir aus statischen Dokumentenarchiven eine lebendige Wissensbasis für den operativen Alltag im Portfolio- & Property-Management machen.</p>
+                    <p class="mt-6 text-base md:text-lg text-[var(--brand-gray)] max-w-3xl" data-i18n="pmLanding.slide1.subtitle">Wie wir aus statischen Dokumentenarchiven eine lebendige Wissensbasis für den operativen Alltag im Portfolio- & Property-Management machen.</p>
                 </div>
             </div>
 
             <!-- Slide 2: Problem -->
             <div class="slide bg-[var(--brand-light-gray)]">
                 <div class="slide-content text-center p-12 md:p-20">
-                    <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-12">Wo versickert wertvolle Zeit im Tagesgeschäft?</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-12" data-i18n="pmLanding.slide2.title">Wo versickert wertvolle Zeit im Tagesgeschäft?</h2>
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 w-full max-w-5xl">
                         
                         <div class="flex flex-col items-center p-4 bg-white border border-[var(--brand-border)] rounded-xl">
                             <div class="w-16 h-16 bg-blue-50 text-[var(--brand-blue)] rounded-full flex items-center justify-center mb-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 10l.01.01" /></svg>
                             </div>
-                            <p class="text-[var(--brand-gray)] font-medium text-sm">Ständiges Suchen nach der EINEN gültigen Information über diverse Nachträge hinweg.</p>
+                            <p class="text-[var(--brand-gray)] font-medium text-sm" data-i18n="pmLanding.slide2.card1">Ständiges Suchen nach der EINEN gültigen Information über diverse Nachträge hinweg.</p>
                         </div>
                         
                         <div class="flex flex-col items-center p-4 bg-white border border-[var(--brand-border)] rounded-xl">
                             <div class="w-16 h-16 bg-blue-50 text-[var(--brand-blue)] rounded-full flex items-center justify-center mb-4">
                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M12 8h.01M15 8h.01M15 5h.01M12 5h.01M9 5h.01M4 7h16a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V8a1 1 0 011-1z" /></svg>
                             </div>
-                            <p class="text-[var(--brand-gray)] font-medium text-sm">Manuelle Datenübertragung in fehleranfällige Excel-Listen.</p>
+                            <p class="text-[var(--brand-gray)] font-medium text-sm" data-i18n="pmLanding.slide2.card2">Manuelle Datenübertragung in fehleranfällige Excel-Listen.</p>
                         </div>
                         
                         <div class="flex flex-col items-center p-4 bg-white border border-[var(--brand-border)] rounded-xl">
                             <div class="w-16 h-16 bg-blue-50 text-[var(--brand-blue)] rounded-full flex items-center justify-center mb-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                             </div>
-                            <p class="text-[var(--brand-gray)] font-medium text-sm">Hohes Risiko, kritische Fristen und Klauseln zu übersehen.</p>
+                            <p class="text-[var(--brand-gray)] font-medium text-sm" data-i18n="pmLanding.slide2.card3">Hohes Risiko, kritische Fristen und Klauseln zu übersehen.</p>
                         </div>
                         
                         <div class="flex flex-col items-center p-4 bg-white border border-[var(--brand-border)] rounded-xl">
@@ -328,7 +331,7 @@
                                 
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2zM9 14h6m-3-3v6" /></svg>
                             </div>
-                            <p class="text-[var(--brand-gray)] font-medium text-sm">Mühsames Onboarding neuer Mandate aus unsortierten Datenräumen und physischen Akten.</p>
+                            <p class="text-[var(--brand-gray)] font-medium text-sm" data-i18n="pmLanding.slide2.card4">Mühsames Onboarding neuer Mandate aus unsortierten Datenräumen und physischen Akten.</p>
                         </div>
                     </div>
                 </div>
@@ -337,21 +340,21 @@
             <!-- Slide 3: Vision -->
             <div class="slide bg-[var(--brand-light-gray)]">
                 <div class="slide-content text-center p-12 md:p-20">
-                    <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-4">Dokumente sollten für Sie arbeiten</h2>
-                    <p class="text-xl md:text-2xl text-[var(--brand-gray)] mb-16">– nicht umgekehrt.</p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-4" data-i18n="pmLanding.slide3.title">Dokumente sollten für Sie arbeiten</h2>
+                    <p class="text-xl md:text-2xl text-[var(--brand-gray)] mb-16" data-i18n="pmLanding.slide3.subtitle">– nicht umgekehrt.</p>
                     <div class="w-full flex items-center justify-around max-w-4xl">
                         <div class="flex flex-col items-center w-1/3 text-center">
                             <img src="../resources/images/pile-of-leases.svg" alt="Pile of unsorted leases" class="h-48 mb-4">
-                            <span class="font-bold text-[var(--brand-dark)]">Unsortierte Dokumentenberge</span>
-                            <p class="text-sm text-[var(--brand-gray)]">PDFs, Scans, E-Mails – eine unstrukturierte Datenflut.</p>
+                            <span class="font-bold text-[var(--brand-dark)]" data-i18n="pmLanding.slide3.card1.title">Unsortierte Dokumentenberge</span>
+                            <p class="text-sm text-[var(--brand-gray)]" data-i18n="pmLanding.slide3.card1.text">PDFs, Scans, E-Mails – eine unstrukturierte Datenflut.</p>
                         </div>
                         <div class="text-gray-400 px-4">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                         </div>
                         <div class="flex flex-col items-center w-1/3 text-center">
                             <img src="../resources/images/dashboard.svg" alt="Clearlease dashboard" class="h-48 mb-4">
-                            <span class="font-bold text-[var(--brand-dark)]">Klarheit auf einen Blick</span>
-                            <p class="text-sm text-[var(--brand-gray)]">Alle relevanten Datenpunkte sofort verfügbar und verständlich.</p>
+                            <span class="font-bold text-[var(--brand-dark)]" data-i18n="pmLanding.slide3.card2.title">Klarheit auf einen Blick</span>
+                            <p class="text-sm text-[var(--brand-gray)]" data-i18n="pmLanding.slide3.card2.text">Alle relevanten Datenpunkte sofort verfügbar und verständlich.</p>
                         </div>
                     </div>
                 </div>
@@ -362,8 +365,8 @@
                  <div class="slide-content flex-row items-center justify-center p-12 md:p-20 space-x-12">
                     
                     <div class="text-left w-1/2 max-w-md">
-                        <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-6">Eine Frage – eine einzige, korrekte Antwort.</h2>
-                        <p class="text-lg text-[var(--brand-gray)] max-w-sm">Unsere KI versteht die Historie Ihrer Dokumente und liefert immer die aktuell gültige Information, egal wie viele Nachträge es gibt.</p>
+                        <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-6" data-i18n="pmLanding.slide4.title">Eine Frage – eine einzige, korrekte Antwort.</h2>
+                        <p class="text-lg text-[var(--brand-gray)] max-w-sm" data-i18n="pmLanding.slide4.text">Unsere KI versteht die Historie Ihrer Dokumente und liefert immer die aktuell gültige Information, egal wie viele Nachträge es gibt.</p>
                     </div>
 
                     <!-- Visuelle Darstellung des Historienverlaufs -->
@@ -371,7 +374,7 @@
                         
                         <!-- Aktueller Wert Header -->
                         <div class="flex justify-between items-center p-3 mb-6 bg-white rounded-lg border border-[var(--brand-blue)] shadow-md">
-                            <p class="text-xl font-bold text-[var(--brand-dark)]">Hauptmietfläche</p>
+                            <p class="text-xl font-bold text-[var(--brand-dark)]" data-i18n="pmLanding.slide4.visual.title">Hauptmietfläche</p>
                             <div class="flex items-center space-x-2">
                                 <span class="text-2xl font-mono text-[var(--brand-blue)]">574 m²</span>
                                 <!-- Edit Icon -->
@@ -390,7 +393,7 @@
                                 <!-- Punkt -->
                                 <div class="absolute -left-4 w-3 h-3 bg-[var(--brand-blue)] rounded-full mt-2"></div>
                                 <div class="bg-white rounded-xl border border-[var(--brand-border)] shadow-sm ml-6 p-3">
-                                    <p class="text-sm font-semibold text-[var(--brand-dark)] mb-1">15.12.2024 (Nachtrag 3) - <span class="text-[var(--brand-blue)]">Gültige Korrektur</span></p>
+                                    <p class="text-sm font-semibold text-[var(--brand-dark)] mb-1" data-i18n="pmLanding.slide4.visual.item1">15.12.2024 (Nachtrag 3) - <span class="text-[var(--brand-blue)]">Gültige Korrektur</span></p>
                                     
                                     <p class="text-lg font-mono text-green-600 mt-1">574 m²</p>
                                 </div>
@@ -401,7 +404,7 @@
                                 <!-- Punkt -->
                                 <div class="absolute -left-4 w-3 h-3 bg-gray-400 rounded-full mt-2"></div>
                                 <div class="bg-white rounded-xl border border-[var(--brand-border)] shadow-sm ml-6 p-3">
-                                    <p class="text-sm text-[var(--brand-gray)] mb-1">05.04.2024 (Nachtrag 2)</p>
+                                    <p class="text-sm text-[var(--brand-gray)] mb-1" data-i18n="pmLanding.slide4.visual.item2">05.04.2024 (Nachtrag 2)</p>
                                      <p class="text-lg font-mono text-[var(--brand-gray)] mt-1">unbekannt</p>
                                 </div>
                             </div>
@@ -411,7 +414,7 @@
                                 <!-- Punkt -->
                                 <div class="absolute -left-4 w-3 h-3 bg-gray-400 rounded-full mt-2"></div>
                                 <div class="bg-white rounded-xl border border-[var(--brand-border)] shadow-sm ml-6 p-3">
-                                    <p class="text-sm text-[var(--brand-gray)] mb-1">10.12.2019 (Hauptdokument)</p>
+                                    <p class="text-sm text-[var(--brand-gray)] mb-1" data-i18n="pmLanding.slide4.visual.item3">10.12.2019 (Hauptdokument)</p>
                                     <p class="text-lg font-mono text-[var(--brand-gray)] mt-1">550 m²</p>
                                 </div>
                             </div>
@@ -427,22 +430,22 @@
             <!-- NEUE Slide 5: Operative Exzellenz (Effizienz-Boost) -->
             <div class="slide bg-[var(--brand-light-gray)]">
                 <div class="slide-content p-12 md:p-20">
-                    <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-12">Ihr Gewinn im operativen Alltag: Sicherheit und Geschwindigkeit</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-12" data-i18n="pmLanding.slide5.title">Ihr Gewinn im operativen Alltag: Sicherheit und Geschwindigkeit</h2>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
                         
                         <!-- Linke Spalte: Suchen & Finden -->
                         <div class="p-6 text-center bg-white border border-[var(--brand-border)] rounded-xl shadow-lg">
                             <lottie-player src="../resources/lottie/click-to-source-vid.json" background="transparent" speed="1" loop autoplay style="width:100%;height:220px;" class="object-contain mb-4 rounded-lg border border-gray-100" aria-label="Structured overview animation"></lottie-player>
-                            <h3 class="font-bold text-[var(--brand-blue)] text-xl mb-2">Kein Suchen, nur Finden.</h3>
-                            <p class="text-[var(--brand-gray)] text-sm">Unsere KI liefert nicht nur die Daten, sondern zeigt Ihnen auf Klick die exakte Textstelle im Originaldokument. Das endlose Scrollen zur Verifizierung hat ein Ende.</p>
+                            <h3 class="font-bold text-[var(--brand-blue)] text-xl mb-2" data-i18n="pmLanding.slide5.card1.title">Kein Suchen, nur Finden.</h3>
+                            <p class="text-[var(--brand-gray)] text-sm" data-i18n="pmLanding.slide5.card1.text">Unsere KI liefert nicht nur die Daten, sondern zeigt Ihnen auf Klick die exakte Textstelle im Originaldokument. Das endlose Scrollen zur Verifizierung hat ein Ende.</p>
                         </div>
                         
                         <!-- Rechte Spalte: Datenqualität & Kontrolle -->
                         <div class="p-6 text-center bg-white border border-[var(--brand-border)] rounded-xl shadow-lg">
                             <lottie-player src="../resources/lottie/proactive-suggestions-vid.json" background="transparent" speed="1" loop autoplay style="width:100%;height:220px;" class="object-contain mb-4 rounded-lg border border-gray-100" aria-label="Proactive suggestions animation"></lottie-player>
-                            <h3 class="font-bold text-[var(--brand-blue)] text-xl mb-2">KI-Vorschlag, menschliche Kontrolle.</h3>
-                            <p class="text-[var(--brand-gray)] text-sm">Das System schlägt Änderungen intelligent vor, aber Sie behalten die volle Kontrolle. Jeder extrahierte Wert kann validiert werden – für 100% revisionssichere Datenqualität.</p>
+                            <h3 class="font-bold text-[var(--brand-blue)] text-xl mb-2" data-i18n="pmLanding.slide5.card2.title">KI-Vorschlag, menschliche Kontrolle.</h3>
+                            <p class="text-[var(--brand-gray)] text-sm" data-i18n="pmLanding.slide5.card2.text">Das System schlägt Änderungen intelligent vor, aber Sie behalten die volle Kontrolle. Jeder extrahierte Wert kann validiert werden – für 100% revisionssichere Datenqualität.</p>
                         </div>
                     </div>
                 </div>
@@ -451,7 +454,7 @@
             <!-- NEUE Slide 6: Strategischer Vorteil (Flexibilität) -->
             <div class="slide bg-[var(--brand-light-gray)]">
                 <div class="slide-content p-12 md:p-20">
-                    <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-12">Bereit für morgen: Reagieren Sie auf jeden neuen Markttrend.</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-12" data-i18n="pmLanding.slide6.title">Bereit für morgen: Reagieren Sie auf jeden neuen Markttrend.</h2>
                     
                     <div class="w-full max-w-2xl text-center">
                         <!-- Bild: Natural Language Query -->
@@ -464,9 +467,9 @@
                             </button>
                         </div>
 
-                        <p class="mt-12 text-lg text-[var(--brand-gray)] max-w-xl mx-auto">
-                            Der Markt verändert sich ständig: Neue ESG-Richtlinien, geänderte Gesetze, neue Reporting-Anforderungen. Mit unserer flexiblen Abfragesprache stellen Sie Ihrem Portfolio einfach neue Fragen, ohne auf teure Software-Updates warten zu müssen. 
-                            <span class="font-bold text-[var(--brand-blue)] block mt-2">Das ist Ihre Zukunfts- und Investitionssicherheit.</span>
+                        <p class="mt-12 text-lg text-[var(--brand-gray)] max-w-xl mx-auto" data-i18n="pmLanding.slide6.text">
+                            Der Markt verändert sich ständig: Neue ESG-Richtlinien, geänderte Gesetze, neue Reporting-Anforderungen. Mit unserer flexiblen Abfragesprache stellen Sie Ihrem Portfolio einfach neue Fragen, ohne auf teure Software-Updates warten zu müssen.
+                            <span class="font-bold text-[var(--brand-blue)] block mt-2" data-i18n="pmLanding.slide6.highlight">Das ist Ihre Zukunfts- und Investitionssicherheit.</span>
                         </p>
                     </div>
                 </div>
@@ -477,32 +480,32 @@
             <div class="slide bg-[var(--brand-light-gray)]">
                 <div class="slide-content items-center p-12 md:p-20">
                     <div class="w-full max-w-5xl">
-                        <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] text-center">Für den Start: Das Aufräum-Projekt</h2>
-                        <p class="text-lg text-[var(--brand-gray)] mt-2 mb-8 text-center">Ideal für Onboarding neuer Mandate, Due Diligence, Systemmigrationen.</p>
+                        <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] text-center" data-i18n="pmLanding.slide7.title">Für den Start: Das Aufräum-Projekt</h2>
+                        <p class="text-lg text-[var(--brand-gray)] mt-2 mb-8 text-center" data-i18n="pmLanding.slide7.subtitle">Ideal für Onboarding neuer Mandate, Due Diligence, Systemmigrationen.</p>
                         
                         <div class="flex flex-row items-start justify-center gap-8 mt-8">
                             <!-- Left Column -->
                             <div class="w-1/2 space-y-4">
                                 <div class="p-6 bg-white rounded-lg border border-[var(--brand-border)] shadow-md h-full">
-                                    <h4 class="font-semibold text-[var(--brand-blue)]">Was wir tun:</h4>
-                                    <p class="text-[var(--brand-gray)]">Wir nehmen Ihre unsortierten Akten (PDF & Scanns)  und extrahieren einmalig alle relevanten Daten.</p>
+                                    <h4 class="font-semibold text-[var(--brand-blue)]" data-i18n="pmLanding.slide7.card1.title">Was wir tun:</h4>
+                                    <p class="text-[var(--brand-gray)]" data-i18n="pmLanding.slide7.card1.text">Wir nehmen Ihre unsortierten Akten (PDF & Scanns)  und extrahieren einmalig alle relevanten Daten.</p>
                                 </div>
                                 <div class="p-6 bg-[var(--brand-light-gray)] rounded-lg shadow-md h-full">
-                                    <h4 class="font-semibold text-[var(--brand-blue)]">Ihr Ergebnis:</h4>
-                                    <p class="text-[var(--brand-gray)]">Eine saubere, strukturierte Datengrundlage für Ihr ERP-System in Rekordzeit.</p>
+                                    <h4 class="font-semibold text-[var(--brand-blue)]" data-i18n="pmLanding.slide7.card2.title">Ihr Ergebnis:</h4>
+                                    <p class="text-[var(--brand-gray)]" data-i18n="pmLanding.slide7.card2.text">Eine saubere, strukturierte Datengrundlage für Ihr ERP-System in Rekordzeit.</p>
                                 </div>
                             </div>
 
                             <!-- Right Column (Social Proof) -->
                             <div class="w-1/2">
                                 <div class="p-6 bg-white rounded-lg border border-[var(--brand-border)] shadow-md h-full">
-                                    <h4 class="font-semibold text-green-600">Praxis-Beispiel: Versicherungskonzern</h4>
-                                    <p class="text-[var(--brand-gray)] mt-2">Reduzierung der Onboarding-Zeit für <span class="font-bold text-[var(--brand-dark)]">500+ Standorte</span>.</p>
+                                    <h4 class="font-semibold text-green-600" data-i18n="pmLanding.slide7.card3.title">Praxis-Beispiel: Versicherungskonzern</h4>
+                                    <p class="text-[var(--brand-gray)] mt-2" data-i18n="pmLanding.slide7.card3.text">Reduzierung der Onboarding-Zeit für <span class="font-bold text-[var(--brand-dark)]">500+ Standorte</span>.</p>
                                     <div class="mt-4 space-y-3">
                                         <div class="w-full">
                                             <div class="flex justify-between items-center mb-1">
-                                                <span class="text-sm font-medium text-[var(--brand-gray)]">Vorher</span>
-                                                <span class="text-sm font-bold text-[var(--brand-dark)]">3 Monate</span>
+                                                <span class="text-sm font-medium text-[var(--brand-gray)]" data-i18n="pmLanding.slide7.card3.before">Vorher</span>
+                                                <span class="text-sm font-bold text-[var(--brand-dark)]" data-i18n="pmLanding.slide7.card3.before.value">3 Monate</span>
                                             </div>
                                             <div class="w-full bg-gray-200 rounded-full h-4">
                                                 <div class="bg-red-400 h-4 rounded-full animated-bar" data-width="100%" style="width: 0;"></div>
@@ -510,8 +513,8 @@
                                         </div>
                                         <div class="w-full">
                                             <div class="flex justify-between items-center mb-1">
-                                                <span class="text-sm font-medium text-[var(--brand-gray)]">Nachher</span>
-                                                <span class="text-sm font-bold text-green-600">3 Tage</span>
+                                                <span class="text-sm font-medium text-[var(--brand-gray)]" data-i18n="pmLanding.slide7.card3.after">Nachher</span>
+                                                <span class="text-sm font-bold text-green-600" data-i18n="pmLanding.slide7.card3.after.value">3 Tage</span>
                                             </div>
                                             <div class="w-full bg-gray-200 rounded-full h-4">
                                                 <div class="bg-green-500 h-4 rounded-full animated-bar" data-width="3.3%" style="width: 0;"></div>
@@ -529,33 +532,33 @@
             <div class="slide bg-[var(--brand-light-gray)]">
                 <div class="slide-content items-center p-12 md:p-20">
                     <div class="w-full max-w-5xl">
-                        <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] text-center">Für den Dauerbetrieb: Die SaaS-Plattform</h2>
-                        <p class="text-lg text-[var(--brand-gray)] mt-2 mb-8 text-center">Ideal für laufendes, aktives Property Management.</p>
+                        <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] text-center" data-i18n="pmLanding.slide8.title">Für den Dauerbetrieb: Die SaaS-Plattform</h2>
+                        <p class="text-lg text-[var(--brand-gray)] mt-2 mb-8 text-center" data-i18n="pmLanding.slide8.subtitle">Ideal für laufendes, aktives Property Management.</p>
                         
                         <div class="flex flex-row items-start justify-center gap-8 mt-8">
                             <!-- Left Column -->
                             <div class="w-1/2 space-y-4">
                                 <div class="p-6 bg-white rounded-lg border border-[var(--brand-border)] shadow-md h-full">
-                                    <h4 class="font-semibold text-[var(--brand-blue)]">Was wir tun:</h4>
-                                    <p class="text-[var(--brand-gray)]">Ihre zentrale Anlaufstelle für alle Fragen rund um Ihre Mietverträge.</p>
+                                    <h4 class="font-semibold text-[var(--brand-blue)]" data-i18n="pmLanding.slide8.card1.title">Was wir tun:</h4>
+                                    <p class="text-[var(--brand-gray)]" data-i18n="pmLanding.slide8.card1.text">Ihre zentrale Anlaufstelle für alle Fragen rund um Ihre Mietverträge.</p>
                                 </div>
                                 <div class="p-6 bg-gray-100 rounded-lg shadow-md h-full">
-                                    <h4 class="font-semibold text-[var(--brand-blue)]">Ihr Ergebnis:</h4>
-                                    <p class="text-[var(--brand-gray)]">Eine immer aktuelle Wissensbasis, die mit Ihrem Portfolio wächst und Ihr Team jeden Tag intelligenter macht.</p>
+                                    <h4 class="font-semibold text-[var(--brand-blue)]" data-i18n="pmLanding.slide8.card2.title">Ihr Ergebnis:</h4>
+                                    <p class="text-[var(--brand-gray)]" data-i18n="pmLanding.slide8.card2.text">Eine immer aktuelle Wissensbasis, die mit Ihrem Portfolio wächst und Ihr Team jeden Tag intelligenter macht.</p>
                                 </div>
                             </div>
 
                             <!-- Right Column (Social Proof) -->
                             <div class="w-1/2">
                                 <div class="p-6 bg-white rounded-lg border border-[var(--brand-border)] shadow-md h-full">
-                                    <h4 class="font-semibold text-green-600">Praxis-Beispiel: Full-Service Provider</h4>
-                                    <p class="text-[var(--brand-gray)] mt-2">Aufwand für zukünftige Suchen: <span class="font-bold text-green-600">> 95% Zeitersparnis</span>.</p>
-                                    <p class="text-sm text-[var(--brand-gray)] mt-2">Nach dem Onboarding dauert das Nachschlagen einer Information (z.B. "Reparaturklausel") weniger als 30 Sekunden statt der bisherigen 15 Minuten pro Anfrage.</p>
+                                    <h4 class="font-semibold text-green-600" data-i18n="pmLanding.slide8.card3.title">Praxis-Beispiel: Full-Service Provider</h4>
+                                    <p class="text-[var(--brand-gray)] mt-2" data-i18n="pmLanding.slide8.card3.text">Aufwand für zukünftige Suchen: <span class="font-bold text-green-600">> 95% Zeitersparnis</span>.</p>
+                                    <p class="text-sm text-[var(--brand-gray)] mt-2" data-i18n="pmLanding.slide8.card3.subtext">Nach dem Onboarding dauert das Nachschlagen einer Information (z.B. "Reparaturklausel") weniger als 30 Sekunden statt der bisherigen 15 Minuten pro Anfrage.</p>
                                     <div class="mt-4 space-y-3">
                                         <div class="w-full">
                                             <div class="flex justify-between items-center mb-1">
-                                                <span class="text-sm font-medium text-[var(--brand-gray)]">Vorher</span>
-                                                <span class="text-sm font-bold text-[var(--brand-dark)]">15 Minuten</span>
+                                                <span class="text-sm font-medium text-[var(--brand-gray)]" data-i18n="pmLanding.slide8.card3.before">Vorher</span>
+                                                <span class="text-sm font-bold text-[var(--brand-dark)]" data-i18n="pmLanding.slide8.card3.before.value">15 Minuten</span>
                                             </div>
                                             <div class="w-full bg-gray-200 rounded-full h-4">
                                                 <div class="bg-red-400 h-4 rounded-full animated-bar" data-width="100%" style="width: 0;"></div>
@@ -563,8 +566,8 @@
                                         </div>
                                         <div class="w-full">
                                             <div class="flex justify-between items-center mb-1">
-                                                <span class="text-sm font-medium text-[var(--brand-gray)]">Nachher</span>
-                                                <span class="text-sm font-bold text-green-600">< 30 Sekunden</span>
+                                                <span class="text-sm font-medium text-[var(--brand-gray)]" data-i18n="pmLanding.slide8.card3.after">Nachher</span>
+                                                <span class="text-sm font-bold text-green-600" data-i18n="pmLanding.slide8.card3.after.value">< 30 Sekunden</span>
                                             </div>
                                             <div class="w-full bg-gray-200 rounded-full h-4">
                                                 <div class="bg-green-500 h-4 rounded-full animated-bar" data-width="3.3%" style="width: 0;"></div>
@@ -581,19 +584,19 @@
             <!-- Slide 9 (vorher 8): Integration/Ökosystem -->
             <div class="slide bg-[var(--brand-light-gray)]">
                 <div class="slide-content text-center p-12 md:p-20">
-                    <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-12">Wir sind die intelligente Ergänzung, kein Ersatz.</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-12" data-i18n="pmLanding.slide9.title">Wir sind die intelligente Ergänzung, kein Ersatz.</h2>
                     
                     <div class="w-full max-w-5xl flex items-center justify-between">
                         <!-- Column 1: Data Sources -->
                         <div class="w-1/4 space-y-4">
                             <div class="p-4 bg-white rounded-lg border border-[var(--brand-border)] shadow-md text-center">
-                                <h4 class="font-semibold text-[var(--brand-dark)]">E-Mails (Outlook)</h4>
+                                <h4 class="font-semibold text-[var(--brand-dark)]" data-i18n="pmLanding.slide9.card1.title">E-Mails (Outlook)</h4>
                             </div>
                             <div class="p-4 bg-white rounded-lg border border-[var(--brand-border)] shadow-md text-center">
-                                <h4 class="font-semibold text-[var(--brand-dark)]">PDFs & Scans</h4>
+                                <h4 class="font-semibold text-[var(--brand-dark)]" data-i18n="pmLanding.slide9.card2.title">PDFs & Scans</h4>
                             </div>
                             <div class="p-4 bg-white rounded-lg border border-[var(--brand-border)] shadow-md text-center">
-                                <h4 class="font-semibold text-[var(--brand-dark)]">DMS</h4>
+                                <h4 class="font-semibold text-[var(--brand-dark)]" data-i18n="pmLanding.slide9.card3.title">DMS</h4>
                             </div>
                         </div>
 
@@ -603,8 +606,8 @@
                         <!-- Column 2: ClearLease -->
                         <div class="w-1/3">
                             <div class="p-6 bg-[var(--brand-blue)] text-white rounded-2xl shadow-xl text-center">
-                                <h3 class="font-bold text-xl">clearlea.se</h3>
-                                <p class="text-sm">Intelligent Extraction & Validation</p>
+                                <h3 class="font-bold text-xl" data-i18n="pmLanding.slide9.card4.title">clearlea.se</h3>
+                                <p class="text-sm" data-i18n="pmLanding.slide9.card4.text">Intelligent Extraction & Validation</p>
                             </div>
                         </div>
 
@@ -614,26 +617,26 @@
                         <!-- Column 3: Destination Systems -->
                         <div class="w-1/4 space-y-4">
                             <div class="p-3 bg-white rounded-lg border border-[var(--brand-border)] shadow-md text-center">
-                                <h4 class="font-semibold text-[var(--brand-dark)]">ERP</h4>
+                                <h4 class="font-semibold text-[var(--brand-dark)]" data-i18n="pmLanding.slide9.card5.title">ERP</h4>
                             </div>
                             <div class="p-3 bg-white rounded-lg border border-[var(--brand-border)] shadow-md text-center">
-                                <h4 class="font-semibold text-[var(--brand-dark)]">SAP / SAP-REFX</h4>
+                                <h4 class="font-semibold text-[var(--brand-dark)]" data-i18n="pmLanding.slide9.card6.title">SAP / SAP-REFX</h4>
                             </div>
                             <div class="p-3 bg-white rounded-lg border border-[var(--brand-border)] shadow-md text-center">
-                                <h4 class="font-semibold text-[var(--brand-dark)]">Excel</h4>
+                                <h4 class="font-semibold text-[var(--brand-dark)]" data-i18n="pmLanding.slide9.card7.title">Excel</h4>
                             </div>
                             <div class="p-3 bg-white rounded-lg border border-[var(--brand-border)] shadow-md text-center">
-                                <h4 class="font-semibold text-[var(--brand-dark)]">API</h4>
+                                <h4 class="font-semibold text-[var(--brand-dark)]" data-i18n="pmLanding.slide9.card8.title">API</h4>
                             </div>
                         </div>
                     </div>
-                     <p class="mt-12 text-[var(--brand-gray)] max-w-3xl">Über unsere flexible API binden wir uns nahtlos an Ihre bestehende Systemlandschaft an und liefern qualitätsgesicherte Daten dorthin, wo Sie sie brauchen.</p>
+                     <p class="mt-12 text-[var(--brand-gray)] max-w-3xl" data-i18n="pmLanding.slide9.text">Über unsere flexible API binden wir uns nahtlos an Ihre bestehende Systemlandschaft an und liefern qualitätsgesicherte Daten dorthin, wo Sie sie brauchen.</p>
                 </div>
             </div>
             <!-- Slide 10 (vorher 9): Referenzen (Text geschärft) -->
             <div class="slide bg-[var(--brand-light-gray)]">
                 <div class="slide-content text-center p-12 md:p-20">
-                    <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-12">In der Praxis entwickelt, von Experten geschätzt.</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-12" data-i18n="pmLanding.slide10.title">In der Praxis entwickelt, von Experten geschätzt.</h2>
                     <div class="partner-marquee">
                         <div class="marquee-track" aria-hidden="false">
                             <img src="../resources/logos/zia-logo.svg" alt="ZIA" class="partner-logo opacity-80">
@@ -665,17 +668,17 @@
             <!-- Slide 11 (vorher 10): Team -->
             <div class="slide bg-[var(--brand-light-gray)]">
                 <div class="slide-content text-center p-12 md:p-20">
-                    <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-12">Gebaut von Experten, die beide Welten verstehen.</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-12" data-i18n="pmLanding.slide11.title">Gebaut von Experten, die beide Welten verstehen.</h2>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-4xl">
                         <div class="flex flex-col items-center">
                             <img src="../resources/images/hiero.png" alt="Hieronymus Deutsch Foto" class="w-32 h-32 rounded-full mb-4 object-cover shadow-lg">
-                            <h4 class="font-bold text-lg text-[var(--brand-dark)]">Hieronymus Deutsch</h4>
-                            <p class="text-[var(--brand-blue)]">Business-Strategie & Prozessverständnis</p>
+                            <h4 class="font-bold text-lg text-[var(--brand-dark)]" data-i18n="pmLanding.slide11.card1.title">Hieronymus Deutsch</h4>
+                            <p class="text-[var(--brand-blue)]" data-i18n="pmLanding.slide11.card1.text">Business-Strategie & Prozessverständnis</p>
                         </div>
                          <div class="flex flex-col items-center">
                             <img src="../resources/images/fabian.png" alt="Fabian Lausmann Foto" class="w-32 h-32 rounded-full mb-4 object-cover shadow-lg">
-                            <h4 class="font-bold text-lg text-[var(--brand-dark)]">Fabian Lausmann</h4>
-                            <p class="text-[var(--brand-blue)]">Enterprise-Tech & KI-Architektur</p>
+                            <h4 class="font-bold text-lg text-[var(--brand-dark)]" data-i18n="pmLanding.slide11.card2.title">Fabian Lausmann</h4>
+                            <p class="text-[var(--brand-blue)]" data-i18n="pmLanding.slide11.card2.text">Enterprise-Tech & KI-Architektur</p>
                         </div>
                          <div class="flex flex-col items-center">
                             <div class="w-32 h-32 rounded-full mb-4 bg-gray-100 text-gray-500 flex items-center justify-center object-cover shadow-lg">
@@ -684,8 +687,8 @@
                                 </svg>
                             </div>
                             
-                            <h4 class="font-bold text-lg text-[var(--brand-dark)]">Die Stimme des Kunden</h4>
-                            <p class="text-[var(--brand-blue)]">Verankert im echten PM-Alltag</p>
+                            <h4 class="font-bold text-lg text-[var(--brand-dark)]" data-i18n="pmLanding.slide11.card3.title">Die Stimme des Kunden</h4>
+                            <p class="text-[var(--brand-blue)]" data-i18n="pmLanding.slide11.card3.text">Verankert im echten PM-Alltag</p>
                         </div>
                     </div>
                 </div>
@@ -694,23 +697,23 @@
             <!-- Slide 12 (vorher 11): Call to Action -->
             <div class="slide bg-[var(--clr-primary)] text-white">
                  <div class="slide-content text-center p-12 md:p-20">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6">Lassen Sie uns über Ihre konkreten Herausforderungen sprechen.</h2>
-                    <p class="text-lg md:text-xl text-gray-300 mb-10">Buchen Sie eine unverbindliche 15-Minuten Live-Demo.</p>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6" data-i18n="pmLanding.slide12.title">Lassen Sie uns über Ihre konkreten Herausforderungen sprechen.</h2>
+                    <p class="text-lg md:text-xl text-gray-300 mb-10" data-i18n="pmLanding.slide12.subtitle">Buchen Sie eine unverbindliche 15-Minuten Live-Demo.</p>
                     
-                    <a data-cal-link="deutsch/demo" data-cal-namespace="demo" data-cal-config='{"layout":"month_view"}' class="bg-[var(--brand-blue)] hover:opacity-90 text-white font-bold py-4 px-8 rounded-full text-xl transition duration-300 shadow-lg">
+                    <a data-cal-link="deutsch/demo" data-cal-namespace="demo" data-cal-config='{"layout":"month_view"}' class="bg-[var(--brand-blue)] hover:opacity-90 text-white font-bold py-4 px-8 rounded-full text-xl transition duration-300 shadow-lg" data-i18n="pmLanding.slide12.cta">
                         Jetzt Demo buchen
                     </a>
 
                     <div class="mt-12 border-t border-gray-600 pt-8 w-full max-w-lg flex items-center justify-center space-x-6">
                         <img src="../resources/images/hiero.png" alt="Foto Hieronymus Deutsch" class="w-24 h-24 rounded-full object-cover shadow-lg border-2 border-[var(--brand-blue)]">
                         <div class="text-left">
-                            <p class="font-bold text-lg">Hieronymus Deutsch</p>
-                            <p class="text-gray-300">Gründer & CEO</p>
-                            <p class="text-gray-300 mt-1"><a href="mailto:deutsch@clearlea.se?subject=Anfrage%20über%20clearlea.se&body=Sehr%20geehrter%20Herr%20Deutsch,%0A%0Aich%20habe%20Ihre%20Präsentation%20gesehen%20und%20hätte%20eine%20Frage.%0A%0AMit%20freundlichen%20Grüßen,">deutsch@clearlea.se</a></p>
-                            <p class="text-gray-300"><a href="tel:+4917634571313">+49 176 345 713 13</a></p>
+                            <p class="font-bold text-lg" data-i18n="pmLanding.slide12.card1.title">Hieronymus Deutsch</p>
+                            <p class="text-gray-300" data-i18n="pmLanding.slide12.card1.text1">Gründer & CEO</p>
+                            <p class="text-gray-300 mt-1"><a href="mailto:deutsch@clearlea.se?subject=Anfrage%20über%20clearlea.se&body=Sehr%20geehrter%20Herr%20Deutsch,%0A%0Aich%20habe%20Ihre%20Präsentation%20gesehen%20und%20hätte%20eine%20Frage.%0A%0AMit%20freundlichen%20Grüßen," data-i18n="pmLanding.slide12.card1.text2">deutsch@clearlea.se</a></p>
+                            <p class="text-gray-300"><a href="tel:+4917634571313" data-i18n="pmLanding.slide12.card1.text3">+49 176 345 713 13</a></p>
                         </div>
                     </div>
-                     <p class="mt-6 text-sm text-gray-400">Keine Standardpräsentation. Wir schauen uns live an, wie wir eine Ihrer täglichen Aufgaben lösen.</p>
+                     <p class="mt-6 text-sm text-gray-400" data-i18n="pmLanding.slide12.text">Keine Standardpräsentation. Wir schauen uns live an, wie wir eine Ihrer täglichen Aufgaben lösen.</p>
                 </div>
             </div>
             
@@ -718,21 +721,43 @@
 
         <!-- Contact Button Container -->
         <div id="contact-button-container">
-            <a href="mailto:deutsch@clearlea.se" class="bg-[var(--brand-blue)] hover:opacity-90 text-white font-bold py-3 px-6 rounded-full text-lg transition duration-300 shadow-lg">
+            <a href="mailto:deutsch@clearlea.se" class="bg-[var(--brand-blue)] hover:opacity-90 text-white font-bold py-3 px-6 rounded-full text-lg transition duration-300 shadow-lg" data-i18n="pmLanding.contact">
                 Kontakt aufnehmen
             </a>
         </div>
     </div>
 
     <!-- Navigation und Zähler -->
-    <div class="absolute bottom-0 left-0 right-0 p-4 flex items-center justify-center space-x-4 z-20">
-         <button id="prev-btn" class="p-2 rounded-full bg-white/80 hover:bg-white transition shadow-md backdrop-blur-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
-        </button>
-        <div id="dot-navigation" class="text-center flex items-center bg-white/80 px-3 py-2 rounded-full shadow-md backdrop-blur-sm"></div>
-         <button id="next-btn" class="p-2 rounded-full bg-white/80 hover:bg-white transition shadow-md backdrop-blur-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-        </button>
+            <div class="absolute bottom-0 left-0 right-0 p-4 flex items-center justify-between z-20">
+                <!-- Language Switcher -->
+                <div x-data="{ open: false }" class="relative">
+                    <button @click="open = !open" class="p-2 rounded-full bg-white/50 hover:bg-white/80 transition-colors">
+                        <i data-lucide="globe" class="w-6 h-6 text-gray-700"></i>
+                    </button>
+                    <div x-show="open" @click.away="open = false" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="absolute bottom-full mb-2 w-40 bg-white rounded-lg shadow-lg py-1 z-20" style="display: none;">
+                        <a href="?lang=de" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Deutsch</a>
+                        <a href="?lang=en" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">English</a>
+                        <a href="?lang=nl" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Nederlands</a>
+                        <a href="?lang=fr" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Français</a>
+                    </div>
+                </div>
+
+                <!-- Centered Navigation -->
+                <div class="flex items-center justify-center space-x-4">
+                     <button id="prev-btn" class="p-2 rounded-full bg-white/80 hover:bg-white transition shadow-md backdrop-blur-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                    </button>
+                    <div id="dot-navigation" class="text-center flex items-center bg-white/80 px-3 py-2 rounded-full shadow-md backdrop-blur-sm"></div>
+                     <button id="next-btn" class="p-2 rounded-full bg-white/80 hover:bg-white transition shadow-md backdrop-blur-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                    </button>
+                </div>
+
+                <!-- Spacer to keep nav centered -->
+                <div class="w-10 h-10"></div>
+            </div>
+    <div class="absolute bottom-4 right-4 text-xs text-gray-400 z-20">
+        <span id="current-slide">1</span> / <span id="total-slides">12</span>
     </div>
     <div class="absolute bottom-4 right-4 text-xs text-gray-400 z-20">
         <span id="current-slide">1</span> / <span id="total-slides">12</span>
@@ -813,12 +838,6 @@ Cal("init", "demo", {origin:"https://app.cal.com"});
                     });
 
                     const searchElement = document.getElementById('search-text');
-                    const questions = [
-                        "Welche Verträge deckeln die Wartung?",
-                        "Gibt es eine 'Change of Control' Klausel?",
-                        "Welche Nebenkosten sind umlegbar?",
-                        "Mieter zur Zählerablesung verpflichtet?"
-                    ];
                     
                     const typeSpeed = 50;
                     const deletingSpeed = 30;
@@ -888,6 +907,22 @@ Cal("init", "demo", {origin:"https://app.cal.com"});
                     }
                     currentSlideEl.textContent = currentSlide + 1;
                 }
+
+                let questions = [];
+                function updateQuestions() {
+                    questions = [
+                        window.getTranslation('pmLanding.slide6.animated.1'),
+                        window.getTranslation('pmLanding.slide6.animated.2'),
+                        window.getTranslation('pmLanding.slide6.animated.3'),
+                        window.getTranslation('pmLanding.slide6.animated.4')
+                    ];
+                }
+
+                document.addEventListener('translationsLoaded', () => {
+                    updateQuestions();
+                    // We only need to update the questions array.
+                    // The typing animation will pick up the new questions when its slide becomes active.
+                });
 
                 function nextSlide() {
                     currentSlide = (currentSlide + 1) % totalSlides;
