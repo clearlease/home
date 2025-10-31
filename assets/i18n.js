@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const defaultLang = 'de';
     let currentLang = defaultLang;
-    const supportedLangs = ['de', 'en', 'nl'];
+    const supportedLangs = ['de', 'en', 'nl', 'fr'];
     let translations = {};
 
     const loadTranslations = async (lang) => {
@@ -83,6 +83,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const getInitialLang = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const langFromUrl = urlParams.get('lang');
+        if (langFromUrl && supportedLangs.includes(langFromUrl)) {
+            return langFromUrl;
+        }
         const savedLang = localStorage.getItem('lang');
         if (savedLang && supportedLangs.includes(savedLang)) {
             return savedLang;
