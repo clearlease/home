@@ -1,10 +1,13 @@
 /* assets/christmas.css */
 
 .christmas-theme {
-    --clr-primary: #0F4C3A;       /* Christmas Green */
+    --clr-primary: #0F4C3A;
+    /* Christmas Green */
     --clr-primary-hover: #0a3528;
-    --clr-accent: #C41E3A;        /* Christmas Red */
-    --clr-accent-light: #FDF2F4;  /* Light Red BG */
+    --clr-accent: #C41E3A;
+    /* Christmas Red */
+    --clr-accent-light: #FDF2F4;
+    /* Light Red BG */
     --clr-highlight: rgba(196, 30, 58, 0.18);
 }
 
@@ -19,7 +22,8 @@
     position: fixed;
     top: -10px;
     z-index: 9999;
-    color: #b0d0e0; /* Pastel Blue for visibility */
+    color: #b0d0e0;
+    /* Pastel Blue for visibility */
     font-size: 1em;
     font-family: sans-serif;
     text-shadow: 0 0 1px #888;
@@ -35,8 +39,36 @@
         transform: translateY(-10vh) translateX(0) rotate(0deg);
         opacity: 1;
     }
+
     100% {
         transform: translateY(100vh) translateX(20px) rotate(360deg);
         opacity: 0.5;
     }
+}
+
+/* Banner Styles */
+#christmas-banner {
+    background-color: var(--clr-primary, #0F4C3A);
+    color: #fff;
+    text-align: center;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 1rem;
+    position: relative;
+    z-index: 10000;
+    /* Ensure it stays on top */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid var(--clr-accent, #C41E3A);
+}
+
+/* Fix for layout overlap */
+.christmas-theme header {
+    position: sticky !important;
+    top: 0;
+}
+
+/* Remove the top padding from hero that was compensating for fixed header */
+.christmas-theme main>section:first-of-type {
+    padding-top: 2rem !important;
+    /* Reduced from pt-32 (8rem) to pt-8 (2rem) */
 }
