@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -c \"import sys, json, subprocess\ndata = json.load(sys.stdin)\nf = data.get('tool_input', {}).get('file_path', '')\nif f and 'locales/' in f and f.endswith('.json'):\n    r = subprocess.run(['python3', '-m', 'json.tool', f], capture_output=True, text=True)\n    if r.returncode != 0:\n        msg = r.stderr.strip()\n        out = {'systemMessage': '\\u274c JSON syntax error in ' + f + ': ' + msg, 'hookSpecificOutput': {'hookEventName': 'PostToolUse', 'additionalContext': 'Fix JSON syntax error in ' + f + ': ' + msg}}\n        print(json.dumps(out))\n\"",
+            "statusMessage": "Validating locale JSON..."
+          }
+        ]
+      }
+    ]
+  }
+}
