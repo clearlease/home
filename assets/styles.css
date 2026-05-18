@@ -21,11 +21,8 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
-/* Gradient text used in headings */
-.gradient-text {
-    background: linear-gradient(90deg, var(--clr-accent), var(--clr-primary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.signal-text {
+    color: var(--clr-accent);
 }
 
 /* CTA button */
@@ -152,35 +149,148 @@ img[src*="integrationimage"] {
 
 /* On hover we keep desaturation removal but pause marquee for clarity */
 .partner-marquee:hover .marquee-track { animation-play-state: paused; }
-/* Tab component styles */
-[role="tablist"] {
-    display: flex;
-    background-color: #fff;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* Use-cases tabbed persona switcher */
+.use-cases-tabs {
+    max-width: 860px;
+    margin: 0 auto;
 }
 
-[role="tab"] {
-    flex: 1;
-    text-align: center;
-    padding: 0.75rem 1rem;
-    border-radius: 0.375rem;
+.use-cases-tablist {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.375rem;
+    background: #fff;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    margin-bottom: 1.5rem;
+    scrollbar-width: none;
+}
+.use-cases-tablist::-webkit-scrollbar { display: none; }
+
+.use-cases-tablist [role="tab"] {
+    flex: 1 0 auto;
+    scroll-snap-align: start;
+    white-space: nowrap;
+    padding: 0.625rem 1.125rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
     font-weight: 600;
-    transition: all 0.3s ease-in-out;
     cursor: pointer;
     border: none;
-    background-color: transparent;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    line-height: 1.4;
 }
 
-[role="tab"][aria-selected="true"] {
-    background-color: #2563eb;
+.use-cases-tablist [role="tab"].tab-active {
+    background-color: var(--clr-primary);
     color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
 }
 
-[role="tabpanel"] {
-    transition: opacity 0.5s ease-in-out;
+.use-cases-tablist [role="tab"].tab-inactive {
+    background-color: transparent;
+    color: var(--clr-text-muted, #6b7280);
+}
+
+.use-cases-tablist [role="tab"].tab-inactive:hover {
+    background-color: var(--clr-surface, #f3f4f6);
+    color: var(--clr-text, #111827);
+}
+
+.use-cases-tablist [role="tab"]:focus-visible {
+    outline: 2px solid var(--clr-primary);
+    outline-offset: 2px;
+}
+
+.use-cases-panel {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    padding: 2rem 2.5rem;
+    border: 1px solid #f0f0f0;
+}
+
+.use-cases-kicker {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--clr-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+}
+
+.use-cases-headline {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 1.5rem;
+    line-height: 1.25;
+}
+
+.use-cases-body-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.25rem;
+    align-items: start;
+}
+
+@media (max-width: 640px) {
+    .use-cases-body-grid { grid-template-columns: 1fr; }
+    .use-cases-panel { padding: 1.5rem 1.25rem; }
+    .use-cases-headline { font-size: 1.25rem; }
+}
+
+.use-cases-quote {
+    background: var(--clr-surface, #f9fafb);
+    border-left: 4px solid var(--clr-primary);
+    border-radius: 0 0.5rem 0.5rem 0;
+    padding: 1rem 1.25rem;
+    font-style: italic;
+    color: #374151;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    margin: 0;
+    quotes: "\201E" "\201C";
+}
+
+.use-cases-quote::before { content: open-quote; }
+.use-cases-quote::after  { content: close-quote; }
+
+.use-cases-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+}
+
+.use-cases-bullets li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.9375rem;
+    color: #1f2937;
+    font-weight: 500;
+}
+
+.use-cases-bullets li::before {
+    content: "✓";
+    color: var(--clr-primary);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 0.05em;
+}
+
+.use-cases-body {
+    color: #4b5563;
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    margin: 0;
 }
 /* Accordion Styles */
 #faq button:focus {
