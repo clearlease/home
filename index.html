@@ -54,6 +54,13 @@
 </head>
 <body class="bg-gray-50 text-gray-800">
 
+    <!-- ZIA Innovationsradar 2026 announcement banner (auto-expires 2026-08-21, dismissible) -->
+    <div id="zia-banner" class="zia-banner">
+        <img src="resources/logos/zia_innovation_logo_2026.svg" alt="ZIA Innovationsradar 2026" class="zia-banner-logo">
+        <span data-i18n="ziaBanner.text">🎉 Wir sind im ZIA Innovationsradar 2026 — als empfohlene PropTech-Lösung gelistet!</span>
+        <button onclick="dismissZiaBanner()" aria-label="Schließen" class="zia-banner-close">×</button>
+    </div>
+
     <!-- Header -->
     <header class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 border-b border-gray-200">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -106,7 +113,7 @@
                 <div class="mt-8 text-center">
                     <p class="text-sm text-gray-500" data-i18n="hero.supportedBy">Unterstützt von:</p>
                     <div class="flex justify-center items-center space-x-8 mt-4">
-                        <img src="resources/logos/zia-logo.svg" alt="ZIA Logo" class="h-6">
+                        <img src="resources/logos/zia_innovation_logo_2026.svg" alt="ZIA Innovationsradar 2026" class="h-6">
                         <img src="resources/logos/d7c52f63358bebbf1ee6e8c58fb13ccaeb12b39f125d2c599a422cc747268d04-L.png" alt="GPTI Logo" class="h-6">
                         <img src="resources/logos/KI-Park-und-Rise-of-AI-Mitgliedschaft-2048x817.png" alt="KI Park Logo" class="h-6">
                         <img src="resources/logos/63a75b0d9304ed50871e75c2e20c120510bc62b00c29770d69908a6aefcf581e-L.png" alt="Partner Logo" class="h-6">
@@ -243,7 +250,7 @@
                     <h3 class="text-lg text-gray-500 font-semibold mb-6" data-i18n="socialProof.partners">Unterstützt und vertraut von starken Partnern</h3>
                     <div class="partner-marquee">
                         <div class="marquee-track" aria-hidden="false">
-                            <img src="resources/logos/zia-logo.svg" alt="ZIA" class="partner-logo opacity-80">
+                            <img src="resources/logos/zia_innovation_logo_2026.svg" alt="ZIA Innovationsradar 2026" class="partner-logo opacity-80">
                             <img src="resources/logos/202201_KIEZ_Logo_RGB_Black.svg" alt="KIEZ" class="partner-logo opacity-80">
                             <img src="resources/logos/gpti_Logo_FINAL_einzeln.svg" alt="GPTI" class="partner-logo opacity-80">
                             <img src="resources/logos/mistral-ai-seeklogo.svg" alt="Mistral AI" class="partner-logo opacity-80">
@@ -254,7 +261,7 @@
                             <img src="resources/logos/d7c52f63358bebbf1ee6e8c58fb13ccaeb12b39f125d2c599a422cc747268d04-L.png" alt="Partner" class="partner-logo opacity-80">
                             <img src="resources/logos/bb6a255ad28cced895c9c9beed7a9f4bba57e09f1a20a545d71c85498b80b7ca-L.jpg" alt="Partner" class="partner-logo opacity-80">
                             <!-- Repeat for seamless loop -->
-                            <img src="resources/logos/zia-logo.svg" alt="ZIA" class="partner-logo opacity-80">
+                            <img src="resources/logos/zia_innovation_logo_2026.svg" alt="ZIA Innovationsradar 2026" class="partner-logo opacity-80">
                             <img src="resources/logos/202201_KIEZ_Logo_RGB_Black.svg" alt="KIEZ" class="partner-logo opacity-80">
                             <img src="resources/logos/gpti_Logo_FINAL_einzeln.svg" alt="GPTI" class="partner-logo opacity-80">
                             <img src="resources/logos/mistral-ai-seeklogo.svg" alt="Mistral AI" class="partner-logo opacity-80">
@@ -646,5 +653,32 @@
     <script src="assets/script.js"></script>
     <script src="assets/i18n.js"></script>
     <script src="assets/christmas.js"></script>
+    <script>
+        (function () {
+            var EXPIRY = new Date('2026-08-22');
+            var banner = document.getElementById('zia-banner');
+            var header = document.querySelector('header');
+            if (!banner) return;
+
+            function hideBanner() {
+                banner.style.display = 'none';
+                if (header) header.style.top = '0px';
+                document.documentElement.style.setProperty('--banner-height', '0px');
+            }
+
+            if (new Date() > EXPIRY || localStorage.getItem('ziaBannerDismissed')) {
+                hideBanner();
+            } else if (header) {
+                var bannerH = banner.offsetHeight;
+                header.style.top = bannerH + 'px';
+                document.documentElement.style.setProperty('--banner-height', bannerH + 'px');
+            }
+
+            window.dismissZiaBanner = function () {
+                hideBanner();
+                localStorage.setItem('ziaBannerDismissed', '1');
+            };
+        })();
+    </script>
 </body>
 </html>
