@@ -12,6 +12,44 @@
     --clr-border: #E5E7EB;        /* gray-200 */
     /* Accessibility: highlight color used for focused elements */
     --clr-highlight: rgba(36,123,160,0.18);
+    /* Set by JS when the announcement banner is visible */
+    --banner-height: 0px;
+}
+
+/* ZIA Innovationsradar announcement banner */
+.zia-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 60;
+    background: var(--clr-primary);
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+.zia-banner-logo {
+    height: 2rem;
+    flex-shrink: 0;
+}
+.zia-banner-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    opacity: 0.7;
+    flex-shrink: 0;
+}
+.zia-banner-close:hover {
+    opacity: 1;
 }
 
 /* Page background */
@@ -419,7 +457,12 @@ img[src*="integrationimage"] {
 }
 /* Accessibility & anchor offset fixes (prevents fixed header from covering anchored sections) */
 section[id] {
-    scroll-margin-top: 96px; /* matches header height + spacing */
+    scroll-margin-top: calc(96px + var(--banner-height));
+}
+
+/* Push content below the banner when it is visible */
+main {
+    padding-top: var(--banner-height);
 }
 
 /* Ensure focus outlines use the theme highlight variable (override if needed) */
