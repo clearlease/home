@@ -1,6 +1,6 @@
 {
     "meta.title": "Clearlea.se | AI-aangedreven Lease Administratie",
-    "meta.description": "Clearlea.se - AI-aangedreven Lease Administratie: Automatische extractie & structurering van vastgoeddocumenten.",
+    "meta.description": "Clearlea.se automatiseert huurcontractbeheer met AI: extractie, structurering en portfoliooverzicht voor vastgoedteams. 90% minder werk. AVG-conform. Hosting in Duitsland.",
     "nav.challenge": "De Uitdaging",
     "nav.workflow": "Workflow",
     "nav.useCases": "Use Cases",
@@ -60,6 +60,7 @@
     "useCases.panels.pm.bullet2": "Stamgegevens live in iX-Haus, Domus en Yardi",
     "useCases.panels.pm.bullet3": "Index-, optie- en termijntriggers automatisch herkend",
     "useCases.panels.pm.body": "Neem nieuwe beheersmandaten op zonder lineaire personeelsgroei. Het vier-ogenprincipe blijft — één daarvan is nu AI. Elk datapunt herleidbaar tot de originele clausule.",
+    "useCases.panels.pm.learnMore": "Casestudy: Clearlea.se voor property managers →",
     "useCases.panels.retail.kicker": "Voor retailketens & filiaalbedrijven",
     "useCases.panels.retail.headline": "Geen servicekosten onopgemerkt. Geen optie gemist.",
     "useCases.panels.retail.quote": "Zonder te weten wat er in de winkel is ingebouwd, kunnen we de servicekostenafrekening noch interpreteren noch betwisten bij de verhuurder.",
