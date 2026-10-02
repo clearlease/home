@@ -1,0 +1,4 @@
+/* Pairs with src/scripts/enhance.js: Esc keeps the menu closed until focus or the pointer leaves. */
+.cl-dd.cl-dd-closed .cl-dd-menu { display: none !important; }
+/* Anchor targets clear the sticky 72px header. */
+[id] { scroll-margin-top: 96px; }

@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Gespräch mit Hieronymus · clearlea.se</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;display=swap">
+<style>
+body { margin: 0; background: #F7F7F7; font-family: Montserrat, "Segoe UI", system-ui, sans-serif; color: #13293d; -webkit-font-smoothing: antialiased; }
+a { color: #13293d; } a:hover { color: #1d6485; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible { outline: 2px solid #247ba0; outline-offset: 2px; }
+.cl-navlinks a, .cl-navlinks button.cl-ddbtn { color: #13293d; text-decoration: none; white-space: nowrap; }
+.cl-navlinks > button { white-space: nowrap; } .cl-navlinks a:hover, .cl-navlinks button.cl-ddbtn:hover { color: #1d6485; }
+.cl-card { transition: transform 200ms cubic-bezier(0.25, 0.8, 0.5, 1), box-shadow 200ms cubic-bezier(0.25, 0.8, 0.5, 1); }
+.cl-card:hover { transform: translateY(-2px); box-shadow: 0 9px 17px rgba(12, 18, 28, 0.12); }
+.cl-dd { position: relative; display: flex; align-items: center; }
+.cl-ddbtn { display: inline-flex; align-items: center; gap: 6px; border: 0; background: transparent; padding: 0; font-family: inherit; font-size: 15px; font-weight: 500; cursor: pointer; }
+.cl-dd-menu { position: absolute; top: 100%; left: -24px; padding-top: 18px; display: none; z-index: 40; }
+.cl-dd:hover .cl-dd-menu, .cl-dd:focus-within .cl-dd-menu { display: block; }
+.cl-dd-panel { width: 380px; background: #ffffff; border-radius: 12px; box-shadow: 0 18px 45px rgba(12, 18, 28, 0.18); border: 1px solid rgba(0, 0, 0, 0.08); padding: 8px; display: flex; flex-direction: column; gap: 2px; animation: clIn 160ms cubic-bezier(0.25, 0.8, 0.5, 1); }
+.cl-dd-panel a { display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; border-radius: 8px; text-decoration: none; }
+.cl-dd-panel a:hover { background: #F7F7F7; color: #13293d; }
+.cl-wftrack { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.cl-wftrack span, h1, h2, h3 { overflow-wrap: break-word; -webkit-hyphens: auto; hyphens: auto; }
+.cl-redact { border-radius: 6px; padding: 0 6px; background: #13293d; color: transparent; cursor: help; transition: background 260ms cubic-bezier(0.25, 0.8, 0.5, 1), color 260ms cubic-bezier(0.25, 0.8, 0.5, 1); }
+.cl-redact:hover, .cl-redact:focus-visible { background: #eff6fa; color: #13293d; }
+.cl-chipbtn { transition: background 160ms, color 160ms; }
+.cl-logo { filter: grayscale(1) contrast(1.1); mix-blend-mode: multiply; opacity: 0.8; transition: filter 200ms, opacity 200ms; }
+.cl-logo:hover { filter: none; opacity: 1; }
+@keyframes clToast { 0% { opacity: 0; transform: translateY(14px) scale(0.96); } 60% { opacity: 1; transform: translateY(-3px) scale(1.01); } 100% { opacity: 1; transform: none; } }
+@keyframes clCell { from { background: rgba(36, 123, 160, 0.30); } to { background: rgba(36, 123, 160, 0.10); } }
+@keyframes clPulse { 0% { box-shadow: 0 0 0 0 rgba(36, 123, 160, 0.45); } 100% { box-shadow: 0 0 0 14px rgba(36, 123, 160, 0); } }
+@keyframes clBlink { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+@keyframes clTravel { from { left: 0%; } to { left: 100%; } }
+@keyframes clFloat { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-18px, 22px); } }
+.cl-pick { cursor: pointer; transition: background 160ms, box-shadow 160ms; }
+@keyframes clIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.cl-mnav { display: none; } .cl-mnav > summary::-webkit-details-marker { display: none; } .cl-show-sm { display: none; }
+@media (max-width: 1240px) { .cl-hide-lg { display: none !important; } }
+@media (max-width: 1040px) { .cl-navlinks { display: none !important; } .cl-mnav { display: block; } }
+@media (max-width: 600px) { .cl-hide-sm { display: none !important; } .cl-show-sm { display: inline !important; } }
+@media (max-width: 900px) { .cl-wftrack { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+@media (max-width: 520px) { .cl-wftrack { grid-template-columns: minmax(0, 1fr) !important; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</helmet>
+
+<!--
+  DEV NOTES · PAGE: Gespräch (/gespraech), DE. EN /en/call.
+  PURPOSE: the one conversion page. Every "Gespräch mit Hieronymus" button lands here. Promise (founder 01.10.): 30-min workshop, the visitor leaves with a first example workflow. Free of charge.
+  SEO: noindex is NOT needed; <title> "Gespräch mit Hieronymus Deutsch buchen · clearlea.se". No closing CTA block on this page (the page is the CTA).
+  SHARED: nav, footer and closing CTA are identical across pages (see Home for the full system notes: claims register, DS tokens, brand motif, stack, a11y, analytics).
+-->
+
+<div style="display: flex; flex-direction: column; min-width: 0; background: #F7F7F7">
+<!-- DEV · NAV (same on every page). Sticky, blurred surface. "Lösungen" = disclosure menu (CSS :hover/:focus-within on canvas; in production a button with aria-expanded, Esc closes, arrow keys move). "Neu" opens the news popover (newest 3 items from the CMS: Ressourcen > News / Produkt-Updates). Active page: aria-current="page" + underline. Mobile (<1040px): one disclosure menu with all links and the news. "Anmelden" -> production app URL [APP-URL, ask Fabian]. The EXPO news item links straight to the Cal.com EXPO event (cal.com/deutsch/exporeal-2026, founder 02.10.); take it out after 07.10.
+  ROUTES (canvas file -> production URL; Claude Code rewrites every href): Home.dc.html -> / · Plattform.dc.html -> /plattform · Loesungen-Bestandshalter.dc.html -> /loesungen/bestandshalter · Loesungen-Property.dc.html -> /loesungen/property-management · Loesungen-Filialisten.dc.html -> /loesungen/filialisten · KI-Teams.dc.html -> /ki-teams · Trust-Center.dc.html -> /trust-center · Ressourcen.dc.html -> /ressourcen · Unternehmen.dc.html -> /unternehmen · Gespraech.dc.html -> /gespraech · Deep links: links carry data-anchor (e.g. data-anchor="cockpit" -> /plattform#cockpit); every anchor has a matching section id (Plattform #daten #cockpit #workflows #integrationen, KI-Teams #mcp, Trust #unterlagen, Ressourcen #indexrechner). No dead links: legal pages render the existing Markdown files (impressum, datenschutz, agb) as HTML pages in the site layout · Ressourcen filters = /ressourcen/news, /ressourcen/produkt-updates. /loesungen has no page of its own in v1: the nav item is a disclosure menu; the URL /loesungen 301-redirects to /#rollen. EN mirror: same tree under /en/... (hreflang pairs). Legal pages /impressum /datenschutz /agb reuse the current texts. -->
+<header style="position: sticky; top: 0; z-index: 30; background: rgba(247, 247, 247, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 0, 0, 0.08)">
+  <div style="position: relative; max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px">
+    <a href="Home.dc.html" aria-label="clearlea.se Startseite" style="display: flex; align-items: center"><img src="/_blob/3fe7a8b82ce8052f386ce3a43a0a6a77" alt="clearlea.se" width="156" height="26" style="display: block; height: 26px; width: auto"></a>
+    <nav class="cl-navlinks" aria-label="Hauptnavigation" style="display: flex; align-items: center; gap: 22px; font-size: 15px; font-weight: 500">
+      <a href="Plattform.dc.html">Plattform</a>
+      <div class="cl-dd"><button type="button" class="cl-ddbtn" aria-haspopup="true">Lösungen<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button><div class="cl-dd-menu"><div class="cl-dd-panel"><a href="Loesungen-Bestandshalter.dc.html"><span style="font-size: 15px; font-weight: 700; color: #13293d">Bestandshalter &amp; Asset Management</span><span style="font-size: 13px; line-height: 1.4; color: #55636f; font-weight: 500">Ein Stand für jedes Objekt. Mit Beleg.</span></a><a href="Loesungen-Property.dc.html"><span style="font-size: 15px; font-weight: 700; color: #13293d">Property &amp; Facility Management</span><span style="font-size: 13px; line-height: 1.4; color: #55636f; font-weight: 500">Neue Mandate in Tagen arbeitsfähig.</span></a><a href="Loesungen-Filialisten.dc.html"><span style="font-size: 15px; font-weight: 700; color: #13293d">Filialisten &amp; Unternehmen</span><span style="font-size: 13px; line-height: 1.4; color: #55636f; font-weight: 500">Jede Nebenkostenabrechnung geprüft, jede Frist im Blick.</span></a><a href="KI-Teams.dc.html" style="border-top: 1px solid rgba(0, 0, 0, 0.08); border-radius: 0 0 8px 8px; margin-top: 4px"><span style="font-size: 15px; font-weight: 700; color: #13293d">Für KI- &amp; IT-Teams</span><span style="font-size: 13px; line-height: 1.4; color: #55636f; font-weight: 500">Eine Quelle, der Ihre KI trauen kann.</span></a></div></div></div>
+      <a href="KI-Teams.dc.html">Für KI-Teams</a>
+      <a href="Trust-Center.dc.html">Trust Center</a>
+      <a href="Ressourcen.dc.html">Ressourcen</a>
+      <button type="button" onClick="{{toggleNews}}" aria-expanded="{{newsExpanded}}" aria-controls="news-pop" style="display: flex; align-items: center; gap: 6px; border: 0; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 5px 10px 5px 12px"><span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase">Neu</span><span aria-label="3 Updates" style="min-width: 18px; height: 18px; border-radius: 9999px; background: #1b6384; color: #ffffff; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">3</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+    </nav>
+    <div style="display: flex; align-items: center; gap: 16px; flex-shrink: 0">
+      <a href="/en" class="cl-hide-sm" aria-label="English version" style="font-size: 14px; font-weight: 600; color: #55636f; text-decoration: none">EN</a>
+      <a href="[APP-URL]" class="cl-hide-lg" style="font-size: 14px; font-weight: 600; color: #13293d; text-decoration: none; white-space: nowrap">Anmelden</a>
+      <a href="Gespraech.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 9999px; background: #13293d; color: #ffffff; font-size: 14px; font-weight: 600; text-decoration: none; white-space: nowrap"><span class="cl-hide-sm">Gespräch mit Hieronymus</span><span class="cl-show-sm">Gespräch</span></a>
+      <details class="cl-mnav"><summary aria-label="Menü" style="list-style: none; cursor: pointer; width: 44px; height: 44px; border-radius: 9999px; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.16)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#13293d" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg></summary>
+        <div style="position: absolute; top: 64px; left: 16px; right: 16px; background: #ffffff; border-radius: 12px; box-shadow: 0 18px 45px rgba(12, 18, 28, 0.18); border: 1px solid rgba(0, 0, 0, 0.08); padding: 12px; display: flex; flex-direction: column; gap: 2px; z-index: 50"><a href="Plattform.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; font-size: 16px; font-weight: 600; text-decoration: none; color: #13293d">Plattform</a><a href="Loesungen-Bestandshalter.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; font-size: 16px; font-weight: 600; text-decoration: none; color: #13293d">Bestandshalter &amp; Asset Management</a><a href="Loesungen-Property.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; font-size: 16px; font-weight: 600; text-decoration: none; color: #13293d">Property &amp; Facility Management</a><a href="Loesungen-Filialisten.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; font-size: 16px; font-weight: 600; text-decoration: none; color: #13293d">Filialisten &amp; Unternehmen</a><a href="KI-Teams.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; font-size: 16px; font-weight: 600; text-decoration: none; color: #13293d">Für KI- &amp; IT-Teams</a><a href="Trust-Center.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; font-size: 16px; font-weight: 600; text-decoration: none; color: #13293d">Trust Center</a><a href="Ressourcen.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; font-size: 16px; font-weight: 600; text-decoration: none; color: #13293d">Ressourcen &amp; News</a><a href="Unternehmen.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; font-size: 16px; font-weight: 600; text-decoration: none; color: #13293d">Unternehmen</a><a href="[APP-URL]" style="display: block; padding: 12px 14px; font-size: 15px; font-weight: 600; color: #55636f; text-decoration: none">Anmelden</a><a href="/en" style="display: block; padding: 12px 14px; font-size: 15px; font-weight: 600; color: #55636f; text-decoration: none">English</a></div>
+      </details>
+    </div>
+    <sc-if value="{{news}}" hint-placeholder-val="{{false}}">
+      <div id="news-pop" role="dialog" aria-label="Neuigkeiten" style="position: absolute; top: 64px; right: clamp(16px, 4vw, 48px); width: min(720px, calc(100% - 32px)); background: #ffffff; border-radius: 12px; box-shadow: 0 18px 45px rgba(12, 18, 28, 0.18); border: 1px solid rgba(0, 0, 0, 0.08); padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 14px; animation: clIn 200ms cubic-bezier(0.25, 0.8, 0.5, 1)">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Neu bei clearlea.se</span><a href="Ressourcen.dc.html" style="font-size: 13px; font-weight: 600; text-decoration: none">Alle Updates →</a></div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 12px">
+          <a href="KI-Teams.dc.html" data-anchor="mcp" style="display: flex; flex-direction: column; gap: 8px; background: #eff6fa; border-radius: 8px; padding: 16px; text-decoration: none; color: #13293d"><span style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #1b6384">Produkt</span><span style="font-size: 15px; font-weight: 700; line-height: 1.3">MCP-Server: clearlea.se als Quelle für Ihre KI</span><span style="font-size: 13px; line-height: 1.45; color: #43586c">Ihr KI-Assistent fragt den gültigen Stand ab, mit Beleg.</span></a>
+          <a href="Plattform.dc.html" data-anchor="workflows" style="display: flex; flex-direction: column; gap: 8px; background: #F7F7F7; border-radius: 8px; padding: 16px; text-decoration: none; color: #13293d"><span style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Produkt</span><span style="font-size: 15px; font-weight: 700; line-height: 1.3">Workflows mit 9 eingebauten Garantien</span><span style="font-size: 13px; line-height: 1.45; color: #43586c">Prozesse prüfbar automatisieren, Schritt für Schritt.</span></a>
+          <a data-until="2026-10-07" href="https://cal.com/deutsch/exporeal-2026" target="_blank" rel="noopener" style="display: flex; flex-direction: column; gap: 8px; background: #F7F7F7; border-radius: 8px; padding: 16px; text-decoration: none; color: #13293d"><span style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Event · 5. bis 7. Oktober</span><span style="font-size: 15px; font-weight: 700; line-height: 1.3">EXPO REAL 2026: Halle B3, Stand 121</span><span style="font-size: 13px; line-height: 1.45; color: #43586c">Mit der German PropTech Initiative. Termin am Stand buchen.</span></a>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+</header>
+
+<main>
+<!-- DEV · BOOKING = Cal.com inline embed (founder 02.10., round 8: "standard booking should be any time through our booking cal.com link"). The card on the right is the Cal.com booker for the event "clearlea.se Demo" (id 448317, cal.com/deutsch/demo), embedded inline (Cal.com embed snippet, layout month_view, brand colour #13293D, theme light, config duration=30). Visitors pick any free date; Cal.com then asks its own booking questions (name, email, company, number_of_contracts, brings_own_data, reason). No custom form, no API key on the site.
+  The canvas shows a static stand-in with the real free slots of 02.10. (Oct 7–30): each time and the button link to cal.com/deutsch/demo?duration=30 (with &date=YYYY-MM-DD where a day is chosen). In production the embed replaces the whole card.
+  EVENT SETTINGS (live 02.10.): 30 or 60 min (book 30 via duration=30), Microsoft Teams, confirmation required (founder keeps it, so the copy says "Wir bestätigen jeden Termin persönlich"), minimum notice 1 day, max. 2 per day, 30-day rolling window, 15-min buffers.
+  EXPO: the EXPO note on the left links to cal.com/deutsch/exporeal-2026 (id 7018309, Mo 5.10. + Di 6.10., Halle B3, Stand 121). Remove the note after 07.10.
+  PRE-FILL: pass ?thema=… from KI-Teams/Trust links into the embed as reason (Cal.com prefill by field slug), and name/email when known. ANALYTICS: the demo event already sends bookings to HubSpot, GA4 (G-BFDY33BDFJ) and GTM; listen to the embed's bookingSuccessful event for the site's booking_submit. -->
+<section aria-labelledby="hero-title" style="position: relative; overflow: hidden; padding-block: clamp(48px, 7vw, 88px)">
+  <svg aria-hidden="true" viewBox="4 8 22 15" style="position: absolute; bottom: -140px; right: -180px; width: min(640px, 70vw); height: auto; pointer-events: none"><path fill="rgba(19, 41, 61, 0.035)" d="m 11.484882,21.769442 q -1.8818515,0 -3.3604495,-0.784105 -1.456195,-0.806508 -2.285106,-2.195494 -0.828911,-1.388986 -0.828911,-3.158823 0,-1.79224 0.828911,-3.158823 0.828911,-1.388986 2.285106,-2.173091 1.478598,-0.7841046 3.3604495,-0.7841046 1.747434,0 3.069211,0.7168956 1.34418,0.694493 2.038673,2.061076 l -2.150688,1.254568 q -0.537672,-0.851314 -1.321777,-1.254568 -0.761702,-0.403254 -1.657822,-0.403254 -1.030538,0 -1.8594485,0.44806 -0.828911,0.44806 -1.299374,1.299374 -0.470463,0.828911 -0.470463,1.993867 0,1.164956 0.470463,2.01627 0.470463,0.828911 1.299374,1.276971 0.8289105,0.44806 1.8594485,0.44806 0.89612,0 1.657822,-0.403254 0.784105,-0.403254 1.321777,-1.254568 l 2.150688,1.254568 q -0.694493,1.34418 -2.038673,2.083479 -1.321777,0.716896 -3.069211,0.716896 z"></path><circle cx="20.6" cy="20.3" r="1.5" fill="rgba(19, 41, 61, 0.07)"></circle></svg>
+  <div style="position: relative; max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; display: flex; flex-wrap: wrap; gap: clamp(32px, 5vw, 64px); align-items: flex-start">
+    <div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 28px; max-width: 540px">
+      <span style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #1d6485"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 9999px; background: #13293d"></span>Gespräch mit Hieronymus</span>
+      <h1 id="hero-title" style="margin: 0; font-size: clamp(2.5rem, 5vw, 4.25rem); line-height: 1.03; letter-spacing: -0.045em; font-weight: 700">30 Minuten. Ihr erster Workflow.</h1>
+      <p style="margin: 0; font-size: 19px; line-height: 1.55; color: #43586c">Ein Gespräch mit Hieronymus Deutsch, Mitgründer und CEO. Kein Verkaufsvortrag, sondern ein kurzer Workshop an Ihrem Fall. Kostenlos.</p>
+      <ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 18px"><li style="display: flex; gap: 14px; align-items: flex-start"><span style="flex-shrink: 0; width: 30px; height: 30px; border-radius: 9999px; background: #13293d; color: #ffffff; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">1</span><span style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 17px; font-weight: 700">Sie erzählen, wo es hakt</span><span style="font-size: 15px; line-height: 1.5; color: #43586c">Welche Dokumente, welche Prozesse, welche Systeme.</span></span></li><li style="display: flex; gap: 14px; align-items: flex-start"><span style="flex-shrink: 0; width: 30px; height: 30px; border-radius: 9999px; background: #13293d; color: #ffffff; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">2</span><span style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 17px; font-weight: 700">Wir finden den größten Hebel</span><span style="font-size: 15px; line-height: 1.5; color: #43586c">Den einen Prozess, der in Ihrem Portfolio am meisten Zeit kostet.</span></span></li><li style="display: flex; gap: 14px; align-items: flex-start"><span style="flex-shrink: 0; width: 30px; height: 30px; border-radius: 9999px; background: #13293d; color: #ffffff; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">3</span><span style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 17px; font-weight: 700">Sie gehen mit einem Workflow raus</span><span style="font-size: 15px; line-height: 1.5; color: #43586c">Eine erste Skizze für Ihr Team, mit Schritten und Verantwortlichen.</span></span></li></ol>
+      <div style="display: flex; align-items: center; gap: 16px; background: #ffffff; border-radius: 12px; padding: 16px">
+        <img src="/_blob/ff00bcf1c8b07d9db211f358a6a9ad2e" alt="Hieronymus Deutsch" width="64" height="64" style="flex-shrink: 0; display: block; width: 64px; height: 64px; border-radius: 9999px; object-fit: cover; object-position: 50% 28%">
+        <span style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 16px; font-weight: 700">Hieronymus Deutsch</span><span style="font-size: 14px; color: #55636f">Mitgründer und CEO · bei IT-Fragen mit Fabian Laußmann, CTO</span></span>
+      </div>
+      <div data-until="2026-10-07" style="display: flex; gap: 12px; align-items: flex-start; background: #eff6fa; border-radius: 12px; padding: 16px"><span aria-hidden="true" style="flex-shrink: 0; margin-top: 5px; width: 8px; height: 8px; border-radius: 9999px; background: #247ba0"></span><span style="font-size: 15px; line-height: 1.5; color: #13293d"><span style="font-weight: 700">Auf der EXPO REAL?</span> Am 5. und 6. Oktober treffen Sie uns in Halle B3, Stand 121, bei der German PropTech Initiative. <a href="https://cal.com/deutsch/exporeal-2026" target="_blank" rel="noopener" style="font-weight: 600; white-space: nowrap">Termin am Stand buchen →</a></span></div>
+      <span style="font-size: 15px; color: #43586c">Lieber per E-Mail? <a href="mailto:hello@clearlea.se" style="font-weight: 600">hello@clearlea.se</a></span>
+    </div>
+    <div style="flex: 1.1 1 480px; min-width: 0">
+      <div data-slot="cal-embed" style="background: #ffffff; border-radius: 12px; box-shadow: 0 18px 45px rgba(12, 18, 28, 0.10); overflow: hidden">
+        <div style="display: flex; align-items: center; gap: 14px; padding: 20px clamp(20px, 3vw, 28px); border-bottom: 1px solid rgba(0, 0, 0, 0.08)">
+          <img src="/_blob/ff00bcf1c8b07d9db211f358a6a9ad2e" alt="" width="44" height="44" style="flex-shrink: 0; display: block; width: 44px; height: 44px; border-radius: 9999px; object-fit: cover; object-position: 50% 28%">
+          <span style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><span style="font-size: 13px; color: #55636f">Hieronymus Deutsch · clearlea.se</span><span style="font-size: 18px; font-weight: 700">Erstgespräch</span><span style="display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; color: #43586c"><span>30 Minuten</span><span>Microsoft Teams</span><span>Kostenlos</span></span></span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 24px; padding: clamp(20px, 3vw, 28px)">
+          <div style="flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px"><span style="font-size: 16px; font-weight: 700">Oktober 2026</span><a href="https://cal.com/deutsch/demo?duration=30&month=2026-11" target="_blank" rel="noopener" style="font-size: 13px; font-weight: 600; text-decoration: none">November →</a></div>
+            <div aria-hidden="true" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #55636f; text-align: center"><span>Mo</span><span>Di</span><span>Mi</span><span>Do</span><span>Fr</span><span>Sa</span><span>So</span></div>
+            <div role="group" aria-label="Tag wählen" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px">
+              <sc-for list="{{cells}}" as="c" hint-placeholder-count="35"><button type="button" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}" aria-label="{{c.aria}}" aria-disabled="{{c.off}}" style="{{c.st}}">{{c.n}}</button></sc-for>
+            </div>
+          </div>
+          <div style="flex: 1 1 160px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+            <span style="font-size: 14px; font-weight: 700">{{dayLabel}}</span>
+            <sc-for list="{{times}}" as="t" hint-placeholder-count="3"><a href="{{t.href}}" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: center; min-height: 44px; border-radius: 8px; border: 1px solid rgba(19, 41, 61, 0.3); font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; text-decoration: none; color: #13293d">{{t.label}}</a></sc-for>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px; padding: 18px clamp(20px, 3vw, 28px) 22px; border-top: 1px solid rgba(0, 0, 0, 0.08); background: #F7F7F7">
+          <span style="font-size: 14px; line-height: 1.5; color: #43586c">Sie wählen einen beliebigen freien Termin. Name, Unternehmen und Ihr Thema fragen wir im nächsten Schritt ab, gern auch mit einem eigenen Vertrag. Wir bestätigen jeden Termin persönlich.</span>
+          <a href="https://cal.com/deutsch/demo?duration=30" target="_blank" rel="noopener" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 22px; border-radius: 9999px; background: #13293d; color: #ffffff; font-size: 15px; font-weight: 600; text-decoration: none">Alle freien Termine ansehen<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEV · BOOKING FAQ. Price per site and month confirmed (R38). "Beraten Sie auch?" (founder 02.10.: "we also consult"); one-off projects per R29. -->
+<section aria-labelledby="gfaq-title" style="background: #ffffff; padding-block: clamp(56px, 7vw, 88px);">
+  <div style="max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 20px; max-width: 860px"><h2 id="gfaq-title" style="margin: 0; font-size: clamp(2rem, 3.8vw, 3.25rem); line-height: 1.06; letter-spacing: -0.035em; font-weight: 700; text-wrap: balance">Gut zu wissen.</h2></div><dl style="margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: 0 48px"><div style="display: flex; flex-direction: column; gap: 6px; padding: 20px 0; border-top: 1px solid rgba(0, 0, 0, 0.12)"><dt style="font-size: 17px; font-weight: 700">Kostet das Gespräch etwas?</dt><dd style="margin: 0; font-size: 15px; line-height: 1.55; color: #43586c">Nein. Sie investieren 30 Minuten und gehen mit einer ersten Workflow-Skizze raus.</dd></div><div style="display: flex; flex-direction: column; gap: 6px; padding: 20px 0; border-top: 1px solid rgba(0, 0, 0, 0.12)"><dt style="font-size: 17px; font-weight: 700">Was sollten wir vorbereiten?</dt><dd style="margin: 0; font-size: 15px; line-height: 1.55; color: #43586c">Nichts. Wenn Sie mögen, ein Beispieldokument oder eine Liste Ihrer Systeme.</dd></div><div style="display: flex; flex-direction: column; gap: 6px; padding: 20px 0; border-top: 1px solid rgba(0, 0, 0, 0.12)"><dt style="font-size: 17px; font-weight: 700">Wer ist dabei?</dt><dd style="margin: 0; font-size: 15px; line-height: 1.55; color: #43586c">Hieronymus Deutsch. Bei IT- und Sicherheitsfragen kommt Fabian Laußmann, CTO, dazu.</dd></div><div style="display: flex; flex-direction: column; gap: 6px; padding: 20px 0; border-top: 1px solid rgba(0, 0, 0, 0.12)"><dt style="font-size: 17px; font-weight: 700">Was kostet clearlea.se?</dt><dd style="margin: 0; font-size: 15px; line-height: 1.55; color: #43586c">Ab 9,49 € pro Standort und Monat, für größere Bestände mit Mengenrabatt. Beliebig viele Nutzer, KI-Nutzung inklusive.</dd></div><div style="display: flex; flex-direction: column; gap: 6px; padding: 20px 0; border-top: 1px solid rgba(0, 0, 0, 0.12)"><dt style="font-size: 17px; font-weight: 700">Beraten Sie auch?</dt><dd style="margin: 0; font-size: 15px; line-height: 1.55; color: #43586c">Ja. Zu KI im Haus, zu Datenqualität und zu Ihren Prozessen. Fragen Sie einfach im Gespräch.</dd></div></dl>
+  </div>
+</section>
+
+
+</main>
+<!-- DEV · FOOTER (same on every page). Copyright line shows only "clearlea.se" (founder 02.10.); the legal entity stays in the Impressum (update after the GmbH conversion). Legal pages: render the existing Markdown files (Impressum, Datenschutz, AGB) as HTML pages in the site layout (founder 02.10.); recheck the privacy text for the new analytics setup. -->
+<footer style="background: #F7F7F7; padding-block: 56px 40px; border-top: 1px solid rgba(0, 0, 0, 0.08)">
+  <div style="max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; display: flex; flex-direction: column; gap: 40px">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 32px">
+      <div style="display: flex; flex-direction: column; gap: 14px"><img src="/_blob/3fe7a8b82ce8052f386ce3a43a0a6a77" alt="clearlea.se" width="144" height="24" style="display: block; height: 24px; width: auto"><span style="font-size: 14px; line-height: 1.55; color: #43586c">Operations Intelligence für Gewerbeimmobilien. Entwickelt in Berlin.</span></div>
+      <nav aria-label="Plattform" style="display: flex; flex-direction: column; gap: 10px; font-size: 14px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Plattform</span><a href="Plattform.dc.html" data-anchor="daten" style="text-decoration: none">Daten mit Historie</a><a href="Plattform.dc.html" data-anchor="cockpit" style="text-decoration: none">Cockpit</a><a href="Plattform.dc.html" data-anchor="workflows" style="text-decoration: none">Workflows</a><a href="Plattform.dc.html" data-anchor="integrationen" style="text-decoration: none">Integrationen &amp; MCP</a></nav>
+      <nav aria-label="Lösungen" style="display: flex; flex-direction: column; gap: 10px; font-size: 14px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Lösungen</span><a href="Loesungen-Bestandshalter.dc.html" style="text-decoration: none">Bestandshalter &amp; Asset Management</a><a href="Loesungen-Property.dc.html" style="text-decoration: none">Property &amp; Facility Management</a><a href="Loesungen-Filialisten.dc.html" style="text-decoration: none">Filialisten &amp; Unternehmen</a><a href="KI-Teams.dc.html" style="text-decoration: none">Für KI- &amp; IT-Teams</a></nav>
+      <nav aria-label="Unternehmen" style="display: flex; flex-direction: column; gap: 10px; font-size: 14px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Unternehmen</span><a href="Unternehmen.dc.html" style="text-decoration: none">Über uns</a><a href="Trust-Center.dc.html" style="text-decoration: none">Trust Center</a><a href="Ressourcen.dc.html" style="text-decoration: none">News &amp; Produkt-Updates</a><a href="Gespraech.dc.html" style="text-decoration: none">Gespräch buchen</a></nav>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 13px; color: #55636f; border-top: 1px solid rgba(0, 0, 0, 0.08); padding-top: 24px">
+      <span>© 2026 clearlea.se · Gehostet in Deutschland · DSGVO-konform · Kein KI-Training mit Ihren Daten</span>
+      <span style="display: flex; gap: 20px"><a href="/impressum" style="color: #55636f">Impressum</a><a href="/datenschutz" style="color: #55636f">Datenschutz</a><a href="/agb" style="color: #55636f">AGB</a></span>
+    </div>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 1440, "height": 2000}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    var reduce = false;
+    try { reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+    this.reduce = reduce;
+    this.setState(Object.assign({ news: false }, { day: 7 }));
+  }
+  componentWillUnmount() {
+    if (this.t) clearInterval(this.t);
+    (this.timers || []).forEach(function (x) { clearTimeout(x); });
+  }
+  renderVals() {
+    var self = this;
+    var s = this.state || {};
+    var out = {
+      news: !!s.news,
+      newsExpanded: s.news ? 'true' : 'false',
+      toggleNews: function () { self.setState({ news: !(self.state || {}).news }); }
+    };
+    var FREE = { 7: ['14:00', '15:00', '16:00'], 8: ['14:00', '15:00', '16:00'], 9: ['15:00', '16:00'], 14: ['10:00', '14:00', '15:00', '16:00'], 15: ['16:00'], 16: ['15:00', '16:00'], 21: ['14:00', '15:00', '16:00'], 22: ['14:00', '15:00', '16:00'], 23: ['10:00', '15:00', '16:00'], 28: ['14:00', '15:00', '16:00'], 29: ['14:00'], 30: ['15:00', '16:00'] };
+    var WD = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
+    var BASE = 'https://cal.com/deutsch/demo?duration=30';
+    var sel = s.day || 7;
+    var cells = [];
+    for (var b = 0; b < 3; b++) cells.push({ n: '', pressed: 'false', aria: 'leer', off: 'true', st: 'visibility: hidden; min-height: 40px;', pick: function () {} });
+    for (var d = 1; d <= 31; d++) {
+      (function (day) {
+        var free = !!FREE[day], on = day === sel;
+        var wd = WD[(day + 2) % 7];
+        cells.push({
+          n: String(day), pressed: on ? 'true' : 'false', off: free ? 'false' : 'true',
+          aria: wd + ' ' + day + '. Oktober' + (free ? ', ' + FREE[day].length + ' freie Termine' : ', keine freien Termine'),
+          st: 'min-height: 40px; border-radius: 8px; font-family: inherit; font-size: 14px; font-variant-numeric: tabular-nums;' + (on ? ' border: 0; background: #13293d; color: #ffffff; font-weight: 700; cursor: pointer;' : (free ? ' border: 0; background: #eff6fa; color: #13293d; font-weight: 700; cursor: pointer;' : ' border: 0; background: transparent; color: #a3acb4; font-weight: 500; cursor: default;')),
+          pick: function () { if (free) self.setState({ day: day }); }
+        });
+      })(d);
+    }
+    out.cells = cells;
+    var dd = sel < 10 ? '0' + sel : String(sel);
+    out.dayLabel = WD[(sel + 2) % 7] + ', ' + sel + '. Oktober';
+    out.times = (FREE[sel] || []).map(function (t) { return { label: t, href: BASE + '&date=2026-10-' + dd }; });
+    return out;
+  }
+}
+</script>
+</body>
+</html>

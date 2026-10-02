@@ -1,0 +1,72 @@
+---
+// Document shell for every page: <head> metadata, fonts, structured data.
+// The page body itself comes from the compiled design (src/designs/<lang>/<Page>.dc.html).
+import '@fontsource/montserrat/400.css';
+import '@fontsource/montserrat/500.css';
+import '@fontsource/montserrat/600.css';
+import '@fontsource/montserrat/700.css';
+import '../styles/enhance.css';
+import { SITE_URL, route, otherLang } from '../site.config.mjs';
+import { TITLES } from '../seo.mjs';
+
+interface Props {
+  page: string;
+  lang: 'de' | 'en';
+  description?: string;
+  faq?: { q: string; a: string }[];
+  jsonLd?: object[];
+  noindex?: boolean;
+}
+const { page, lang, description = '', faq = [], jsonLd = [], noindex = false } = Astro.props;
+const title = TITLES[page]?.[lang] ?? 'clearlea.se';
+const abs = (p: string) => SITE_URL + p;
+const canonical = abs(route(page, lang));
+const alternate = abs(route(page, otherLang(lang)));
+const deUrl = abs(route(page, 'de'));
+const ogImage = SITE_URL + '/og-image.png';
+
+const ld: object[] = [...jsonLd];
+if (faq.length) {
+  ld.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    inLanguage: lang,
+    mainEntity: faq.map(({ q, a }) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+  });
+}
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang={lang} href={canonical} />
+    <link rel="alternate" hreflang={otherLang(lang)} href={alternate} />
+    <link rel="alternate" hreflang="x-default" href={deUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="clearlea.se" />
+    <meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'en_GB'} />
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#13293d" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <slot name="head" />
+    {ld.map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}
+  </head>
+  <body>
+    <slot />
+    <script src="../scripts/enhance.js"></script>
+  </body>
+</html>
