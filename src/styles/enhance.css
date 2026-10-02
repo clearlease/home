@@ -67,6 +67,7 @@
 section[aria-labelledby="cta-title"] :is(a, button):focus-visible, .cl-demo-note [role="status"] button:focus-visible { outline-color: #ffffff !important; }
 a.cl-n7-cta, a.cl-n7-cta:hover { color: #ffffff; }
 @media (hover: hover) and (pointer: fine) { a.cl-n7-cta:hover { background: #1a3553; } }
+@media (max-width: 760px) { .cl-n7-cta { min-height: 44px; } }
 
 @media (prefers-reduced-motion: reduce) {
   :is(.cl-btn-primary, .cl-btn-light, .cl-link-arrow) svg, :is(.cl-btn-primary, .cl-btn-light, .cl-btn-ghost, .cl-btn-tint, .cl-btn-chip, .cl-chipbtn) { transform: none !important; }
