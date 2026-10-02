@@ -30,3 +30,25 @@ test('all internal links and anchors resolve, no placeholder links', async ({ pa
   }
   expect(problems).toEqual([]);
 });
+
+test('every visible e-mail address is a mailto link to that address', async ({ page }) => {
+  test.setTimeout(180_000);
+  const problems = [];
+  for (const { path } of ALL) {
+    await page.goto(path);
+    await page.waitForFunction(() => !document.querySelector('astro-island[ssr]'));
+    problems.push(...(await page.evaluate((p) => {
+      const out = [];
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      for (let n; (n = walker.nextNode());) {
+        if (n.parentElement.closest('script, style')) continue;
+        for (const m of n.data.matchAll(/[\w.+-]+@[\w-]+\.[a-z]{2,}/gi)) {
+          const href = n.parentElement.closest('a')?.getAttribute('href') || '';
+          if (!href.startsWith('mailto:' + m[0])) out.push(`${p}: ${m[0]} is not a mailto link`);
+        }
+      }
+      return out;
+    }, path)));
+  }
+  expect(problems).toEqual([]);
+});

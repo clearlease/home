@@ -10,6 +10,7 @@ export function organization(lang, { founders = false } = {}) {
     logo: SITE_URL + '/media/clearlease-logo.png', // Google needs a raster logo
     description: lang === 'de' ? 'Operations Intelligence für Gewerbeimmobilien' : 'Operations intelligence for commercial real estate',
     email: 'hello@clearlea.se',
+    sameAs: [LINKS.linkedin],
     address: { '@type': 'PostalAddress', addressLocality: 'Berlin', addressCountry: 'DE' },
   };
   if (founders) {

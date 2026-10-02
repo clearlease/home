@@ -7,8 +7,9 @@ export const SITE_URL = 'https://www.clearlea.se';
 // links" test fails, so a missing value cannot slip into production unnoticed.
 export const LINKS = {
   appUrl: 'https://app.clearlea.se', // production app login for "Anmelden"
-  linkedinHieronymus: null, // founder profile on the Unternehmen page (design: [LINKEDIN])
-  linkedinFabian: null, // founder profile on the Unternehmen page (design: [LINKEDIN])
+  linkedin: 'https://www.linkedin.com/company/clearlease', // company page (Organization JSON-LD, agent.md)
+  linkedinHieronymus: 'https://www.linkedin.com/in/hieronymus-deutsch/', // founder profile on the Unternehmen page (design: [LINKEDIN-HIERONYMUS])
+  linkedinFabian: 'https://www.linkedin.com/in/flaussmann/', // founder profile on the Unternehmen page (design: [LINKEDIN-FABIAN])
   calDemo: 'https://cal.com/deutsch/demo',
 };
 

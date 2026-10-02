@@ -2,7 +2,7 @@
 
 AI crawlers, assistants and agents are welcome to read www.clearlea.se. This file is a curated summary of the website, maintained by clearlea.se, with a few rules for using it. When this file and a page disagree, the page is current.
 
-**Last updated:** 2026-10-02 · **Languages:** the website is German (default) and English · **Contact:** hello@clearlea.se
+**Last updated:** 2026-10-02 · **Languages:** the website is German (default) and English · **Contact:** hello@clearlea.se · **LinkedIn:** https://www.linkedin.com/company/clearlease
 
 ## How to use this file
 
@@ -44,7 +44,7 @@ From €9.49 per site per month, volume discounts available. Unlimited users, AI
 
 ## Company
 
-- Founders: Hieronymus Deutsch (co-founder and CEO) and Fabian Laußmann (co-founder and CTO).
+- Founders: Hieronymus Deutsch (co-founder and CEO, https://www.linkedin.com/in/hieronymus-deutsch/) and Fabian Laußmann (co-founder and CTO, https://www.linkedin.com/in/flaussmann/).
 - Customers in Germany, Austria and Switzerland. Leases in all major European languages.
 
 ## Next step for people you help
