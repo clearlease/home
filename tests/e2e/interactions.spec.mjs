@@ -150,6 +150,30 @@ test.describe('Unterseiten', () => {
     await expect.poll(() => word.evaluate((el) => getComputedStyle(el).backgroundImage + getComputedStyle(el).backgroundColor + el.getAttribute('style'))).not.toBe(before);
   });
 
+  test('Trust Center: scratch reveal has no leftover dark strips and survives quick re-entry', async ({ page }) => {
+    test.skip(!isDesktop(page), 'pointer interaction');
+    await page.goto('/trust-center/');
+    await ready(page);
+    const word = page.locator('section').first().locator('p span[tabindex="0"]').nth(1);
+    const box = await word.boundingBox();
+    const y = box.y + box.height / 2;
+    const bg = () => word.evaluate((el) => el.style.background);
+    // enter in the middle from above, leave fast to the right
+    await page.mouse.move(box.x + box.width / 2, box.y - 20);
+    await page.mouse.move(box.x + box.width / 2, y);
+    await page.mouse.move(box.x + box.width + 40, y);
+    expect(await bg()).toMatch(/100%, rgb\(19, 41, 61\) 100%\)$/); // revealed right to the edge, no strip left
+    // come back within the cover delay: the reveal stays while hovering
+    await page.waitForTimeout(300);
+    await page.mouse.move(box.x + box.width * 0.9, y);
+    await page.waitForTimeout(1300);
+    expect(await bg()).toContain('linear-gradient');
+    expect(await bg()).toMatch(/100%, rgb\(19, 41, 61\) 100%\)$/);
+    // leave for good: covered again
+    await page.mouse.move(box.x + box.width / 2, box.y - 40);
+    await expect.poll(bg, { timeout: 3000 }).toBe('rgb(19, 41, 61)');
+  });
+
   test('Ressourcen: filter tabs and the index calculator', async ({ page }) => {
     await page.goto('/ressourcen/');
     await ready(page);
