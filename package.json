@@ -27,5 +27,6 @@
     "@axe-core/playwright": "^4.13.0",
     "@playwright/test": "^1.63.0",
     "vitest": "^4.1.11"
-  }
+  },
+  "version": "1.0.0"
 }
