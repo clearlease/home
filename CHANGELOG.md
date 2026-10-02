@@ -13,7 +13,7 @@ Website v1: the founder-approved design from the Design canvas, live as the new 
 - Interactive sections from the design: workflow explorer, AI comparison, case studies, the Trust Center scratch reveal and the Indexmiete calculator.
 - Link previews for every page: their own preview image, title and short description for LinkedIn, WhatsApp, Teams and Slack. Google gets the site name, breadcrumbs, logo and FAQ data.
 - `/agent.md` and `/llms.txt`: a curated summary for AI assistants, linked in every footer. AI search and assistant crawlers may read the whole site.
-- Hover, press and focus states for every button and link.
+- Hover, press and focus states for every button.
 - Three easter eggs for the curious.
 - The founders' LinkedIn profiles on the Unternehmen page and the company profile in the search data.
 
@@ -23,7 +23,7 @@ Website v1: the founder-approved design from the Design canvas, live as the new 
 - Fonts are self-hosted. The site loads no analytics and no Google Fonts.
 
 ### Fixed
-- Old addresses (landing pages, old legal pages, `?lang=en`) redirect to their new pages.
+- Old addresses (landing pages, old legal pages, and `?lang=en` on the homepage) redirect to their new pages.
 - Every email address is a working mailto link.
 
 ### Removed

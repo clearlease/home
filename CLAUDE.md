@@ -82,7 +82,7 @@ The designs use inline styles. Keep them, because they are what the canvas edito
 
 1. **German copy:** edit `src/designs/de/<Page>.dc.html`, ideally on the canvas first, then copy the file here.
 2. **English:** update the matching text in `src/designs/en/<Page>.dc.html`. Follow `docs/i18n/translation-brief.md`, then run `npm run check:i18n`.
-3. **New page:** add it to `ROUTES` and `src/seo.mjs`, then run `node scripts/gen-pages.mjs`.
+3. **New page:** add the DE and EN design files, add the page to `ROUTES` and to `TITLES`, `DESCRIPTIONS` and `LABELS` in `src/seo.mjs`, and add it to the page lists in `scripts/gen-pages.mjs` (`DESIGN_PAGES`), `scripts/og-images.mjs`, `scripts/check-copy.mjs`, `scripts/translation-review.mjs` and `tests/e2e/routes.mjs`. Then run `node scripts/gen-pages.mjs`.
 4. **Claims:** every number or claim must be backed by the Notion "Website Claims & Estimates Register". Never add one that is not.
 
 ## Content & brand voice
