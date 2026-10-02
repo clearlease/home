@@ -62,6 +62,7 @@ if (faq.length) {
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="text/markdown" href="/agent.md" title="Information for AI agents" />
     <slot name="head" />
     {ld.map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}
   </head>
