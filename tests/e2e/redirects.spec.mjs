@@ -1,0 +1,39 @@
+// Old URLs from the previous site land on the matching new page.
+import { test, expect } from '@playwright/test';
+
+const OLD = {
+  '/landings/property-managers.html': '/loesungen/property-management/',
+  '/landings/asset-managers.html': '/loesungen/bestandshalter/',
+  '/landings/transaction-managers.html': '/loesungen/bestandshalter/',
+  '/privacy.html': '/datenschutz/',
+  '/terms.html': '/agb/',
+  '/impressum.html': '/impressum/',
+  '/datenschutz.html': '/datenschutz/',
+  '/agb.html': '/agb/',
+  '/loesungen/': '/',
+  '/?lang=en': '/en/',
+};
+// Handled by GitHub Pages itself (folder redirect, index.html, 404), not by the local preview server.
+const HOST_ONLY = { '/index.html': '/', '/plattform': '/plattform/', '/en/platform': '/en/platform/' };
+const live = !!process.env.BASE_URL;
+for (const [from, to] of Object.entries(OLD)) {
+  test(`${from} -> ${to}`, async ({ page }) => {
+    await page.goto(from);
+    await page.waitForURL((u) => u.pathname === to);
+    await expect(page.locator('h1, main').first()).toBeVisible();
+  });
+}
+for (const [from, to] of Object.entries(HOST_ONLY)) {
+  test(`host: ${from} -> ${to}`, async ({ page }) => {
+    test.skip(!live, 'GitHub Pages behaviour; run with BASE_URL=https://www.clearlea.se');
+    await page.goto(from);
+    await page.waitForURL((u) => u.pathname === to);
+  });
+}
+
+test('unknown paths show the 404 page', async ({ page }) => {
+  // Locally the preview server has its own 404, so load the page GitHub Pages serves for unknown paths.
+  const res = await page.goto(live ? '/gibt-es-nicht' : '/404.html');
+  expect(res.status()).toBe(live ? 404 : 200);
+  await expect(page.locator('h1')).toHaveText('Diese Seite gibt es nicht.');
+});
