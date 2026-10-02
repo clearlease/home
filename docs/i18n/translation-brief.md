@@ -122,6 +122,7 @@ Header and news popover:
 | Ressourcen | Resources |
 | Neu | New |
 | 3 Updates (aria) | 3 updates |
+| 2 Updates (aria, from 8 October) | 2 updates |
 | Anmelden | Log in |
 | Gespräch vereinbaren | Book a call |
 | Gespräch mit Hieronymus | Talk to Hieronymus |

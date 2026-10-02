@@ -18,7 +18,7 @@ npm run preview      # serve dist/
 npm run check:i18n   # English designs are pure translations of the German ones
 npm run check:copy   # every design text line reaches the built pages (after build)
 npm run test:unit    # vitest
-npm test             # Playwright: all pages, links, redirects, interactions, axe (after build)
+npm test             # Playwright: pages, links, redirects, interactions, hover states, link previews, agent files, axe (after build)
 SCREENSHOTS=1 npx playwright test visual   # full-page screenshots in test-results/screens/
 BASE_URL=https://www.clearlea.se npm test  # run the suite against production
 ```
@@ -42,11 +42,12 @@ Compiler features used in the designs:
 
 - `Page.dc.html` links, with optional `data-anchor`, become production routes. `/agb`, `/datenschutz` and `/impressum` are localized.
 - `/en` in a German file, or `/de` in an English file, links to the same page in the other language.
-- `[APP-URL]` and `[LINKEDIN-*]` resolve from `LINKS` in `src/site.config.mjs`. While unset, the link test fails on purpose.
-- `/_blob/<id>` images resolve through `scripts/import-media.mjs` to `public/media/`.
+- `[APP-URL]` and `[LINKEDIN-*]` resolve from `LINKS` in `src/site.config.mjs`: `[LINKEDIN-HIERONYMUS]` reads `linkedinHieronymus`, `[LINKEDIN-FABIAN]` reads `linkedinFabian`. All are set. A `null` value leaves the placeholder in the page, and the link test fails on purpose.
+- `/_blob/<id>` images resolve through the map in `src/dc/media.mjs` to `public/media/`. For a new canvas image, add its id there, then run `node scripts/import-media.mjs <dir>` to write the WebP or SVG file.
 - `data-until="YYYY-MM-DD"` drops an element from builds after that day. The deploy workflow rebuilds daily.
-- `data-from="YYYY-MM-DD"` drops an element from builds before that day, e.g. the "Neu" badge count after an item expires.
-- `data-slot="cal-embed"` mounts `src/islands/CalEmbed.jsx` (the Cal.com booker). `data-slot="children"` renders Astro children.
+- `data-from="YYYY-MM-DD"` drops an element from builds before that day, e.g. the "Neu" badge count after an item expires. Pair it with a `data-until` twin: the Neu badge shows 3 until 7 October and 2 from 8 October.
+- Build day: Berlin time, from `buildDay()` in `src/site.config.mjs`. `data-until`, `data-from` and the Ressourcen `until:` all compare against it. Run `SITE_BUILD_DATE=YYYY-MM-DD npm run build` to preview another day.
+- `data-slot="cal-embed"` mounts `src/islands/CalEmbed.jsx` (the Cal.com booker, link from `LINKS.calDemo`). `data-slot="children"` renders Astro children. New slots go in `SLOTS` in `src/dc/compile.mjs`.
 - HTML comments (`<!-- DEV … -->`) are internal build notes and never reach the output.
 
 ### Routes and SEO
