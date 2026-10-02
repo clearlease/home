@@ -2,6 +2,15 @@
 
 All notable changes to clearlea.se. Versions follow `MAJOR.MINOR.PATCH.MICRO`.
 
+## [1.0.1.0] - 2026-10-02
+
+Phone layouts for the parts of Website v1 that only worked on desktop.
+
+### Fixed
+- Workflow tracks (Startseite, Plattform, Lösungen) become a vertical timeline on phones and tablets. The cards fit their text, and the pulse follows the scroll position.
+- The Lösungen hero shows one property card on phones instead of a table that scrolled sideways, the same split as the Startseite hero.
+- The KI-Teams comparison shows one block per criterion on phones instead of a table that scrolled sideways.
+
 ## [1.0.0.0] - 2026-10-02
 
 Website v1: the founder-approved design from the Design canvas, live as the new clearlea.se in German and English.

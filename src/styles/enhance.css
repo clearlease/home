@@ -72,3 +72,27 @@ a.cl-n7-cta, a.cl-n7-cta:hover { color: #ffffff; }
 @media (prefers-reduced-motion: reduce) {
   :is(.cl-btn-primary, .cl-btn-light, .cl-link-arrow) svg, :is(.cl-btn-primary, .cl-btn-light, .cl-btn-ghost, .cl-btn-tint, .cl-btn-chip, .cl-chipbtn) { transform: none !important; }
 }
+
+/* Workflow track below 900px: a vertical timeline (design note "Mobile: track turns vertical").
+   The line runs down the left past each step's dot, the cards fit their text, and the pulse
+   follows the scroll position (time-based where scroll-driven animations are not supported).
+   Children of the track wrapper: 1 = line, 2 = pulse rail, 3 = the <ol>. */
+@keyframes clTravelY { from { top: 0%; } to { top: 100%; } }
+@media (max-width: 900px) {
+  div:has(> ol.cl-wftrack) > ol.cl-wftrack { grid-template-columns: minmax(0, 1fr) !important; gap: 12px !important; }
+  .cl-wftrack > li { flex-direction: row !important; align-items: flex-start; gap: 14px !important; }
+  .cl-wftrack > li > span:first-child { flex: none; margin-top: 16px; position: relative; z-index: 1; }
+  .cl-wftrack > li > span:last-child { flex: 1; min-width: 0; min-height: 0 !important; height: auto !important; }
+  div:has(> ol.cl-wftrack) > span:nth-child(1) { left: 5px !important; right: auto !important; width: 2px; top: 26px !important; bottom: 12px; height: auto !important; background: linear-gradient(rgba(19, 41, 61, 0.18) 85%, rgba(19, 41, 61, 0)) !important; }
+  div:has(> ol.cl-wftrack) > span:nth-child(2) { left: 0 !important; right: auto !important; width: 12px; top: 26px !important; bottom: 12px; height: auto !important; z-index: 2; }
+  div:has(> ol.cl-wftrack) > span:nth-child(2) > span { left: 0; margin-left: 0 !important; margin-top: -6px; animation: none !important; }
+}
+@media (max-width: 900px) and (prefers-reduced-motion: no-preference) {
+  div:has(> ol.cl-wftrack) > span:nth-child(2) > span { animation: clTravelY 8s linear infinite !important; }
+  @supports (animation-timeline: view()) {
+    div:has(> ol.cl-wftrack) { view-timeline: --cl-wf block; }
+    /* overflow: hidden would make the card its own scroll container and freeze the timeline; clip keeps the rounded corners without that. */
+    div[style*="overflow: hidden"]:has(ol.cl-wftrack) { overflow: clip !important; }
+    div:has(> ol.cl-wftrack) > span:nth-child(2) > span { animation: clTravelY linear both !important; animation-timeline: --cl-wf !important; animation-range: cover 50vh cover calc(100% - 50vh) !important; }
+  }
+}
