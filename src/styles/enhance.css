@@ -24,14 +24,14 @@
 /* Nachtrag 7 (easter egg): an amendment card in the product's style. */
 .cl-n7 { position: fixed; z-index: 60; right: clamp(16px, 3vw, 32px); bottom: calc(clamp(16px, 3vw, 32px) + env(safe-area-inset-bottom, 0px)); width: min(380px, calc(100vw - 32px)); box-sizing: border-box; background: #ffffff; color: #13293d; border-radius: 12px; padding: 20px; box-shadow: 0 18px 45px rgba(12, 18, 28, 0.18), inset 0 0 0 1.5px #a9cde1; font-family: Montserrat, "Segoe UI", system-ui, sans-serif; display: flex; flex-direction: column; gap: 10px; animation: clN7 420ms cubic-bezier(0.25, 0.8, 0.5, 1); }
 .cl-n7-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-.cl-n7-kicker { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 3px 10px; }
+.cl-n7-kicker { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #1d6485; background: #eff6fa; border-radius: 9999px; padding: 3px 10px; }
 .cl-n7-close { width: 44px; height: 44px; margin: -12px -12px -12px 0; border: 0; background: transparent; color: #55636f; border-radius: 9999px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
 .cl-n7-close:hover { color: #13293d; background: #F7F7F7; }
 .cl-n7-title { margin: 0; font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
 .cl-n7-body { margin: 0; font-size: 15px; line-height: 1.55; color: #43586c; }
 .cl-n7-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding-top: 10px; border-top: 1px solid rgba(0, 0, 0, 0.08); }
-.cl-n7-source { font-size: 12px; font-weight: 600; color: #1b6384; }
-.cl-n7-cta { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 9999px; background: #13293d; color: #ffffff !important; font-size: 14px; font-weight: 600; text-decoration: none; }
+.cl-n7-source { font-size: 12px; font-weight: 600; color: #1d6485; }
+.cl-n7-cta { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 9999px; background: #13293d; color: #ffffff; font-size: 14px; font-weight: 600; text-decoration: none; }
 @keyframes clN7 { from { opacity: 0; transform: translateY(14px) rotate(-1.5deg); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .cl-n7 { animation: none; } }
 
@@ -64,7 +64,9 @@
 
 /* Keyboard focus: the design system's ring (cl-focus-ring) on every control, on dark grounds in white. */
 :is(a, button, summary, [tabindex]):focus-visible { outline: 2px solid #247ba0 !important; outline-offset: 3px; }
-section[aria-labelledby="cta-title"] :is(a, button):focus-visible { outline-color: #ffffff !important; }
+section[aria-labelledby="cta-title"] :is(a, button):focus-visible, .cl-demo-note [role="status"] button:focus-visible { outline-color: #ffffff !important; }
+a.cl-n7-cta, a.cl-n7-cta:hover { color: #ffffff; }
+@media (hover: hover) and (pointer: fine) { a.cl-n7-cta:hover { background: #1a3553; } }
 
 @media (prefers-reduced-motion: reduce) {
   :is(.cl-btn-primary, .cl-btn-light, .cl-link-arrow) svg, :is(.cl-btn-primary, .cl-btn-light, .cl-btn-ghost, .cl-btn-tint, .cl-btn-chip, .cl-chipbtn) { transform: none !important; }

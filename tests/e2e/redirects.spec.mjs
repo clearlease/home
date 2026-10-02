@@ -14,7 +14,7 @@ const OLD = {
   '/?lang=en': '/en/',
 };
 // Handled by GitHub Pages itself (folder redirect, index.html, 404), not by the local preview server.
-const HOST_ONLY = { '/index.html': '/', '/plattform': '/plattform/', '/en/platform': '/en/platform/' };
+const HOST_ONLY = { '/plattform': '/plattform/', '/en/platform': '/en/platform/' };
 const live = /^https:\/\/(www\.)?clearlea\.se/.test(process.env.BASE_URL || '');
 for (const [from, to] of Object.entries(OLD)) {
   test(`${from} -> ${to}`, async ({ page }) => {

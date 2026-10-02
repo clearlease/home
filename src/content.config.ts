@@ -15,7 +15,8 @@ const ressourcen = defineCollection({
     neu: z.boolean().default(false),
     href: z.string().optional(),
     date: z.string().optional(),
-    until: z.string().optional(),
+    // quoted or not: YAML reads an unquoted 2026-10-07 as a Date
+    until: z.union([z.string(), z.date().transform((d) => d.toISOString().slice(0, 10))]).optional(),
     image: z.string().optional(),
   }),
 });
