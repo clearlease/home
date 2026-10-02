@@ -22,7 +22,7 @@ export const SLOTS = { 'cal-embed': fileURLToPath(new URL('../islands/CalEmbed.j
 const EVENT_MAP = { onfocus: 'onfocusin', onblur: 'onfocusout' };
 const HOLE = /{{\s*([^}]+?)\s*}}/g;
 const WS = /[ \t\n\r\f]+/g;
-// Pages outside the route map (the shell used for legal pages, 404, articles) get the
+// Pages outside the route map (the shell used for legal pages and 404) get the
 // language-switch target from the `altHref` prop at render time.
 const ALT_HREF = '\u0000ALT_HREF\u0000';
 

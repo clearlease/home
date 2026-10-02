@@ -2,8 +2,8 @@ import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
 // One Markdown file per Ressourcen item, per language: src/content/ressourcen/<lang>/<nn>-<slug>.md
-// Frontmatter drives the card on /ressourcen. A body below the frontmatter is optional; when a
-// file has one, the item gets its own article page (/ressourcen/<slug>) and the card links there.
+// Frontmatter drives the card on /ressourcen; the card links to `href`. Article pages with their own
+// URL are planned but not built yet, so a body below the frontmatter is not published.
 // `until: YYYY-MM-DD` hides the item after that day (the daily build picks it up).
 const ressourcen = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/ressourcen' }),

@@ -2,8 +2,7 @@
 import { readFileSync } from 'node:fs';
 import { marked } from 'marked';
 import { getCollection } from 'astro:content';
-import { route, buildDay as today } from '../site.config.mjs';
-const slugOf = (id) => id.split('/').pop().replace(/^\d+-/, '');
+import { buildDay as today } from '../site.config.mjs';
 
 // Ressourcen items for one language, in `order`, without expired ones.
 export async function ressourcenItems(lang) {
@@ -16,15 +15,11 @@ export async function ressourcenItems(lang) {
       title: e.data.title,
       text: e.data.text,
       neu: e.data.neu,
-      // an item with a body gets its own article page; otherwise the card links to `href`
-      href: e.body && e.body.trim() ? `${route('Ressourcen', lang)}${slugOf(e.id)}/` : e.data.href,
+      // Article pages are not built yet (planned): a body below the frontmatter is ignored.
+      href: e.data.href,
     }));
 }
 
-export async function ressourcenArticles(lang) {
-  const all = await getCollection('ressourcen', (e) => e.id.startsWith(lang + '/') && !!(e.body && e.body.trim()));
-  return all.filter((e) => !e.data.until || today() <= e.data.until).map((e) => ({ slug: slugOf(e.id), entry: e }));
-}
 
 // Legal texts: the existing Markdown files, rendered at build time (German only).
 const LEGAL_FILES = {

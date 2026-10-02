@@ -1,6 +1,6 @@
 // Builds src/designs/<lang>/Shell.dc.html from the approved Unternehmen design: the same
 // header, footer and news popover, with <main> replaced by a slot for page content.
-// Used by the legal pages, the 404 page and resource articles. Re-run after nav/footer changes:
+// Used by the legal pages and the 404 page. Re-run after nav/footer changes:
 //   node scripts/make-shell.mjs
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 
