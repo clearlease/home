@@ -14,6 +14,7 @@ Website v1: the founder-approved design from the Design canvas, live as the new 
 - Link previews for every page: their own preview image, title and short description for LinkedIn, WhatsApp, Teams and Slack. Google gets the site name, breadcrumbs, logo and FAQ data.
 - `/agent.md` and `/llms.txt`: a curated summary for AI assistants, linked in every footer. AI search and assistant crawlers may read the whole site.
 - Workflow tracks become a vertical timeline on phones and tablets, with the pulse following the scroll position.
+- On phones, the Lösungen hero shows one property card instead of a sideways-scrolling table, and the KI-Teams comparison shows one block per criterion.
 - Hover, press and focus states for every button.
 - Three easter eggs for the curious.
 - The founders' LinkedIn profiles on the Unternehmen page and the company profile in the search data.
