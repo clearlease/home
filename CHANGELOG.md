@@ -2,6 +2,15 @@
 
 All notable changes to clearlea.se. Versions follow `MAJOR.MINOR.PATCH.MICRO`.
 
+## [1.0.1.0] - 2026-10-02
+
+Phone layouts for the parts of Website v1 that only worked on desktop.
+
+### Fixed
+- Workflow tracks (Startseite, Plattform, Lösungen) become a vertical timeline on phones and tablets. The cards fit their text, and the pulse follows the scroll position.
+- The Lösungen hero shows one property card on phones instead of a table that scrolled sideways, the same split as the Startseite hero.
+- The KI-Teams comparison shows one block per criterion on phones instead of a table that scrolled sideways.
+
 ## [1.0.0.0] - 2026-10-02
 
 Website v1: the founder-approved design from the Design canvas, live as the new clearlea.se in German and English.
@@ -13,8 +22,6 @@ Website v1: the founder-approved design from the Design canvas, live as the new 
 - Interactive sections from the design: workflow explorer, AI comparison, case studies, the Trust Center scratch reveal and the Indexmiete calculator.
 - Link previews for every page: their own preview image, title and short description for LinkedIn, WhatsApp, Teams and Slack. Google gets the site name, breadcrumbs, logo and FAQ data.
 - `/agent.md` and `/llms.txt`: a curated summary for AI assistants, linked in every footer. AI search and assistant crawlers may read the whole site.
-- Workflow tracks become a vertical timeline on phones and tablets, with the pulse following the scroll position.
-- On phones, the Lösungen hero shows one property card instead of a sideways-scrolling table, and the KI-Teams comparison shows one block per criterion.
 - Hover, press and focus states for every button.
 - Three easter eggs for the curious.
 - The founders' LinkedIn profiles on the Unternehmen page and the company profile in the search data.
