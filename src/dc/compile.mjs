@@ -26,6 +26,30 @@ const WS = /[ \t\n\r\f]+/g;
 const ALT_HREF = '\u0000ALT_HREF\u0000';
 
 const attr = (node, name) => node.attrs?.find((a) => a.name === name)?.value;
+
+// Interaction states. The designs set colours inline, so stylesheet :hover rules cannot reach
+// them without a hook. Buttons and button-like links get a class from their inline style here;
+// src/styles/enhance.css gives each class the design system's hover, active and focus states.
+function interactionClass(node) {
+  const tag = node.tagName;
+  if (!['a', 'button', 'summary'].includes(tag)) return '';
+  const st = (attr(node, 'style') || '').replace(/\s+/g, ' ');
+  const has = (re) => re.test(st);
+  if (st.includes('{{')) {
+    if (tag === 'button' && (attr(node, 'aria-pressed') !== undefined || attr(node, 'role') === 'tab')) return 'cl-btn-chip';
+    return '';
+  }
+  const pill = has(/border-radius: ?9999px/);
+  if (has(/background: ?#13293d/i) && has(/color: ?#fff(fff)?\b/i)) return 'cl-btn-primary';
+  if (pill && has(/border: ?1(\.5)?px solid rgba\((0, 0, 0, 0\.2|19, 41, 61, 0\.3)/)) return 'cl-btn-ghost';
+  if (tag === 'a' && has(/border: ?1px solid rgba\(19, 41, 61, 0\.3\)/)) return 'cl-btn-ghost';
+  if (pill && has(/background: ?#fff(fff)?\b/i)) return 'cl-btn-light';
+  if (pill && has(/background: ?#eff6fa/i)) return 'cl-btn-tint';
+  if (tag === 'summary' && has(/box-shadow: ?inset/)) return 'cl-btn-icon';
+  if (tag === 'a' && has(/border-radius: ?8px/) && has(/background: ?#(F7F7F7|eff6fa)/i)) return 'cl-tile';
+  if (tag === 'a' && !has(/background/) && (node.childNodes || []).some((c) => c.tagName === 'svg') && has(/text-decoration: ?none/)) return 'cl-link-arrow';
+  return '';
+}
 const elementChildren = (node) => (node.childNodes || []).filter((n) => n.tagName);
 
 function find(node, pred) {
@@ -106,6 +130,8 @@ export function compileDC(source, { lang, page, file = page + '.dc.html', runtim
   function attrsCode(node) {
     const entries = [];
     const anchor = attr(node, 'data-anchor');
+    const extra = interactionClass(node);
+    if (extra && attr(node, 'class') === undefined) entries.push(`"class":${JSON.stringify(extra)}`);
     for (const { name, value } of node.attrs || []) {
       if (DROP_ATTRS.has(name)) continue;
       let v = value;
@@ -121,6 +147,7 @@ export function compileDC(source, { lang, page, file = page + '.dc.html', runtim
         continue;
       }
       if (BOOL_ATTRS.has(name) && v === '') { entries.push(`${JSON.stringify(key)}:true`); continue; }
+      if (name === 'class' && extra) v = `${v} ${extra}`;
       entries.push(v === ALT_HREF ? `${JSON.stringify(key)}:(this.props.altHref||"/")` : `${JSON.stringify(key)}:${valueCode(v)}`);
     }
     // the language switch link carries hreflang for crawlers and screen readers

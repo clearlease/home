@@ -34,3 +34,38 @@
 .cl-n7-cta { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 9999px; background: #13293d; color: #ffffff !important; font-size: 14px; font-weight: 600; text-decoration: none; }
 @keyframes clN7 { from { opacity: 0; transform: translateY(14px) rotate(-1.5deg); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .cl-n7 { animation: none; } }
+
+/* Interaction states for buttons and links. Classes come from src/dc/compile.mjs
+   (interactionClass). Values are design-system tokens: cl-navy-hover, cl-primary-50/100/600,
+   cl-hover-veil, cl-surface-3, motion 160 ms on the system easing. !important is needed
+   because the designs set colours inline. Hover only on devices that really hover. */
+.cl-btn-primary, .cl-btn-light, .cl-btn-ghost, .cl-btn-tint, .cl-btn-icon, .cl-btn-chip, .cl-chipbtn, .cl-tile, .cl-link-arrow, footer a, section[aria-labelledby="cta-title"] a {
+  transition: background-color 160ms cubic-bezier(0.25, 0.8, 0.5, 1), border-color 160ms cubic-bezier(0.25, 0.8, 0.5, 1), box-shadow 160ms cubic-bezier(0.25, 0.8, 0.5, 1), color 160ms cubic-bezier(0.25, 0.8, 0.5, 1), transform 120ms cubic-bezier(0.25, 0.8, 0.5, 1);
+}
+.cl-btn-primary svg, .cl-btn-light svg, .cl-link-arrow svg { transition: transform 160ms cubic-bezier(0.25, 0.8, 0.5, 1); }
+
+@media (hover: hover) and (pointer: fine) {
+  .cl-btn-primary:hover { background: #1a3553 !important; }
+  .cl-btn-light:hover { background: #eff6fa !important; }
+  .cl-btn-ghost:hover { background-color: rgba(19, 41, 61, 0.05) !important; border-color: #13293d !important; }
+  .cl-btn-tint:hover { background: #d4e6f0 !important; }
+  .cl-btn-icon:hover { background: #E8E8E8; }
+  .cl-tile:hover { box-shadow: inset 0 0 0 999px rgba(0, 0, 0, 0.05); }
+  .cl-link-arrow:hover { color: #1d6485 !important; }
+  :is(.cl-btn-chip, .cl-chipbtn):hover:not([aria-pressed="true"], [aria-selected="true"], [aria-disabled="true"]) { box-shadow: inset 0 0 0 999px rgba(0, 0, 0, 0.05) !important; }
+  :is(.cl-btn-primary, .cl-btn-light, .cl-link-arrow):hover svg { transform: translateX(3px); }
+  footer a:hover { color: #13293d !important; text-decoration: underline !important; text-underline-offset: 3px; }
+  /* plain text links on the navy closing block (e.g. the e-mail address): teal-100 on navy */
+  section[aria-labelledby="cta-title"] a:not([class]):hover { color: #d4e6f0 !important; }
+}
+
+/* Press feedback, also on touch. */
+:is(.cl-btn-primary, .cl-btn-light, .cl-btn-ghost, .cl-btn-tint, .cl-btn-chip, .cl-chipbtn):active:not([aria-disabled="true"]) { transform: translateY(1px); }
+
+/* Keyboard focus: the design system's ring (cl-focus-ring) on every control, on dark grounds in white. */
+:is(a, button, summary, [tabindex]):focus-visible { outline: 2px solid #247ba0 !important; outline-offset: 3px; }
+section[aria-labelledby="cta-title"] :is(a, button):focus-visible { outline-color: #ffffff !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  :is(.cl-btn-primary, .cl-btn-light, .cl-link-arrow) svg, :is(.cl-btn-primary, .cl-btn-light, .cl-btn-ghost, .cl-btn-tint, .cl-btn-chip, .cl-chipbtn) { transform: none !important; }
+}
