@@ -47,8 +47,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 @media (max-width: 520px) { .cl-wftrack { grid-template-columns: minmax(0, 1fr) !important; } }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 .cl-demo-mob { display: none; }
+.cl-demo-mobi { display: none; }
 .cl-demo-note { position: absolute; right: clamp(8px, 2vw, 24px); width: min(420px, calc(100% - 16px)); z-index: 2; }
-@media (max-width: 760px) { .cl-demo-desk { display: none !important; } .cl-demo-mob { display: block; } .cl-demo-note { position: static; width: auto; padding: 0 16px 16px; } .cl-chiprow { flex-wrap: nowrap !important; overflow-x: auto; scrollbar-width: none; margin-inline: -20px; padding-inline: 20px; } .cl-chiprow::-webkit-scrollbar { display: none; } }
+@media (max-width: 760px) { .cl-demo-desk { display: none !important; } .cl-demo-mob { display: block; } .cl-demo-mobi { display: inline-block; } .cl-demo-hint { display: block !important; line-height: 1.45; } .cl-demo-hint > span { display: inline; } .cl-demo-hint > span:first-child { display: inline-block; margin-right: 8px; vertical-align: 2px; } .cl-demo-hint > span:last-child { margin-left: 6px; } .cl-chiprow .cl-doc { max-width: 210px; } .cl-chiprow { -webkit-mask-image: linear-gradient(90deg, #000 80%, transparent); mask-image: linear-gradient(90deg, #000 80%, transparent); } .cl-demo-note { position: static; width: auto; padding: 0 16px 16px; } .cl-chiprow { flex-wrap: nowrap !important; overflow-x: auto; scrollbar-width: none; margin-inline: -20px; padding-inline: 20px; } .cl-chiprow::-webkit-scrollbar { display: none; } }
 .cl-doc { transition: transform 160ms cubic-bezier(0.25, 0.8, 0.5, 1), box-shadow 160ms; }
 .cl-doc:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(12, 18, 28, 0.10); }
 .cl-glass { position: absolute; aspect-ratio: 1 / 1; transform: translate(-50%, -50%); border-radius: 9999px; background: rgba(19, 41, 61, 0.08); pointer-events: auto; cursor: pointer; display: flex; align-items: center; justify-content: center; overflow: hidden; transition: transform 520ms cubic-bezier(0.34, 1.56, 0.64, 1), background 420ms, box-shadow 420ms; }
@@ -149,8 +150,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     </div>
 
     <div id="demo" style="margin-top: clamp(48px, 6vw, 72px); display: flex; flex-direction: column; gap: 14px">
-      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
-        <span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 9999px; background: #247ba0; animation: clBlink 1.6s ease-in-out infinite"></span>
+      <div class="cl-demo-hint" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
+        <span aria-hidden="true" style="flex: none; width: 8px; height: 8px; border-radius: 9999px; background: #247ba0; animation: clBlink 1.6s ease-in-out infinite"></span>
         <span style="font-size: 15px; font-weight: 600; color: #13293d">Try it: drag a document into the property list.</span>
         <span style="font-size: 14px; color: #55636f">Or tap it.</span>
       </div>
@@ -160,15 +161,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
           <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 14px 20px; border-bottom: 1px solid rgba(0, 0, 0, 0.08)">
             <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap" role="tablist" aria-label="View">
               <button type="button" role="tab" aria-selected="{{tabTableSel}}" onClick="{{showTable}}" style="{{tabTableSt}}">Property list</button>
-              <button type="button" role="tab" aria-selected="{{tabTasksSel}}" onClick="{{showTasks}}" style="{{tabTasksSt}}">My tasks</button>
+              <button type="button" role="tab" aria-selected="{{tabTasksSel}}" onClick="{{showTasks}}" style="{{tabTasksSt}}">My tasks<span class="cl-demo-mobi" style="margin-left: 8px; min-width: 20px; height: 20px; box-sizing: border-box; padding: 0 6px; border-radius: 9999px; background: #fdf0e3; color: #84410d; font-size: 12px; font-weight: 700; line-height: 20px; text-align: center">{{openCount}}</span></button>
               <span class="cl-demo-desk" style="font-size: 13px; color: #55636f; margin-left: 8px">Retail portfolio · 248 leases</span>
             </div>
-            <button type="button" onClick="{{showTasks}}" style="{{attnSt}}">{{attnLabel}}</button>
+            <button type="button" class="cl-demo-desk" onClick="{{showTasks}}" style="{{attnSt}}">{{attnLabel}}</button>
           </div>
 
           <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px 20px; box-sizing: border-box; background: #F7F7F7; border-bottom: 1px solid rgba(0, 0, 0, 0.08)">
             <div class="cl-chiprow" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
-              <span style="flex: none; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f; margin-right: 4px">New documents</span>
+              <span class="cl-demo-desk" style="flex: none; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f; margin-right: 4px">New documents</span>
               <sc-for list="{{docs}}" as="d" hint-placeholder-count="5">
               <button type="button" class="cl-doc" draggable="true" onDragStart="{{d.dragStart}}" onClick="{{d.run}}" aria-label="{{d.aria}}" style="{{d.st}}">
                 <span style="display: flex; align-items: center; gap: 8px; min-width: 0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path></svg><span style="display: flex; flex-direction: column; gap: 2px; min-width: 0; text-align: left"><span style="font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{d.label}}</span><span style="font-size: 11px; color: #55636f">{{d.kind}}</span></span></span>
@@ -237,7 +238,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
                         <div style="{{f.st}}">
                           <span style="font-size: 11px; color: #55636f">{{f.label}}</span>
                           <span style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px"><sc-for list="{{f.segs}}" as="p" hint-placeholder-count="1"><sc-if value="{{p.plain}}" hint-placeholder-val="{{true}}"><span style="{{p.st}}">{{p.text}}</span></sc-if><sc-if value="{{p.changed}}" hint-placeholder-val="{{false}}"><span style="display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px"><span style="color: #55636f; text-decoration: line-through; font-size: 13px">{{p.old}}</span><span style="font-weight: 700; color: #13293d">{{p.neu}}</span><span title="{{p.qsTitle}}" style="display: inline-flex; align-items: flex-end; gap: 2px; height: 13px"><sc-for list="{{p.sig}}" as="g" hint-placeholder-count="4"><span style="{{g.st}}"></span></sc-for></span></span></sc-if></sc-for></span>
-                          <sc-if value="{{f.hasChip}}" hint-placeholder-val="{{false}}"><span style="align-self: flex-start; font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 2px 9px; white-space: nowrap">{{f.chip}}</span></sc-if>
+                          <sc-if value="{{f.hasChip}}" hint-placeholder-val="{{false}}"><span style="align-self: flex-start; font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 2px 9px; max-width: 100%; box-sizing: border-box; overflow-wrap: anywhere">{{f.chip}}</span></sc-if>
                         </div>
                       </sc-for>
                     </div>
@@ -1057,6 +1058,7 @@ class Component extends DCLogic {
       tabTasksSt: view === 'tasks' ? tabOn : tabOff,
       showTable: function () { self.lastUser = Date.now(); self.setState({ view: 'table' }); },
       showTasks: function () { self.lastUser = Date.now(); self.setState({ view: 'tasks' }); },
+      openCount: open,
       attnLabel: open > 0 ? (open + (open === 1 ? ' needs' : ' need') + ' attention') : 'All done',
       attnSt: attnBase + (open > 0 ? ' color: #84410d; background: #fdf0e3;' : ' color: #2e7d32; background: #eaf4ea;'),
       dropSt: 'position: relative;' + (s.over ? ' box-shadow: inset 0 0 0 2px #247ba0; background: #f8fbfd;' : ''),

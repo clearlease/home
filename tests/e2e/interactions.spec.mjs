@@ -81,8 +81,10 @@ test.describe('Startseite', () => {
   test('"Meine Aufgaben" view opens from the attention counter', async ({ page }) => {
     await page.goto('/');
     await ready(page);
-    await page.getByRole('button', { name: /brauchen Aufmerksamkeit/ }).click();
-    await expect(page.getByRole('tab', { name: 'Meine Aufgaben' })).toHaveAttribute('aria-selected', 'true');
+    // desktop: the attention counter; phones: the counter is a badge on the tab itself
+    if (isDesktop(page)) await page.getByRole('button', { name: /brauchen Aufmerksamkeit/ }).click();
+    else await page.getByRole('tab', { name: /Meine Aufgaben/ }).click();
+    await expect(page.getByRole('tab', { name: /Meine Aufgaben/ })).toHaveAttribute('aria-selected', 'true');
     await expect(page.getByText('Rechnungsabweichung klären')).toBeVisible();
   });
 
