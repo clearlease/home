@@ -46,6 +46,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 @media (max-width: 900px) { .cl-wftrack { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
 @media (max-width: 520px) { .cl-wftrack { grid-template-columns: minmax(0, 1fr) !important; } }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+.cl-demo-mob { display: none; }
+.cl-demo-note { position: absolute; right: clamp(8px, 2vw, 24px); width: min(420px, calc(100% - 16px)); z-index: 2; }
+@media (max-width: 760px) { .cl-demo-desk { display: none !important; } .cl-demo-mob { display: block; } .cl-demo-note { position: static; width: auto; padding: 0 16px 16px; } .cl-chiprow { flex-wrap: nowrap !important; overflow-x: auto; scrollbar-width: none; margin-inline: -20px; padding-inline: 20px; } .cl-chiprow::-webkit-scrollbar { display: none; } }
 .cl-doc { transition: transform 160ms cubic-bezier(0.25, 0.8, 0.5, 1), box-shadow 160ms; }
 .cl-doc:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(12, 18, 28, 0.10); }
 .cl-glass { position: absolute; aspect-ratio: 1 / 1; transform: translate(-50%, -50%); border-radius: 9999px; background: rgba(19, 41, 61, 0.08); pointer-events: auto; cursor: pointer; display: flex; align-items: center; justify-content: center; overflow: hidden; transition: transform 520ms cubic-bezier(0.34, 1.56, 0.64, 1), background 420ms, box-shadow 420ms; }
@@ -117,14 +120,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 <!-- DEV · HERO LOGO (founder 02.10.): the brand "c" and its dot keep the exact logo proportions (dot = circle at 20.6/20.3, r 1.5 in the logo viewBox, positioned in % of the same box), so every page shows the same mark. Gimmick: on hover the dot turns into a glass ball (Glaskugel). Round 7 (founder 02.10.): while hovered it rotates short hints every 2.8 s, and a click shows the next one (the call costs nothing, "we also consult", snippets from the pages, the EXPO stand, the "Option Zürich" prediction). Each new hover continues where the last one stopped, so visitors see different tips. Tips live in tips() in the script; max. ~18 characters per line so they fit the ball. Remove the EXPO tip after 07.10. Decorative (aria-hidden): every tip repeats content that is on the pages anyway. Pointer only on desktop; reduced motion = no wobble. In the build the dot may still travel with scroll and return to its logo position. -->
 <!-- DEV · HERO. H1 decided 01.10. Subline revised 02.10. (founder: "who is it for" + "auditierbare KI-Workflows"; CREM alone would exclude owners and property managers, so the subline names all three audiences in plain words). Background: the brand "c" + dot, very light; in the build the dot moves with scroll (scroll-linked, GPU transform only), the c turns slightly. -->
 <!-- DEV · HERO DEMO (founder 02.10.: "make it a fun experience, the table could be real, drag a file in"). A real, interactive mini app, not a slideshow:
-  - Left tray: 5 sample documents. Visitor drags one onto the Objektliste (or clicks / presses Enter on it). Use a robust pointer-based DnD lib (e.g. dnd-kit) in production; keyboard and click always work.
+  - Layout revised 02.10. (founder: "crowded, breaks on mobile"; chose the slim table for desktop and the focus card for phones). Documents = chip row above the table. Visitor drags one onto the Objektliste (or clicks / presses Enter on it). Use a robust pointer-based DnD lib (e.g. dnd-kit) in production; keyboard and click always work.
   - Processing: 3 visible steps in the "Eingang" lane (recognised -> read -> checked), ~2 s total.
   - Result: the affected cell updates (old value struck, new value, source chip, QS signal). QS = quality of a NEW data suggestion, shown like a phone-signal icon (founder 02.10.). At or above the customer's threshold (here 98 %) a change is taken over automatically; below it a person approves.
   - A notification pops (navy, prominent) with one action. Click -> "Erledigt · protokolliert", the task disappears from "Meine Aufgaben".
   - "x brauchen Aufmerksamkeit" opens the "Meine Aufgaben" view (founder 02.10.).
   - Idle autoplay: after 15 s without interaction the demo processes the next document by itself; any interaction pauses it.
   - Only LIVE capabilities (register §2: no date-triggered workflow). Fictional data only.
-  Mobile: tray becomes a horizontal chip row above the table; table scrolls horizontally; notification sits below the table. -->
+  - Desktop table: 3 columns (Objekt · Mieter / Vertrag: Laufzeit, Miete, Index / Vertragshistorie), no horizontal scroll. The notification floats over the table like a proactive popup, at the bottom right, or at the top right when the changed row is in the lower half.
+  Mobile (max 760px): chip row scrolls sideways; the table becomes ONE property card (Mieter, Laufzeit bis, Nettokaltmiete, Indexstichtag) for the document's object; the notification sits below the card. -->
 <section aria-labelledby="hero-title" style="position: relative; overflow: hidden; padding-top: clamp(56px, 8vw, 104px); padding-bottom: clamp(72px, 8vw, 104px)">
   <div aria-hidden="true" style="position: absolute; top: -40px; right: -120px; width: min(980px, 90vw); aspect-ratio: 22 / 15; pointer-events: none; z-index: 1"><svg viewBox="4 8 22 15" style="position: absolute; inset: 0; width: 100%; height: 100%"><path fill="rgba(19, 41, 61, 0.045)" d="m 11.484882,21.769442 q -1.8818515,0 -3.3604495,-0.784105 -1.456195,-0.806508 -2.285106,-2.195494 -0.828911,-1.388986 -0.828911,-3.158823 0,-1.79224 0.828911,-3.158823 0.828911,-1.388986 2.285106,-2.173091 1.478598,-0.7841046 3.3604495,-0.7841046 1.747434,0 3.069211,0.7168956 1.34418,0.694493 2.038673,2.061076 l -2.150688,1.254568 q -0.537672,-0.851314 -1.321777,-1.254568 -0.761702,-0.403254 -1.657822,-0.403254 -1.030538,0 -1.8594485,0.44806 -0.828911,0.44806 -1.299374,1.299374 -0.470463,0.828911 -0.470463,1.993867 0,1.164956 0.470463,2.01627 0.470463,0.828911 1.299374,1.276971 0.8289105,0.44806 1.8594485,0.44806 0.89612,0 1.657822,-0.403254 0.784105,-0.403254 1.321777,-1.254568 l 2.150688,1.254568 q -0.694493,1.34418 -2.038673,2.083479 -1.321777,0.716896 -3.069211,0.716896 z"></path></svg><span class="cl-glass" onMouseEnter="{{glassIn}}" onMouseLeave="{{glassOut}}" onClick="{{glassNext}}" style="left: 75.4545%; top: 82%; width: 13.6364%"><span class="cl-glass-txt"><span style="{{tipSt}}"><span style="display: block; font-size: 0.85em; color: #43586c">{{tip.k}}</span><span style="display: block; font-weight: 700">{{tip.t}}</span><span style="display: block">{{tip.s}}</span></span></span></span></div>
 
@@ -150,29 +154,29 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
         <span style="font-size: 15px; font-weight: 600; color: #13293d">Probieren Sie es aus: Ziehen Sie ein Dokument in die Objektliste.</span>
         <span style="font-size: 14px; color: #55636f">Oder tippen Sie es an.</span>
       </div>
-      <div onMouseEnter="{{pause}}" onMouseLeave="{{resume}}" style="background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.12); border-radius: 12px; box-shadow: 0 18px 45px rgba(12, 18, 28, 0.10); overflow: hidden; display: flex; flex-wrap: wrap">
-        <div style="flex: 1 1 220px; max-width: 260px; box-sizing: border-box; padding: 18px; background: #F3F3F3; border-right: 1px solid rgba(0, 0, 0, 0.08); display: flex; flex-direction: column; gap: 10px">
-          <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Neue Dokumente</span>
-          <sc-for list="{{docs}}" as="d" hint-placeholder-count="5">
-            <button type="button" class="cl-doc" draggable="true" onDragStart="{{d.dragStart}}" onClick="{{d.run}}" aria-label="{{d.aria}}" style="{{d.st}}">
-              <span style="display: flex; align-items: center; gap: 8px; min-width: 0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path></svg><span style="display: flex; flex-direction: column; gap: 2px; min-width: 0; text-align: left"><span style="font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{d.label}}</span><span style="font-size: 11px; color: #55636f">{{d.kind}}</span></span></span>
-              <sc-if value="{{d.processed}}" hint-placeholder-val="{{false}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-label="verarbeitet" style="flex-shrink: 0"><path d="m5 12 5 5L20 7"></path></svg></sc-if>
-            </button>
-          </sc-for>
-          <span style="font-size: 12px; line-height: 1.45; color: #55636f; margin-top: 4px">Beispieldaten. Echte Verarbeitung: Nebenkostenabrechnung in rund 45 Sekunden.</span>
-        </div>
+      <div onMouseEnter="{{pause}}" onMouseLeave="{{resume}}" style="background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.12); border-radius: 12px; box-shadow: 0 18px 45px rgba(12, 18, 28, 0.10); overflow: hidden">
 
-        <div onDragOver="{{dragOver}}" onDragLeave="{{dragLeave}}" onDrop="{{drop}}" style="{{dropSt}}">
+        <div>
           <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 14px 20px; border-bottom: 1px solid rgba(0, 0, 0, 0.08)">
             <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap" role="tablist" aria-label="Ansicht">
               <button type="button" role="tab" aria-selected="{{tabTableSel}}" onClick="{{showTable}}" style="{{tabTableSt}}">Objektliste</button>
               <button type="button" role="tab" aria-selected="{{tabTasksSel}}" onClick="{{showTasks}}" style="{{tabTasksSt}}">Meine Aufgaben</button>
-              <span style="font-size: 13px; color: #55636f; margin-left: 8px">Portfolio Einzelhandel · 248 Mietverhältnisse</span>
+              <span class="cl-demo-desk" style="font-size: 13px; color: #55636f; margin-left: 8px">Portfolio Einzelhandel · 248 Mietverhältnisse</span>
             </div>
             <button type="button" onClick="{{showTasks}}" style="{{attnSt}}">{{attnLabel}}</button>
           </div>
 
-          <div aria-live="polite" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; min-height: 56px; padding: 10px 20px; box-sizing: border-box; background: #F7F7F7; border-bottom: 1px solid rgba(0, 0, 0, 0.08)">
+          <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px 20px; box-sizing: border-box; background: #F7F7F7; border-bottom: 1px solid rgba(0, 0, 0, 0.08)">
+            <div class="cl-chiprow" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+              <span style="flex: none; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f; margin-right: 4px">Neue Dokumente</span>
+              <sc-for list="{{docs}}" as="d" hint-placeholder-count="5">
+              <button type="button" class="cl-doc" draggable="true" onDragStart="{{d.dragStart}}" onClick="{{d.run}}" aria-label="{{d.aria}}" style="{{d.st}}">
+                <span style="display: flex; align-items: center; gap: 8px; min-width: 0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path></svg><span style="display: flex; flex-direction: column; gap: 2px; min-width: 0; text-align: left"><span style="font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{d.label}}</span><span style="font-size: 11px; color: #55636f">{{d.kind}}</span></span></span>
+                <sc-if value="{{d.processed}}" hint-placeholder-val="{{false}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-label="verarbeitet" style="flex-shrink: 0"><path d="m5 12 5 5L20 7"></path></svg></sc-if>
+              </button>
+            </sc-for>
+            </div>
+          <div aria-live="polite" class="cl-demo-desk" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; min-height: 30px">
             <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Eingang</span>
             <sc-if value="{{isIdle}}" hint-placeholder-val="{{false}}">
               <span style="font-size: 13px; color: #55636f">Hier landen neue Dokumente, aus DMS, Postfach oder Upload.</span>
@@ -184,40 +188,61 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
               </sc-for>
             </sc-if>
           </div>
+          </div>
 
           <div style="position: relative">
             <sc-if value="{{viewTable}}" hint-placeholder-val="{{true}}">
-              <div tabindex="0" role="region" aria-label="Objektliste" style="overflow-x: auto">
-                <div role="table" aria-label="Objektliste, Beispieldaten" style="min-width: 900px">
-                  <div role="row" style="display: grid; grid-template-columns: 1.75fr 1.5fr 1.05fr 1.05fr 1fr 1.1fr; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #55636f">
-                    <span role="columnheader" style="padding: 12px 16px">Objekt</span>
-                    <span role="columnheader" style="padding: 12px 16px">Mieter</span>
-                    <span role="columnheader" style="padding: 12px 16px">Laufzeit bis</span>
-                    <span role="columnheader" style="padding: 12px 16px">Nettokaltmiete</span>
-                    <span role="columnheader" style="padding: 12px 16px">Indexstichtag</span>
+              <div class="cl-demo-desk" tabindex="0" role="region" aria-label="Objektliste" onDragOver="{{dragOver}}" onDragLeave="{{dragLeave}}" onDrop="{{drop}}" style="{{dropSt}}">
+                <div role="table" aria-label="Objektliste, Beispieldaten">
+                  <div role="row" style="display: grid; grid-template-columns: 1.5fr 1.3fr 1fr; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #55636f">
+                    <span role="columnheader" style="padding: 12px 16px">Objekt · Mieter</span>
+                    <span role="columnheader" style="padding: 12px 16px">Vertrag</span>
                     <span role="columnheader" style="padding: 12px 16px">Vertragshistorie</span>
                   </div>
                   <sc-for list="{{rows}}" as="row" hint-placeholder-count="5">
                     <div role="row" style="{{row.st}}">
-                      <sc-for list="{{row.cells}}" as="cell" hint-placeholder-count="6">
+                      <sc-for list="{{row.cells}}" as="cell" hint-placeholder-count="3">
                         <div role="cell" style="{{cell.st}}">
-                          <sc-if value="{{cell.plain}}" hint-placeholder-val="{{true}}"><span style="{{cell.textSt}}">{{cell.text}}</span></sc-if>
-                          <sc-if value="{{cell.changed}}" hint-placeholder-val="{{false}}">
-                            <span style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px"><span style="color: #55636f; text-decoration: line-through; font-size: 13px">{{cell.old}}</span><span style="font-weight: 700; color: #13293d">{{cell.neu}}</span>
-                              <span title="{{cell.qsTitle}}" style="display: inline-flex; align-items: flex-end; gap: 2px; height: 13px; margin-left: 2px"><sc-for list="{{cell.sig}}" as="g" hint-placeholder-count="4"><span style="{{g.st}}"></span></sc-for></span>
-                            </span>
+                          <sc-if value="{{cell.isText}}" hint-placeholder-val="{{true}}">
+                            <span style="display: flex; flex-wrap: wrap; align-items: center; gap: 2px 5px"><sc-for list="{{cell.l1}}" as="p" hint-placeholder-count="1"><sc-if value="{{p.plain}}" hint-placeholder-val="{{true}}"><span style="{{p.st}}">{{p.text}}</span></sc-if><sc-if value="{{p.changed}}" hint-placeholder-val="{{false}}"><span style="display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px"><span style="color: #55636f; text-decoration: line-through; font-size: 13px">{{p.old}}</span><span style="font-weight: 700; color: #13293d">{{p.neu}}</span><span title="{{p.qsTitle}}" style="display: inline-flex; align-items: flex-end; gap: 2px; height: 13px"><sc-for list="{{p.sig}}" as="g" hint-placeholder-count="4"><span style="{{g.st}}"></span></sc-for></span></span></sc-if></sc-for></span>
+                            <span style="display: flex; flex-wrap: wrap; align-items: center; gap: 2px 5px; font-size: 13px; color: #55636f"><sc-for list="{{cell.l2}}" as="p" hint-placeholder-count="1"><sc-if value="{{p.plain}}" hint-placeholder-val="{{true}}"><span style="{{p.st}}">{{p.text}}</span></sc-if><sc-if value="{{p.changed}}" hint-placeholder-val="{{false}}"><span style="display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px"><span style="color: #55636f; text-decoration: line-through; font-size: 13px">{{p.old}}</span><span style="font-weight: 700; color: #13293d">{{p.neu}}</span><span title="{{p.qsTitle}}" style="display: inline-flex; align-items: flex-end; gap: 2px; height: 13px"><sc-for list="{{p.sig}}" as="g" hint-placeholder-count="4"><span style="{{g.st}}"></span></sc-for></span></span></sc-if></sc-for></span>
                           </sc-if>
                           <sc-if value="{{cell.isHist}}" hint-placeholder-val="{{false}}">
-                            <span style="display: flex; align-items: center; gap: 8px">
-                              <span style="display: flex; align-items: center; gap: 3px"><sc-for list="{{cell.bars}}" as="bar" hint-placeholder-count="4"><span style="{{bar.st}}"></span></sc-for></span>
-                              <span style="font-size: 12px; color: #55636f; white-space: nowrap">{{cell.histLabel}}</span>
-                            </span>
+                            <span style="display: flex; align-items: center; gap: 8px"><span style="display: flex; align-items: center; gap: 3px"><sc-for list="{{cell.bars}}" as="bar" hint-placeholder-count="4"><span style="{{bar.st}}"></span></sc-for></span><span style="font-size: 12px; color: #55636f; white-space: nowrap">{{cell.histLabel}}</span></span>
                           </sc-if>
                           <sc-if value="{{cell.hasChip}}" hint-placeholder-val="{{false}}"><span style="align-self: flex-start; font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 2px 9px; white-space: nowrap">{{cell.chip}}</span></sc-if>
                         </div>
                       </sc-for>
                     </div>
                   </sc-for>
+                </div>
+              </div>
+              <div class="cl-demo-mob" aria-live="polite" style="padding: 16px; box-sizing: border-box">
+                <div style="background: #F7F7F7; border-radius: 8px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px">
+                    <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="font-size: 16px; font-weight: 700; line-height: 1.3; color: #13293d">{{mob.obj}}</span><span style="font-size: 12px; color: #55636f">{{mob.sub}}</span></span>
+                    <span style="flex-shrink: 0; padding-top: 4px"><span style="display: flex; align-items: center; gap: 3px"><sc-for list="{{mob.bars}}" as="bar" hint-placeholder-count="4"><span style="{{bar.st}}"></span></sc-for></span></span>
+                  </div>
+                  <sc-if value="{{mob.proc}}" hint-placeholder-val="{{false}}">
+                    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px">
+                      <span style="display: inline-flex; align-items: center; gap: 8px; background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.12); border-radius: 8px; padding: 6px 12px; font-size: 13px; font-weight: 600; color: #13293d; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; animation: clDoc 320ms cubic-bezier(0.25, 0.8, 0.5, 1)">{{c.doc}}</span>
+                      <sc-for list="{{steps}}" as="s" hint-placeholder-count="3">
+                        <span style="{{s.st}}"><sc-if value="{{s.ok}}" hint-placeholder-val="{{true}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"></path></svg></sc-if>{{s.label}}</span>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{mob.showFields}}" hint-placeholder-val="{{true}}">
+                    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+                      <sc-for list="{{mob.fields}}" as="f" hint-placeholder-count="4">
+                        <div style="{{f.st}}">
+                          <span style="font-size: 11px; color: #55636f">{{f.label}}</span>
+                          <span style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px"><sc-for list="{{f.segs}}" as="p" hint-placeholder-count="1"><sc-if value="{{p.plain}}" hint-placeholder-val="{{true}}"><span style="{{p.st}}">{{p.text}}</span></sc-if><sc-if value="{{p.changed}}" hint-placeholder-val="{{false}}"><span style="display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px"><span style="color: #55636f; text-decoration: line-through; font-size: 13px">{{p.old}}</span><span style="font-weight: 700; color: #13293d">{{p.neu}}</span><span title="{{p.qsTitle}}" style="display: inline-flex; align-items: flex-end; gap: 2px; height: 13px"><sc-for list="{{p.sig}}" as="g" hint-placeholder-count="4"><span style="{{g.st}}"></span></sc-for></span></span></sc-if></sc-for></span>
+                          <sc-if value="{{f.hasChip}}" hint-placeholder-val="{{false}}"><span style="align-self: flex-start; font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 2px 9px; white-space: nowrap">{{f.chip}}</span></sc-if>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{mob.hasChip}}" hint-placeholder-val="{{false}}"><span style="align-self: flex-start; font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 2px 9px; white-space: nowrap">{{mob.chip}}</span></sc-if>
                 </div>
               </div>
             </sc-if>
@@ -234,7 +259,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
               </ul>
             </sc-if>
 
-            <div style="position: absolute; right: clamp(8px, 2vw, 24px); bottom: 18px; width: min(420px, calc(100% - 16px)); z-index: 2">
+            <div class="cl-demo-note" style="{{noteSt}}">
               <sc-if value="{{showToast}}" hint-placeholder-val="{{true}}">
                 <div role="status" style="background: #13293d; color: #ffffff; border-radius: 12px; box-shadow: 0 18px 45px rgba(12, 18, 28, 0.32); padding: 18px 20px; display: flex; flex-direction: column; gap: 14px; animation: clToast 420ms cubic-bezier(0.25, 0.8, 0.5, 1)">
                   <div style="display: flex; align-items: flex-start; gap: 12px">
@@ -260,6 +285,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
           </div>
         </div>
       </div>
+      <span style="font-size: 12px; line-height: 1.45; color: #55636f">Beispieldaten. Echte Verarbeitung: Nebenkostenabrechnung in rund 45 Sekunden.</span>
     </div>
   </div>
 </section>
@@ -885,7 +911,7 @@ class Component extends DCLogic {
     var c = CASES[i];
     var showResult = phase === 'result';
 
-    var docBase = 'width: 100%; min-height: 48px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 12px; border-radius: 8px; font-family: inherit; color: #13293d; cursor: grab; text-align: left;';
+    var docBase = 'flex: none; max-width: 260px; min-height: 44px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 9999px; font-family: inherit; color: #13293d; cursor: grab; text-align: left;';
     var docs = CASES.map(function (cc, idx) {
       var active = idx === i && phase !== 'idle';
       return {
@@ -911,39 +937,49 @@ class Component extends DCLogic {
       { obj: 'Köln · Schildergasse 61', ten: 'Drogerie Weiss GmbH', lz: '31.12.2029', rent: '15.180 €', idx: '01.07.2027', hist: 2 },
       { obj: 'Leipzig · Grimmaische Straße 20', ten: 'Buchhandlung Arndt', lz: '30.09.2027', rent: '6.840 €', idx: '—', hist: 5 }
     ];
-    var COLS = ['obj', 'ten', 'lz', 'rent', 'idx', 'hist'];
+    var sigOf = function (q) {
+      var lvl = q >= 98 ? 4 : (q >= 95 ? 3 : 2), sig = [];
+      for (var g = 0; g < 4; g++) sig.push({ st: 'display: block; width: 3px; height: ' + (4 + g * 3) + 'px; border-radius: 1px; background: ' + (g < lvl ? '#247ba0' : '#d4e6f0') + ';' });
+      return sig;
+    };
+    var txt = function (t, st) { return { plain: true, changed: false, text: t, st: st || '', old: '', neu: '', sig: [], qsTitle: '' }; };
+    var seg = function (r, key, hit, st) {
+      if (hit && c.col === key && c.old) { var q = c.qs || 0; return { plain: false, changed: true, text: '', st: '', old: c.old, neu: c.neu, sig: sigOf(q), qsTitle: 'QS-Index ' + q + ' %' }; }
+      return txt(r[key], st);
+    };
+    var histOf = function (r, grow) {
+      var n = r.hist + (grow ? 1 : 0), bars = [];
+      for (var b = 0; b < n; b++) {
+        var isNew = grow && b === n - 1;
+        bars.push({ st: 'display: block; width: 6px; height: 16px; border-radius: 2px; background: ' + (isNew ? '#247ba0' : (b === 0 ? '#13293d' : '#7f8fa0')) + ';' });
+      }
+      return { bars: bars, label: n + ' Dokumente' };
+    };
     var cellBase = 'padding: 14px 16px; font-size: 14px; color: #13293d; display: flex; flex-direction: column; justify-content: center; gap: 6px; min-width: 0; border-top: 1px solid rgba(0, 0, 0, 0.06);';
     var cellActive = 'background: rgba(36, 123, 160, 0.10); box-shadow: inset 0 0 0 1.5px #247ba0; border-radius: 6px; animation: clCell 900ms cubic-bezier(0.25, 0.8, 0.5, 1);';
+    var warnSt = 'color: #84410d; font-weight: 600;';
     var rows = BASE.map(function (r, ri) {
       var activeRow = ri === c.row && phase !== 'idle';
-      var cells = COLS.map(function (key) {
-        var activeCell = activeRow && showResult && key === c.col;
-        var cell = { st: cellBase + (activeCell ? cellActive : ''), plain: true, text: r[key], textSt: key === 'obj' ? 'font-weight: 600;' : '', changed: false, old: '', neu: '', hasChip: false, chip: '', isHist: false, bars: [], histLabel: '', sig: [], qsTitle: '' };
-        if (key === 'hist') {
-          var grow = activeRow && showResult && c.hist;
-          var n = r.hist + (grow ? 1 : 0);
-          var bars = [];
-          for (var b = 0; b < n; b++) {
-            var isNew = grow && b === n - 1;
-            bars.push({ st: 'display: block; width: 6px; height: 16px; border-radius: 2px; background: ' + (isNew ? '#247ba0' : (b === 0 ? '#13293d' : '#7f8fa0')) + ';' });
-          }
-          cell.plain = false; cell.isHist = true; cell.bars = bars; cell.histLabel = n + ' Dokumente';
-          return cell;
-        }
-        if (key === 'idx' && r.warn) cell.textSt = 'color: #84410d; font-weight: 600;';
-        if (activeCell && c.old) {
-          cell.plain = false; cell.changed = true; cell.old = c.old; cell.neu = c.neu;
-          var q = c.qs || 0; var lvl = q >= 98 ? 4 : (q >= 95 ? 3 : 2);
-          var sig = [];
-          for (var g = 0; g < 4; g++) sig.push({ st: 'display: block; width: 3px; height: ' + (4 + g * 3) + 'px; border-radius: 1px; background: ' + (g < lvl ? '#247ba0' : '#d4e6f0') + ';' });
-          cell.sig = sig; cell.qsTitle = 'QS-Index ' + q + ' %';
-        }
-        if (activeCell && c.chip) { cell.hasChip = true; cell.chip = c.chip; }
-        if (activeRow && phase === 'proc' && key === 'obj') cell.textSt = 'font-weight: 600; animation: clBlink 0.9s ease-in-out infinite;';
-        return cell;
-      });
-      return { st: 'display: grid; grid-template-columns: 1.75fr 1.5fr 1.05fr 1.05fr 1fr 1.1fr; align-items: stretch;' + (activeRow ? ' background: #f8fbfd;' : ''), cells: cells };
+      var hit = activeRow && showResult;
+      var col = hit ? c.col : '';
+      var first = col === 'obj' || col === 'ten', second = col === 'lz' || col === 'rent';
+      var h = histOf(r, hit && c.hist);
+      var objSt = 'font-weight: 600;' + (activeRow && phase === 'proc' ? ' animation: clBlink 0.9s ease-in-out infinite;' : '');
+      var cells = [
+        { st: cellBase + (first ? cellActive : ''), isText: true, isHist: false, l1: [txt(r.obj, objSt)], l2: [seg(r, 'ten', hit)], hasChip: first && !!c.chip, chip: c.chip, bars: [], histLabel: '' },
+        { st: cellBase + (second ? cellActive : ''), isText: true, isHist: false, l1: [txt('bis'), seg(r, 'lz', hit), txt('·'), seg(r, 'rent', hit)], l2: [txt('Index:'), txt(r.idx, r.warn ? warnSt : '')], hasChip: second && !!c.chip, chip: c.chip, bars: [], histLabel: '' },
+        { st: cellBase, isText: false, isHist: true, l1: [], l2: [], hasChip: false, chip: '', bars: h.bars, histLabel: h.label }
+      ];
+      return { st: 'display: grid; grid-template-columns: 1.5fr 1.3fr 1fr; align-items: stretch;' + (activeRow ? ' background: #f8fbfd;' : ''), cells: cells };
     });
+    // phones: one property card instead of the table
+    var mr = BASE[phase === 'idle' ? 0 : c.row];
+    var mh = histOf(mr, showResult && c.hist);
+    var field = function (key, label) {
+      var on = showResult && c.col === key;
+      return { label: label, st: 'background: #ffffff; border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; gap: 4px; min-width: 0; color: #13293d;' + (on ? ' ' + cellActive : ''), segs: [seg(mr, key, showResult, 'font-size: 14px; font-weight: 600;' + (key === 'idx' && mr.warn ? ' color: #84410d;' : ''))], hasChip: on && !!c.chip, chip: c.chip };
+    };
+    var mob = { obj: mr.obj, sub: 'Portfolio Einzelhandel · 248 Mietverhältnisse', bars: mh.bars, proc: phase === 'proc', showFields: phase !== 'proc', fields: [field('ten', 'Mieter'), field('lz', 'Laufzeit bis'), field('rent', 'Nettokaltmiete'), field('idx', 'Indexstichtag')], hasChip: showResult && c.col === 'obj' && !!c.chip, chip: c.chip };
 
     var tasksRaw = s.tasks || [];
     var open = tasksRaw.filter(function (t) { return !t.done; }).length;
@@ -1010,6 +1046,8 @@ class Component extends DCLogic {
       isIdle: phase === 'idle',
       hasDoc: phase !== 'idle',
       rows: rows,
+      mob: mob,
+      noteSt: c.row >= 3 ? 'top: 56px;' : 'bottom: 18px;',
       tasks: tasks,
       viewTable: view === 'table',
       viewTasks: view === 'tasks',
@@ -1021,7 +1059,7 @@ class Component extends DCLogic {
       showTasks: function () { self.lastUser = Date.now(); self.setState({ view: 'tasks' }); },
       attnLabel: open > 0 ? (open + (open === 1 ? ' braucht' : ' brauchen') + ' Aufmerksamkeit') : 'Alles erledigt',
       attnSt: attnBase + (open > 0 ? ' color: #84410d; background: #fdf0e3;' : ' color: #2e7d32; background: #eaf4ea;'),
-      dropSt: 'flex: 999 1 560px; min-width: 0; position: relative;' + (s.over ? ' box-shadow: inset 0 0 0 2px #247ba0; background: #f8fbfd;' : ''),
+      dropSt: 'position: relative;' + (s.over ? ' box-shadow: inset 0 0 0 2px #247ba0; background: #f8fbfd;' : ''),
       dragOver: function (e) { if (e && e.preventDefault) e.preventDefault(); if (!(self.state || {}).over) self.setState({ over: true }); },
       dragLeave: function () { if ((self.state || {}).over) self.setState({ over: false }); },
       drop: function (e) { if (e && e.preventDefault) e.preventDefault(); self.setState({ over: false }); if (self.dragIdx !== undefined && self.dragIdx !== null) self.run(self.dragIdx, true); },
