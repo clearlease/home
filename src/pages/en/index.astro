@@ -3,9 +3,9 @@
 import Base from '../../layouts/Base.astro';
 import Page, { meta } from '../../designs/en/Home.dc.html?dc';
 import '../../designs/en/Home.dc.html?dccss&lang.css';
-import { organization, softwareApplication } from '../../lib/schema.mjs';
+import { organization, softwareApplication, website } from '../../lib/schema.mjs';
 const lang = 'en';
 ---
-<Base page="Home" lang={lang} description={meta.description} faq={meta.faq} jsonLd={[organization(lang), softwareApplication(lang)]}>
+<Base page="Home" lang={lang} description={meta.description} faq={meta.faq} jsonLd={[website(lang), organization(lang), softwareApplication(lang)]}>
   <Page client:load />
 </Base>

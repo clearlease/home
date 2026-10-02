@@ -6,8 +6,9 @@ import '@fontsource/montserrat/500.css';
 import '@fontsource/montserrat/600.css';
 import '@fontsource/montserrat/700.css';
 import '../styles/enhance.css';
+import { existsSync } from 'node:fs';
 import { SITE_URL, route, otherLang } from '../site.config.mjs';
-import { TITLES } from '../seo.mjs';
+import { TITLES, DESCRIPTIONS, LABELS } from '../seo.mjs';
 
 interface Props {
   page: string;
@@ -17,15 +18,29 @@ interface Props {
   jsonLd?: object[];
   noindex?: boolean;
 }
-const { page, lang, description = '', faq = [], jsonLd = [], noindex = false } = Astro.props;
+const { page, lang, faq = [], jsonLd = [], noindex = false } = Astro.props;
 const title = TITLES[page]?.[lang] ?? 'clearlea.se';
+const description = DESCRIPTIONS[page]?.[lang] ?? Astro.props.description ?? '';
 const abs = (p: string) => SITE_URL + p;
 const canonical = abs(route(page, lang));
 const alternate = abs(route(page, otherLang(lang)));
 const deUrl = abs(route(page, 'de'));
-const ogImage = SITE_URL + '/og-image.png';
+// per-page link-preview image (scripts/og-images.mjs), else the generic one
+const ogFile = `/og/${lang}-${page}.png`;
+const ogImage = SITE_URL + (existsSync('public' + ogFile) ? ogFile : '/og-image.png');
 
 const ld: object[] = [...jsonLd];
+// Breadcrumbs let Google show "clearlea.se › Plattform" instead of a bare URL.
+if (page !== 'Home' && page !== 'NotFound' && LABELS[page]) {
+  ld.push({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: LABELS.Home[lang], item: abs(route('Home', lang)) },
+      { '@type': 'ListItem', position: 2, name: LABELS[page][lang], item: canonical },
+    ],
+  });
+}
 if (faq.length) {
   ld.push({
     '@context': 'https://schema.org',
@@ -50,16 +65,23 @@ if (faq.length) {
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="clearlea.se" />
     <meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'en_GB'} />
+    <meta property="og:locale:alternate" content={lang === 'de' ? 'en_GB' : 'de_DE'} />
     <meta property="og:title" content={title} />
     {description && <meta property="og:description" content={description} />}
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    {description && <meta name="twitter:description" content={description} />}
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={title} />
     <meta name="theme-color" content="#13293d" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="alternate" type="text/markdown" href="/agent.md" title="Information for AI agents" />

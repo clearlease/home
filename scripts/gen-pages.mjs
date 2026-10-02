@@ -22,8 +22,8 @@ for (const lang of LANGS) {
     const file = fileFor(ROUTES[page][lang]);
     let extraImports = '', extraFront = '', props = '', baseProps = '';
     if (page === 'Home') {
-      extraImports = `import { organization, softwareApplication } from '${rel(file, 'src/lib/schema.mjs')}';\n`;
-      baseProps = ` jsonLd={[organization(lang), softwareApplication(lang)]}`;
+      extraImports = `import { organization, softwareApplication, website } from '${rel(file, 'src/lib/schema.mjs')}';\n`;
+      baseProps = ` jsonLd={[website(lang), organization(lang), softwareApplication(lang)]}`;
     }
     if (page === 'Unternehmen') {
       extraImports = `import { organization } from '${rel(file, 'src/lib/schema.mjs')}';\n`;

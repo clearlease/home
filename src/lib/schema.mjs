@@ -7,7 +7,8 @@ export function organization(lang, { founders = false } = {}) {
     '@type': 'Organization',
     name: 'clearlea.se',
     url: SITE_URL + route('Home', lang),
-    logo: SITE_URL + '/media/clearlease-logo.svg',
+    logo: SITE_URL + '/media/clearlease-logo.png', // Google needs a raster logo
+    description: lang === 'de' ? 'Operations Intelligence für Gewerbeimmobilien' : 'Operations intelligence for commercial real estate',
     email: 'hello@clearlea.se',
     address: { '@type': 'PostalAddress', addressLocality: 'Berlin', addressCountry: 'DE' },
   };
@@ -19,6 +20,11 @@ export function organization(lang, { founders = false } = {}) {
     ];
   }
   return org;
+}
+
+// WebSite: gives Google the site name ("clearlea.se") to show above the result.
+export function website(lang) {
+  return { '@context': 'https://schema.org', '@type': 'WebSite', name: 'clearlea.se', alternateName: 'clearlease', url: SITE_URL + route('Home', lang), inLanguage: lang };
 }
 
 export function softwareApplication(lang) {

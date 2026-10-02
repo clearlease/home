@@ -50,8 +50,9 @@ Compiler features used in the designs:
 
 ### Routes and SEO
 
-- `src/site.config.mjs` holds `ROUTES` (German and English URL per page, with trailing slashes) and `LINKS`.
-- `src/seo.mjs` holds the `<title>` per page and language.
+- `src/site.config.mjs` holds `ROUTES` (German and English URL per page, with trailing slashes) and `LINKS`. They are compiled into the pages, so restart `npm run dev` after changing them.
+- `src/seo.mjs` holds the `<title>`, the meta description (max ~155 characters) and the breadcrumb label per page and language.
+- **Link previews:** `npm run build` first runs `scripts/og-images.mjs`, which renders a 1200x630 preview image per page and language from the page's kicker and H1 into `public/og/`. Run `npm run og` to refresh them in dev.
 - The meta description is the hero subline, and FAQ sections become FAQPage JSON-LD. Both are extracted by the compiler.
 - `src/lib/schema.mjs` builds the Organization and SoftwareApplication JSON-LD.
 - Old URLs redirect through static stubs in `public/` (GitHub Pages has no server redirects).

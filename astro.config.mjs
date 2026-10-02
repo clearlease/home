@@ -16,7 +16,7 @@ for (const r of Object.values(ROUTES)) {
 
 export default defineConfig({
   site: SITE_URL,
-  trailingSlash: 'always',
+  trailingSlash: 'ignore', // URLs are written with a slash; 'ignore' lets dev and preview show the real 404 page
   build: { format: 'directory', inlineStylesheets: 'always' },
   integrations: [
     preact(),

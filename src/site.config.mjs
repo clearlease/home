@@ -6,7 +6,7 @@ export const SITE_URL = 'https://www.clearlea.se';
 // Launch inputs. A value of null renders the link as-is and the "no placeholder
 // links" test fails, so a missing value cannot slip into production unnoticed.
 export const LINKS = {
-  appUrl: null, // production app login for "Anmelden" (design: [APP-URL], ask Fabian)
+  appUrl: 'https://app.clearlea.se', // production app login for "Anmelden"
   linkedinHieronymus: null, // founder profile on the Unternehmen page (design: [LINKEDIN])
   linkedinFabian: null, // founder profile on the Unternehmen page (design: [LINKEDIN])
   calDemo: 'https://cal.com/deutsch/demo',

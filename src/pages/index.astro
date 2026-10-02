@@ -3,10 +3,10 @@
 import Base from '../layouts/Base.astro';
 import Page, { meta } from '../designs/de/Home.dc.html?dc';
 import '../designs/de/Home.dc.html?dccss&lang.css';
-import { organization, softwareApplication } from '../lib/schema.mjs';
+import { organization, softwareApplication, website } from '../lib/schema.mjs';
 const lang = 'de';
 ---
-<Base page="Home" lang={lang} description={meta.description} faq={meta.faq} jsonLd={[organization(lang), softwareApplication(lang)]}>
+<Base page="Home" lang={lang} description={meta.description} faq={meta.faq} jsonLd={[website(lang), organization(lang), softwareApplication(lang)]}>
   <script is:inline slot="head">if(/[?&]lang=en\b/.test(location.search))location.replace('/en/');</script>
   <Page client:load />
 </Base>
