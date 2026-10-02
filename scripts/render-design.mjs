@@ -7,6 +7,7 @@ import { pathToFileURL, fileURLToPath } from 'node:url';
 import { renderToString } from 'preact-render-to-string';
 import { h } from 'preact';
 import { compileDC } from '../src/dc/compile.mjs';
+import { textOf } from './lib/html.mjs';
 
 const [lang, page, flag] = process.argv.slice(2);
 if (!lang || !page) { console.error('usage: node scripts/render-design.mjs <de|en> <Page> [--html]'); process.exit(2); }
@@ -21,11 +22,8 @@ const html = renderToString(h(mod.default, {}));
 rmSync(dir, { recursive: true, force: true });
 for (const w of new Set(warnings)) console.error('warning:', w);
 if (flag === '--html') { process.stdout.write(html + '\n'); } else {
-const text = html
-  .replace(/<svg[\s\S]*?<\/svg>/g, ' ')
-  .replace(/<(br|\/p|\/h\d|\/li|\/dt|\/dd|\/div|\/a|\/button|\/span)>/g, '$&\n')
-  .replace(/<[^>]+>/g, '')
-  .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'")
+const BLOCKS = new Set(['br', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li', 'dt', 'dd', 'div', 'a', 'button', 'span']);
+const text = textOf(html, { sep: '', breakAfter: BLOCKS })
   .split('\n').map((l) => l.replace(/\s+/g, ' ').trim()).filter(Boolean);
 console.log([...text.reduce((acc, l) => (acc.at(-1) === l ? acc : (acc.push(l), acc)), [])].join('\n'));
 console.log('\n--- meta:', JSON.stringify(mod.meta, null, 0).slice(0, 600));

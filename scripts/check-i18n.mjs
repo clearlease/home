@@ -4,6 +4,7 @@
 // Usage: node scripts/check-i18n.mjs [Page]     Exit code 1 on any structural difference.
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { parse } from 'parse5';
+import { stripComments, textOf } from './lib/html.mjs';
 
 const TRANSLATABLE = new Set(['alt', 'aria-label', 'title', 'placeholder', 'aria-roledescription']);
 const only = process.argv[2];
@@ -61,10 +62,11 @@ for (const p of pages) {
   const enSrc = readFileSync(en, 'utf8');
   compare(parse(de), parse(enSrc), p, errs);
   if (!/<html lang="en"/.test(enSrc)) errs.push('<html lang="en"> missing');
-  if (/ — | – /.test(enSrc.replace(/<!--[\s\S]*?-->/g, ''))) errs.push('dash with spaces found (brand voice: no em or en dashes as punctuation)');
-  if (/Clearlea\.se|ClearLease|Clearlease(?!-)/.test(enSrc.replace(/<!--[\s\S]*?-->/g, '').replace(/clearlease[-_]/gi, ''))) errs.push('brand spelling: use "clearlea.se"');
+  const noComments = stripComments(enSrc);
+  if (/ — | – /.test(noComments)) errs.push('dash with spaces found (brand voice: no em or en dashes as punctuation)');
+  if (/Clearlea\.se|ClearLease|Clearlease(?!-)/.test(noComments.replace(/clearlease[-_]/gi, ''))) errs.push('brand spelling: use "clearlea.se"');
   // German words that should not survive a translation (outside comments, URLs and names)
-  const visible = enSrc.replace(/<!--[\s\S]*?-->/g, '').replace(/<style[\s\S]*?<\/style>/g, '').replace(/ (style|href|src|d|class|id)="[^"]*"/g, '');
+  const visible = textOf(enSrc, { keep: new Set(['script']) });
   const leftovers = (visible.match(/\b(und|oder|nicht|Ihre?n?|Sie|wir|mit|für|der|die|das|ein|eine|ist|sind|wird|Gespräch|Vertrag|Verträge|Nachtrag)\b/g) || []);
   if (leftovers.length > 12) errs.push(`possible untranslated German (${leftovers.length} hits, e.g. ${[...new Set(leftovers)].slice(0, 8).join(', ')})`);
   if (errs.length) { failed++; console.log(`FAIL     ${p}\n  - ${errs.slice(0, 25).join('\n  - ')}${errs.length > 25 ? `\n  … ${errs.length - 25} more` : ''}`); }

@@ -26,6 +26,9 @@ const WS = /[ \t\n\r\f]+/g;
 // language-switch target from the `altHref` prop at render time.
 const ALT_HREF = '\u0000ALT_HREF\u0000';
 
+// A JS string literal that is also safe inside HTML (no <, >, line separators).
+const lit = (v) => JSON.stringify(String(v)).replace(/[<>\u2028\u2029]/g, (c) => '\\u' + c.charCodeAt(0).toString(16).padStart(4, '0'));
+
 const attr = (node, name) => node.attrs?.find((a) => a.name === name)?.value;
 
 // Interaction states. The designs set colours inline, so stylesheet :hover rules cannot reach
@@ -193,8 +196,9 @@ export function compileDC(source, { lang, page, file = page + '.dc.html', runtim
     if (tag === 'sc-for') {
       const list = attr(node, 'list');
       const as = attr(node, 'as') || 'item';
+      if (!/^[A-Za-z_$][\w$]*$/.test(as)) throw new Error(`${file}: <sc-for as="${as}"> is not a name`);
       const kids = childrenCode(node);
-      return `arr(${valueCode(list)}).map((__v,__i)=>((s)=>[${kids.join(',')}])(sub(s,${JSON.stringify(as)},__v,__i)))`;
+      return `arr(${valueCode(list)}).map((__v,__i)=>((s)=>[${kids.join(',')}])(sub(s,${lit(as)},__v,__i)))`;
     }
     if (tag === 'sc-if') {
       const kids = childrenCode(node);

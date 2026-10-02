@@ -4,11 +4,10 @@
 import { execFileSync } from 'node:child_process';
 import { readFileSync, existsSync } from 'node:fs';
 import { ROUTES } from '../src/site.config.mjs';
+import { textOf } from './lib/html.mjs';
 
 const PAGES = ['Home', 'Plattform', 'Loesungen-Bestandshalter', 'Loesungen-Property', 'Loesungen-Filialisten', 'KI-Teams', 'Trust-Center', 'Ressourcen', 'Unternehmen', 'Gespraech'];
-// &amp; last, so an escaped entity such as &amp;lt; stays the text "&lt;"
-const decode = (s) => s.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&#x27;/g, "'").replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&');
-const flat = (html) => decode(html.replace(/<script\b[\s\S]*?<\/script\s*>/gi, ' ').replace(/<style\b[\s\S]*?<\/style\s*>/gi, ' ').replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ');
+const flat = (html) => textOf(html).replace(/\s+/g, ' ');
 let failed = 0;
 for (const lang of ['de', 'en']) {
   for (const page of PAGES) {
