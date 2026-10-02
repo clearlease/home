@@ -9,15 +9,16 @@
 //   page in the other language, [APP-URL] / [LINKEDIN-*] -> values from src/site.config.mjs;
 // - rewrites canvas images /_blob/<id> -> /media/<name>.webp|svg.
 import { parse } from 'parse5';
-import { ROUTES, LEGAL_HREFS, LINKS, route, otherLang } from '../site.config.mjs';
-import { mediaPath } from '../../scripts/import-media.mjs';
+import { fileURLToPath } from 'node:url';
+import { ROUTES, LEGAL_HREFS, LINKS, route, otherLang, buildDay } from '../site.config.mjs';
+import { mediaPath } from './media.mjs';
 
 const BOOL_ATTRS = new Set(['disabled', 'open', 'checked', 'selected', 'hidden', 'required', 'readonly', 'multiple', 'autofocus', 'novalidate', 'inert']);
-const DROP_ATTRS = new Set(['hint-placeholder-val', 'hint-placeholder-count', 'hint-size', 'data-anchor', 'data-until', 'data-slot']);
+const DROP_ATTRS = new Set(['hint-placeholder-val', 'hint-placeholder-count', 'hint-size', 'data-anchor', 'data-until', 'data-from', 'data-slot']);
 // data-slot="name": the element keeps its own attributes, its children are replaced by this component.
-const SLOTS = { 'cal-embed': new URL('../islands/CalEmbed.jsx', import.meta.url).pathname };
-// data-until="YYYY-MM-DD": the element is left out of builds after that day (Europe/Berlin).
-const buildDay = () => process.env.SITE_BUILD_DATE || new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Berlin' });
+export const SLOTS = { 'cal-embed': fileURLToPath(new URL('../islands/CalEmbed.jsx', import.meta.url)) };
+// data-until="YYYY-MM-DD": the element is left out of builds after that day (buildDay, Europe/Berlin).
+// data-from="YYYY-MM-DD": the element is left out of builds before that day (its successor, e.g. a lower count).
 const EVENT_MAP = { onfocus: 'onfocusin', onblur: 'onfocusout' };
 const HOLE = /{{\s*([^}]+?)\s*}}/g;
 const WS = /[ \t\n\r\f]+/g;
@@ -172,6 +173,8 @@ export function compileDC(source, { lang, page, file = page + '.dc.html', runtim
     const tag = node.tagName;
     const until = attr(node, 'data-until');
     if (until && today > until) return null;
+    const from = attr(node, 'data-from');
+    if (from && today < from) return null;
     const slot = attr(node, 'data-slot');
     if (slot === 'children') return `h(${JSON.stringify(tag)},${attrsCode(node)},this.props.children)`;
     if (slot) {

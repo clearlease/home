@@ -69,7 +69,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
       <a href="KI-Teams.dc.html" aria-current="page" style="font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 10px">For AI Teams</a>
       <a href="Trust-Center.dc.html">Trust Center</a>
       <a href="Ressourcen.dc.html">Resources</a>
-      <button type="button" onClick="{{toggleNews}}" aria-expanded="{{newsExpanded}}" aria-controls="news-pop" style="display: flex; align-items: center; gap: 6px; border: 0; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 5px 10px 5px 12px"><span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase">New</span><span aria-label="3 updates" style="min-width: 18px; height: 18px; border-radius: 9999px; background: #1b6384; color: #ffffff; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">3</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+      <button type="button" onClick="{{toggleNews}}" aria-expanded="{{newsExpanded}}" aria-controls="news-pop" style="display: flex; align-items: center; gap: 6px; border: 0; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 5px 10px 5px 12px"><span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase">New</span><span data-until="2026-10-07" aria-label="3 updates" style="min-width: 18px; height: 18px; border-radius: 9999px; background: #1b6384; color: #ffffff; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">3</span><span data-from="2026-10-08" aria-label="2 updates" style="min-width: 18px; height: 18px; border-radius: 9999px; background: #1b6384; color: #ffffff; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">2</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
     </nav>
     <div style="display: flex; align-items: center; gap: 16px; flex-shrink: 0">
       <a href="/de" class="cl-hide-sm" aria-label="Deutsche Version" style="font-size: 14px; font-weight: 600; color: #55636f; text-decoration: none">DE</a>
@@ -207,7 +207,12 @@ class Component extends DCLogic {
     this.k = 0;
     if (!reduce) {
       var self2 = this;
-      this.t = setInterval(function () { self2.setState({ k: (((self2.state || {}).k || 0) + 1) % 14 }); }, 700);
+      this.t = setInterval(function () {
+        // tick only while the hero animation is on screen: each tick re-renders the page
+        var h = document.querySelector('section[aria-labelledby="hero-title"]'), r = h && h.getBoundingClientRect();
+        if (document.hidden || (r && r.bottom < 0)) return;
+        self2.setState({ k: (((self2.state || {}).k || 0) + 1) % 14 });
+      }, 700);
     } else { this.setState({ k: 10 }); }
   }
   componentWillUnmount() {

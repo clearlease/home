@@ -45,6 +45,7 @@ Compiler features used in the designs:
 - `[APP-URL]` and `[LINKEDIN-*]` resolve from `LINKS` in `src/site.config.mjs`. While unset, the link test fails on purpose.
 - `/_blob/<id>` images resolve through `scripts/import-media.mjs` to `public/media/`.
 - `data-until="YYYY-MM-DD"` drops an element from builds after that day. The deploy workflow rebuilds daily.
+- `data-from="YYYY-MM-DD"` drops an element from builds before that day, e.g. the "Neu" badge count after an item expires.
 - `data-slot="cal-embed"` mounts `src/islands/CalEmbed.jsx` (the Cal.com booker). `data-slot="children"` renders Astro children.
 - HTML comments (`<!-- DEV … -->`) are internal build notes and never reach the output.
 
@@ -53,7 +54,7 @@ Compiler features used in the designs:
 - `src/site.config.mjs` holds `ROUTES` (German and English URL per page, with trailing slashes) and `LINKS`. They are compiled into the pages, so restart `npm run dev` after changing them.
 - `src/seo.mjs` holds the `<title>`, the meta description (max ~155 characters) and the breadcrumb label per page and language.
 - **Link previews:** `npm run build` first runs `scripts/og-images.mjs`, which renders a 1200x630 preview image per page and language from the page's kicker and H1 into `public/og/`. Run `npm run og` to refresh them in dev.
-- The meta description is the hero subline, and FAQ sections become FAQPage JSON-LD. Both are extracted by the compiler.
+- The meta description comes from `DESCRIPTIONS` in `src/seo.mjs`; a page without an entry falls back to its hero subline. FAQ sections become FAQPage JSON-LD. The compiler extracts both.
 - `src/lib/schema.mjs` builds the Organization and SoftwareApplication JSON-LD.
 - Old URLs redirect through static stubs in `public/` (GitHub Pages has no server redirects).
 
