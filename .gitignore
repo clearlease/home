@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.astro/
+.tmp/
+test-results/
+playwright-report/
+.mcp.json
+.DS_Store

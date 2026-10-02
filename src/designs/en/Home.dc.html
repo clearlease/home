@@ -1,0 +1,1113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Home · clearlea.se</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;display=swap">
+<style>
+body { margin: 0; background: #F7F7F7; font-family: Montserrat, "Segoe UI", system-ui, sans-serif; color: #13293d; -webkit-font-smoothing: antialiased; }
+a { color: #13293d; } a:hover { color: #1d6485; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible { outline: 2px solid #247ba0; outline-offset: 2px; }
+.cl-navlinks a, .cl-navlinks button.cl-ddbtn { color: #13293d; text-decoration: none; white-space: nowrap; }
+.cl-navlinks > button { white-space: nowrap; } .cl-navlinks a:hover, .cl-navlinks button.cl-ddbtn:hover { color: #1d6485; }
+.cl-card { transition: transform 200ms cubic-bezier(0.25, 0.8, 0.5, 1), box-shadow 200ms cubic-bezier(0.25, 0.8, 0.5, 1); }
+.cl-card:hover { transform: translateY(-2px); box-shadow: 0 9px 17px rgba(12, 18, 28, 0.12); }
+.cl-dd { position: relative; display: flex; align-items: center; }
+.cl-ddbtn { display: inline-flex; align-items: center; gap: 6px; border: 0; background: transparent; padding: 0; font-family: inherit; font-size: 15px; font-weight: 500; cursor: pointer; }
+.cl-dd-menu { position: absolute; top: 100%; left: -24px; padding-top: 18px; display: none; z-index: 40; }
+.cl-dd:hover .cl-dd-menu, .cl-dd:focus-within .cl-dd-menu { display: block; }
+.cl-dd-panel { width: 380px; background: #ffffff; border-radius: 12px; box-shadow: 0 18px 45px rgba(12, 18, 28, 0.18); border: 1px solid rgba(0, 0, 0, 0.08); padding: 8px; display: flex; flex-direction: column; gap: 2px; animation: clIn 160ms cubic-bezier(0.25, 0.8, 0.5, 1); }
+.cl-dd-panel a { display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; border-radius: 8px; text-decoration: none; }
+.cl-dd-panel a:hover { background: #F7F7F7; color: #13293d; }
+.cl-wftrack { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.cl-wftrack span, h1, h2, h3 { overflow-wrap: break-word; -webkit-hyphens: auto; hyphens: auto; }
+.cl-redact { border-radius: 6px; padding: 0 6px; background: #13293d; color: transparent; cursor: help; transition: background 260ms cubic-bezier(0.25, 0.8, 0.5, 1), color 260ms cubic-bezier(0.25, 0.8, 0.5, 1); }
+.cl-redact:hover, .cl-redact:focus-visible { background: #eff6fa; color: #13293d; }
+.cl-chipbtn { transition: background 160ms, color 160ms; }
+.cl-logo { filter: grayscale(1) contrast(1.1); mix-blend-mode: multiply; opacity: 0.8; transition: filter 200ms, opacity 200ms; }
+.cl-logo:hover { filter: none; opacity: 1; }
+@keyframes clToast { 0% { opacity: 0; transform: translateY(14px) scale(0.96); } 60% { opacity: 1; transform: translateY(-3px) scale(1.01); } 100% { opacity: 1; transform: none; } }
+@keyframes clCell { from { background: rgba(36, 123, 160, 0.30); } to { background: rgba(36, 123, 160, 0.10); } }
+@keyframes clPulse { 0% { box-shadow: 0 0 0 0 rgba(36, 123, 160, 0.45); } 100% { box-shadow: 0 0 0 14px rgba(36, 123, 160, 0); } }
+@keyframes clBlink { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+@keyframes clTravel { from { left: 0%; } to { left: 100%; } }
+@keyframes clFloat { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-18px, 22px); } }
+.cl-pick { cursor: pointer; transition: background 160ms, box-shadow 160ms; }
+@keyframes clIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.cl-mnav { display: none; } .cl-mnav > summary::-webkit-details-marker { display: none; } .cl-show-sm { display: none; }
+@media (max-width: 1240px) { .cl-hide-lg { display: none !important; } }
+@media (max-width: 1040px) { .cl-navlinks { display: none !important; } .cl-mnav { display: block; } }
+@media (max-width: 600px) { .cl-hide-sm { display: none !important; } .cl-show-sm { display: inline !important; } }
+@media (max-width: 900px) { .cl-wftrack { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+@media (max-width: 520px) { .cl-wftrack { grid-template-columns: minmax(0, 1fr) !important; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+.cl-demo-mob { display: none; }
+.cl-demo-mobi { display: none; }
+.cl-demo-note { position: absolute; right: clamp(8px, 2vw, 24px); width: min(420px, calc(100% - 16px)); z-index: 2; }
+@media (max-width: 760px) { .cl-demo-desk { display: none !important; } .cl-demo-mob { display: block; } .cl-demo-mobi { display: inline-block; } .cl-demo-small { font-size: 12px !important; } .cl-demo-tap { min-height: 44px !important; } .cl-demo-hint { display: block !important; line-height: 1.45; } .cl-demo-hint > span { display: inline; } .cl-demo-hint > span:first-child { display: inline-block; margin-right: 8px; vertical-align: 2px; } .cl-demo-hint > span:last-child { margin-left: 6px; } .cl-chiprow .cl-doc { max-width: 210px; } .cl-chiprow { -webkit-mask-image: linear-gradient(90deg, #000 80%, transparent); mask-image: linear-gradient(90deg, #000 80%, transparent); } .cl-demo-note { position: static; width: auto; padding: 0 16px 16px; } .cl-chiprow { flex-wrap: nowrap !important; overflow-x: auto; scrollbar-width: none; margin: -6px -20px; padding: 6px 20px; } .cl-chiprow:focus-within { -webkit-mask-image: none; mask-image: none; } .cl-chiprow::-webkit-scrollbar { display: none; } }
+.cl-doc { transition: transform 160ms cubic-bezier(0.25, 0.8, 0.5, 1), box-shadow 160ms; }
+@media (hover: hover) and (pointer: fine) { .cl-doc:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(12, 18, 28, 0.10); } }
+.cl-glass { position: absolute; aspect-ratio: 1 / 1; transform: translate(-50%, -50%); border-radius: 9999px; background: rgba(19, 41, 61, 0.08); pointer-events: auto; cursor: pointer; display: flex; align-items: center; justify-content: center; overflow: hidden; transition: transform 520ms cubic-bezier(0.34, 1.56, 0.64, 1), background 420ms, box-shadow 420ms; }
+.cl-glass::after { content: ""; position: absolute; inset: 0; border-radius: 9999px; opacity: 0; background: conic-gradient(from 0deg, rgba(36, 123, 160, 0) 0deg, rgba(36, 123, 160, 0.18) 90deg, rgba(255, 255, 255, 0) 180deg, rgba(36, 123, 160, 0.14) 270deg, rgba(36, 123, 160, 0) 360deg); transition: opacity 420ms; }
+.cl-glass:hover { transform: translate(-50%, -50%) scale(1.14); background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.98) 0 6%, rgba(255, 255, 255, 0.6) 13%, rgba(239, 246, 250, 0.55) 36%, rgba(169, 205, 225, 0.45) 68%, rgba(19, 41, 61, 0.38) 100%); box-shadow: inset -12px -16px 30px rgba(19, 41, 61, 0.28), inset 10px 12px 24px rgba(255, 255, 255, 0.75), 0 26px 44px rgba(12, 18, 28, 0.2); animation: clWobble 2.6s ease-in-out infinite; }
+.cl-glass:hover::after { opacity: 1; animation: clSwirl 4s linear infinite; }
+.cl-glass-txt { position: relative; z-index: 1; opacity: 0; transform: scale(0.8); transition: opacity 280ms 160ms, transform 420ms 160ms; font-size: clamp(9px, 0.8vw, 12px); line-height: 1.25; text-align: center; color: #13293d; }
+.cl-glass:hover .cl-glass-txt { opacity: 1; transform: none; }
+@keyframes clTipA { from { opacity: 0; transform: translateY(5px) scale(0.96); } to { opacity: 1; transform: none; } }
+@keyframes clTipB { from { opacity: 0; transform: translateY(5px) scale(0.96); } to { opacity: 1; transform: none; } }
+@keyframes clSwirl { to { transform: rotate(360deg); } }
+@keyframes clWobble { 0%, 100% { transform: translate(-50%, -50%) scale(1.14); } 50% { transform: translate(-50%, -52%) scale(1.16); } }
+@media (max-width: 700px) { .cl-glass { pointer-events: none; } }
+@keyframes clDoc { from { opacity: 0; transform: translateX(-12px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+
+<!--
+  DEV NOTES · PAGE: Startseite (/), DE. EN mirror at /en.
+  PURPOSE: Visitors understand in 5 seconds what clearlea.se does and for whom, then book a 30-min call with the founder.
+  ONE primary action, repeated: "Gespräch mit Hieronymus" -> /gespraech (booking page, Cal.com embed; form fields -> Notion CRM Contacts + Companies, tag "Website").
+  CLAIMS: every number/claim is backed in Notion "Website Claims & Estimates Register" (R-numbers per section). Never add a number that is not in the register.
+  DESIGN SYSTEM: Clearlease DS tokens (Montserrat 400/500/600/700; navy #13293D = chrome; teal #247BA0 = AI/sources ONLY; surfaces #F7F7F7/#FFFFFF/#E7E5DF; radii 8/12/pill; hero gradient only on the closing CTA). Small teal text on light grounds uses #1d6485 for 4.5:1.
+  BRAND MOTIF (founder 01.10./02.10.): the "c" and the dot from the logo. Large, light grey in the background, moving on scroll to tell the story (chaos -> clarity -> next step). Kickers carry a small dot. Timelines and workflow tracks use line + dot.
+  STACK: free choice. Static-first, server-rendered HTML for SEO and AI crawlers (never client-only copy). Interactive islands: hero demo, news popover, workflow explorer, AI comparison. Self-hosted in the EU. Cookieless analytics (Plausible/Matomo self-hosted) -> no cookie banner if no tracking cookies.
+  SEO: one H1 (hero). <title> "clearlea.se · Operations Intelligence für Gewerbeimmobilien". Meta description = hero subline. hreflang de/en. Organization + SoftwareApplication schema.
+  A11Y: real links/buttons; drag & drop always has a click/keyboard alternative; prefers-reduced-motion stops all autoplay and shows final states.
+  ROUTES (canvas file -> production URL; Claude Code rewrites every href): Home.dc.html -> / · Plattform.dc.html -> /plattform · Loesungen-Bestandshalter.dc.html -> /loesungen/bestandshalter · Loesungen-Property.dc.html -> /loesungen/property-management · Loesungen-Filialisten.dc.html -> /loesungen/filialisten · KI-Teams.dc.html -> /ki-teams · Trust-Center.dc.html -> /trust-center · Ressourcen.dc.html -> /ressourcen · Unternehmen.dc.html -> /unternehmen · Gespraech.dc.html -> /gespraech · Deep links: links carry data-anchor (e.g. data-anchor="cockpit" -> /plattform#cockpit); every anchor has a matching section id (Plattform #daten #cockpit #workflows #integrationen, KI-Teams #mcp, Trust #unterlagen, Ressourcen #indexrechner). No dead links: legal pages render the existing Markdown files (impressum, datenschutz, agb) as HTML pages in the site layout · Ressourcen filters = /ressourcen/news, /ressourcen/produkt-updates. /loesungen has no page of its own in v1: the nav item is a disclosure menu; the URL /loesungen 301-redirects to /#rollen. EN mirror: same tree under /en/... (hreflang pairs). Legal pages /impressum /datenschutz /agb reuse the current texts.
+  ANALYTICS EVENTS: cta_click {location}, hero_doc_drop {doc, method: drag|click|auto}, hero_action_click {case}, tasks_view_open, workflow_select {id}, ki_replay, news_open.
+-->
+
+<div style="display: flex; flex-direction: column; min-width: 0; background: #F7F7F7">
+
+<!-- DEV · NAV (same on every page). Sticky, blurred surface. "Lösungen" = disclosure menu (CSS :hover/:focus-within on canvas; in production a button with aria-expanded, Esc closes, arrow keys move). "Neu" opens the news popover (newest 3 items from the CMS: Ressourcen > News / Produkt-Updates). Active page: aria-current="page" + underline. Mobile (<1040px): one disclosure menu with all links and the news. "Anmelden" -> production app URL [APP-URL, ask Fabian]. The EXPO news item links straight to the Cal.com EXPO event (cal.com/deutsch/exporeal-2026, founder 02.10.); take it out after 07.10.
+  ROUTES (canvas file -> production URL; Claude Code rewrites every href): Home.dc.html -> / · Plattform.dc.html -> /plattform · Loesungen-Bestandshalter.dc.html -> /loesungen/bestandshalter · Loesungen-Property.dc.html -> /loesungen/property-management · Loesungen-Filialisten.dc.html -> /loesungen/filialisten · KI-Teams.dc.html -> /ki-teams · Trust-Center.dc.html -> /trust-center · Ressourcen.dc.html -> /ressourcen · Unternehmen.dc.html -> /unternehmen · Gespraech.dc.html -> /gespraech · Deep links: links carry data-anchor (e.g. data-anchor="cockpit" -> /plattform#cockpit); every anchor has a matching section id (Plattform #daten #cockpit #workflows #integrationen, KI-Teams #mcp, Trust #unterlagen, Ressourcen #indexrechner). No dead links: legal pages render the existing Markdown files (impressum, datenschutz, agb) as HTML pages in the site layout · Ressourcen filters = /ressourcen/news, /ressourcen/produkt-updates. /loesungen has no page of its own in v1: the nav item is a disclosure menu; the URL /loesungen 301-redirects to /#rollen. EN mirror: same tree under /en/... (hreflang pairs). Legal pages /impressum /datenschutz /agb reuse the current texts. -->
+<header style="position: sticky; top: 0; z-index: 30; background: rgba(247, 247, 247, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 0, 0, 0.08)">
+  <div style="position: relative; max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px">
+    <a href="Home.dc.html" aria-label="clearlea.se home" style="display: flex; align-items: center"><img src="/_blob/3fe7a8b82ce8052f386ce3a43a0a6a77" alt="clearlea.se" width="156" height="26" style="display: block; height: 26px; width: auto"></a>
+    <nav class="cl-navlinks" aria-label="Main navigation" style="display: flex; align-items: center; gap: 22px; font-size: 15px; font-weight: 500">
+      <a href="Plattform.dc.html">Platform</a>
+      <div class="cl-dd"><button type="button" class="cl-ddbtn" aria-haspopup="true">Solutions<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button><div class="cl-dd-menu"><div class="cl-dd-panel"><a href="Loesungen-Bestandshalter.dc.html"><span style="font-size: 15px; font-weight: 700; color: #13293d">Owners &amp; Asset Management</span><span style="font-size: 13px; line-height: 1.4; color: #55636f; font-weight: 500">One valid state for every property. With evidence.</span></a><a href="Loesungen-Property.dc.html"><span style="font-size: 15px; font-weight: 700; color: #13293d">Property &amp; Facility Management</span><span style="font-size: 13px; line-height: 1.4; color: #55636f; font-weight: 500">New mandates up and running in days.</span></a><a href="Loesungen-Filialisten.dc.html"><span style="font-size: 15px; font-weight: 700; color: #13293d">Multi-Site Retailers &amp; Corporates</span><span style="font-size: 13px; line-height: 1.4; color: #55636f; font-weight: 500">Every service charge statement checked, every deadline in view.</span></a><a href="KI-Teams.dc.html" style="border-top: 1px solid rgba(0, 0, 0, 0.08); border-radius: 0 0 8px 8px; margin-top: 4px"><span style="font-size: 15px; font-weight: 700; color: #13293d">For AI &amp; IT Teams</span><span style="font-size: 13px; line-height: 1.4; color: #55636f; font-weight: 500">A source your AI can trust.</span></a></div></div></div>
+      <a href="KI-Teams.dc.html">For AI Teams</a>
+      <a href="Trust-Center.dc.html">Trust Center</a>
+      <a href="Ressourcen.dc.html">Resources</a>
+      <button type="button" onClick="{{toggleNews}}" aria-expanded="{{newsExpanded}}" aria-controls="news-pop" style="display: flex; align-items: center; gap: 6px; border: 0; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 5px 10px 5px 12px"><span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase">New</span><span data-until="2026-10-07" aria-label="3 updates" style="min-width: 18px; height: 18px; border-radius: 9999px; background: #1b6384; color: #ffffff; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">3</span><span data-from="2026-10-08" aria-label="2 updates" style="min-width: 18px; height: 18px; border-radius: 9999px; background: #1b6384; color: #ffffff; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">2</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+    </nav>
+    <div style="display: flex; align-items: center; gap: 16px; flex-shrink: 0">
+      <a href="/de" class="cl-hide-sm" aria-label="Deutsche Version" style="font-size: 14px; font-weight: 600; color: #55636f; text-decoration: none">DE</a>
+      <a href="[APP-URL]" class="cl-hide-lg" style="font-size: 14px; font-weight: 600; color: #13293d; text-decoration: none; white-space: nowrap">Log in</a>
+      <a href="Gespraech.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 9999px; background: #13293d; color: #ffffff; font-size: 14px; font-weight: 600; text-decoration: none; white-space: nowrap"><span class="cl-hide-sm">Book a call</span><span class="cl-show-sm">Call</span></a>
+      <details class="cl-mnav"><summary aria-label="Menu" style="list-style: none; cursor: pointer; width: 44px; height: 44px; border-radius: 9999px; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.16)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#13293d" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg></summary>
+        <div style="position: absolute; top: 64px; left: 16px; right: 16px; background: #ffffff; border-radius: 12px; box-shadow: 0 18px 45px rgba(12, 18, 28, 0.18); border: 1px solid rgba(0, 0, 0, 0.08); padding: 12px; display: flex; flex-direction: column; gap: 2px; z-index: 50"><a href="Plattform.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; font-size: 16px; font-weight: 600; text-decoration: none; color: #13293d">Platform</a><a href="Loesungen-Bestandshalter.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; font-size: 16px; font-weight: 600; text-decoration: none; color: #13293d">Owners &amp; Asset Management</a><a href="Loesungen-Property.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; font-size: 16px; font-weight: 600; text-decoration: none; color: #13293d">Property &amp; Facility Management</a><a href="Loesungen-Filialisten.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; font-size: 16px; font-weight: 600; text-decoration: none; color: #13293d">Multi-Site Retailers &amp; Corporates</a><a href="KI-Teams.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; font-size: 16px; font-weight: 600; text-decoration: none; color: #13293d">For AI &amp; IT Teams</a><a href="Trust-Center.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; font-size: 16px; font-weight: 600; text-decoration: none; color: #13293d">Trust Center</a><a href="Ressourcen.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; font-size: 16px; font-weight: 600; text-decoration: none; color: #13293d">Resources &amp; News</a><a href="Unternehmen.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; font-size: 16px; font-weight: 600; text-decoration: none; color: #13293d">Company</a><a href="[APP-URL]" style="display: block; padding: 12px 14px; font-size: 15px; font-weight: 600; color: #55636f; text-decoration: none">Log in</a><a href="/de" style="display: block; padding: 12px 14px; font-size: 15px; font-weight: 600; color: #55636f; text-decoration: none">Deutsch</a></div>
+      </details>
+    </div>
+    <sc-if value="{{news}}" hint-placeholder-val="{{false}}">
+      <div id="news-pop" role="dialog" aria-label="News" style="position: absolute; top: 64px; right: clamp(16px, 4vw, 48px); width: min(720px, calc(100% - 32px)); background: #ffffff; border-radius: 12px; box-shadow: 0 18px 45px rgba(12, 18, 28, 0.18); border: 1px solid rgba(0, 0, 0, 0.08); padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 14px; animation: clIn 200ms cubic-bezier(0.25, 0.8, 0.5, 1)">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">New at clearlea.se</span><a href="Ressourcen.dc.html" style="font-size: 13px; font-weight: 600; text-decoration: none">All updates →</a></div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 12px">
+          <a href="KI-Teams.dc.html" style="display: flex; flex-direction: column; gap: 8px; background: #eff6fa; border-radius: 8px; padding: 16px; text-decoration: none; color: #13293d"><span style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #1b6384">Product</span><span style="font-size: 15px; font-weight: 700; line-height: 1.3">MCP server: clearlea.se as the source for your AI</span><span style="font-size: 13px; line-height: 1.45; color: #43586c">Your AI assistant queries the current valid state, with evidence.</span></a>
+          <a href="Plattform.dc.html" data-anchor="workflows" style="display: flex; flex-direction: column; gap: 8px; background: #F7F7F7; border-radius: 8px; padding: 16px; text-decoration: none; color: #13293d"><span style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Product</span><span style="font-size: 15px; font-weight: 700; line-height: 1.3">Workflows with 9 built-in guarantees</span><span style="font-size: 13px; line-height: 1.45; color: #43586c">Automate processes you can audit, step by step.</span></a>
+          <a data-until="2026-10-07" href="https://cal.com/deutsch/exporeal-2026" target="_blank" rel="noopener" style="display: flex; flex-direction: column; gap: 8px; background: #F7F7F7; border-radius: 8px; padding: 16px; text-decoration: none; color: #13293d"><span style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Event · 5 to 7 October</span><span style="font-size: 15px; font-weight: 700; line-height: 1.3">EXPO REAL 2026: Hall B3, Stand 121</span><span style="font-size: 13px; line-height: 1.45; color: #43586c">With the German PropTech Initiative. Book a meeting at the stand.</span></a>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+</header>
+
+<!-- DEV · NO FOUNDER NAME ON THE HOMEPAGE (founder 02.10., round 8): buttons say "Gespräch vereinbaren", the closing block says "unserem Mitgründer und CEO". Subpages keep "Gespräch mit Hieronymus". -->
+<!-- DEV · HERO LOGO (founder 02.10.): the brand "c" and its dot keep the exact logo proportions (dot = circle at 20.6/20.3, r 1.5 in the logo viewBox, positioned in % of the same box), so every page shows the same mark. Gimmick: on hover the dot turns into a glass ball (Glaskugel). Round 7 (founder 02.10.): while hovered it rotates short hints every 2.8 s, and a click shows the next one (the call costs nothing, "we also consult", snippets from the pages, the EXPO stand, the "Option Zürich" prediction). Each new hover continues where the last one stopped, so visitors see different tips. Tips live in tips() in the script; max. ~18 characters per line so they fit the ball. Remove the EXPO tip after 07.10. Decorative (aria-hidden): every tip repeats content that is on the pages anyway. Pointer only on desktop; reduced motion = no wobble. In the build the dot may still travel with scroll and return to its logo position. -->
+<!-- DEV · HERO. H1 decided 01.10. Subline revised 02.10. (founder: "who is it for" + "auditierbare KI-Workflows"; CREM alone would exclude owners and property managers, so the subline names all three audiences in plain words). Background: the brand "c" + dot, very light; in the build the dot moves with scroll (scroll-linked, GPU transform only), the c turns slightly. -->
+<!-- DEV · HERO DEMO (founder 02.10.: "make it a fun experience, the table could be real, drag a file in"). A real, interactive mini app, not a slideshow:
+  - Layout revised 02.10. (founder: "crowded, breaks on mobile"; chose the slim table for desktop and the focus card for phones). Documents = chip row above the table. Visitor drags one onto the Objektliste (or clicks / presses Enter on it). Use a robust pointer-based DnD lib (e.g. dnd-kit) in production; keyboard and click always work.
+  - Processing: 3 visible steps in the "Eingang" lane (recognised -> read -> checked), ~2 s total.
+  - Result: the affected cell updates (old value struck, new value, source chip, QS signal). QS = quality of a NEW data suggestion, shown like a phone-signal icon (founder 02.10.). At or above the customer's threshold (here 98 %) a change is taken over automatically; below it a person approves.
+  - A notification pops (navy, prominent) with one action. Click -> "Erledigt · protokolliert", the task disappears from "Meine Aufgaben".
+  - "x brauchen Aufmerksamkeit" opens the "Meine Aufgaben" view (founder 02.10.).
+  - Idle autoplay: after 15 s without interaction the demo processes the next document by itself; any interaction pauses it.
+  - Only LIVE capabilities (register §2: no date-triggered workflow). Fictional data only.
+  - Desktop table: 3 columns (Objekt · Mieter / Vertrag: Laufzeit, Miete, Index / Vertragshistorie), no horizontal scroll. The notification floats over the table like a proactive popup, at the bottom right, or at the top right when the changed row is in the lower half.
+  Mobile (max 760px): chip row scrolls sideways; the table becomes ONE property card (Mieter, Laufzeit bis, Nettokaltmiete, Indexstichtag) for the document's object; the notification sits below the card. -->
+<section aria-labelledby="hero-title" style="position: relative; overflow: hidden; padding-top: clamp(56px, 8vw, 104px); padding-bottom: clamp(72px, 8vw, 104px)">
+  <div aria-hidden="true" style="position: absolute; top: -40px; right: -120px; width: min(980px, 90vw); aspect-ratio: 22 / 15; pointer-events: none; z-index: 1"><svg viewBox="4 8 22 15" style="position: absolute; inset: 0; width: 100%; height: 100%"><path fill="rgba(19, 41, 61, 0.045)" d="m 11.484882,21.769442 q -1.8818515,0 -3.3604495,-0.784105 -1.456195,-0.806508 -2.285106,-2.195494 -0.828911,-1.388986 -0.828911,-3.158823 0,-1.79224 0.828911,-3.158823 0.828911,-1.388986 2.285106,-2.173091 1.478598,-0.7841046 3.3604495,-0.7841046 1.747434,0 3.069211,0.7168956 1.34418,0.694493 2.038673,2.061076 l -2.150688,1.254568 q -0.537672,-0.851314 -1.321777,-1.254568 -0.761702,-0.403254 -1.657822,-0.403254 -1.030538,0 -1.8594485,0.44806 -0.828911,0.44806 -1.299374,1.299374 -0.470463,0.828911 -0.470463,1.993867 0,1.164956 0.470463,2.01627 0.470463,0.828911 1.299374,1.276971 0.8289105,0.44806 1.8594485,0.44806 0.89612,0 1.657822,-0.403254 0.784105,-0.403254 1.321777,-1.254568 l 2.150688,1.254568 q -0.694493,1.34418 -2.038673,2.083479 -1.321777,0.716896 -3.069211,0.716896 z"></path></svg><span class="cl-glass" onMouseEnter="{{glassIn}}" onMouseLeave="{{glassOut}}" onClick="{{glassNext}}" style="left: 75.4545%; top: 82%; width: 13.6364%"><span class="cl-glass-txt"><span style="{{tipSt}}"><span style="display: block; font-size: 0.85em; color: #43586c">{{tip.k}}</span><span style="display: block; font-weight: 700">{{tip.t}}</span><span style="display: block">{{tip.s}}</span></span></span></span></div>
+
+  <div style="position: relative; max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box">
+    <div style="display: flex; flex-direction: column; gap: 28px; max-width: 940px">
+      <span style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #1d6485"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 9999px; background: #13293d"></span>Operations intelligence for commercial real estate</span>
+      <h1 id="hero-title" style="margin: 0; font-size: clamp(2.75rem, 7vw, 5.5rem); line-height: 1.02; letter-spacing: -0.045em; font-weight: 700; color: #13293d; display: flex; flex-direction: column">
+        <span style="color: #55636f; font-weight: 500">Chaos in.</span>
+        <span>Clarity out.</span>
+        <span>Next step included.</span>
+      </h1>
+      <p style="margin: 0; font-size: clamp(1.125rem, 1.6vw, 1.375rem); line-height: 1.5; color: #43586c; max-width: 50ch; text-wrap: pretty"><span style="color: #13293d; font-weight: 600">For owners, property managers and companies with many sites:</span> clearlea.se reads every lease with all its amendments, shows what needs attention next and handles the routine in auditable AI workflows.</p>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+        <a href="Gespraech.dc.html" style="display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 26px; border-radius: 9999px; background: #13293d; color: #ffffff; font-size: 16px; font-weight: 600; text-decoration: none">Book a call<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></a>
+        <a href="#demo" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 24px; border-radius: 9999px; border: 1px solid rgba(0, 0, 0, 0.24); color: #13293d; font-size: 16px; font-weight: 600; text-decoration: none">Try it yourself</a>
+      </div>
+      <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #55636f">30 minutes with our co-founder. You leave with a first workflow for your team.</p>
+    </div>
+
+    <div id="demo" style="margin-top: clamp(48px, 6vw, 72px); display: flex; flex-direction: column; gap: 14px">
+      <div class="cl-demo-hint" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
+        <span aria-hidden="true" style="flex: none; width: 8px; height: 8px; border-radius: 9999px; background: #247ba0; animation: clBlink 1.6s ease-in-out infinite"></span>
+        <span style="font-size: 15px; font-weight: 600; color: #13293d">Try it: drag a document into the property list.</span>
+        <span style="font-size: 14px; color: #55636f">Or tap it.</span>
+      </div>
+      <div onMouseEnter="{{pause}}" onMouseLeave="{{resume}}" onFocusIn="{{pause}}" onFocusOut="{{resume}}" style="background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.12); border-radius: 12px; box-shadow: 0 18px 45px rgba(12, 18, 28, 0.10); overflow: hidden">
+
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 14px 20px; border-bottom: 1px solid rgba(0, 0, 0, 0.08)">
+            <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap" role="tablist" aria-label="View">
+              <button type="button" class="cl-demo-tap" role="tab" aria-selected="{{tabTableSel}}" onClick="{{showTable}}" style="{{tabTableSt}}">Property list</button>
+              <button type="button" class="cl-demo-tap" role="tab" aria-selected="{{tabTasksSel}}" onClick="{{showTasks}}" style="{{tabTasksSt}}">My tasks<span class="cl-demo-mobi" style="margin-left: 8px; min-width: 20px; height: 20px; box-sizing: border-box; padding: 0 6px; border-radius: 9999px; background: #fdf0e3; color: #84410d; font-size: 12px; font-weight: 700; line-height: 20px; text-align: center">{{openCount}}</span></button>
+              <span class="cl-demo-desk" style="font-size: 13px; color: #55636f; margin-left: 8px">Retail portfolio · 248 leases</span>
+            </div>
+            <button type="button" class="cl-demo-desk" onClick="{{showTasks}}" style="{{attnSt}}">{{attnLabel}}</button>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px 20px; box-sizing: border-box; background: #F7F7F7; border-bottom: 1px solid rgba(0, 0, 0, 0.08)">
+            <div class="cl-chiprow" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+              <span class="cl-demo-desk" style="flex: none; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f; margin-right: 4px">New documents</span>
+              <sc-for list="{{docs}}" as="d" hint-placeholder-count="5">
+              <button type="button" class="cl-doc" draggable="true" onDragStart="{{d.dragStart}}" onClick="{{d.run}}" aria-label="{{d.aria}}" style="{{d.st}}">
+                <span style="display: flex; align-items: center; gap: 8px; min-width: 0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path></svg><span style="display: flex; flex-direction: column; gap: 2px; min-width: 0; text-align: left"><span style="font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{d.label}}</span><span class="cl-demo-small" style="font-size: 11px; color: #55636f">{{d.kind}}</span></span></span>
+                <sc-if value="{{d.processed}}" hint-placeholder-val="{{false}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-label="processed" style="flex-shrink: 0"><path d="m5 12 5 5L20 7"></path></svg></sc-if>
+              </button>
+            </sc-for>
+            </div>
+          <div aria-live="polite" class="cl-demo-desk" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; min-height: 30px">
+            <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Inbox</span>
+            <sc-if value="{{isIdle}}" hint-placeholder-val="{{false}}">
+              <span style="font-size: 13px; color: #55636f">New documents land here, from your DMS, mailbox or upload.</span>
+            </sc-if>
+            <sc-if value="{{hasDoc}}" hint-placeholder-val="{{true}}">
+              <span style="display: inline-flex; align-items: center; gap: 8px; background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.12); border-radius: 8px; padding: 6px 12px; font-size: 13px; font-weight: 600; color: #13293d; animation: clDoc 320ms cubic-bezier(0.25, 0.8, 0.5, 1)">{{c.doc}}</span>
+              <sc-for list="{{steps}}" as="s" hint-placeholder-count="3">
+                <span style="{{s.st}}"><sc-if value="{{s.ok}}" hint-placeholder-val="{{true}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"></path></svg></sc-if>{{s.label}}</span>
+              </sc-for>
+            </sc-if>
+          </div>
+          </div>
+
+          <div style="position: relative">
+            <sc-if value="{{viewTable}}" hint-placeholder-val="{{true}}">
+              <div class="cl-demo-desk" role="region" aria-label="Property list" onDragOver="{{dragOver}}" onDragLeave="{{dragLeave}}" onDrop="{{drop}}" style="{{dropSt}}">
+                <div role="table" aria-label="Property list, sample data">
+                  <div role="row" style="display: grid; grid-template-columns: 1.5fr 1.3fr 1fr; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #55636f">
+                    <span role="columnheader" style="padding: 12px 16px">Property · Tenant</span>
+                    <span role="columnheader" style="padding: 12px 16px">Lease</span>
+                    <span role="columnheader" style="padding: 12px 16px">Contract history</span>
+                  </div>
+                  <sc-for list="{{rows}}" as="row" hint-placeholder-count="5">
+                    <div role="row" style="{{row.st}}">
+                      <sc-for list="{{row.cells}}" as="cell" hint-placeholder-count="3">
+                        <div role="cell" style="{{cell.st}}">
+                          <sc-if value="{{cell.isText}}" hint-placeholder-val="{{true}}">
+                            <span style="display: flex; flex-wrap: wrap; align-items: center; gap: 2px 5px"><sc-for list="{{cell.l1}}" as="p" hint-placeholder-count="1"><sc-if value="{{p.plain}}" hint-placeholder-val="{{true}}"><span style="{{p.st}}">{{p.text}}</span></sc-if><sc-if value="{{p.changed}}" hint-placeholder-val="{{false}}"><span style="display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px"><span style="color: #55636f; text-decoration: line-through; font-size: 13px">{{p.old}}</span><span style="font-weight: 700; color: #13293d">{{p.neu}}</span><span title="{{p.qsTitle}}" style="display: inline-flex; align-items: flex-end; gap: 2px; height: 13px"><sc-for list="{{p.sig}}" as="g" hint-placeholder-count="4"><span style="{{g.st}}"></span></sc-for></span></span></sc-if></sc-for></span>
+                            <span style="display: flex; flex-wrap: wrap; align-items: center; gap: 2px 5px; font-size: 13px; color: #55636f"><sc-for list="{{cell.l2}}" as="p" hint-placeholder-count="1"><sc-if value="{{p.plain}}" hint-placeholder-val="{{true}}"><span style="{{p.st}}">{{p.text}}</span></sc-if><sc-if value="{{p.changed}}" hint-placeholder-val="{{false}}"><span style="display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px"><span style="color: #55636f; text-decoration: line-through; font-size: 13px">{{p.old}}</span><span style="font-weight: 700; color: #13293d">{{p.neu}}</span><span title="{{p.qsTitle}}" style="display: inline-flex; align-items: flex-end; gap: 2px; height: 13px"><sc-for list="{{p.sig}}" as="g" hint-placeholder-count="4"><span style="{{g.st}}"></span></sc-for></span></span></sc-if></sc-for></span>
+                          </sc-if>
+                          <sc-if value="{{cell.isHist}}" hint-placeholder-val="{{false}}">
+                            <span style="display: flex; align-items: center; gap: 8px"><span style="display: flex; align-items: center; gap: 3px"><sc-for list="{{cell.bars}}" as="bar" hint-placeholder-count="4"><span style="{{bar.st}}"></span></sc-for></span><span style="font-size: 12px; color: #55636f; white-space: nowrap">{{cell.histLabel}}</span></span>
+                          </sc-if>
+                          <sc-if value="{{cell.hasChip}}" hint-placeholder-val="{{false}}"><span style="align-self: flex-start; font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 2px 9px; white-space: nowrap">{{cell.chip}}</span></sc-if>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+              <div class="cl-demo-mob" aria-live="polite" style="padding: 16px; box-sizing: border-box">
+                <div style="background: #F7F7F7; border-radius: 8px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px">
+                    <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="font-size: 16px; font-weight: 700; line-height: 1.3; color: #13293d">{{mob.obj}}</span><span style="font-size: 12px; color: #55636f">{{mob.sub}}</span></span>
+                    <span style="flex-shrink: 0; padding-top: 4px"><span style="display: flex; align-items: center; gap: 3px"><sc-for list="{{mob.bars}}" as="bar" hint-placeholder-count="4"><span style="{{bar.st}}"></span></sc-for></span></span>
+                  </div>
+                  <sc-if value="{{mob.proc}}" hint-placeholder-val="{{false}}">
+                    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px">
+                      <span style="display: inline-flex; align-items: center; gap: 8px; background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.12); border-radius: 8px; padding: 6px 12px; font-size: 13px; font-weight: 600; color: #13293d; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; animation: clDoc 320ms cubic-bezier(0.25, 0.8, 0.5, 1)">{{c.doc}}</span>
+                      <sc-for list="{{steps}}" as="s" hint-placeholder-count="3">
+                        <span style="{{s.st}}"><sc-if value="{{s.ok}}" hint-placeholder-val="{{true}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"></path></svg></sc-if>{{s.label}}</span>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{mob.showFields}}" hint-placeholder-val="{{true}}">
+                    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+                      <sc-for list="{{mob.fields}}" as="f" hint-placeholder-count="4">
+                        <div style="{{f.st}}">
+                          <span class="cl-demo-small" style="font-size: 11px; color: #55636f">{{f.label}}</span>
+                          <span style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px"><sc-for list="{{f.segs}}" as="p" hint-placeholder-count="1"><sc-if value="{{p.plain}}" hint-placeholder-val="{{true}}"><span style="{{p.st}}">{{p.text}}</span></sc-if><sc-if value="{{p.changed}}" hint-placeholder-val="{{false}}"><span style="display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px"><span style="color: #55636f; text-decoration: line-through; font-size: 13px">{{p.old}}</span><span style="font-weight: 700; color: #13293d">{{p.neu}}</span><span title="{{p.qsTitle}}" style="display: inline-flex; align-items: flex-end; gap: 2px; height: 13px"><sc-for list="{{p.sig}}" as="g" hint-placeholder-count="4"><span style="{{g.st}}"></span></sc-for></span></span></sc-if></sc-for></span>
+                          <sc-if value="{{f.hasChip}}" hint-placeholder-val="{{false}}"><span style="align-self: flex-start; font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 2px 9px; max-width: 100%; box-sizing: border-box; overflow-wrap: anywhere">{{f.chip}}</span></sc-if>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{mob.hasChip}}" hint-placeholder-val="{{false}}"><span style="align-self: flex-start; font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 2px 9px; white-space: nowrap">{{mob.chip}}</span></sc-if>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{viewTasks}}" hint-placeholder-val="{{false}}">
+              <ul aria-label="My tasks" style="list-style: none; margin: 0; padding: 8px 20px 20px; display: flex; flex-direction: column; min-height: 320px">
+                <sc-for list="{{tasks}}" as="t" hint-placeholder-count="3">
+                  <li style="{{t.st}}">
+                    <span aria-hidden="true" style="flex-shrink: 0; width: 32px; height: 32px; border-radius: 9999px; background: #E7E5DF; color: #13293d; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center">{{t.owner}}</span>
+                    <span style="display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1 1 auto"><span style="{{t.titleSt}}">{{t.title}}</span><span style="font-size: 13px; color: #55636f">{{t.obj}} · {{t.ownerName}} · due {{t.due}}</span></span>
+                    <sc-if value="{{t.open}}" hint-placeholder-val="{{true}}"><button type="button" class="cl-demo-tap" onClick="{{t.finish}}" style="min-height: 36px; padding: 0 16px; border-radius: 9999px; border: 1px solid rgba(0, 0, 0, 0.24); background: #ffffff; color: #13293d; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer">Complete</button></sc-if>
+                    <sc-if value="{{t.closed}}" hint-placeholder-val="{{false}}"><span style="font-size: 13px; font-weight: 600; color: #2e7d32">Done · logged</span></sc-if>
+                  </li>
+                </sc-for>
+              </ul>
+            </sc-if>
+
+            <div class="cl-demo-note" style="{{noteSt}}">
+              <sc-if value="{{showToast}}" hint-placeholder-val="{{true}}">
+                <div role="status" style="background: #13293d; color: #ffffff; border-radius: 12px; box-shadow: 0 18px 45px rgba(12, 18, 28, 0.32); padding: 18px 20px; display: flex; flex-direction: column; gap: 14px; animation: clToast 420ms cubic-bezier(0.25, 0.8, 0.5, 1)">
+                  <div style="display: flex; align-items: flex-start; gap: 12px">
+                    <span aria-hidden="true" style="flex-shrink: 0; width: 34px; height: 34px; border-radius: 9999px; background: #247ba0; color: #ffffff; display: flex; align-items: center; justify-content: center; animation: clPulse 1.4s ease-out 2"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h10"></path><path d="M4 12h16"></path><path d="M4 17h7"></path><circle cx="18" cy="7" r="2"></circle></svg></span>
+                    <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+                      <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.04em; color: rgba(255, 255, 255, 0.72)">{{c.kicker}}</span>
+                      <span style="font-size: 17px; font-weight: 700; line-height: 1.3">{{c.title}}</span>
+                      <span style="font-size: 14px; line-height: 1.45; color: rgba(255, 255, 255, 0.82)">{{c.meta}}</span>
+                    </div>
+                  </div>
+                  <div style="display: flex; justify-content: flex-end">
+                    <button type="button" class="cl-demo-tap" onClick="{{act}}" style="min-height: 42px; padding: 0 20px; border: 0; border-radius: 9999px; background: #ffffff; color: #13293d; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer">{{c.action}}</button>
+                  </div>
+                </div>
+              </sc-if>
+              <sc-if value="{{showDone}}" hint-placeholder-val="{{false}}">
+                <div role="status" style="background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.08); border-radius: 12px; box-shadow: 0 18px 45px rgba(12, 18, 28, 0.18); padding: 16px 18px; display: flex; align-items: center; gap: 12px; animation: clToast 320ms cubic-bezier(0.25, 0.8, 0.5, 1)">
+                  <span aria-hidden="true" style="flex-shrink: 0; width: 32px; height: 32px; border-radius: 9999px; background: #eaf4ea; color: #2e7d32; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"></path></svg></span>
+                  <div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 600; color: #13293d">Done</span><span style="font-size: 13px; color: #43586c">Logged in the audit trail · by you · just now</span></div>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span style="font-size: 12px; line-height: 1.45; color: #55636f">Sample data. Real processing: a service charge statement in around 45 seconds.</span>
+    </div>
+  </div>
+</section>
+
+<!-- DEV · PROOF STRIP. Register: R5 (98 % + learns with use), R1 (3 Tage statt 10 Wochen, anonymous quote of a lease-management service provider), R2 (45 s per service-charge statement incl. consumption costs). Naming policy §4: GARBE is the only named customer (logo from asset folder). Founder decision 02.10.: no customer count anywhere on the site, breadth without a number. GARBE logo with consent (only named customer). Recognition row = the founder's logos, greyscale, colour on hover (ZIA Innovation 2026, German PropTech Initiative, Handelsimmobilien Kongress, KI Park, AI Nation; start-up programme logos and EU-Startups removed by founder decision 02.10., round 8); full list with groups on Unternehmen. Recognition logos stay in their own row. Copy shortened 02.10. (founder: "too much text in that section on all KPIs"): kicker, discretion line and KPI captions cut to one short line each; full wording lives in the register. -->
+<section aria-label="Customers and key figures" style="border-top: 1px solid rgba(0, 0, 0, 0.08); padding-block: clamp(48px, 6vw, 72px)">
+  <div style="max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; display: flex; flex-direction: column; gap: 40px">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 32px; align-items: start">
+      <div style="display: flex; flex-direction: column; gap: 12px">
+        <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">In use across DACH, e.g. at</span>
+        <img src="/_blob/eb8782b39769d456ca7f4f68bc673c4d" alt="GARBE Industrial Real Estate" width="120" height="45" loading="lazy" style="display: block; height: 45px; width: auto; max-width: 100%; max-height: 100%; object-fit: contain; align-self: flex-start; margin-left: -2px">
+        <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #43586c">Most of our customers prefer not to be named.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <span style="font-size: clamp(2.25rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums">98%</span>
+        <span style="font-size: 15px; line-height: 1.5; color: #43586c">accuracy, learns from every correction</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <span style="font-size: clamp(2.25rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums">3 days</span>
+        <span style="font-size: 15px; line-height: 1.5; color: #43586c">instead of 10 weeks of portfolio onboarding</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <span style="font-size: clamp(2.25rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums">45 s</span>
+        <span style="font-size: 15px; line-height: 1.5; color: #43586c">per service charge statement</span>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 20px; border-top: 1px solid rgba(0, 0, 0, 0.08); padding-top: 28px">
+      <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Recognised &amp; connected</span>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px 32px">
+        <img class="cl-logo" src="/_blob/e6908b7065227635261e9f638742d54e" alt="ZIA Innovation 2026" width="76" height="38" loading="lazy" style="display: block; height: 38px; width: auto; max-width: 100%; max-height: 100%; object-fit: contain">
+        <img class="cl-logo" src="/_blob/a2503e88d93dd8ab06c79621c25f6a45" alt="German PropTech Initiative" width="59" height="35" loading="lazy" style="display: block; height: 35px; width: auto; max-width: 100%; max-height: 100%; object-fit: contain">
+        <img class="cl-logo" src="/_blob/bfc3584943b9f4d161695d905351bd7f" alt="Handelsimmobilien Kongress" width="74" height="30" loading="lazy" style="display: block; height: 30px; width: auto; max-width: 100%; max-height: 100%; object-fit: contain">
+        <img class="cl-logo" src="/_blob/900f377862b89424ab310658c99bc652" alt="KI Park" width="73" height="29" loading="lazy" style="display: block; height: 29px; width: auto; max-width: 100%; max-height: 100%; object-fit: contain">
+        <img class="cl-logo" src="/_blob/0033c8c59c88f27ecb24ffeda8aefb6a" alt="AI Nation" width="65" height="65" loading="lazy" style="display: block; height: 65px; width: auto; max-width: 100%; max-height: 100%; object-fit: contain">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEV · PROBLEM. Visual = the Vertragshistorie (data-point history), the core USP. Market figures with sources: Mineko 2026 (M1), CCIM (M4). Timeline uses the brand line + dot. -->
+<section aria-labelledby="problem-title" style="background: #ffffff; padding-block: clamp(72px, 9vw, 120px)">
+  <div style="max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: clamp(40px, 6vw, 80px); align-items: start">
+    <div style="display: flex; flex-direction: column; gap: 24px">
+      <span style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #1d6485"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 9999px; background: #13293d"></span>The problem</span>
+      <h2 id="problem-title" style="margin: 0; font-size: clamp(2rem, 3.8vw, 3.25rem); line-height: 1.06; letter-spacing: -0.035em; font-weight: 700; text-wrap: balance">The truth is in Amendment 7.</h2>
+      <p style="margin: 0; font-size: 18px; line-height: 1.6; color: #43586c; max-width: 56ch">Lease, amendments, terminations, service charge statements, invoices, Excel lists and emails: the current valid state of a lease is spread across dozens of documents. Whoever decides often decides on outdated information. And a mistake from year one runs on for the entire lease term.</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 24px; padding-top: 8px">
+        <div style="display: flex; flex-direction: column; gap: 6px; border-top: 2px solid #13293d; padding-top: 16px">
+          <span style="font-size: 40px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums">84%</span>
+          <span style="font-size: 15px; line-height: 1.5; color: #43586c">of audited commercial service charge statements contain errors.</span>
+          <span style="font-size: 12px; color: #55636f">Source: Mineko, 2026 analysis</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px; border-top: 2px solid #13293d; padding-top: 16px">
+          <span style="font-size: 40px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums">14 years</span>
+          <span style="font-size: 15px; line-height: 1.5; color: #43586c">of impact from a mistake made in year one of a 15-year lease.</span>
+          <span style="font-size: 12px; color: #55636f">Source: CCIM Institute</span>
+        </div>
+      </div>
+      <p style="margin: 0; font-size: 20px; line-height: 1.45; font-weight: 600; color: #13293d; max-width: 34ch">Operations intelligence means: the current valid state is there before anyone looks for it.</p>
+    </div>
+
+    <div aria-label="Example: contract history of a lease" style="background: #F7F7F7; border-radius: 12px; padding: clamp(20px, 3vw, 32px); display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; padding-bottom: 6px">
+        <span style="font-size: 15px; font-weight: 700">Contract history · Friedrichstraße 112</span>
+        <span style="font-size: 13px; color: #55636f">8 documents · 2014 to today</span>
+      </div>
+      <div style="display: flex; flex-direction: column; border-left: 2px solid rgba(19, 41, 61, 0.2); margin-left: 6px">
+        <div style="position: relative; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 0 12px 22px; border-bottom: 1px solid rgba(0, 0, 0, 0.06)"><span aria-hidden="true" style="position: absolute; left: -6px; top: 17px; width: 10px; height: 10px; border-radius: 9999px; background: #13293d"></span><span style="font-size: 14px; font-weight: 600">Lease · 2014</span><span style="font-size: 14px; color: #43586c">Lease end 31/12/2024 · 1,360 m²</span></div>
+        <div style="position: relative; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 0 12px 22px; border-bottom: 1px solid rgba(0, 0, 0, 0.06)"><span aria-hidden="true" style="position: absolute; left: -6px; top: 17px; width: 10px; height: 10px; border-radius: 9999px; background: #13293d"></span><span style="font-size: 14px; font-weight: 600">Amendment 1 · 2016</span><span style="font-size: 14px; color: #43586c">Area +120 m²</span></div>
+        <div style="position: relative; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 0 12px 22px; border-bottom: 1px solid rgba(0, 0, 0, 0.06)"><span aria-hidden="true" style="position: absolute; left: -5px; top: 18px; width: 8px; height: 8px; border-radius: 9999px; background: #F7F7F7; box-shadow: inset 0 0 0 2px rgba(19, 41, 61, 0.35)"></span><span style="font-size: 14px; font-weight: 600; color: #55636f">Amendments 2 to 5 · 2017 to 2022</span><span style="font-size: 14px; color: #55636f">4 documents, incl. partial termination of storage</span></div>
+        <div style="position: relative; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 0 12px 22px; border-bottom: 1px solid rgba(0, 0, 0, 0.06)"><span aria-hidden="true" style="position: absolute; left: -6px; top: 17px; width: 10px; height: 10px; border-radius: 9999px; background: #13293d"></span><span style="font-size: 14px; font-weight: 600">Amendment 6 · 2024</span><span style="font-size: 14px; color: #43586c">Lease end 31/12/2031</span></div>
+        <div style="position: relative; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 0 12px 22px"><span aria-hidden="true" style="position: absolute; left: -7px; top: 16px; width: 12px; height: 12px; border-radius: 9999px; background: #247ba0"></span><span style="font-size: 14px; font-weight: 600">Amendment 7 · 2025</span><span style="font-size: 14px; color: #43586c">Rent from 01/01/2026: €19,200</span></div>
+      </div>
+      <div style="background: #ffffff; border-radius: 8px; padding: 18px 20px; margin-top: 8px; display: flex; flex-direction: column; gap: 12px; box-shadow: inset 0 0 0 1.5px #247ba0">
+        <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #1d6485">Valid as of today</span>
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap"><span style="font-size: 15px"><span style="color: #43586c">Lease end</span> <span style="font-weight: 700">31/12/2031</span></span><span style="font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 3px 10px">Amendment 6 · § 2</span></div>
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap"><span style="font-size: 15px"><span style="color: #43586c">Net rent</span> <span style="font-weight: 700">€19,200</span></span><span style="font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 3px 10px">Amendment 7 · § 1</span></div>
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap"><span style="font-size: 15px"><span style="color: #43586c">Leased area</span> <span style="font-weight: 700">1,480 m²</span></span><span style="font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 3px 10px">Amendment 1 · § 3</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEV · SO FUNKTIONIERT'S (#so-funktionierts). Three beats = three platform layers. Visuals replaced 02.10. (founder: "different visuals"): each beat shows a small product fragment instead of abstract lines. Beat 1 sources -> classification; beat 2 one data point with history, source and QS signal; beat 3 cockpit + a running workflow with owners. In the build: the brand dot travels from beat to beat while scrolling. Register: R4 (ca. 250 categories, founder 02.10.), R5. "Automatisch erledigt 41" in beat 3 is fictional demo data inside a product mock. -->
+<section id="so-funktionierts" aria-labelledby="how-title" style="padding-block: clamp(72px, 9vw, 120px)">
+  <div style="max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; display: flex; flex-direction: column; gap: 48px">
+    <div style="display: flex; flex-direction: column; gap: 20px; max-width: 820px">
+      <span style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #1d6485"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 9999px; background: #13293d"></span>How it works</span>
+      <h2 id="how-title" style="margin: 0; font-size: clamp(2rem, 3.8vw, 3.25rem); line-height: 1.06; letter-spacing: -0.035em; font-weight: 700; text-wrap: balance">Three layers. One valid state. Every next step.</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 24px">
+      <article style="background: #ffffff; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; gap: 18px">
+        <div aria-hidden="true" style="height: 220px; border-radius: 8px; background: #F7F7F7; padding: 18px; box-sizing: border-box; display: flex; align-items: center; gap: 14px">
+          <div style="display: flex; flex-direction: column; gap: 8px; flex: 0 0 auto">
+            <span style="font-size: 12px; font-weight: 600; background: #ffffff; border-radius: 6px; padding: 6px 10px">DMS</span>
+            <span style="font-size: 12px; font-weight: 600; background: #ffffff; border-radius: 6px; padding: 6px 10px">Mailbox</span>
+            <span style="font-size: 12px; font-weight: 600; background: #ffffff; border-radius: 6px; padding: 6px 10px">Data room</span>
+            <span style="font-size: 12px; font-weight: 600; background: #ffffff; border-radius: 6px; padding: 6px 10px">Upload · API</span>
+          </div>
+          <div style="flex: 1 1 auto; display: flex; align-items: center; min-width: 24px"><span style="flex: 1 1 auto; height: 2px; background: rgba(19, 41, 61, 0.25)"></span><span style="width: 8px; height: 8px; border-radius: 9999px; background: #247ba0"></span></div>
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 0 1 auto; min-width: 0">
+            <span style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #1d6485">Classified</span>
+            <span style="font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 3px 10px">Lease</span>
+            <span style="font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 3px 10px">Amendment</span>
+            <span style="font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 3px 10px">Service charges</span>
+            <span style="font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 3px 10px">Maintenance report</span>
+            <span style="font-size: 11px; color: #55636f">+ around 250 more</span>
+          </div>
+        </div>
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">01 · Chaos in</span>
+        <h3 style="margin: 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 700">Integration &amp; documents</h3>
+        <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #43586c">Documents arrive however they arrive: from your DMS, mailbox, data room, upload or via API. clearlea.se assigns every document to one of around 250 categories and reads the information you need. You decide which information that is.</p>
+      </article>
+      <article style="background: #ffffff; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; gap: 18px">
+        <div aria-hidden="true" style="height: 220px; border-radius: 8px; background: #F7F7F7; padding: 18px; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px">
+          <div style="background: #ffffff; border-radius: 8px; padding: 12px 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px; box-shadow: inset 0 0 0 1.5px #247ba0">
+            <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #55636f">Net rent</span><span style="font-size: 18px; font-weight: 700">€19,200</span></span>
+            <span style="display: flex; align-items: center; gap: 8px"><span style="display: inline-flex; align-items: flex-end; gap: 2px; height: 13px"><span style="width: 3px; height: 4px; border-radius: 1px; background: #247ba0"></span><span style="width: 3px; height: 7px; border-radius: 1px; background: #247ba0"></span><span style="width: 3px; height: 10px; border-radius: 1px; background: #247ba0"></span><span style="width: 3px; height: 13px; border-radius: 1px; background: #247ba0"></span></span><span style="font-size: 11px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 2px 8px">Amendment 7 · § 1</span></span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px; border-left: 2px solid rgba(19, 41, 61, 0.2); margin-left: 8px; padding-left: 14px">
+            <span style="font-size: 12px; color: #55636f">2014 Lease: €14,900</span>
+            <span style="font-size: 12px; color: #55636f">2017 Amendment 2: €16,300</span>
+            <span style="font-size: 12px; color: #55636f">2023 Index letter: €17,850</span>
+            <span style="font-size: 12px; font-weight: 600; color: #13293d">2025 Amendment 7: €19,200</span>
+          </div>
+        </div>
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">02 · Clarity out</span>
+        <h3 style="margin: 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 700">Asset data with history</h3>
+        <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #43586c">For every data point, the current valid state across lease, amendments and terminations, with history and a source down to the clause. 98% accuracy. The QA index shows the quality of every new value, and the system learns from every correction.</p>
+      </article>
+      <article style="background: #ffffff; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; gap: 18px">
+        <div aria-hidden="true" style="height: 220px; border-radius: 8px; background: #F7F7F7; padding: 18px; box-sizing: border-box; display: flex; flex-direction: column; gap: 10px">
+          <div style="display: flex; gap: 8px">
+            <span style="flex: 1 1 0; background: #ffffff; border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 11px; color: #55636f">Needs attention</span><span style="font-size: 20px; font-weight: 700; color: #84410d">3</span></span>
+            <span style="flex: 1 1 0; background: #ffffff; border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 11px; color: #55636f">Done automatically</span><span style="font-size: 20px; font-weight: 700; color: #2e7d32">41</span></span>
+          </div>
+          <div style="background: #ffffff; border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 10px">
+            <span style="font-size: 12px; font-weight: 600">Invoice check · Step 4 of 5</span>
+            <span style="position: relative; display: block; height: 2px; background: rgba(19, 41, 61, 0.15); margin: 4px 4px">
+              <span style="position: absolute; left: 0; top: -3px; width: 8px; height: 8px; border-radius: 9999px; background: #13293d"></span>
+              <span style="position: absolute; left: 25%; top: -3px; width: 8px; height: 8px; border-radius: 9999px; background: #247ba0"></span>
+              <span style="position: absolute; left: 50%; top: -3px; width: 8px; height: 8px; border-radius: 9999px; background: #13293d"></span>
+              <span style="position: absolute; left: 75%; top: -5px; width: 12px; height: 12px; border-radius: 9999px; background: #ffffff; box-shadow: inset 0 0 0 3px #ed6c02"></span>
+              <span style="position: absolute; left: calc(100% - 8px); top: -3px; width: 8px; height: 8px; border-radius: 9999px; background: #E2E2E2"></span>
+            </span>
+            <span style="display: flex; align-items: center; gap: 8px"><span style="width: 22px; height: 22px; border-radius: 9999px; background: #E7E5DF; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center">MW</span><span style="font-size: 12px; color: #43586c">Waiting for approval by M. Weber</span></span>
+          </div>
+        </div>
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">03 · Next step included</span>
+        <h3 style="margin: 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 700">Cockpit &amp; workflows</h3>
+        <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #43586c">The cockpit shows what needs attention next. Workflows handle the routine: step by step, with named ownership and approval where it counts.</p>
+      </article>
+    </div>
+    <a href="Plattform.dc.html" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600; color: #13293d; text-decoration: none">The platform in detail<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></a>
+  </div>
+</section>
+
+<!-- DEV · ROLE ROUTER. One card per segment page. Lines = core messages from Website Brief §2 (approved 01.10.). -->
+<section id="rollen" aria-labelledby="router-title" style="background: #E7E5DF; padding-block: clamp(72px, 9vw, 120px)">
+  <div style="max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; display: flex; flex-direction: column; gap: 40px">
+    <div style="display: flex; flex-direction: column; gap: 20px; max-width: 820px">
+      <span style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #13293d"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 9999px; background: #13293d"></span>Who it's for</span>
+      <h2 id="router-title" style="margin: 0; font-size: clamp(2rem, 3.8vw, 3.25rem); line-height: 1.06; letter-spacing: -0.035em; font-weight: 700; text-wrap: balance">Built for everyone who works with leases.</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 16px">
+      <a href="Loesungen-Bestandshalter.dc.html" class="cl-card" style="background: #ffffff; border-radius: 12px; padding: 28px; min-height: 280px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; text-decoration: none; color: #13293d">
+        <span style="display: flex; flex-direction: column; gap: 14px"><span style="font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #55636f">Owners &amp; Asset Management</span><span style="font-size: 23px; line-height: 1.2; font-weight: 700; letter-spacing: -0.02em">One valid state for every property. With evidence.</span><span style="font-size: 15px; line-height: 1.55; color: #43586c">Portfolio transparency, due diligence and reporting, without Excel archaeology.</span></span>
+        <span style="font-size: 15px; font-weight: 600">Learn more →</span>
+      </a>
+      <a href="Loesungen-Property.dc.html" class="cl-card" style="background: #ffffff; border-radius: 12px; padding: 28px; min-height: 280px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; text-decoration: none; color: #13293d">
+        <span style="display: flex; flex-direction: column; gap: 14px"><span style="font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #55636f">Property &amp; Facility Management</span><span style="font-size: 23px; line-height: 1.2; font-weight: 700; letter-spacing: -0.02em">New mandate? Up and running in days.</span><span style="font-size: 15px; line-height: 1.55; color: #43586c">No missed rent adjustments, fewer disputes over service charge statements.</span></span>
+        <span style="font-size: 15px; font-weight: 600">Learn more →</span>
+      </a>
+      <a href="Loesungen-Filialisten.dc.html" class="cl-card" style="background: #ffffff; border-radius: 12px; padding: 28px; min-height: 280px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; text-decoration: none; color: #13293d">
+        <span style="display: flex; flex-direction: column; gap: 14px"><span style="font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #55636f">Multi-Site Retailers &amp; Corporates</span><span style="font-size: 23px; line-height: 1.2; font-weight: 700; letter-spacing: -0.02em">Every service charge statement checked. Every deadline in view.</span><span style="font-size: 15px; line-height: 1.55; color: #43586c">One central overview of all sites, across national borders too.</span></span>
+        <span style="font-size: 15px; font-weight: 600">Learn more →</span>
+      </a>
+      <a href="KI-Teams.dc.html" class="cl-card" style="background: #ffffff; border-radius: 12px; padding: 28px; min-height: 280px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; text-decoration: none; color: #13293d">
+        <span style="display: flex; flex-direction: column; gap: 14px"><span style="font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #1d6485">AI &amp; IT teams</span><span style="font-size: 23px; line-height: 1.2; font-weight: 700; letter-spacing: -0.02em">Keep your AI strategy.</span><span style="font-size: 15px; line-height: 1.55; color: #43586c">A source your agents can trust. With central control instead of sprawl.</span></span>
+        <span style="font-size: 15px; font-weight: 600">Learn more →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- DEV · WORKFLOWS + USE-CASE EXPLORER (redesigned 02.10.: "visually more pleasing", "more such cases", market map). Top: workflow library = row of 7 clickable chips plus a dashed "+ Ihr Workflow" chip (founder 02.10.: communicate customizability; it shows a template track of "Ihr ..." steps) (moved from the left column 02.10. so the 6-step track gets the full width for owner, team, deadline and escalation) picked from the market map (most claimed by competitors and most evidenced in our CRM: amendments P1d, onboarding P4a, service charges P2a, index/deadlines P5a, maintenance P3, ESG/energy). Right: the selected workflow as a track of business steps (brand line + dot), a pulse travelling along the track, AI steps in teal, decisions in orange, owners as initials. Only boxes and owners, never step configuration (register §5). Labels: "Aus der Praxis" = mirrors a real customer setup; "Typischer Ablauf" = scenario. Steps not yet GA carry "Pilot". Cross-functional (founder 02.10., round 3): every step shows owner + team, a deadline (clock) and the escalation path (arrow); a "Beteiligt" row lists the teams and external parties per workflow (external = dashed chip). Escalation = the step's escalation PATH (who), deadline = the step's Frist; we do not claim calendar-triggered starts (register §2). Grid = one column per step on desktop (.cl-wftrack: 2 columns <900px, 1 <520px); "first ever" deliberately NOT claimed (register §1: no unverifiable superlatives; MRI Agora markets cross-functional agentic workflows). Mobile: track turns vertical. -->
+<section id="workflows" aria-labelledby="wf-title" style="background: #ffffff; padding-block: clamp(72px, 9vw, 120px)">
+  <div style="max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; display: flex; flex-direction: column; gap: 48px">
+    <div style="display: flex; flex-direction: column; gap: 20px; max-width: 880px">
+      <span style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #1d6485"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 9999px; background: #13293d"></span>Controlled automation</span>
+      <h2 id="wf-title" style="margin: 0; font-size: clamp(2rem, 3.8vw, 3.25rem); line-height: 1.06; letter-spacing: -0.035em; font-weight: 700; text-wrap: balance">No agents you send off and hope for the best.</h2>
+      <p style="margin: 0; font-size: 18px; line-height: 1.6; color: #43586c; max-width: 62ch">Workflows break a process into clear steps. AI works within the steps, a named person owns each one and approves where it counts. Every step has an owner, a deadline and an escalation path. That way, processes run across departments, even across company boundaries, and stay auditable for internal audit and compliance.</p>
+    </div>
+
+    <div style="background: #F7F7F7; border-radius: 12px; display: flex; flex-direction: column; overflow: hidden">
+      <div role="group" aria-label="Workflow library" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; box-sizing: border-box; padding: 18px clamp(20px, 2.4vw, 32px); border-bottom: 1px solid rgba(0, 0, 0, 0.06)">
+        <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f; margin-right: 8px">Workflow library</span>
+        <sc-for list="{{wfList}}" as="w" hint-placeholder-count="7">
+          <button type="button" onClick="{{w.pick}}" aria-pressed="{{w.pressed}}" style="{{w.st}}"><span>{{w.name}}</span><span style="{{w.tagSt}}">{{w.tag}}</span></button>
+        </sc-for>
+      </div>
+      <div style="min-width: 0; box-sizing: border-box; padding: clamp(20px, 2.4vw, 32px); display: flex; flex-direction: column; gap: 22px">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap">
+          <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 22px; font-weight: 700; letter-spacing: -0.02em">{{wf.name}}</span><span style="font-size: 14px; color: #55636f">{{wf.trigger}}</span></div>
+          <span style="{{wf.tagSt}}">{{wf.tag}}</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f; margin-right: 4px">Involved</span><sc-for list="{{wf.teams}}" as="tm" hint-placeholder-count="3"><span style="{{tm.st}}">{{tm.name}}</span></sc-for></div>
+        <div style="position: relative; padding-top: 4px">
+          <span aria-hidden="true" style="position: absolute; left: 6px; right: 6px; top: 9px; height: 2px; background: rgba(19, 41, 61, 0.18)"></span>
+          <span aria-hidden="true" style="position: absolute; left: 6px; right: 6px; top: 4px; height: 12px; pointer-events: none"><span style="position: absolute; top: 0; width: 12px; height: 12px; margin-left: -6px; border-radius: 9999px; background: #247ba0; box-shadow: 0 0 0 6px rgba(36, 123, 160, 0.18); animation: clTravel 6s linear infinite"></span></span>
+          <ol class="cl-wftrack" aria-label="Steps of the selected workflow" style="{{wfGridSt}}">
+            <sc-for list="{{wf.steps}}" as="s" hint-placeholder-count="6">
+              <li style="display: flex; flex-direction: column; gap: 14px; min-width: 0; animation: clIn 260ms cubic-bezier(0.25, 0.8, 0.5, 1)">
+                <span aria-hidden="true" style="{{s.dotSt}}"></span>
+                <span style="{{s.cardSt}}">
+                  <span style="{{s.typeSt}}">{{s.type}}</span>
+                  <span style="font-size: 15px; font-weight: 600; line-height: 1.3; color: #13293d">{{s.title}}</span>
+                  <span style="display: flex; align-items: center; gap: 6px"><span style="{{s.ownerSt}}">{{s.ini}}</span><span style="font-size: 12px; color: #55636f; line-height: 1.35">{{s.owner}}</span></span>
+                  <sc-if value="{{s.hasDue}}" hint-placeholder-val="{{false}}"><span style="display: flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; color: #13293d"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>{{s.due}}</span></sc-if>
+                  <sc-if value="{{s.hasEsc}}" hint-placeholder-val="{{false}}"><span style="display: flex; align-items: flex-start; gap: 5px; font-size: 12px; line-height: 1.35; color: #84410d"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg><span>{{s.esc}}</span></span></sc-if>
+                  <sc-if value="{{s.pilot}}" hint-placeholder-val="{{false}}"><span style="align-self: flex-start; margin-top: auto; font-size: 11px; font-weight: 600; color: #13293d; border: 1px solid rgba(0, 0, 0, 0.24); border-radius: 9999px; padding: 1px 7px">Pilot</span></sc-if>
+                </span>
+              </li>
+            </sc-for>
+          </ol>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; border-top: 1px solid rgba(0, 0, 0, 0.08); padding-top: 18px">
+          <sc-if value="{{wf.hasMetric}}" hint-placeholder-val="{{false}}"><span style="font-size: 32px; font-weight: 700; letter-spacing: -0.03em; line-height: 1">{{wf.metric}}</span></sc-if>
+          <span style="font-size: 15px; line-height: 1.5; color: #43586c">{{wf.result}}</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 12px; color: #55636f"><span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 9999px; background: #247ba0"></span>AI step</span><span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 9999px; background: #ffffff; box-shadow: inset 0 0 0 2.5px #ed6c02"></span>Decision</span><span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 9999px; background: #13293d"></span>System or person</span><span style="display: inline-flex; align-items: center; gap: 6px"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>Deadline</span><span style="display: inline-flex; align-items: center; gap: 6px; color: #84410d"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg>Escalation</span></div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: 24px; align-items: stretch">
+      <div style="display: flex; flex-direction: column; gap: 20px">
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <h3 style="margin: 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 700">9 built-in guarantees for every automation</h3>
+          <span style="font-size: 15px; line-height: 1.5; color: #43586c">Built into the code, not the prompt. That is why even agents can work under strict control.</span>
+        </div>
+        <ul style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 10px 20px">
+          <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.45"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px"><path d="m5 12 5 5L20 7"></path></svg>No change without approval</li>
+          <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.45"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px"><path d="m5 12 5 5L20 7"></path></svg>No action runs twice</li>
+          <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.45"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px"><path d="m5 12 5 5L20 7"></path></svg>No decision on outdated data</li>
+          <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.45"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px"><path d="m5 12 5 5L20 7"></path></svg>Closed cases stay unchanged</li>
+          <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.45"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px"><path d="m5 12 5 5L20 7"></path></svg>Complete audit trail: who, when, why</li>
+          <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.45"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px"><path d="m5 12 5 5L20 7"></path></svg>Strict client separation, least privilege</li>
+          <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.45"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px"><path d="m5 12 5 5L20 7"></path></svg>GDPR deletion without losing the audit trail</li>
+          <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.45"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px"><path d="m5 12 5 5L20 7"></path></svg>No faulty workflow goes live</li>
+          <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.45"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px"><path d="m5 12 5 5L20 7"></path></svg>AI never overrides the rules</li>
+        </ul>
+      </div>
+      <figure style="margin: 0; background: #F7F7F7; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; gap: 18px">
+        <figcaption style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 18px; font-weight: 700">Why steps instead of long chains</span><span style="font-size: 15px; line-height: 1.5; color: #43586c">At 95% accuracy per step of an AI agent, around 60% overall quality remains after ten steps. That is why every step in clearlea.se has its own checkpoint.</span></figcaption>
+        <div role="img" aria-label="Bar chart: overall quality falls from 95 per cent after one step to 60 per cent after ten steps" style="display: flex; align-items: flex-end; gap: 8px; height: 190px; padding-top: 8px">
+          <sc-for list="{{lusser}}" as="b" hint-placeholder-count="10">
+            <div style="flex: 1 1 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 6px; height: 100%">
+              <span style="font-size: 11px; font-weight: 600; color: #43586c; font-variant-numeric: tabular-nums">{{b.v}}</span>
+              <span style="{{b.st}}"></span>
+              <span style="font-size: 11px; color: #55636f">{{b.n}}</span>
+            </div>
+          </sc-for>
+        </div>
+        <span style="font-size: 12px; line-height: 1.5; color: #55636f">Consecutive steps, overall quality in %. AI agents solve 58% of single-step tasks but only 35% of multi-step workflows. Sources: Lusser's law; Salesforce AI Research, CRMArena-Pro (2025)</span>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- DEV · KI-VERGLEICH (#ki), animated (founder 02.10.). Left: a GENERIC agent "thinks", reads five files one by one, thinks again, answers WRONG (missed Nachtrag 6), with a high token/cost tag. Right: the customer's own assistant makes ONE tool call to the clearlea.se MCP server, answers correctly with history and source, and suggests starting a workflow; low token/cost tag. Loops; "Erneut abspielen" restarts; reduced motion = final state.
+  LOGOS (founder decision 02.10.): Copilot/ChatGPT/Claude as small round icons on BOTH sides. Framing that keeps this fair (UWG §6): the SAME assistants appear left and right; the caption under the panels says the difference is the access to verified data, not the model. Use official marks from each brand kit, unmodified, small and monochrome-neutral; legal check before launch. Placeholders below.
+  COST TAGS = "Beispielrechnung" (register R18, to add): 5 lease PDFs at ~40 pages ≈ 120.000 input tokens ≈ 0,40 € at typical frontier-model list prices; one MCP call returning a structured answer ≈ 2.000 tokens ≈ 0,01 €. Times are illustrative. -->
+<section id="ki" aria-labelledby="ki-title" style="padding-block: clamp(72px, 9vw, 120px)">
+  <div style="max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; display: flex; flex-direction: column; gap: 40px">
+    <div style="display: flex; flex-direction: column; gap: 20px; max-width: 860px">
+      <span style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #1d6485"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 9999px; background: #13293d"></span>For teams with an AI strategy</span>
+      <h2 id="ki-title" style="margin: 0; font-size: clamp(2rem, 3.8vw, 3.25rem); line-height: 1.06; letter-spacing: -0.035em; font-weight: 700; text-wrap: balance">The answer is there before you ask.</h2>
+      <p style="margin: 0; font-size: 18px; line-height: 1.6; color: #43586c; max-width: 60ch">An AI agent reads what you give it and guesses the rest. clearlea.se keeps the current valid state ready, with history and evidence. Your own AI queries it via MCP: one query instead of entire documents.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: 24px">
+      <div style="background: #ffffff; border-radius: 12px; border: 1px solid rgba(0, 0, 0, 0.08); padding: 24px; display: flex; flex-direction: column; gap: 14px; min-height: 480px; box-sizing: border-box">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap"><span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span style="font-size: 15px; font-weight: 700">General-purpose AI agent</span><span style="display: flex; align-items: center; gap: 4px" aria-label="for example Copilot, ChatGPT or Claude"><span title="Copilot (placeholder for the official logo)" style="width: 24px; height: 24px; border-radius: 9999px; background: #F3F3F3; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); font-size: 8px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">CP</span><span title="ChatGPT (placeholder for the official logo)" style="width: 24px; height: 24px; border-radius: 9999px; background: #F3F3F3; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); font-size: 8px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">GPT</span><span title="Claude (placeholder for the official logo)" style="width: 24px; height: 24px; border-radius: 9999px; background: #F3F3F3; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); font-size: 8px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">CL</span></span></span><span style="font-size: 12px; font-weight: 600; color: #43586c; background: #F3F3F3; border-radius: 9999px; padding: 3px 10px">5 files uploaded</span></div>
+        <div style="align-self: flex-end; max-width: 85%; background: #F3F3F3; border-radius: 12px; padding: 12px 14px; font-size: 15px; line-height: 1.45">When does the lease at Friedrichstraße 112 end?</div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <sc-for list="{{kiLeft}}" as="l" hint-placeholder-count="4"><span style="{{l.st}}">{{l.label}}</span></sc-for>
+        </div>
+        <sc-if value="{{kiLeftAnswer}}" hint-placeholder-val="{{true}}">
+          <div style="display: flex; flex-direction: column; gap: 10px; animation: clIn 260ms cubic-bezier(0.25, 0.8, 0.5, 1)">
+            <div style="align-self: flex-start; max-width: 90%; border: 1px solid rgba(0, 0, 0, 0.08); border-radius: 12px; padding: 12px 14px; font-size: 15px; line-height: 1.45">According to the lease, the tenancy runs until 31/12/2024 and has been tacitly extended since then.</div>
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: #84410d; background: #fdf0e3; border-radius: 8px; padding: 10px 12px"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0"><path d="M12 9v4"></path><path d="M12 17h.01"></path><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path></svg>Wrong: Amendment 6 was not among the files.</div>
+          </div>
+        </sc-if>
+        <div style="margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; border-top: 1px solid rgba(0, 0, 0, 0.08); padding-top: 14px"><span style="font-size: 13px; color: #55636f">Example calculation</span><span style="{{kiLeftCostSt}}">{{kiLeftCost}}</span></div>
+      </div>
+      <div style="background: #ffffff; border-radius: 12px; border: 1px solid #a9cde1; padding: 24px; display: flex; flex-direction: column; gap: 14px; min-height: 480px; box-sizing: border-box">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
+          <span style="font-size: 15px; font-weight: 700">Your AI with clearlea.se</span>
+          <span style="display: flex; align-items: center; gap: 6px"><span style="font-size: 12px; color: #55636f">Works with</span><span style="display: flex; align-items: center; gap: 4px"><span title="Copilot (placeholder for the official logo)" style="width: 24px; height: 24px; border-radius: 9999px; background: #F3F3F3; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); font-size: 8px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">CP</span><span title="ChatGPT (placeholder for the official logo)" style="width: 24px; height: 24px; border-radius: 9999px; background: #F3F3F3; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); font-size: 8px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">GPT</span><span title="Claude (placeholder for the official logo)" style="width: 24px; height: 24px; border-radius: 9999px; background: #F3F3F3; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); font-size: 8px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">CL</span></span></span>
+        </div>
+        <div style="align-self: flex-end; max-width: 85%; background: #F3F3F3; border-radius: 12px; padding: 12px 14px; font-size: 15px; line-height: 1.45">When does the lease at Friedrichstraße 112 end?</div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <sc-for list="{{kiRight}}" as="l" hint-placeholder-count="1"><span style="{{l.st}}">{{l.label}}</span></sc-for>
+        </div>
+        <sc-if value="{{kiRightAnswer}}" hint-placeholder-val="{{true}}">
+          <div style="align-self: flex-start; width: min(100%, 440px); box-sizing: border-box; border: 1px solid rgba(0, 0, 0, 0.08); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 12px; animation: clIn 260ms cubic-bezier(0.25, 0.8, 0.5, 1)">
+            <span style="font-size: 15px; line-height: 1.45">Until <span style="font-weight: 700">31/12/2031</span>, extended by Amendment 6.</span>
+            <div style="display: flex; flex-direction: column; gap: 8px; border-left: 2px solid rgba(19, 41, 61, 0.2); padding-left: 14px">
+              <span style="font-size: 13px; color: #43586c">Lease 2014: until 31/12/2024</span>
+              <span style="font-size: 13px; color: #43586c">Amendment 3 · 2019: until 31/12/2026</span>
+              <span style="font-size: 13px; font-weight: 600; color: #13293d">Amendment 6 · 2024: until 31/12/2031</span>
+            </div>
+            <span style="align-self: flex-start; font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 3px 10px">Source: Amendment 6 · § 2</span>
+            <sc-if value="{{kiSuggest}}" hint-placeholder-val="{{true}}">
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; background: #F7F7F7; border-radius: 8px; padding: 10px 12px; animation: clIn 260ms cubic-bezier(0.25, 0.8, 0.5, 1)"><span style="font-size: 13px; color: #13293d">Start the ‘Check renewal’ workflow?</span><span style="font-size: 12px; font-weight: 700; color: #ffffff; background: #13293d; border-radius: 9999px; padding: 6px 12px">Start</span></div>
+            </sc-if>
+          </div>
+        </sc-if>
+        <div style="margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; border-top: 1px solid rgba(0, 0, 0, 0.08); padding-top: 14px"><span style="font-size: 13px; color: #55636f">Example calculation</span><span style="{{kiRightCostSt}}">{{kiRightCost}}</span></div>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap"><span style="font-size: 14px; color: #43586c">Same model on the left and the right. The difference is access to verified data.</span><button type="button" onClick="{{kiReplay}}" style="min-height: 40px; padding: 0 18px; border-radius: 9999px; border: 1px solid rgba(0, 0, 0, 0.24); background: transparent; color: #13293d; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer">Replay</button></div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 24px; border-top: 1px solid rgba(0, 0, 0, 0.08); padding-top: 32px">
+      <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 17px; font-weight: 700">No uploads, no prompt engineering</span><span style="font-size: 15px; line-height: 1.55; color: #43586c">The verified answer is already in the table. Your AI just queries it.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 17px; font-weight: 700">Saves time and tokens</span><span style="font-size: 15px; line-height: 1.55; color: #43586c">One query instead of entire documents in the context window.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 17px; font-weight: 700">Central control instead of sprawl</span><span style="font-size: 15px; line-height: 1.55; color: #43586c">Permissions, logging and approvals for every AI in your organisation, in one place.</span></div>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+      <span style="font-size: 14px; line-height: 1.5; color: #43586c; max-width: 70ch">Specialised, purchased AI solutions succeed roughly twice as often as in-house builds (67% vs 33%). <span style="color: #55636f">Source: MIT Project NANDA, The GenAI Divide (2025)</span></span>
+      <a href="KI-Teams.dc.html" style="display: inline-flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600; color: #13293d; text-decoration: none">For AI &amp; IT Teams<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- DEV · AUS DER PRAXIS. Two real customer stories, told as workflows. Card 1 = register R1. Quotes removed from both cards (founder 02.10., round 8): add one back only as a written, approved quote. Card 2 = GARBE, corrected 02.10. by founder: NO contract check at GARBE; instead DIN classification of cost types + export to their data warehouse (⏳ which DIN standard, e.g. DIN 276 or DIN 18960, ). More scenarios live in the workflow library above. -->
+<section aria-labelledby="praxis-title" style="background: #ffffff; padding-block: clamp(72px, 9vw, 120px)">
+  <div style="max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; display: flex; flex-direction: column; gap: 48px">
+    <div style="display: flex; flex-direction: column; gap: 20px; max-width: 860px">
+      <span style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #1d6485"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 9999px; background: #13293d"></span>From real setups</span>
+      <h2 id="praxis-title" style="margin: 0; font-size: clamp(2rem, 3.8vw, 3.25rem); line-height: 1.06; letter-spacing: -0.035em; font-weight: 700; text-wrap: balance">Every story is a workflow.</h2>
+      <p style="margin: 0; font-size: 18px; line-height: 1.6; color: #43586c; max-width: 60ch">You see not only the result, but also what would run in your organisation.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 20px">
+      <article style="background: #F7F7F7; border-radius: 12px; padding: 32px; display: flex; flex-direction: column; gap: 20px">
+        <span style="align-self: flex-start; font-size: 12px; font-weight: 600; color: #13293d; background: #ffffff; border-radius: 9999px; padding: 4px 12px">From a real setup</span>
+        <div style="display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-size: 24px; line-height: 1.25; font-weight: 700">Lease management service provider</h3><span style="font-size: 15px; line-height: 1.5; color: #43586c">Portfolio onboarding for four retail chains, each with several hundred sites</span></div>
+        <ol style="list-style: none; margin: 0 0 0 5px; padding: 0; display: flex; flex-direction: column; border-left: 2px solid rgba(19, 41, 61, 0.2)">
+          <li style="position: relative; font-size: 14px; padding: 6px 0 6px 20px"><span aria-hidden="true" style="position: absolute; left: -6px; top: 11px; width: 10px; height: 10px; border-radius: 9999px; background: #13293d"></span>Data room handed over</li>
+          <li style="position: relative; font-size: 14px; padding: 6px 0 6px 20px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap"><span aria-hidden="true" style="position: absolute; left: -6px; top: 11px; width: 10px; height: 10px; border-radius: 9999px; background: #247ba0"></span>Documents classified<span style="font-size: 11px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 1px 7px">AI</span></li>
+          <li style="position: relative; font-size: 14px; padding: 6px 0 6px 20px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap"><span aria-hidden="true" style="position: absolute; left: -6px; top: 11px; width: 10px; height: 10px; border-radius: 9999px; background: #247ba0"></span>Leases and amendments captured<span style="font-size: 11px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 1px 7px">AI</span></li>
+          <li style="position: relative; font-size: 14px; padding: 6px 0 6px 20px"><span aria-hidden="true" style="position: absolute; left: -6px; top: 11px; width: 10px; height: 10px; border-radius: 9999px; background: #13293d"></span>Quality checked and approved</li>
+          <li style="position: relative; font-size: 14px; padding: 6px 0 6px 20px"><span aria-hidden="true" style="position: absolute; left: -6px; top: 11px; width: 10px; height: 10px; border-radius: 9999px; background: #13293d"></span>Deadlines and service charge audits as a service for its clients</li>
+        </ol>
+        <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-top: auto; border-top: 1px solid rgba(0, 0, 0, 0.08); padding-top: 18px"><span style="font-size: 40px; font-weight: 700; letter-spacing: -0.03em; line-height: 1">3 days</span><span style="font-size: 15px; color: #43586c">instead of 10 weeks</span></div>
+      </article>
+      <article style="background: #F7F7F7; border-radius: 12px; padding: 32px; display: flex; flex-direction: column; gap: 20px">
+        <span style="align-self: flex-start; font-size: 12px; font-weight: 600; color: #13293d; background: #ffffff; border-radius: 9999px; padding: 4px 12px">From a real setup</span>
+        <div style="display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; line-height: 1"><img src="/_blob/eb8782b39769d456ca7f4f68bc673c4d" alt="GARBE Industrial Real Estate" width="93" height="35" loading="lazy" style="display: block; height: 35px; width: auto; max-width: 100%; max-height: 100%; object-fit: contain"></h3><span style="font-size: 15px; line-height: 1.5; color: #43586c">Incoming invoices as a workflow, all the way to the data warehouse</span></div>
+        <ol style="list-style: none; margin: 0 0 0 5px; padding: 0; display: flex; flex-direction: column; border-left: 2px solid rgba(19, 41, 61, 0.2)">
+          <li style="position: relative; font-size: 14px; padding: 6px 0 6px 20px"><span aria-hidden="true" style="position: absolute; left: -6px; top: 11px; width: 10px; height: 10px; border-radius: 9999px; background: #13293d"></span>Invoice received</li>
+          <li style="position: relative; font-size: 14px; padding: 6px 0 6px 20px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap"><span aria-hidden="true" style="position: absolute; left: -6px; top: 11px; width: 10px; height: 10px; border-radius: 9999px; background: #247ba0"></span>Classified and matched to the lease<span style="font-size: 11px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 1px 7px">AI</span></li>
+          <li style="position: relative; font-size: 14px; padding: 6px 0 6px 20px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap"><span aria-hidden="true" style="position: absolute; left: -6px; top: 11px; width: 10px; height: 10px; border-radius: 9999px; background: #247ba0"></span>Cost types classified to DIN<span style="font-size: 11px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 1px 7px">AI</span></li>
+          <li style="position: relative; font-size: 14px; padding: 6px 0 6px 20px"><span aria-hidden="true" style="position: absolute; left: -6px; top: 11px; width: 10px; height: 10px; border-radius: 9999px; background: #13293d"></span>Specialist approval given</li>
+          <li style="position: relative; font-size: 14px; padding: 6px 0 6px 20px"><span aria-hidden="true" style="position: absolute; left: -6px; top: 11px; width: 10px; height: 10px; border-radius: 9999px; background: #13293d"></span>Export to the data warehouse</li>
+        </ol>
+        <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-top: auto; border-top: 1px solid rgba(0, 0, 0, 0.08); padding-top: 18px"><span style="font-size: 40px; font-weight: 700; letter-spacing: -0.03em; line-height: 1">10 s</span><span style="font-size: 15px; color: #43586c">per invoice</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- DEV · TRUST. Register R11 (deployment ladder; air-gapped "betreibbar"), R12 (ISO-certified data centres ⏳ provider name). "Bring your own AI / own key / double encryption" NOT shown until Fabian confirms (register ⏳). Link -> /trust-center. -->
+<section aria-labelledby="trust-title" style="padding-block: clamp(72px, 9vw, 120px)">
+  <div style="max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; display: flex; flex-direction: column; gap: 48px">
+    <div style="display: flex; flex-direction: column; gap: 20px; max-width: 860px">
+      <span style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #1d6485"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 9999px; background: #13293d"></span>Sovereignty &amp; security</span>
+      <h2 id="trust-title" style="margin: 0; font-size: clamp(2rem, 3.8vw, 3.25rem); line-height: 1.06; letter-spacing: -0.035em; font-weight: 700; text-wrap: balance">Your data, your rules. In your own infrastructure if you wish.</h2>
+      <p style="margin: 0; font-size: 18px; line-height: 1.6; color: #43586c; max-width: 60ch">For procurement, IT security and data protection: the key answers before you ask.</p>
+    </div>
+    <ol aria-label="Deployment models" style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); gap: 16px">
+      <li style="background: #ffffff; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 14px"><span aria-hidden="true" style="display: flex; gap: 4px"><span style="width: 28px; height: 6px; border-radius: 3px; background: #13293d"></span><span style="width: 28px; height: 6px; border-radius: 3px; background: #E2E2E2"></span><span style="width: 28px; height: 6px; border-radius: 3px; background: #E2E2E2"></span><span style="width: 28px; height: 6px; border-radius: 3px; background: #E2E2E2"></span></span><span style="font-size: 18px; font-weight: 700">Managed Cloud</span><span style="font-size: 15px; line-height: 1.55; color: #43586c">A dedicated instance per customer, hosted in Germany in ISO 27001-certified data centres. If you wish, with no US providers at all, AI included.</span></li>
+      <li style="background: #ffffff; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 14px"><span aria-hidden="true" style="display: flex; gap: 4px"><span style="width: 28px; height: 6px; border-radius: 3px; background: #13293d"></span><span style="width: 28px; height: 6px; border-radius: 3px; background: #13293d"></span><span style="width: 28px; height: 6px; border-radius: 3px; background: #E2E2E2"></span><span style="width: 28px; height: 6px; border-radius: 3px; background: #E2E2E2"></span></span><span style="font-size: 18px; font-weight: 700">Private Cloud</span><span style="font-size: 15px; line-height: 1.55; color: #43586c">In your cloud environment, run by your IT. Documented and enterprise-ready.</span></li>
+      <li style="background: #ffffff; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 14px"><span aria-hidden="true" style="display: flex; gap: 4px"><span style="width: 28px; height: 6px; border-radius: 3px; background: #13293d"></span><span style="width: 28px; height: 6px; border-radius: 3px; background: #13293d"></span><span style="width: 28px; height: 6px; border-radius: 3px; background: #13293d"></span><span style="width: 28px; height: 6px; border-radius: 3px; background: #E2E2E2"></span></span><span style="font-size: 18px; font-weight: 700">On-premises</span><span style="font-size: 15px; line-height: 1.55; color: #43586c">On your own servers, with your security policies.</span></li>
+      <li style="background: #ffffff; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 14px"><span aria-hidden="true" style="display: flex; gap: 4px"><span style="width: 28px; height: 6px; border-radius: 3px; background: #13293d"></span><span style="width: 28px; height: 6px; border-radius: 3px; background: #13293d"></span><span style="width: 28px; height: 6px; border-radius: 3px; background: #13293d"></span><span style="width: 28px; height: 6px; border-radius: 3px; background: #13293d"></span></span><span style="font-size: 18px; font-weight: 700">Air-gapped</span><span style="font-size: 15px; line-height: 1.55; color: #43586c">Can run fully isolated, with no outside connection.</span></li>
+    </ol>
+    <dl style="margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: 0 48px">
+      <div style="display: flex; flex-direction: column; gap: 6px; padding: 20px 0; border-top: 1px solid rgba(0, 0, 0, 0.12)"><dt style="font-size: 17px; font-weight: 700">Does our data go to the US or China?</dt><dd style="margin: 0; font-size: 15px; line-height: 1.55; color: #43586c">No. Data and AI processing stay in Germany or in your own environment. If you wish, with no US providers at all.</dd></div>
+      <div style="display: flex; flex-direction: column; gap: 6px; padding: 20px 0; border-top: 1px solid rgba(0, 0, 0, 0.12)"><dt style="font-size: 17px; font-weight: 700">Do you train your AI on our data?</dt><dd style="margin: 0; font-size: 15px; line-height: 1.55; color: #43586c">No. Neither we nor any model provider uses your data for training.</dd></div>
+      <div style="display: flex; flex-direction: column; gap: 6px; padding: 20px 0; border-top: 1px solid rgba(0, 0, 0, 0.12)"><dt style="font-size: 17px; font-weight: 700">How good is the data?</dt><dd style="margin: 0; font-size: 15px; line-height: 1.55; color: #43586c">98% accuracy, a QA index for every new value and a source down to the clause. We flag uncertain values instead of overwriting them.</dd></div>
+      <div style="display: flex; flex-direction: column; gap: 6px; padding: 20px 0; border-top: 1px solid rgba(0, 0, 0, 0.12)"><dt style="font-size: 17px; font-weight: 700">What about ISO 27001 and GDPR?</dt><dd style="margin: 0; font-size: 15px; line-height: 1.55; color: #43586c">Operated in ISO 27001-certified data centres, our own certification in preparation. Data processing agreement (DPA) under Art. 28 GDPR, TOMs on request.</dd></div>
+    </dl>
+    <a href="Trust-Center.dc.html" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600; color: #13293d; text-decoration: none">To the Trust Center: documents, guarantees, AI principles<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></a>
+  </div>
+</section>
+
+<!-- DEV · INTEGRATIONEN. Your sources -> clearlea.se -> your systems, joined by the brand line + dot. Tool names are EXAMPLES (register §2). Customers without a DMS can use clearlea.se as their document archive. Tool pill list (same component as the Plattform page, founder 02.10.); the classification strip lives on the Plattform page only. -->
+<section aria-labelledby="int-title" style="background: #ffffff; padding-block: clamp(72px, 9vw, 120px)">
+  <div style="max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; display: flex; flex-direction: column; gap: 40px">
+    <div style="display: flex; flex-direction: column; gap: 20px; max-width: 860px">
+      <span style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #1d6485"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 9999px; background: #13293d"></span>Integrations</span>
+      <h2 id="int-title" style="margin: 0; font-size: clamp(2rem, 3.8vw, 3.25rem); line-height: 1.06; letter-spacing: -0.035em; font-weight: 700; text-wrap: balance">Fits between your systems. Replaces none.</h2>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; align-items: stretch; gap: 0">
+      <div style="flex: 1 1 260px; background: #F7F7F7; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Your sources</span><span style="font-size: 16px; line-height: 1.7; font-weight: 500">DMS · Mailbox · Data room · Upload · Data import</span></div>
+      <div aria-hidden="true" style="flex: 0 0 56px; display: flex; align-items: center"><span style="flex: 1 1 auto; height: 2px; background: rgba(19, 41, 61, 0.25)"></span><span style="width: 8px; height: 8px; border-radius: 9999px; background: #13293d"></span></div>
+      <div style="flex: 1 1 260px; background: #13293d; color: #ffffff; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255, 255, 255, 0.7)">clearlea.se</span><span style="font-size: 16px; line-height: 1.7; font-weight: 500">Data with history · Cockpit · Workflows</span></div>
+      <div aria-hidden="true" style="flex: 0 0 56px; display: flex; align-items: center"><span style="flex: 1 1 auto; height: 2px; background: rgba(19, 41, 61, 0.25)"></span><span style="width: 8px; height: 8px; border-radius: 9999px; background: #13293d"></span></div>
+      <div style="flex: 1 1 260px; background: #F7F7F7; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Your systems</span><span style="font-size: 16px; line-height: 1.7; font-weight: 500">ERP · CREM · Accounting · Data warehouse · Excel · Your AI via MCP</span></div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: 24px 48px">
+      <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #43586c">Connections run via API, standard formats and email, in both directions. If your system is missing, we connect it with you. No vendor lock-in: you can export your data at any time.</p>
+      <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #43586c"><span style="font-weight: 700; color: #13293d">No DMS?</span> Then clearlea.se is your document archive, with every document filed to the right property.</p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgba(0, 0, 0, 0.08); padding-top: 28px"><span style="font-size: 15px; color: #43586c">Connected, for example, to</span><div style="display: flex; flex-wrap: wrap; gap: 10px"><span style="font-size: 14px; font-weight: 600; color: #13293d; background: #F7F7F7; border-radius: 8px; padding: 10px 16px">SharePoint</span><span style="font-size: 14px; font-weight: 600; color: #13293d; background: #F7F7F7; border-radius: 8px; padding: 10px 16px">d.velop</span><span style="font-size: 14px; font-weight: 600; color: #13293d; background: #F7F7F7; border-radius: 8px; padding: 10px 16px">ELO</span><span style="font-size: 14px; font-weight: 600; color: #13293d; background: #F7F7F7; border-radius: 8px; padding: 10px 16px">DocuWare</span><span style="font-size: 14px; font-weight: 600; color: #13293d; background: #F7F7F7; border-radius: 8px; padding: 10px 16px">SAP RE-FX</span><span style="font-size: 14px; font-weight: 600; color: #13293d; background: #F7F7F7; border-radius: 8px; padding: 10px 16px">iX-Haus</span><span style="font-size: 14px; font-weight: 600; color: #13293d; background: #F7F7F7; border-radius: 8px; padding: 10px 16px">Yardi</span><span style="font-size: 14px; font-weight: 600; color: #13293d; background: #F7F7F7; border-radius: 8px; padding: 10px 16px">Planon</span><span style="font-size: 14px; font-weight: 600; color: #13293d; background: #F7F7F7; border-radius: 8px; padding: 10px 16px">com.TRADENET</span><span style="font-size: 14px; font-weight: 600; color: #13293d; background: #F7F7F7; border-radius: 8px; padding: 10px 16px">DATEV</span><span style="font-size: 14px; font-weight: 600; color: #13293d; background: #F7F7F7; border-radius: 8px; padding: 10px 16px">Excel</span><span style="font-size: 14px; font-weight: 600; color: #13293d; border: 1.5px dashed rgba(19, 41, 61, 0.35); border-radius: 8px; padding: 10px 16px">Your system</span></div><span style="font-size: 13px; color: #55636f">These names are examples, not partnerships.</span></div>
+  </div>
+</section>
+
+<!-- DEV · CLOSING CTA. The one hero-gradient block (DS rule). Founder photo (founder 02.10.; export responsive WebP/AVIF). Workshop promise (founder 01.10.), free of charge. Price line per site and month confirmed (R38). Brand "c" + dot repeat here, light on dark, closing the story. -->
+<section aria-labelledby="cta-title" style="position: relative; overflow: hidden; background: linear-gradient(135deg, #001426 0%, #13293D 100%); color: #ffffff; padding-block: clamp(72px, 9vw, 120px)">
+  <svg aria-hidden="true" viewBox="4 8 22 15" style="position: absolute; bottom: -80px; left: -100px; width: min(700px, 70vw); height: auto; pointer-events: none"><path fill="rgba(255, 255, 255, 0.04)" d="m 11.484882,21.769442 q -1.8818515,0 -3.3604495,-0.784105 -1.456195,-0.806508 -2.285106,-2.195494 -0.828911,-1.388986 -0.828911,-3.158823 0,-1.79224 0.828911,-3.158823 0.828911,-1.388986 2.285106,-2.173091 1.478598,-0.7841046 3.3604495,-0.7841046 1.747434,0 3.069211,0.7168956 1.34418,0.694493 2.038673,2.061076 l -2.150688,1.254568 q -0.537672,-0.851314 -1.321777,-1.254568 -0.761702,-0.403254 -1.657822,-0.403254 -1.030538,0 -1.8594485,0.44806 -0.828911,0.44806 -1.299374,1.299374 -0.470463,0.828911 -0.470463,1.993867 0,1.164956 0.470463,2.01627 0.470463,0.828911 1.299374,1.276971 0.8289105,0.44806 1.8594485,0.44806 0.89612,0 1.657822,-0.403254 0.784105,-0.403254 1.321777,-1.254568 l 2.150688,1.254568 q -0.694493,1.34418 -2.038673,2.083479 -1.321777,0.716896 -3.069211,0.716896 z"></path><circle cx="20.6" cy="20.3" r="1.5" fill="rgba(255, 255, 255, 0.06)"></circle></svg>
+  <div style="position: relative; max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; display: flex; flex-wrap: wrap; gap: clamp(32px, 5vw, 64px); align-items: center">
+    <img src="/_blob/ff00bcf1c8b07d9db211f358a6a9ad2e" alt="Co-founder and CEO of clearlea.se" width="360" height="360" loading="lazy" style="flex: 0 1 300px; display: block; width: 100%; max-width: 360px; min-width: 0; aspect-ratio: 1 / 1; height: auto; object-fit: cover; object-position: 50% 30%; border-radius: 12px; box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28)">
+    <div style="flex: 999 1 480px; display: flex; flex-direction: column; gap: 22px; min-width: 0">
+      <span style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255, 255, 255, 0.72)"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 9999px; background: #ffffff"></span>Next step</span>
+      <h2 id="cta-title" style="margin: 0; font-size: clamp(2.25rem, 4.4vw, 3.75rem); line-height: 1.04; letter-spacing: -0.04em; font-weight: 700; color: #ffffff">30 minutes. Your first workflow.</h2>
+      <p style="margin: 0; font-size: 18px; line-height: 1.6; color: rgba(255, 255, 255, 0.82); max-width: 56ch">You talk directly to our co-founder and CEO. Together we find the process with the biggest lever in your portfolio and sketch the first workflow for your team. We are also happy to talk about using AI safely in your organisation.</p>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px">
+        <a href="Gespraech.dc.html" style="display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 26px; border-radius: 9999px; background: #ffffff; color: #13293d; font-size: 16px; font-weight: 600; text-decoration: none">Book a call<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></a>
+        <a href="mailto:hello@clearlea.se" style="font-size: 16px; font-weight: 600; color: #ffffff">hello@clearlea.se</a>
+      </div>
+      <span style="font-size: 14px; color: rgba(255, 255, 255, 0.7)">From €9.49 per site per month, volume discounts available. Unlimited users, AI usage included.</span>
+    </div>
+  </div>
+</section>
+
+<!-- DEV · FOOTER (same on every page). Copyright line shows only "clearlea.se" (founder 02.10.); the legal entity stays in the Impressum (update after the GmbH conversion). Legal pages: render the existing Markdown files (Impressum, Datenschutz, AGB) as HTML pages in the site layout (founder 02.10.); recheck the privacy text for the new analytics setup. -->
+<footer style="background: #F7F7F7; padding-block: 56px 40px; border-top: 1px solid rgba(0, 0, 0, 0.08)">
+  <div style="max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; display: flex; flex-direction: column; gap: 40px">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 32px">
+      <div style="display: flex; flex-direction: column; gap: 14px"><img src="/_blob/3fe7a8b82ce8052f386ce3a43a0a6a77" alt="clearlea.se" width="144" height="24" style="display: block; height: 24px; width: auto"><span style="font-size: 14px; line-height: 1.55; color: #43586c">Operations intelligence for commercial real estate. Built in Berlin.</span></div>
+      <nav aria-label="Platform" style="display: flex; flex-direction: column; gap: 10px; font-size: 14px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Platform</span><a href="Plattform.dc.html" data-anchor="daten" style="text-decoration: none">Data with history</a><a href="Plattform.dc.html" data-anchor="cockpit" style="text-decoration: none">Cockpit</a><a href="Plattform.dc.html" data-anchor="workflows" style="text-decoration: none">Workflows</a><a href="Plattform.dc.html" data-anchor="integrationen" style="text-decoration: none">Integrations &amp; MCP</a></nav>
+      <nav aria-label="Solutions" style="display: flex; flex-direction: column; gap: 10px; font-size: 14px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Solutions</span><a href="Loesungen-Bestandshalter.dc.html" style="text-decoration: none">Owners &amp; Asset Management</a><a href="Loesungen-Property.dc.html" style="text-decoration: none">Property &amp; Facility Management</a><a href="Loesungen-Filialisten.dc.html" style="text-decoration: none">Multi-Site Retailers &amp; Corporates</a><a href="KI-Teams.dc.html" style="text-decoration: none">For AI &amp; IT Teams</a></nav>
+      <nav aria-label="Company" style="display: flex; flex-direction: column; gap: 10px; font-size: 14px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Company</span><a href="Unternehmen.dc.html" style="text-decoration: none">About us</a><a href="Trust-Center.dc.html" style="text-decoration: none">Trust Center</a><a href="Ressourcen.dc.html" style="text-decoration: none">News &amp; product updates</a><a href="Gespraech.dc.html" style="text-decoration: none">Book a call</a></nav>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 13px; color: #55636f; border-top: 1px solid rgba(0, 0, 0, 0.08); padding-top: 24px">
+      <span>© 2026 clearlea.se · Hosted in Germany · GDPR-compliant · No AI training on your data</span>
+      <span style="display: flex; gap: 20px"><a href="/impressum" style="color: #55636f">Imprint</a><a href="/datenschutz" style="color: #55636f">Privacy</a><a href="/agb" style="color: #55636f">Terms</a><a href="/agent.md" style="color: #55636f">For AI agents</a></span>
+    </div>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"autoplay":{"editor":"boolean","default":true,"section":"Animation"},"$preview":{"width":1440,"height":11000}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    var reduce = false;
+    try { reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+    var auto = this.props.autoplay;
+    if (auto === undefined || auto === null) auto = true;
+    this.timers = [];
+    this.lastUser = Date.now() - 12500;
+    this.resultAt = 0;
+    this.setState({
+      i: 0, phase: 'idle', step: 0, done: false, view: 'table', over: false, news: false, wf: 0, tip: -1,
+      kiStep: (reduce || !auto) ? 29 : 0, processed: {},
+      tasks: [
+        { id: 'vd', title: 'Approve lease data', obj: 'Berlin · Friedrichstraße 112', owner: 'MW', ownerName: 'M. Weber', due: 'today', done: false },
+        { id: 'rg', title: 'Resolve invoice discrepancy', obj: 'Hamburg · Spitalerstraße 9', owner: 'SK', ownerName: 'S. Krüger', due: 'tomorrow', done: false },
+        { id: 'nk', title: 'Review service charge anomalies', obj: 'München · Kaufingerstraße 4', owner: 'SK', ownerName: 'S. Krüger', due: 'this week', done: false }
+      ]
+    });
+    if (reduce || !auto) return;
+    var self = this;
+    this.tick = setInterval(function () {
+      if (self.paused) return;
+      var s = self.state || {};
+      if (Date.now() - self.lastUser < 15000) return;
+      if (s.phase === 'proc') return;
+      if (s.phase === 'idle' || Date.now() - self.resultAt > 6500) self.run(s.phase === 'idle' ? 0 : ((s.i || 0) + 1) % 5, false);
+    }, 1000);
+    this.kiTimer = setInterval(function () {
+      // tick only while the comparison is on screen: each tick re-renders the page
+      var ki = document.getElementById('ki'), r = ki && ki.getBoundingClientRect();
+      if (document.hidden || (r && (r.bottom < 0 || r.top > window.innerHeight))) return;
+      var s = self.state || {};
+      self.setState({ kiStep: ((s.kiStep || 0) + 1) % 30 });
+    }, 650);
+  }
+  componentWillUnmount() {
+    if (this.tick) clearInterval(this.tick);
+    if (this.kiTimer) clearInterval(this.kiTimer);
+    if (this.glassT) clearInterval(this.glassT);
+    (this.timers || []).forEach(function (t) { clearTimeout(t); });
+  }
+  cases() {
+    return [
+      { label: 'Amendment_6_Friedrichstr.pdf', kind: 'Amendment', doc: 'Amendment_6_Friedrichstr.pdf', s1: 'Recognised: amendment', s3: 'Matched against contract history', row: 0, col: 'lz', old: '31/12/2026', neu: '31/12/2031', qs: 96, chip: 'Amendment 6 · § 2', hist: true, kicker: 'Approval needed · QA 96% is below your threshold', title: 'Lease end changed: 31/12/2031', meta: 'Source: Amendment 6, § 2 · Approval by M. Weber', action: 'Approve', task: 'vd', taskObj: { id: 'vd', title: 'Approve lease data', obj: 'Berlin · Friedrichstraße 112', owner: 'MW', ownerName: 'M. Weber', due: 'today' } },
+      { label: 'Invoice_2026-0412.pdf', kind: 'Invoice', doc: 'Invoice_2026-0412.pdf', s1: 'Recognised: invoice', s3: 'Checked against the lease', row: 1, col: 'obj', chip: 'Invoice 2026-0412 assigned', kicker: 'Invoice check', title: '1 discrepancy with the lease', meta: 'Amount above the contractual flat rate · Resolution by S. Krüger', action: 'Start resolution', task: 'rg', taskObj: { id: 'rg', title: 'Resolve invoice discrepancy', obj: 'Hamburg · Spitalerstraße 9', owner: 'SK', ownerName: 'S. Krüger', due: 'tomorrow' } },
+      { label: 'Service_charges_2025.pdf', kind: 'Service charge statement', doc: 'Service_charges_2025_Kaufingerstr.pdf', s1: 'Recognised: service charge statement', s3: '214 line items captured, incl. consumption costs', row: 2, col: 'obj', chip: '2025 statement · 214 items', kicker: 'Service charge statement · captured in 45 s', title: '3 anomalies flagged', meta: 'Incl. heating costs +12% vs prior year · Review by S. Krüger', action: 'Start review', task: 'nk', taskObj: { id: 'nk', title: 'Review service charge anomalies', obj: 'München · Kaufingerstraße 4', owner: 'SK', ownerName: 'S. Krüger', due: 'this week' } },
+      { label: 'Index_letter_03-2026.pdf', kind: 'Index letter', doc: 'Index_letter_03-2026.pdf', s1: 'Recognised: index letter', s3: 'Checked against § 5 indexation clause', row: 3, col: 'rent', old: '€15,180', neu: '€15,632', qs: 97, chip: 'Index letter 03/2026', hist: true, kicker: 'Index adjustment · correct per lease', title: 'New rent: €15,632 (+2.98%)', meta: 'Checked against § 5 indexation clause · QA 97% · Approval by M. Weber', action: 'Approve', task: 'ix', taskObj: { id: 'ix', title: 'Approve index adjustment', obj: 'Köln · Schildergasse 61', owner: 'MW', ownerName: 'M. Weber', due: 'today' } },
+      { label: 'Tenant_list_Q3.csv', kind: 'Data import', doc: 'Tenant_list_Q3.csv', s1: 'Data source changed', s3: '3 properties matched', row: 4, col: 'ten', old: 'Buchhandlung Arndt', neu: 'Arndt Buch & Papier GmbH', qs: 99, chip: 'Import 30/09', hist: false, kicker: 'Applied automatically · QA 99% above your 98% threshold', title: '3 properties updated', meta: 'No conflicts · Handover to your ERP confirmed', action: 'View log', task: null, taskObj: null }
+    ];
+  }
+  run(idx, user) {
+    var self = this;
+    (this.timers || []).forEach(function (t) { clearTimeout(t); });
+    this.timers = [];
+    if (user) this.lastUser = Date.now();
+    this.setState({ i: idx, phase: 'proc', step: 1, done: false, view: 'table' });
+    this.timers.push(setTimeout(function () { self.setState({ step: 2 }); }, 650));
+    this.timers.push(setTimeout(function () { self.setState({ step: 3 }); }, 1300));
+    this.timers.push(setTimeout(function () {
+      var s = self.state || {};
+      var c = self.cases()[idx];
+      var tasks = (s.tasks || []).slice();
+      if (c.taskObj) {
+        var found = false;
+        tasks = tasks.map(function (t) { if (t.id === c.task) { found = true; return Object.assign({}, t, { done: false }); } return t; });
+        if (!found) tasks.unshift(Object.assign({ done: false }, c.taskObj));
+      }
+      var processed = Object.assign({}, s.processed || {}); processed[idx] = true;
+      self.resultAt = Date.now();
+      self.setState({ phase: 'result', step: 4, tasks: tasks, processed: processed });
+    }, 2000));
+  }
+  workflows() {
+    var P = 'From a real setup', T = 'Typical flow';
+    return [
+      { name: 'Process amendment', tag: T, trigger: 'Starts as soon as an amendment is recognised', teams: ['Contract management', 'Asset Management', 'Accounting'], steps: [
+        { type: 'Trigger', title: 'Amendment received', owner: 'System · Inbox', ini: 'SY', kind: 'trigger' },
+        { type: 'AI step', title: 'Read, changes with QA index', owner: 'AI', ini: 'AI', kind: 'ai' },
+        { type: 'Decision', title: 'QA above threshold?', owner: 'No: M. Weber · Contract management', ini: 'MW', kind: 'dec', due: 'Deadline 2 days', esc: 'to team lead' },
+        { type: 'Approval', title: 'Approve rent change', owner: 'J. Brandt · Asset Management', ini: 'JB', kind: 'human', due: 'Deadline 3 days', esc: 'to head of asset management' },
+        { type: 'Action', title: 'Update contract history', owner: 'System · Evidence saved', ini: 'SY', kind: 'sys' },
+        { type: 'Handover', title: 'Rent debit posting to accounting', owner: 'System · via API', ini: 'SY', kind: 'sys' } ],
+        metric: '', result: 'The current valid state is up to date before anyone looks for it. Three teams, one flow.' },
+      { name: 'Invoice check', tag: T, trigger: 'Starts as soon as an invoice is recognised', teams: ['Accounting', 'Property management', 'External · Service provider'], steps: [
+        { type: 'Trigger', title: 'Invoice received', owner: 'System · Inbox', ini: 'SY', kind: 'trigger' },
+        { type: 'AI step', title: 'Read and match to lease', owner: 'AI', ini: 'AI', kind: 'ai' },
+        { type: 'Check', title: 'Check against the lease', owner: 'System · Rules', ini: 'SY', kind: 'sys' },
+        { type: 'Decision', title: 'Discrepancy?', owner: 'Yes: S. Krüger · Property management', ini: 'SK', kind: 'dec', due: 'Deadline 3 days', esc: 'to property lead' },
+        { type: 'Task', title: 'Request credit note', owner: 'Service provider · external', ini: 'SP', kind: 'human', due: 'Deadline 10 days', esc: 'to property management' },
+        { type: 'Approval', title: 'Approve payment, to ERP', owner: 'Accounting · with signature', ini: 'AC', kind: 'human', due: 'Deadline 2 days' } ],
+        metric: '', result: 'Every invoice checked, every approval documented. Even when a service provider has to follow up.' },
+      { name: 'Service charge audit', tag: T, trigger: 'Starts as soon as a statement is recognised', teams: ['Real estate', 'Controlling', 'External · Landlord'], steps: [
+        { type: 'Trigger', title: 'Statement received', owner: 'System · Inbox', ini: 'SY', kind: 'trigger' },
+        { type: 'AI step', title: 'Capture line items and consumption costs', owner: 'AI · around 45 seconds', ini: 'AI', kind: 'ai' },
+        { type: 'AI check', title: 'Validate against lease and prior year', owner: 'AI · Findings with source', ini: 'AI', kind: 'ai' },
+        { type: 'Decision', title: 'Raise an objection?', owner: 'L. Hoffmann · Real estate', ini: 'LH', kind: 'dec', due: 'Deadline 10 days', esc: 'to head of real estate' },
+        { type: 'AI step', title: 'Draft objection', owner: 'AI', ini: 'AI', kind: 'ai', pilot: true },
+        { type: 'Approval', title: 'Approve and send to landlord', owner: 'Controlling · with signature', ini: 'CO', kind: 'human', due: 'Deadline 5 days' } ],
+        metric: '', result: 'Objections backed by evidence instead of gut feeling, for every statement.' },
+      { name: 'Mandate onboarding', tag: P, trigger: 'Starts when the data room is handed over', teams: ['Project team', 'Property management', 'Accounting'], steps: [
+        { type: 'Trigger', title: 'Data room handed over', owner: 'Project team', ini: 'PT', kind: 'trigger' },
+        { type: 'AI step', title: 'Classify documents', owner: 'AI · around 250 categories', ini: 'AI', kind: 'ai' },
+        { type: 'AI step', title: 'Capture leases and amendments', owner: 'AI', ini: 'AI', kind: 'ai' },
+        { type: 'Check', title: 'Check quality', owner: 'QA index · Spot check by project team', ini: 'QA', kind: 'sys', esc: 'below threshold to project lead' },
+        { type: 'Approval', title: 'Approve dataset', owner: 'Project lead', ini: 'PL', kind: 'human', due: 'Deadline: day 3' },
+        { type: 'Handover', title: 'Start deadlines and service charge audit', owner: 'Property management · Accounting', ini: 'PM', kind: 'human' } ],
+        metric: '3 days', result: 'instead of 10 weeks, at a lease management service provider with four retail chains.' },
+      { name: 'Maintenance & inspections', tag: T, trigger: 'Starts as soon as an inspection report is recognised', teams: ['Technical FM', 'Property lead', 'External · Service provider'], steps: [
+        { type: 'Trigger', title: 'Inspection report received', owner: 'System · Inbox', ini: 'SY', kind: 'trigger' },
+        { type: 'AI step', title: 'Match equipment, read defects', owner: 'AI', ini: 'AI', kind: 'ai' },
+        { type: 'Action', title: 'Record next inspection deadline', owner: 'System · In the cockpit', ini: 'SY', kind: 'sys' },
+        { type: 'Task', title: 'Get defects fixed', owner: 'Service provider · external', ini: 'SP', kind: 'human', due: 'Deadline 14 days', esc: 'to technical FM' },
+        { type: 'Proof', title: 'Request evidence', owner: 'System · 3 of 4 received', ini: 'SY', kind: 'sys', esc: 'evidence missing: to property lead' },
+        { type: 'Approval', title: 'Close with evidence', owner: 'Property lead', ini: 'PL', kind: 'human', due: 'Deadline 5 days' } ],
+        metric: '', result: 'Every inspection duty with proof, every defect with an owner.' },
+      { name: 'Index adjustment', tag: T, trigger: 'Starts as soon as new index values are imported', teams: ['Asset Management', 'Accounting', 'External · Tenant'], steps: [
+        { type: 'Trigger', title: 'New index values imported', owner: 'Data source', ini: 'DS', kind: 'trigger' },
+        { type: 'Check', title: 'Identify affected leases', owner: 'System · Rules', ini: 'SY', kind: 'sys' },
+        { type: 'Calculation', title: 'Calculate new rent', owner: 'System', ini: 'SY', kind: 'sys', pilot: true },
+        { type: 'AI step', title: 'Draft adjustment letter', owner: 'AI', ini: 'AI', kind: 'ai', pilot: true },
+        { type: 'Approval', title: 'Approval with signature', owner: 'M. Weber · Asset Management', ini: 'MW', kind: 'human', due: 'Deadline 5 days', esc: 'to head of asset management' },
+        { type: 'Handover', title: 'Send to tenant, rent debit posting', owner: 'System · Evidence saved', ini: 'SY', kind: 'sys' } ],
+        metric: '', result: 'The AI drafts, a person approves. Every adjustment stays documented.' },
+      { name: 'Energy & ESG data', tag: T, trigger: 'Starts as soon as a utility bill is recognised', teams: ['Energy management', 'Property management', 'ESG reporting'], steps: [
+        { type: 'Trigger', title: 'Utility bill received', owner: 'System · Inbox', ini: 'SY', kind: 'trigger' },
+        { type: 'AI step', title: 'Read meter readings and CO2 cost split', owner: 'AI', ini: 'AI', kind: 'ai' },
+        { type: 'Check', title: 'Plausibility check against prior year', owner: 'System · Rules', ini: 'SY', kind: 'sys' },
+        { type: 'Decision', title: 'Anomaly?', owner: 'Yes: Energy management', ini: 'EM', kind: 'dec', due: 'Deadline 7 days', esc: 'to property management' },
+        { type: 'Export', title: 'Dataset for energy audit', owner: 'System · CSV or XML', ini: 'SY', kind: 'sys' },
+        { type: 'Handover', title: 'Hand over to ESG reporting', owner: 'ESG reporting · Evidence saved', ini: 'ES', kind: 'human' } ],
+        metric: '', result: 'Consumption data for audits and ESG reports, without retyping.' },
+      { name: 'Your own workflow', chip: '+ Your workflow', custom: true, tag: 'Configurable', trigger: 'Starts with your trigger, proactively in the background', teams: ['Your teams', 'External · Your partners'], steps: [
+        { type: 'Trigger', title: 'Your trigger', owner: 'Document, data or event', ini: '+', kind: 'trigger' },
+        { type: 'AI step', title: 'Your questions for the document', owner: 'AI', ini: 'AI', kind: 'ai' },
+        { type: 'Check', title: 'Your rules', owner: 'System · Rules', ini: 'SY', kind: 'sys' },
+        { type: 'Decision', title: 'Your threshold', owner: 'Your team', ini: '+', kind: 'dec', due: 'Your deadline', esc: 'Your escalation path' },
+        { type: 'Approval', title: 'Your approval', owner: 'Your owners', ini: '+', kind: 'human' },
+        { type: 'Handover', title: 'To your system', owner: 'API, email or export', ini: '+', kind: 'sys' } ],
+        metric: '', result: 'Assembled from building blocks and configured in the product, without an IT project. On a call, we sketch your first one.' }
+    ];
+  }
+  tips() {
+    var now = Date.now();
+    return [
+      { k: 'Good to know', t: 'The first call', s: 'is free.' },
+      { k: 'EXPO REAL', t: 'Hall B3', s: 'Stand 121', until: '2026-10-07' },
+      { k: 'Your next step', t: 'Option Zürich', s: 'by 30/06' },
+      { k: 'By the way', t: 'We also advise,', s: 'e.g. on AI.' },
+      { k: 'Did you know?', t: '98% accuracy', s: 'with a source.' },
+      { k: 'Your next deadline', t: 'Index adjustment', s: 'Köln, today' },
+      { k: 'Good to know', t: 'Your own model?', s: 'Supported.' },
+      { k: 'CLOUD Act?', t: 'If you wish, no', s: 'US providers.' },
+      { k: 'Did you know?', t: '< 30 seconds', s: 'per lease.' },
+      { k: 'By the way', t: 'Due diligence', s: 'as a project, too.' },
+      { k: 'Good to know', t: 'Unlimited users', s: 'included.' },
+      { k: 'No DMS?', t: 'Then we are', s: 'your archive.' },
+      { k: 'Good to know', t: 'Installed', s: 'in hours.' },
+      { k: 'Quick question?', t: 'Write to us', s: 'hello@clearlea.se' }
+    ].filter(function (t) { return !t.until || now <= Date.parse(t.until + 'T23:59:59+02:00'); });
+  }
+  renderVals() {
+    var self = this;
+    var s = this.state || {};
+    var CASES = this.cases();
+    var TIPS = this.tips();
+    var tipN = s.tip === undefined ? -1 : s.tip;
+    var i = s.i || 0;
+    var phase = s.phase || 'idle';
+    var step = s.step || 0;
+    var done = !!s.done;
+    var view = s.view || 'table';
+    var processed = s.processed || {};
+    var c = CASES[i];
+    var showResult = phase === 'result';
+
+    var docBase = 'flex: none; max-width: 260px; min-height: 44px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 9999px; font-family: inherit; color: #13293d; cursor: grab; text-align: left;';
+    var docs = CASES.map(function (cc, idx) {
+      var active = idx === i && phase !== 'idle';
+      return {
+        label: cc.label, kind: cc.kind, processed: !!processed[idx], aria: cc.label + ': add to the property list',
+        st: docBase + (active ? ' background: #eff6fa; border: 1px solid #247ba0;' : ' background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.12);'),
+        dragStart: function (e) { self.dragIdx = idx; self.lastUser = Date.now(); try { e.dataTransfer.setData('text/plain', String(idx)); e.dataTransfer.effectAllowed = 'copy'; } catch (err) {} },
+        run: function () { self.run(idx, true); }
+      };
+    });
+
+    var steps = [c.s1, 'Data read', c.s3].map(function (label, k) {
+      var reached = phase === 'result' || step > k + 1;
+      var current = phase === 'proc' && step === k + 1;
+      var base = 'display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; border-radius: 9999px; padding: 4px 10px;';
+      var st = base + (reached ? ' color: #1b6384; background: #eff6fa;' : (current ? ' color: #13293d; background: #ffffff; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12); animation: clBlink 0.9s ease-in-out infinite;' : ' color: #55636f; background: #ffffff;'));
+      return { label: label, ok: reached, st: st };
+    });
+
+    var BASE = [
+      { obj: 'Berlin · Friedrichstraße 112', ten: 'Modehaus Lind GmbH', lz: '31/12/2026', rent: '€18,450', idx: 'in 21 days', warn: true, hist: 6 },
+      { obj: 'Hamburg · Spitalerstraße 9', ten: 'Café Brandt KG', lz: '30/06/2028', rent: '€7,920', idx: '01/01/2027', hist: 3 },
+      { obj: 'München · Kaufingerstraße 4', ten: 'Optik Seidel AG', lz: '31/03/2030', rent: '€22,300', idx: 'in 64 days', warn: true, hist: 4 },
+      { obj: 'Köln · Schildergasse 61', ten: 'Drogerie Weiss GmbH', lz: '31/12/2029', rent: '€15,180', idx: '01/07/2027', hist: 2 },
+      { obj: 'Leipzig · Grimmaische Straße 20', ten: 'Buchhandlung Arndt', lz: '30/09/2027', rent: '€6,840', idx: '—', hist: 5 }
+    ];
+    var sigOf = function (q) {
+      var lvl = q >= 98 ? 4 : (q >= 95 ? 3 : 2), sig = [];
+      for (var g = 0; g < 4; g++) sig.push({ st: 'display: block; width: 3px; height: ' + (4 + g * 3) + 'px; border-radius: 1px; background: ' + (g < lvl ? '#247ba0' : '#d4e6f0') + ';' });
+      return sig;
+    };
+    var txt = function (t, st) { return { plain: true, changed: false, text: t, st: st || '', old: '', neu: '', sig: [], qsTitle: '' }; };
+    var seg = function (r, key, hit, st) {
+      if (hit && c.col === key && c.old) { var q = c.qs || 0; return { plain: false, changed: true, text: '', st: '', old: c.old, neu: c.neu, sig: sigOf(q), qsTitle: 'QA index ' + q + '%' }; }
+      return txt(r[key], st);
+    };
+    var histOf = function (r, grow) {
+      var n = r.hist + (grow ? 1 : 0), bars = [];
+      for (var b = 0; b < n; b++) {
+        var isNew = grow && b === n - 1;
+        bars.push({ st: 'display: block; width: 6px; height: 16px; border-radius: 2px; background: ' + (isNew ? '#247ba0' : (b === 0 ? '#13293d' : '#7f8fa0')) + ';' });
+      }
+      return { bars: bars, label: n + ' documents' };
+    };
+    var cellBase = 'padding: 14px 16px; font-size: 14px; color: #13293d; display: flex; flex-direction: column; justify-content: center; gap: 6px; min-width: 0; border-top: 1px solid rgba(0, 0, 0, 0.06);';
+    var cellActive = 'background: rgba(36, 123, 160, 0.10); box-shadow: inset 0 0 0 1.5px #247ba0; border-radius: 6px; animation: clCell 900ms cubic-bezier(0.25, 0.8, 0.5, 1);';
+    var warnSt = 'color: #84410d; font-weight: 600;';
+    var rows = BASE.map(function (r, ri) {
+      var activeRow = ri === c.row && phase !== 'idle';
+      var hit = activeRow && showResult;
+      var col = hit ? c.col : '';
+      var first = col === 'obj' || col === 'ten', second = col === 'lz' || col === 'rent';
+      var h = histOf(r, hit && c.hist);
+      var objSt = 'font-weight: 600;' + (activeRow && phase === 'proc' ? ' animation: clBlink 0.9s ease-in-out infinite;' : '');
+      var cells = [
+        { st: cellBase + (first ? cellActive : ''), isText: true, isHist: false, l1: [txt(r.obj, objSt)], l2: [seg(r, 'ten', hit)], hasChip: first && !!c.chip, chip: c.chip, bars: [], histLabel: '' },
+        { st: cellBase + (second ? cellActive : ''), isText: true, isHist: false, l1: [txt('until'), seg(r, 'lz', hit), txt('·'), seg(r, 'rent', hit)], l2: [txt('Index:'), txt(r.idx, r.warn ? warnSt : '')], hasChip: second && !!c.chip, chip: c.chip, bars: [], histLabel: '' },
+        { st: cellBase, isText: false, isHist: true, l1: [], l2: [], hasChip: false, chip: '', bars: h.bars, histLabel: h.label }
+      ];
+      return { st: 'display: grid; grid-template-columns: 1.5fr 1.3fr 1fr; align-items: stretch;' + (activeRow ? ' background: #f8fbfd;' : ''), cells: cells };
+    });
+    // phones: one property card instead of the table
+    var mr = BASE[phase === 'idle' ? 0 : c.row];
+    var mh = histOf(mr, showResult && c.hist);
+    var field = function (key, label) {
+      var on = showResult && c.col === key;
+      return { label: label, st: 'background: #ffffff; border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; gap: 4px; min-width: 0; color: #13293d;' + (on ? ' ' + cellActive : ''), segs: [seg(mr, key, showResult, 'font-size: 14px; font-weight: 600;' + (key === 'idx' && mr.warn ? ' color: #84410d;' : ''))], hasChip: on && !!c.chip, chip: c.chip };
+    };
+    var mob = { obj: mr.obj, sub: 'Retail portfolio · 248 leases', bars: mh.bars, proc: phase === 'proc', showFields: phase !== 'proc', fields: [field('ten', 'Tenant'), field('lz', 'Lease end'), field('rent', 'Net rent'), field('idx', 'Index date')], hasChip: showResult && c.col === 'obj' && !!c.chip, chip: c.chip };
+
+    var tasksRaw = s.tasks || [];
+    var open = tasksRaw.filter(function (t) { return !t.done; }).length;
+    var tasks = tasksRaw.map(function (t) {
+      return {
+        title: t.title, obj: t.obj, owner: t.owner, ownerName: t.ownerName, due: t.due, open: !t.done, closed: !!t.done,
+        st: 'display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid rgba(0, 0, 0, 0.06);' + (t.done ? ' opacity: 0.6;' : ''),
+        titleSt: 'font-size: 15px; font-weight: 600;' + (t.done ? ' text-decoration: line-through;' : ''),
+        finish: function () { self.lastUser = Date.now(); self.setState({ tasks: ((self.state || {}).tasks || []).map(function (x) { return x.id === t.id ? Object.assign({}, x, { done: true }) : x; }) }); }
+      };
+    });
+
+    var tabOn = 'min-height: 36px; padding: 0 14px; border: 0; border-radius: 9999px; background: #13293d; color: #ffffff; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer;';
+    var tabOff = 'min-height: 36px; padding: 0 14px; border: 0; border-radius: 9999px; background: transparent; color: #13293d; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;';
+    var attnBase = 'min-height: 36px; padding: 0 14px; border: 0; border-radius: 9999px; font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer;';
+
+    var wfAll = this.workflows();
+    var wi = s.wf || 0;
+    var W = wfAll[wi];
+    var wfList = wfAll.map(function (w, idx) {
+      var on = idx === wi;
+      return {
+        name: w.chip || w.name, tag: w.tag === 'From a real setup' ? 'Real setup' : '', pressed: on ? 'true' : 'false',
+        tagSt: 'font-size: 11px; font-weight: 600; color: ' + (on ? 'rgba(255, 255, 255, 0.8)' : '#55636f') + ';',
+        st: 'min-height: 40px; display: inline-flex; align-items: center; gap: 8px; padding: 0 14px; border-radius: 9999px; font-family: inherit; font-size: 14px; cursor: pointer; white-space: nowrap;' + (on ? ' border: 1px solid #13293d; background: #13293d; color: #ffffff; font-weight: 700;' : (w.custom ? ' border: 1.5px dashed rgba(19, 41, 61, 0.45); background: transparent; color: #13293d; font-weight: 600;' : ' border: 1px solid rgba(0, 0, 0, 0.14); background: #ffffff; color: #13293d; font-weight: 600;')),
+        pick: function () { self.setState({ wf: idx }); }
+      };
+    });
+    var wfSteps = W.steps.map(function (st) {
+      var isAi = st.kind === 'ai', isDec = st.kind === 'dec', isHuman = st.kind === 'human';
+      return {
+        type: st.type, title: st.title, owner: st.owner, ini: st.ini, pilot: !!st.pilot, hasDue: !!st.due, due: st.due || '', hasEsc: !!st.esc, esc: st.esc || '',
+        dotSt: 'display: block; width: 12px; height: 12px; border-radius: 9999px; position: relative; z-index: 1;' + (isDec ? ' background: #ffffff; box-shadow: inset 0 0 0 3px #ed6c02, 0 0 0 4px #F7F7F7;' : (' background: ' + (isAi ? '#247ba0' : '#13293d') + '; box-shadow: 0 0 0 4px #F7F7F7;')),
+        cardSt: 'display: flex; flex-direction: column; gap: 8px; background: #ffffff; border-radius: 10px; padding: 12px; min-height: 172px; height: 100%; box-sizing: border-box;' + (isAi ? ' box-shadow: inset 0 0 0 1.5px #a9cde1, 0 6px 16px rgba(36, 123, 160, 0.10);' : (isDec ? ' box-shadow: inset 0 0 0 1.5px rgba(237, 108, 2, 0.45);' : ' box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);')),
+        typeSt: 'align-self: flex-start; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;' + (isAi ? ' color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 2px 8px;' : (isDec ? ' color: #84410d;' : ' color: #55636f;')),
+        ownerSt: 'flex-shrink: 0; width: 22px; height: 22px; border-radius: 9999px; font-size: 9px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center;' + (isAi ? ' background: #eff6fa; color: #1b6384;' : ((isHuman || isDec) ? ' background: #E7E5DF; color: #13293d;' : ' background: #F3F3F3; color: #55636f;'))
+      };
+    });
+    var tagPraxis = 'align-self: flex-start; font-size: 12px; font-weight: 600; color: #13293d; background: #ffffff; border-radius: 9999px; padding: 4px 12px;';
+    var tagTyp = 'align-self: flex-start; font-size: 12px; font-weight: 600; color: #13293d; border: 1px solid rgba(0, 0, 0, 0.24); border-radius: 9999px; padding: 3px 12px;';
+
+    var lusser = [];
+    for (var n2 = 1; n2 <= 10; n2++) {
+      var v = Math.round(Math.pow(0.95, n2) * 100);
+      lusser.push({ n: n2, v: v, st: 'display: block; width: 100%; max-width: 28px; height: ' + Math.round(v * 1.35) + 'px; border-radius: 4px 4px 0 0; background: ' + (n2 === 10 ? '#ed6c02' : '#13293d') + ';' });
+    }
+
+    var k = s.kiStep || 0;
+    var lineBase = 'font-size: 13px; color: #55636f; display: flex; align-items: center; gap: 8px; animation: clIn 220ms cubic-bezier(0.25, 0.8, 0.5, 1);';
+    var LEFT = ['Thinking …', 'Reading Lease_2014.pdf', 'Reading Amendment_3.pdf', 'Reading Service_charges_2024.pdf', 'Reading Correspondence_2023.pdf', 'Reading Handover_report.pdf', 'Thinking …'];
+    var kiLeft = LEFT.slice(0, Math.max(0, Math.min(LEFT.length, k - 1))).map(function (l) { return { label: l, st: lineBase }; });
+    var leftDone = k >= 10;
+    var kiRight = k >= 2 ? [{ label: '1 query to clearlea.se · lease data', st: lineBase + ' color: #1b6384; font-weight: 600;' }] : [];
+    var rightDone = k >= 3;
+    var costBase = 'font-size: 13px; font-weight: 700; border-radius: 9999px; padding: 4px 12px; font-variant-numeric: tabular-nums;';
+
+    return {
+      c: c,
+      news: !!s.news,
+      newsExpanded: s.news ? 'true' : 'false',
+      toggleNews: function () { self.setState({ news: !(self.state || {}).news }); },
+      docs: docs,
+      steps: steps,
+      isIdle: phase === 'idle',
+      hasDoc: phase !== 'idle',
+      rows: rows,
+      mob: mob,
+      noteSt: c.row >= 3 ? 'top: 56px;' : 'bottom: 18px;',
+      tasks: tasks,
+      viewTable: view === 'table',
+      viewTasks: view === 'tasks',
+      tabTableSel: view === 'table' ? 'true' : 'false',
+      tabTasksSel: view === 'tasks' ? 'true' : 'false',
+      tabTableSt: view === 'table' ? tabOn : tabOff,
+      tabTasksSt: view === 'tasks' ? tabOn : tabOff,
+      showTable: function () { self.lastUser = Date.now(); self.setState({ view: 'table' }); },
+      showTasks: function () { self.lastUser = Date.now(); self.setState({ view: 'tasks' }); },
+      openCount: open,
+      attnLabel: open > 0 ? (open + (open === 1 ? ' needs' : ' need') + ' attention') : 'All done',
+      attnSt: attnBase + (open > 0 ? ' color: #84410d; background: #fdf0e3;' : ' color: #2e7d32; background: #eaf4ea;'),
+      dropSt: 'position: relative;' + (s.over ? ' box-shadow: inset 0 0 0 2px #247ba0; background: #f8fbfd;' : ''),
+      dragOver: function (e) { if (e && e.preventDefault) e.preventDefault(); if (!(self.state || {}).over) self.setState({ over: true }); },
+      dragLeave: function () { if ((self.state || {}).over) self.setState({ over: false }); },
+      drop: function (e) { if (e && e.preventDefault) e.preventDefault(); self.setState({ over: false }); if (self.dragIdx !== undefined && self.dragIdx !== null) self.run(self.dragIdx, true); },
+      showToast: showResult && !done,
+      showDone: showResult && done,
+      act: function () {
+        self.lastUser = Date.now() - 9000;
+        var st = self.state || {};
+        var cc = self.cases()[st.i || 0];
+        var tk = (st.tasks || []).map(function (t) { return cc.task && t.id === cc.task ? Object.assign({}, t, { done: true }) : t; });
+        self.setState({ done: true, tasks: tk });
+      },
+      pause: function () { self.paused = true; },
+      resume: function () { self.paused = false; },
+      wfList: wfList,
+      wf: { name: W.name, trigger: W.trigger, tag: W.tag, tagSt: W.tag === 'From a real setup' ? tagPraxis : tagTyp, steps: wfSteps, hasMetric: !!W.metric, metric: W.metric, result: W.result, teams: (W.teams || []).map(function (t) { var ext = t.indexOf('Extern') === 0; return { name: t, st: ext ? 'font-size: 12px; font-weight: 600; color: #43586c; border: 1px dashed rgba(19, 41, 61, 0.4); border-radius: 9999px; padding: 2px 10px; white-space: nowrap;' : 'font-size: 12px; font-weight: 600; color: #13293d; background: #ffffff; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1); border-radius: 9999px; padding: 3px 10px; white-space: nowrap;' }; }) },
+      wfGridSt: 'grid-template-columns: repeat(' + W.steps.length + ', minmax(0, 1fr)); gap: 10px;',
+      lusser: lusser,
+      kiLeft: kiLeft,
+      kiLeftAnswer: leftDone,
+      kiLeftCost: leftDone ? '≈ 120,000 tokens · ≈ €0.40 · 48 s' : (k >= 2 ? 'running …' : 'waiting'),
+      kiLeftCostSt: costBase + (leftDone ? ' color: #84410d; background: #fdf0e3;' : ' color: #55636f; background: #F3F3F3;'),
+      kiRight: kiRight,
+      kiRightAnswer: rightDone,
+      kiSuggest: k >= 4,
+      kiRightCost: rightDone ? '≈ 2,000 tokens · ≈ €0.01 · 3 s' : (k >= 2 ? 'running …' : 'waiting'),
+      kiRightCostSt: costBase + (rightDone ? ' color: #2e7d32; background: #eaf4ea;' : ' color: #55636f; background: #F3F3F3;'),
+      kiReplay: function () { self.setState({ kiStep: 0 }); },
+      tip: TIPS[Math.max(0, tipN) % TIPS.length],
+      tipSt: 'display: block; animation: ' + (tipN % 2 ? 'clTipA' : 'clTipB') + ' 420ms cubic-bezier(0.25, 0.8, 0.5, 1);',
+      glassIn: function () {
+        if (self.glassOn) return;
+        self.glassOn = true;
+        var adv = function () { self.setState({ tip: ((self.state || {}).tip === undefined ? -1 : (self.state || {}).tip) + 1 }); };
+        adv();
+        if (self.glassT) clearInterval(self.glassT);
+        self.glassT = setInterval(adv, 2800);
+      },
+      glassOut: function () { self.glassOn = false; if (self.glassT) { clearInterval(self.glassT); self.glassT = null; } },
+      glassNext: function () { self.setState({ tip: ((self.state || {}).tip || 0) + 1 }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

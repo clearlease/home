@@ -1,0 +1,21 @@
+# clearlea.se robots.txt
+#
+# Search engines, AI search, AI assistants and AI training crawlers may read the whole site.
+# A curated summary for AI systems: https://www.clearlea.se/agent.md (same content at /llms.txt)
+# Blocked: scrapers and data resellers that bring no visibility in search or AI answers.
+
+User-agent: *
+Allow: /
+
+User-agent: Bytespider
+User-agent: img2dataset
+User-agent: ImagesiftBot
+User-agent: Kangaroo Bot
+User-agent: Timpibot
+User-agent: omgili
+User-agent: omgilibot
+User-agent: Webzio-Extended
+User-agent: Scrapy
+Disallow: /
+
+Sitemap: https://www.clearlea.se/sitemap-index.xml
