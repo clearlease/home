@@ -1,0 +1,50 @@
+# clearlea.se
+
+> clearlea.se is operations intelligence for commercial real estate. It reads every lease with all its amendments, shows what needs attention next, and handles the routine in auditable AI workflows. For owners and asset managers, property and facility managers, and companies with many sites. Founded in 2023 in Berlin.
+
+Every fact below is taken from the published pages. German is the primary language; English pages mirror them.
+
+## Pages
+
+- [Home (DE)](https://www.clearlea.se/) · [Home (EN)](https://www.clearlea.se/en/)
+- [Platform: data with history, cockpit, workflows, integrations](https://www.clearlea.se/en/platform/)
+- [Owners & asset management](https://www.clearlea.se/en/solutions/owners/)
+- [Property & facility management](https://www.clearlea.se/en/solutions/property-management/)
+- [Multi-site retailers & corporates](https://www.clearlea.se/en/solutions/multi-site/)
+- [For AI & IT teams: MCP server and governance](https://www.clearlea.se/en/ai-teams/)
+- [Trust Center: security, deployment models, AI principles](https://www.clearlea.se/en/trust-center/)
+- [Resources: news, product updates, index-linked rent calculator](https://www.clearlea.se/en/resources/)
+- [Company](https://www.clearlea.se/en/company/)
+- [Book a call](https://www.clearlea.se/en/call/)
+
+## What it does
+
+- **Data with history:** for every data point, the current valid state across lease, amendments and terminations, with history and a source down to the clause. 98% accuracy; a QA index shows the quality of every new value, and the system learns from every correction.
+- **Documents in:** from a DMS, mailbox, data room, upload or API. Every document is assigned to one of around 250 categories.
+- **Cockpit:** shows what needs attention next across the portfolio.
+- **Workflows:** business processes as chained steps, each with a person responsible, a deadline and an escalation path. AI prepares, a named person approves. 9 built-in guarantees for every automation, fixed in code rather than in a prompt.
+- **MCP server:** customers' own AI assistants (for example Copilot, ChatGPT or Claude) query verified lease data with history and source. clearlea.se has no chatbot of its own by design.
+- **Integrations:** connects to existing systems via API; it fits between them and replaces none. Tool names on the site are examples.
+
+## Results stated on the site
+
+- 3 days instead of 10 weeks for portfolio onboarding (a lease-management service provider).
+- A service charge statement captured in around 45 seconds.
+- Under 30 seconds per lease.
+
+## Security and operation
+
+- A dedicated instance per customer, hosted in Germany in ISO 27001-certified data centres. Own ISO 27001 certification in preparation.
+- GDPR-compliant; data processing agreement under Art. 28 GDPR; technical and organisational measures (TOMs) on request.
+- No AI training on customer data.
+- Four deployment models, up to fully isolated (air-gapped) operation; on request entirely without US providers, AI included.
+
+## Pricing
+
+From €9.49 per site per month, volume discounts available. Unlimited users, AI usage included.
+
+## Company
+
+- Founders: Hieronymus Deutsch (co-founder and CEO), Fabian Laußmann (co-founder and CTO).
+- Customers in Germany, Austria and Switzerland; leases in all major European languages.
+- Contact: hello@clearlea.se
