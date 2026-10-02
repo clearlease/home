@@ -59,7 +59,7 @@ Compiler features used in the designs:
 ### Content
 
 - Ressourcen items live in `src/content/ressourcen/<lang>/<nn>-<slug>.md`. The frontmatter is described in `src/content.config.ts`. Add `until:` for time-limited items.
-- **AI agents:** `public/robots.txt` blocks known AI crawlers and agents from every page and allows only `/agent.md` and `/llms.txt`. Both are served from one source, `src/agent/agent.md`. Every page links to it in the footer ("Für KI-Agenten" / "For AI agents"). Keep it in line with the page copy and the claims register. Add new AI user agents to the robots group, and to the list in `tests/e2e/agents.spec.mjs`.
+- **AI agents:** AI search bots, assistants and training crawlers may read the whole site. `public/robots.txt` blocks only scrapers and data resellers without search or AI visibility (Bytespider and similar). `/agent.md` and `/llms.txt` serve one curated summary from `src/agent/agent.md`, which every footer links to. Keep it in line with the page copy and the claims register.
 - Legal pages render the Markdown in `resources/content/` at build time. English legal routes show the German text with a "German version is binding" note.
 
 ### Design system

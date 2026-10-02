@@ -1,4 +1,4 @@
-// AI agents may read only /agent.md (and /llms.txt). Search engines keep full access.
+// Search engines and AI systems may read everything; scrapers nothing. /agent.md is the curated summary.
 import { test, expect } from '@playwright/test';
 import { ALL } from './routes.mjs';
 
@@ -36,18 +36,16 @@ function allowed(groups, agent, path) {
   return best ? best.allow : true;
 }
 
-const AI = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-User', 'Claude-SearchBot', 'anthropic-ai', 'Google-Extended', 'Applebot-Extended', 'PerplexityBot', 'Perplexity-User', 'meta-externalagent', 'Amazonbot', 'Bytespider', 'CCBot', 'cohere-ai', 'MistralAI-User', 'DuckAssistBot'];
+const AI = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-User', 'Claude-SearchBot', 'Google-Extended', 'Applebot-Extended', 'PerplexityBot', 'Perplexity-User', 'meta-externalagent', 'Amazonbot', 'CCBot', 'MistralAI-User', 'DuckAssistBot'];
 const SEARCH = ['Googlebot', 'Bingbot', 'DuckDuckBot', 'Applebot'];
+const SCRAPERS = ['Bytespider', 'img2dataset', 'ImagesiftBot', 'Timpibot', 'Scrapy'];
 
-test('robots.txt: AI agents see only agent.md, search engines see everything', async ({ request }) => {
+test('robots.txt: search engines and AI systems read everything, scrapers nothing', async ({ request }) => {
   const groups = parseRobots(await (await request.get('/robots.txt')).text());
-  const paths = ALL.map((r) => r.path).concat(['/agent.md', '/llms.txt', '/media/logo-garbe.webp', '/agent.md.bak']);
+  const paths = ALL.map((r) => r.path).concat(['/agent.md', '/llms.txt', '/media/logo-garbe.webp']);
   const problems = [];
-  for (const agent of AI) for (const p of paths) {
-    const want = p === '/agent.md' || p === '/llms.txt';
-    if (allowed(groups, agent, p) !== want) problems.push(`${agent} ${want ? 'blocked from' : 'allowed on'} ${p}`);
-  }
-  for (const agent of SEARCH) for (const p of paths) if (!allowed(groups, agent, p)) problems.push(`${agent} blocked from ${p}`);
+  for (const agent of [...SEARCH, ...AI]) for (const p of paths) if (!allowed(groups, agent, p)) problems.push(`${agent} blocked from ${p}`);
+  for (const agent of SCRAPERS) for (const p of paths) if (allowed(groups, agent, p)) problems.push(`${agent} allowed on ${p}`);
   expect(problems).toEqual([]);
 });
 
@@ -58,7 +56,6 @@ test('agent.md and llms.txt are served and identical', async ({ request }) => {
   expect(l.status()).toBe(200);
   const text = await a.text();
   expect(text).toContain('hello@clearlea.se');
-  expect(text).toContain('/robots.txt');
   expect(await l.text()).toBe(text);
 });
 

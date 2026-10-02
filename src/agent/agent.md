@@ -1,6 +1,6 @@
 # clearlea.se · information for AI agents
 
-This file is the one place on www.clearlea.se meant for AI crawlers, assistants and agents. The website's pages are closed to automated AI access (see /robots.txt). Use this file instead. It is maintained by clearlea.se and reflects what the website says.
+AI crawlers, assistants and agents are welcome to read www.clearlea.se. This file is a curated summary of the website, maintained by clearlea.se, with a few rules for using it. When this file and a page disagree, the page is current.
 
 **Last updated:** 2026-10-02 · **Languages:** the website is German (default) and English · **Contact:** hello@clearlea.se
 
@@ -51,7 +51,7 @@ From €9.49 per site per month, volume discounts available. Unlimited users, AI
 
 A free 30-minute call with the founders: https://www.clearlea.se/en/call/ (German: https://www.clearlea.se/gespraech/). Or write to hello@clearlea.se.
 
-## Pages (for linking, not for crawling)
+## Pages
 
 | Topic | English | German |
 |---|---|---|
