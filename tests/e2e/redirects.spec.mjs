@@ -35,5 +35,6 @@ test('unknown paths show the 404 page', async ({ page }) => {
   // Locally the preview server has its own 404, so load the page GitHub Pages serves for unknown paths.
   const res = await page.goto(live ? '/gibt-es-nicht' : '/404.html');
   expect(res.status()).toBe(live ? 404 : 200);
-  await expect(page.locator('h1')).toHaveText('Diese Seite gibt es nicht.');
+  await expect(page.locator('h1')).toHaveText('Diese Seite fehlt in der Akte.');
+  await expect(page.getByText('Fehlt in der Akte', { exact: true })).toBeVisible();
 });

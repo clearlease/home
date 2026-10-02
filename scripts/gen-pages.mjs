@@ -69,17 +69,29 @@ const html = legalHtml('${key}');
   }
 }
 // 404: GitHub Pages serves /404.html for every unknown path, in German with an English line.
+// Easter egg: the page is a contract history with one document missing from the file.
 write('src/pages/404.astro', `${header}import Base from '../layouts/Base.astro';
 import Shell from '../designs/de/Shell.dc.html?dc';
 import '../designs/de/Shell.dc.html?dccss&lang.css';
 ---
 <Base page="NotFound" lang="de" noindex>
   <Shell client:load altHref="/en/">
-    <div class="cl-prose">
-      <p class="cl-prose-meta">404</p>
-      <h1>Diese Seite gibt es nicht.</h1>
-      <p>Vielleicht hat sich die Adresse geändert. Auf der <a href="/">Startseite</a> finden Sie alles, oder schreiben Sie uns an <a href="mailto:hello@clearlea.se">hello@clearlea.se</a>.</p>
-      <p lang="en">This page does not exist. Go to the <a href="/en/">English home page</a> or write to <a href="mailto:hello@clearlea.se">hello@clearlea.se</a>.</p>
+    <div class="cl-prose cl-404">
+      <p class="cl-prose-meta">404 · Akte unvollständig</p>
+      <h1>Diese Seite fehlt in der Akte.</h1>
+      <p>Vielleicht hat sich die Adresse geändert. Den gültigen Stand finden Sie auf der <a href="/">Startseite</a>, oder schreiben Sie uns an <a href="mailto:hello@clearlea.se">hello@clearlea.se</a>.</p>
+      <div class="cl-404-file" aria-label="Vertragshistorie dieser Website">
+        <div class="cl-404-head"><span>Vertragshistorie · clearlea.se</span><span>5 Dokumente · 1 fehlt</span></div>
+        <ol class="cl-404-chain">
+          <li><span class="cl-404-dot" aria-hidden="true"></span><span class="cl-404-doc">Hauptvertrag · Startseite</span><a href="/">Öffnen</a></li>
+          <li><span class="cl-404-dot" aria-hidden="true"></span><span class="cl-404-doc">Nachtrag 1 · Plattform</span><a href="/plattform/">Öffnen</a></li>
+          <li><span class="cl-404-dot" aria-hidden="true"></span><span class="cl-404-doc">Nachtrag 2 · Trust Center</span><a href="/trust-center/">Öffnen</a></li>
+          <li class="cl-404-missing"><span class="cl-404-dot" aria-hidden="true"></span><span class="cl-404-doc">Nachtrag 3 · diese Seite</span><span class="cl-404-flag">Fehlt in der Akte</span></li>
+          <li><span class="cl-404-dot" aria-hidden="true"></span><span class="cl-404-doc">Nachtrag 4 · Gespräch</span><a href="/gespraech/">Öffnen</a></li>
+        </ol>
+        <p class="cl-404-note">Fehlende Dokumente markieren wir, statt sie zu erfinden. Auch hier.</p>
+      </div>
+      <p lang="en" class="cl-404-en">This page is missing from the file. Go to the <a href="/en/">English home page</a> or write to <a href="mailto:hello@clearlea.se">hello@clearlea.se</a>.</p>
     </div>
   </Shell>
 </Base>

@@ -170,3 +170,46 @@ test.describe('Unterseiten', () => {
     await expect(page.locator('[data-cal-embed] iframe')).toBeAttached({ timeout: 20_000 });
   });
 });
+
+test.describe('easter eggs', () => {
+  test('typing "nachtrag" opens Nachtrag 7, Esc closes it', async ({ page }) => {
+    await page.goto('/plattform/');
+    await ready(page);
+    await page.locator('body').click({ position: { x: 5, y: 300 } });
+    await page.keyboard.type('nachtrag');
+    const card = page.getByRole('dialog', { name: '§ 1 Zwischen den Zeilen' });
+    await expect(card).toBeVisible();
+    await expect(card.getByRole('button', { name: 'Nachtrag 7 schließen' })).toBeFocused();
+    await expect(card.getByRole('link', { name: 'Gespräch vereinbaren' })).toHaveAttribute('href', '/gespraech/');
+    await page.keyboard.press('Escape');
+    await expect(card).toHaveCount(0);
+  });
+
+  test('typing "amendment" opens amendment 7 on English pages, not while typing in a field', async ({ page }) => {
+    await page.goto('/en/resources/');
+    await ready(page);
+    await page.locator('#indexrechner input').first().fill('amendment');
+    await expect(page.locator('#cl-nachtrag-7')).toHaveCount(0);
+    await page.locator('h1').click();
+    await page.keyboard.type('amendment');
+    await expect(page.getByRole('dialog', { name: '§ 1 Reading between the lines' })).toBeVisible();
+  });
+
+  test('seven clicks on the brand dot open Nachtrag 7', async ({ page }) => {
+    test.skip(!isDesktop(page), 'the glass ball is a desktop pointer gimmick');
+    await page.goto('/');
+    await ready(page);
+    const dot = page.locator('.cl-glass').first();
+    await dot.scrollIntoViewIfNeeded();
+    for (let i = 0; i < 7; i++) await dot.click({ force: true }); // it wobbles while hovered
+    await expect(page.locator('#cl-nachtrag-7')).toBeVisible();
+  });
+
+  test('the console greets developers', async ({ page }) => {
+    const logs = [];
+    page.on('console', (m) => logs.push(m.text()));
+    await page.goto('/');
+    await ready(page);
+    expect(logs.join('\n')).toContain('Sie lesen Quellcode?');
+  });
+});
