@@ -30,6 +30,7 @@ function heroFacts(file) {
 }
 
 mkdirSync('public/og', { recursive: true });
+let written = 0;
 for (const lang of ['de', 'en']) {
   for (const page of PAGES) {
     const { lines, kicker, title } = heroFacts(`src/designs/${lang}/${page}.dc.html`);
@@ -50,6 +51,7 @@ for (const lang of ['de', 'en']) {
     const svg = await satori(tree, { width: 1200, height: 630, fonts });
     const png = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render().asPng();
     writeFileSync(`public/og/${lang}-${page}.png`, png);
+    written++;
   }
 }
-console.log('og images: public/og/ (20)');
+console.log(`og images: public/og/ (${written})`);

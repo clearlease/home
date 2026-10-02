@@ -2,9 +2,7 @@
 import { readFileSync } from 'node:fs';
 import { marked } from 'marked';
 import { getCollection } from 'astro:content';
-import { route } from '../site.config.mjs';
-
-const today = () => process.env.SITE_BUILD_DATE || new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Berlin' });
+import { route, buildDay as today } from '../site.config.mjs';
 const slugOf = (id) => id.split('/').pop().replace(/^\d+-/, '');
 
 // Ressourcen items for one language, in `order`, without expired ones.

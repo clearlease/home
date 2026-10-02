@@ -15,6 +15,10 @@ export const LINKS = {
 
 export const LANGS = ['de', 'en'];
 
+// The day a build runs, in Berlin. `data-until` (designs) and `until:` (Ressourcen) compare
+// against it. SITE_BUILD_DATE=YYYY-MM-DD overrides it, e.g. to preview an expiry.
+export const buildDay = () => process.env.SITE_BUILD_DATE || new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Berlin' });
+
 // page key = canvas file name without .dc.html
 export const ROUTES = {
   Home: { de: '/', en: '/en/' },

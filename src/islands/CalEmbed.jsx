@@ -2,8 +2,9 @@
 // Gespräch page DEV note specifies: month view, brand colour #13293D, light theme, 30 min.
 // Server render and no-JS fallback: a plain link to the booking page.
 import { useEffect, useRef } from 'preact/hooks';
+import { LINKS } from '../site.config.mjs';
 
-const CAL_LINK = 'deutsch/demo';
+const CAL_LINK = LINKS.calDemo.replace('https://cal.com/', '');
 const TEXT = {
   de: { loading: 'Kalender wird geladen …', fallback: 'Freie Termine auf cal.com ansehen' },
   en: { loading: 'Loading the calendar …', fallback: 'See free slots on cal.com' },

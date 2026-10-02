@@ -1,5 +1,5 @@
 // <title> per page and language. German titles are the ones set in each design's DEV notes.
-// The meta description is taken from the page's hero subline (see compile.mjs `meta`).
+// Meta description: DESCRIPTIONS below; a page without an entry falls back to its hero subline (compile.mjs `meta`).
 export const TITLES = {
   Home: {
     de: 'clearlea.se · Operations Intelligence für Gewerbeimmobilien',

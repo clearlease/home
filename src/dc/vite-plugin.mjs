@@ -4,10 +4,9 @@
 import { readFileSync } from 'node:fs';
 import { basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { compileDC } from './compile.mjs';
+import { compileDC, SLOTS } from './compile.mjs';
 
 const RUNTIME = fileURLToPath(new URL('./runtime.js', import.meta.url));
-const SLOTS = { 'cal-embed': fileURLToPath(new URL('../islands/CalEmbed.jsx', import.meta.url)) };
 
 function compileFile(file) {
   const lang = /[\\/]designs[\\/]en[\\/]/.test(file) ? 'en' : 'de';
