@@ -12,6 +12,7 @@ import { parse } from 'parse5';
 import { fileURLToPath } from 'node:url';
 import { ROUTES, LEGAL_HREFS, LINKS, route, otherLang, buildDay } from '../site.config.mjs';
 import { mediaPath } from './media.mjs';
+import { isLive } from '../lib/expiry.mjs';
 
 const BOOL_ATTRS = new Set(['disabled', 'open', 'checked', 'selected', 'hidden', 'required', 'readonly', 'multiple', 'autofocus', 'novalidate', 'inert']);
 const DROP_ATTRS = new Set(['hint-placeholder-val', 'hint-placeholder-count', 'hint-size', 'data-anchor', 'data-until', 'data-from', 'data-slot']);
@@ -174,10 +175,7 @@ export function compileDC(source, { lang, page, file = page + '.dc.html', runtim
       return valueCode(t, { whole: false });
     }
     const tag = node.tagName;
-    const until = attr(node, 'data-until');
-    if (until && today > until) return null;
-    const from = attr(node, 'data-from');
-    if (from && today < from) return null;
+    if (!isLive({ until: attr(node, 'data-until'), from: attr(node, 'data-from') }, today, `${file}: <${tag}>`)) return null;
     const slot = attr(node, 'data-slot');
     if (slot === 'children') return `h(${JSON.stringify(tag)},${attrsCode(node)},this.props.children)`;
     if (slot) {

@@ -44,9 +44,7 @@ Compiler features used in the designs:
 - `/en` in a German file, or `/de` in an English file, links to the same page in the other language.
 - `[APP-URL]` and `[LINKEDIN-*]` resolve from `LINKS` in `src/site.config.mjs`: `[LINKEDIN-HIERONYMUS]` reads `linkedinHieronymus`, `[LINKEDIN-FABIAN]` reads `linkedinFabian`. All are set. A `null` value leaves the placeholder in the page, and the link test fails on purpose.
 - `/_blob/<id>` images resolve through the map in `src/dc/media.mjs` to `public/media/`. For a new canvas image, add its id there, then run `node scripts/import-media.mjs <dir>` to write the WebP or SVG file.
-- `data-until="YYYY-MM-DD"` drops an element from builds after that day. The deploy workflow rebuilds daily.
-- `data-from="YYYY-MM-DD"` drops an element from builds before that day, e.g. the "Neu" badge count after an item expires. Pair it with a `data-until` twin: the Neu badge shows 3 until 7 October and 2 from 8 October.
-- Build day: Berlin time, from `buildDay()` in `src/site.config.mjs`. `data-until`, `data-from` and the Ressourcen `until:` all compare against it. Run `SITE_BUILD_DATE=YYYY-MM-DD npm run build` to preview another day.
+- **Time-limited content (events):** `data-until="YYYY-MM-DD"` keeps an element through that day, and `data-from="YYYY-MM-DD"` adds it from that day on. Example: Neu badge twins with the old and new count. Ressourcen items take `until:`. All of them compare against the Berlin build day (`buildDay()` in `src/site.config.mjs`, logic in `src/lib/expiry.mjs`). The deploy workflow rebuilds nightly. Preview another day with `SITE_BUILD_DATE=YYYY-MM-DD npm run build`. `tests/unit/expiry.test.mjs` checks every dated element. Recipe, the EXPO REAL 2026 example, and what to do when the nightly deploy fails: `docs/events.md`.
 - `data-slot="cal-embed"` mounts `src/islands/CalEmbed.jsx` (the Cal.com booker, link from `LINKS.calDemo`). `data-slot="children"` renders Astro children. New slots go in `SLOTS` in `src/dc/compile.mjs`.
 - HTML comments (`<!-- DEV … -->`) are internal build notes and never reach the output.
 
@@ -61,7 +59,7 @@ Compiler features used in the designs:
 
 ### Content
 
-- Ressourcen items live in `src/content/ressourcen/<lang>/<nn>-<slug>.md`. The frontmatter is described in `src/content.config.ts`. Add `until:` for time-limited items. Cards link to their `href`; article pages are not built yet.
+- Ressourcen items live in `src/content/ressourcen/<lang>/<nn>-<slug>.md`. The frontmatter is described in `src/content.config.ts`. Add `until:` for time-limited items (see `docs/events.md`). Cards link to their `href`; article pages are not built yet.
 - **AI agents:** AI search bots, assistants and training crawlers may read the whole site. `public/robots.txt` blocks only scrapers and data resellers without search or AI visibility (Bytespider and similar). `/agent.md` and `/llms.txt` serve one curated summary from `src/agent/agent.md`, which every footer links to. Keep it in line with the page copy and the claims register.
 - Legal pages render the Markdown in `resources/content/` at build time. English legal routes show the German text with a "German version is binding" note.
 

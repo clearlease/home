@@ -2,6 +2,17 @@
 
 All notable changes to clearlea.se. Versions follow `MAJOR.MINOR.PATCH.MICRO`.
 
+## [1.0.1.1] - 2026-10-08
+
+EXPO REAL is over, and the site now shows it.
+
+### Fixed
+- The nightly rebuild failed on 8 October, so the EXPO REAL announcements stayed online after the fair. The English check now accepts translated column headings in the phone tables, and the rebuild goes through again. The phone layouts from 1.0.1.0 go live with it.
+
+### Added
+- A test that checks every dated element on every page: present on its last day, gone the day after. Dates in the wrong format now fail the build instead of never expiring.
+- `docs/events.md`: how to announce the next event, preview it and check that it disappeared afterwards.
+
 ## [1.0.1.0] - 2026-10-02
 
 Phone layouts for the parts of Website v1 that only worked on desktop.

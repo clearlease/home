@@ -3,8 +3,8 @@ name: Build and deploy to GitHub Pages
 on:
   push:
     branches: [main]
-  # Daily rebuild at 03:15 Berlin time (01:15 UTC in summer), so content with an `until`
-  # date (EXPO news, time-limited tips) drops out without a manual deploy.
+  # Daily rebuild at 03:15 Berlin time (01:15 UTC in summer), so time-limited content
+  # (data-until / data-from / until:) switches without a manual deploy. See docs/events.md.
   schedule:
     - cron: '15 1 * * *'
   workflow_dispatch:

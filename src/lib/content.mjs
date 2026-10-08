@@ -3,12 +3,13 @@ import { readFileSync } from 'node:fs';
 import { marked } from 'marked';
 import { getCollection } from 'astro:content';
 import { buildDay as today } from '../site.config.mjs';
+import { isLive } from './expiry.mjs';
 
 // Ressourcen items for one language, in `order`, without expired ones.
 export async function ressourcenItems(lang) {
   const all = await getCollection('ressourcen', (e) => e.id.startsWith(lang + '/'));
   return all
-    .filter((e) => !e.data.until || today() <= e.data.until)
+    .filter((e) => isLive({ until: e.data.until }, today(), `ressourcen/${e.id}`))
     .sort((a, b) => a.data.order - b.data.order)
     .map((e) => ({
       cat: e.data.cat,
