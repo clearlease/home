@@ -1,12 +1,13 @@
 // Checks that every English design (src/designs/en/*.dc.html) is a pure translation of its
 // German source: same elements, same attributes and styles, same script logic. Only text,
-// translatable attributes (alt, aria-label, title, placeholder) and string literals may differ.
+// translatable attributes (alt, aria-label, title, placeholder, data-label for phone table headings)
+// and string literals may differ.
 // Usage: node scripts/check-i18n.mjs [Page]     Exit code 1 on any structural difference.
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { parse } from 'parse5';
 import { stripComments, textOf } from './lib/html.mjs';
 
-const TRANSLATABLE = new Set(['alt', 'aria-label', 'title', 'placeholder', 'aria-roledescription']);
+const TRANSLATABLE = new Set(['alt', 'aria-label', 'title', 'placeholder', 'aria-roledescription', 'data-label']);
 const only = process.argv[2];
 const pages = readdirSync('src/designs/de').filter((f) => f.endsWith('.dc.html') && f !== 'Shell.dc.html').map((f) => f.replace('.dc.html', ''));
 let failed = 0;

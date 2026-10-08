@@ -64,6 +64,7 @@ This skips the test that needs cal.com.
 - **Links:** "Anmelden", LinkedIn and Cal.com links live in `LINKS` in `src/site.config.mjs`.
 - **Titles, descriptions, breadcrumbs:** these live in `src/seo.mjs`.
 - **Ressourcen items:** one Markdown file each in `src/content/ressourcen/<lang>/`. Add `until: YYYY-MM-DD` for items that should disappear after a date.
+- **Events and other time-limited content:** see [docs/events.md](docs/events.md) for where an event can appear, how to date it, how to preview it, and what to check the morning after.
 - **AI agent summary:** `src/agent/agent.md`, served at `/agent.md` and `/llms.txt`.
 - **Legal texts:** the Markdown files in `resources/content/`, German only.
 
@@ -74,7 +75,7 @@ Every claim and number must be backed by the "Website Claims & Estimates Registe
 GitHub Pages serves the site, with **Settings › Pages › Source** set to **GitHub Actions**. The custom domain comes from `public/CNAME`.
 
 - **Pushes to `main`:** `.github/workflows/deploy.yml` runs `check:i18n`, the build, `check:copy` and the unit tests, then publishes. If any step fails, nothing is published.
-- **Daily rebuild:** the same workflow also runs every night, so content with an expiry date (`until:`, `data-until`, `data-from`) changes on its own.
+- **Daily rebuild:** the same workflow also runs every night, so content with an expiry date (`until:`, `data-until`, `data-from`) changes on its own. If that run fails, nothing is published and expired content stays live: check the Actions tab the morning after an event ([docs/events.md](docs/events.md)).
 - **Pull requests:** `.github/workflows/test.yml` runs the same checks plus the Playwright suite.
 
 After a release, check the live site with `BASE_URL=https://www.clearlea.se npm test`. Then refresh changed link previews with LinkedIn's Post Inspector.
