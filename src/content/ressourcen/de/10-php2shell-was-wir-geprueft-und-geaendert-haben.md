@@ -1,7 +1,7 @@
 ---
 cat: "News"
-title: "PHP2Shell: Was wir geprüft und geändert haben"
-text: "clearlea.se nutzt kein PHP. Trotzdem haben wir unsere gesamte Infrastruktur geprüft und sichern sie weiter ab."
+title: "PHP2Shell: Was wir geprüft haben"
+text: "clearlea.se nutzt kein PHP. Weil wir Sicherheit ernst nehmen, haben wir unsere gesamte Infrastruktur geprüft."
 neu: true
 href: "Trust-Center.dc.html"
 date: "2026-10-22"
@@ -17,9 +17,9 @@ PHP läuft auf rund 69 % aller Websites, deren Serversprache bekannt ist. Hier l
 
 Die Anwendung und ihre Softwarekomponenten enthalten kein PHP. Das haben wir auf Architekturebene und an den tatsächlich ausgerollten Paketen geprüft. Die Kundenumgebungen sind nicht betroffen: Die verwalteten Cloud-Dienste darunter betreibt und aktualisiert der Cloud-Anbieter.
 
-## Wir haben trotzdem alles geprüft
+## Wir prüfen gründlich
 
-Kein PHP im Produkt heißt für uns nicht: nicht hinsehen. Wir haben unsere gesamte Infrastruktur geprüft, Umgebung für Umgebung: Container und Prozesse, Anmeldungen und Schlüssel, geänderte Systemdienste, Dateien und gespeicherte Daten, Protokolle und Firewall.
+Bei einer kritischen Lücke verlassen wir uns nicht auf Annahmen. Wir haben unsere gesamte Infrastruktur geprüft, Umgebung für Umgebung: Container und Prozesse, Anmeldungen und Schlüssel, geänderte Systemdienste, Dateien und gespeicherte Daten, Protokolle und Firewall.
 
 **Ergebnis:** kein Hinweis auf eine Kompromittierung.
 
@@ -36,14 +36,6 @@ Sicherheit beginnt bei uns nicht mit dem nächsten Patch. Diese Schutzschichten 
 - **Rechenzentren in Deutschland.** ISO-27001-zertifiziert.
 
 Für Ihre IT-Sicherheit heißt das: Eine Lücke in einer einzelnen Komponente öffnet nicht automatisch den Zugang zu Ihren Daten.
-
-## Was wir ändern
-
-- Wir sichern Admin-Zugänge zusätzlich ab.
-- Wir schränken Server-Zugänge weiter ein.
-- Wir protokollieren Webzugriffe und bewahren die Protokolle auf.
-- Wir richten regelmäßige Backups ein, als Vergleichsstand für künftige Prüfungen.
-- Wir prüfen, ob Passwörter und Schlüssel der Produktion neu vergeben werden müssen.
 
 Fragen zu unserer Sicherheit beantworten wir gern unter [hello@clearlea.se](mailto:hello@clearlea.se).
 
