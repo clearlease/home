@@ -1,7 +1,7 @@
 ---
 cat: "News"
 title: "PHP2Shell: Was wir geprüft und geändert haben"
-text: "clearlea.se nutzt kein PHP. Trotzdem prüfen wir unsere gesamte Infrastruktur und sichern sie weiter ab."
+text: "clearlea.se nutzt kein PHP. Trotzdem haben wir unsere gesamte Infrastruktur geprüft und sichern sie weiter ab."
 neu: true
 href: "Trust-Center.dc.html"
 date: "2026-10-22"
@@ -15,13 +15,25 @@ PHP läuft auf rund 69 % aller Websites, deren Serversprache bekannt ist. Hier l
 
 Die Anwendung und ihre Softwarekomponenten enthalten kein PHP. Das haben wir auf Architekturebene und an den tatsächlich ausgerollten Paketen geprüft. Die Kundenumgebungen sind nicht betroffen: Die verwalteten Cloud-Dienste darunter betreibt und aktualisiert der Cloud-Anbieter.
 
-## Wir prüfen trotzdem alles
+## Wir haben trotzdem alles geprüft
 
-Kein PHP im Produkt heißt für uns nicht: nicht hinsehen. Wir prüfen unsere gesamte Infrastruktur, Umgebung für Umgebung: Container und Prozesse, Anmeldungen und Schlüssel, geänderte Systemdienste, Dateien und gespeicherte Daten, Protokolle und Firewall.
+Kein PHP im Produkt heißt für uns nicht: nicht hinsehen. Wir haben unsere gesamte Infrastruktur geprüft, Umgebung für Umgebung: Container und Prozesse, Anmeldungen und Schlüssel, geänderte Systemdienste, Dateien und gespeicherte Daten, Protokolle und Firewall.
 
-**Ergebnis bisher:** kein Hinweis auf eine Kompromittierung.
+**Ergebnis:** kein Hinweis auf eine Kompromittierung.
 
-Die Prüfung unserer Produktionsumgebung läuft. Das Ergebnis ergänzen wir hier.
+## Was wir schon haben
+
+Sicherheit beginnt bei uns nicht mit dem nächsten Patch. Diese Schutzschichten sind in clearlea.se fest eingebaut:
+
+- **Doppelt verschlüsselte Dokumente.** Festplattenverschlüsselung schützt nur, solange ein Server ausgeschaltet ist. Im laufenden Betrieb ist sie entsperrt. Deshalb verschlüsseln wir jedes Dokument zusätzlich in der Anwendung. Ein entsperrtes Laufwerk allein gibt Ihre Dokumente nicht preis.
+- **Ihre eigenen Schlüssel.** Auf Wunsch verschlüsseln wir mit Ihren Schlüsseln, angebunden an Ihren Key Vault. Dann haben nicht einmal wir Zugriff.
+- **Eigene Instanz pro Kunde.** Getrennte Hardware, keine geteilte Datenbank, dazu strikte Mandantentrennung innerhalb der Instanz.
+- **Private Cloud oder On-Premise, auch hinter Ihrer Firewall.** clearlea.se läuft auf Wunsch in Ihrer Cloud oder auf Ihren Servern, bis hin zum vollständig isolierten Betrieb.
+- **Ihr eigenes Sprachmodell, Ihre eigenen API-Schlüssel.** Sie binden Ihr Modell an oder nutzen KI auf GPU-Servern in Deutschland. Kein Training mit Ihren Daten.
+- **Minimale Rechte, lückenloser Audit-Trail.** Jeder sieht nur, was er sehen darf. Jeder Zugriff von Nutzern, KI und Systemen ist protokolliert.
+- **Rechenzentren in Deutschland.** ISO-27001-zertifiziert.
+
+Für Ihre IT-Sicherheit heißt das: Eine Lücke in einer einzelnen Komponente öffnet nicht automatisch den Zugang zu Ihren Daten.
 
 ## Was wir ändern
 

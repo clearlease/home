@@ -1,7 +1,7 @@
 ---
 cat: "News"
 title: "PHP2Shell: what we checked and changed"
-text: "clearlea.se uses no PHP. We are checking our entire infrastructure anyway and tightening it further."
+text: "clearlea.se uses no PHP. We checked our entire infrastructure anyway and are tightening it further."
 neu: true
 href: "Trust-Center.dc.html"
 date: "2026-10-22"
@@ -15,13 +15,25 @@ PHP runs on about 69% of all websites whose server language is known. Here is wh
 
 The application and its software components contain no PHP. We checked this at architecture level and against the packages actually deployed. Customer environments are not affected: the cloud provider runs and updates the managed cloud services underneath.
 
-## We are checking everything anyway
+## We checked everything anyway
 
-No PHP in the product does not mean we stop looking. We are checking our entire infrastructure, environment by environment: containers and processes, logins and keys, changed system services, files and stored data, logs and firewall.
+No PHP in the product does not mean we stop looking. We checked our entire infrastructure, environment by environment: containers and processes, logins and keys, changed system services, files and stored data, logs and firewall.
 
-**Result so far:** no sign of compromise.
+**Result:** no sign of compromise.
 
-We are still checking our production environment and will add the result here.
+## What we already have
+
+For us, security does not start with the next patch. These layers of protection are built into clearlea.se:
+
+- **Documents encrypted twice.** Disk encryption only protects a server while it is switched off. While it runs, the disk is unlocked. That is why we also encrypt every document inside the application. An unlocked drive alone does not give away your documents.
+- **Your own keys.** On request, we encrypt with your own keys, connected to your key vault. Then not even we have access.
+- **A dedicated instance per customer.** Separate hardware, no shared database, plus strict client separation within the instance.
+- **Private cloud or on-premise, also behind your firewall.** clearlea.se can run in your cloud or on your servers, up to fully isolated operation.
+- **Your own language model, your own API keys.** Connect your own model or use AI on GPU servers in Germany. No training on your data.
+- **Least privilege, complete audit trail.** Everyone sees only what they are allowed to see. Every access by people, AI and systems is logged.
+- **Data centres in Germany.** ISO 27001-certified.
+
+For your IT security, this means a gap in a single component does not automatically open access to your data.
 
 ## What we are changing
 
