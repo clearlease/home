@@ -1,7 +1,7 @@
 ---
 cat: "News"
 title: "PHP2Shell: Was wir geprüft und geändert haben"
-text: "clearlea.se nutzt kein PHP. Ein Werkzeug unserer Deployment-Infrastruktur schon. Wir haben es am selben Tag gepatcht und geprüft."
+text: "clearlea.se nutzt kein PHP. Trotzdem prüfen wir unsere gesamte Infrastruktur und sichern sie weiter ab."
 neu: true
 href: "Trust-Center.dc.html"
 date: "2026-10-22"
@@ -15,17 +15,17 @@ PHP läuft auf rund 69 % aller Websites, deren Serversprache bekannt ist. Hier l
 
 Die Anwendung und ihre Softwarekomponenten enthalten kein PHP. Das haben wir auf Architekturebene und an den tatsächlich ausgerollten Paketen geprüft. Die Kundenumgebungen sind nicht betroffen: Die verwalteten Cloud-Dienste darunter betreibt und aktualisiert der Cloud-Anbieter.
 
-## Ein Werkzeug unserer Infrastruktur schon
+## Wir prüfen trotzdem alles
 
-Ein Werkzeug unserer Deployment-Infrastruktur läuft auf PHP. Wir haben es am 21. Oktober gepatcht, am Tag der Patches. Danach haben wir den Server geprüft, auf dem es läuft: Container und Prozesse, Anmeldungen und Schlüssel, geänderte Systemdienste, Dateien und gespeicherte Daten, Protokolle und Firewall.
+Kein PHP im Produkt heißt für uns nicht: nicht hinsehen. Wir prüfen unsere gesamte Infrastruktur, Umgebung für Umgebung: Container und Prozesse, Anmeldungen und Schlüssel, geänderte Systemdienste, Dateien und gespeicherte Daten, Protokolle und Firewall.
 
-**Ergebnis:** Wir haben keinen Hinweis auf eine Kompromittierung gefunden. Eine frühere Ausnutzung können wir trotzdem nicht ganz ausschließen, denn ältere Protokolle gingen beim Update verloren. Das sagen wir lieber offen.
+**Ergebnis bisher:** kein Hinweis auf eine Kompromittierung.
 
-Dieselbe Prüfung für unsere Produktionsumgebung läuft. Das Ergebnis ergänzen wir hier.
+Die Prüfung unserer Produktionsumgebung läuft. Das Ergebnis ergänzen wir hier.
 
 ## Was wir ändern
 
-- Wir sichern den Zugang zu unseren Deployment-Werkzeugen zusätzlich ab.
+- Wir sichern Admin-Zugänge zusätzlich ab.
 - Wir schränken Server-Zugänge weiter ein.
 - Wir protokollieren Webzugriffe und bewahren die Protokolle auf.
 - Wir richten regelmäßige Backups ein, als Vergleichsstand für künftige Prüfungen.

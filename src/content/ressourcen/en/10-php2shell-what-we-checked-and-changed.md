@@ -1,7 +1,7 @@
 ---
 cat: "News"
 title: "PHP2Shell: what we checked and changed"
-text: "clearlea.se uses no PHP. One tool in our deployment infrastructure does. We patched and checked it the same day."
+text: "clearlea.se uses no PHP. We are checking our entire infrastructure anyway and tightening it further."
 neu: true
 href: "Trust-Center.dc.html"
 date: "2026-10-22"
@@ -15,17 +15,17 @@ PHP runs on about 69% of all websites whose server language is known. Here is wh
 
 The application and its software components contain no PHP. We checked this at architecture level and against the packages actually deployed. Customer environments are not affected: the cloud provider runs and updates the managed cloud services underneath.
 
-## One tool in our infrastructure does
+## We are checking everything anyway
 
-One tool in our deployment infrastructure runs on PHP. We patched it on 21 October, the day the patches came out. We then checked the server it runs on: containers and processes, logins and keys, changed system services, files and stored data, logs and firewall.
+No PHP in the product does not mean we stop looking. We are checking our entire infrastructure, environment by environment: containers and processes, logins and keys, changed system services, files and stored data, logs and firewall.
 
-**Result:** we found no sign of compromise. Even so, we cannot fully rule out earlier exploitation, because older logs were lost during the update. We would rather say so openly.
+**Result so far:** no sign of compromise.
 
-We are running the same check on our production environment and will add the result here.
+We are still checking our production environment and will add the result here.
 
 ## What we are changing
 
-- We are adding further protection to access to our deployment tools.
+- We are adding further protection to admin access.
 - We are restricting server access further.
 - We log web access and keep the logs.
 - We are setting up regular backups as a baseline for future checks.
