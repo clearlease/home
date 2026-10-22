@@ -1,7 +1,7 @@
 ---
 cat: "News"
-title: "PHP2Shell: what we checked and changed"
-text: "clearlea.se uses no PHP. We checked our entire infrastructure anyway and are tightening it further."
+title: "PHP2Shell: what we checked"
+text: "clearlea.se uses no PHP. Because we take security seriously, we checked our entire infrastructure."
 neu: true
 href: "Trust-Center.dc.html"
 date: "2026-10-22"
@@ -17,9 +17,9 @@ PHP runs on about 69% of all websites whose server language is known. Here is wh
 
 The application and its software components contain no PHP. We checked this at architecture level and against the packages actually deployed. Customer environments are not affected: the cloud provider runs and updates the managed cloud services underneath.
 
-## We checked everything anyway
+## We check thoroughly
 
-No PHP in the product does not mean we stop looking. We checked our entire infrastructure, environment by environment: containers and processes, logins and keys, changed system services, files and stored data, logs and firewall.
+When a critical vulnerability appears, we do not rely on assumptions. We checked our entire infrastructure, environment by environment: containers and processes, logins and keys, changed system services, files and stored data, logs and firewall.
 
 **Result:** no sign of compromise.
 
@@ -36,14 +36,6 @@ For us, security does not start with the next patch. These layers of protection 
 - **Data centres in Germany.** ISO 27001-certified.
 
 For your IT security, this means a gap in a single component does not automatically open access to your data.
-
-## What we are changing
-
-- We are adding further protection to admin access.
-- We are restricting server access further.
-- We log web access and keep the logs.
-- We are setting up regular backups as a baseline for future checks.
-- We are checking whether production passwords and keys need to be replaced.
 
 Questions about our security? Write to [hello@clearlea.se](mailto:hello@clearlea.se).
 
