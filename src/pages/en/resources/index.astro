@@ -4,9 +4,10 @@ import Base from '../../../layouts/Base.astro';
 import Page, { meta } from '../../../designs/en/Ressourcen.dc.html?dc';
 import '../../../designs/en/Ressourcen.dc.html?dccss&lang.css';
 import { ressourcenItems } from '../../../lib/content.mjs';
+import { filterUrls, feedPath } from '../../../lib/articles.mjs';
 const lang = 'en';
 const items = await ressourcenItems(lang);
 ---
-<Base page="Ressourcen" lang={lang} description={meta.description} faq={meta.faq}>
-  <Page client:load items={items} />
+<Base page="Ressourcen" lang={lang} description={meta.description} faq={meta.faq} feed={feedPath(lang)}>
+  <Page client:load items={items} filterUrls={filterUrls(lang)} />
 </Base>

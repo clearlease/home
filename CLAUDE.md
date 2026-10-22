@@ -42,6 +42,7 @@ Compiler features used in the designs:
 
 - `Page.dc.html` links, with optional `data-anchor`, become production routes. `/agb`, `/datenschutz` and `/impressum` are localized.
 - `/en` in a German file, or `/de` in an English file, links to the same page in the other language.
+- `[RESSOURCE-nn]` links to the Ressourcen article with number `nn` in the page language (used by the nav "Neu" popover).
 - `[APP-URL]` and `[LINKEDIN-*]` resolve from `LINKS` in `src/site.config.mjs`: `[LINKEDIN-HIERONYMUS]` reads `linkedinHieronymus`, `[LINKEDIN-FABIAN]` reads `linkedinFabian`. All are set. A `null` value leaves the placeholder in the page, and the link test fails on purpose.
 - `/_blob/<id>` images resolve through the map in `src/dc/media.mjs` to `public/media/`. For a new canvas image, add its id there, then run `node scripts/import-media.mjs <dir>` to write the WebP or SVG file.
 - **Time-limited content (events):** `data-until="YYYY-MM-DD"` keeps an element through that day, and `data-from="YYYY-MM-DD"` adds it from that day on. Example: Neu badge twins with the old and new count. Ressourcen items take `until:`. All of them compare against the Berlin build day (`buildDay()` in `src/site.config.mjs`, logic in `src/lib/expiry.mjs`). The deploy workflow rebuilds nightly. Preview another day with `SITE_BUILD_DATE=YYYY-MM-DD npm run build`. `tests/unit/expiry.test.mjs` checks every dated element. Recipe, the EXPO REAL 2026 example, and what to do when the nightly deploy fails: `docs/events.md`.
@@ -59,7 +60,7 @@ Compiler features used in the designs:
 
 ### Content
 
-- Ressourcen items live in `src/content/ressourcen/<lang>/<nn>-<slug>.md`. The frontmatter is described in `src/content.config.ts`. Add `until:` for time-limited items (see `docs/events.md`). Cards link to their `href`; article pages are not built yet.
+- Ressourcen items live in `src/content/ressourcen/<lang>/<nn>-<slug>.md`, paired across languages by `<nn>`. The frontmatter is described in `src/content.config.ts`. Text below the frontmatter makes an article page (`/ressourcen/<slug>/`); without it the card links to `href`. Filter pages and an RSS feed are generated too. Add `until:` for time-limited items (see `docs/events.md`). Rules, checks and URLs: `docs/ressourcen.md`. New items: the `ressourcen-beitrag` skill.
 - **AI agents:** AI search bots, assistants and training crawlers may read the whole site. `public/robots.txt` blocks only scrapers and data resellers without search or AI visibility (Bytespider and similar). `/agent.md` and `/llms.txt` serve one curated summary from `src/agent/agent.md`, which every footer links to. Keep it in line with the page copy and the claims register.
 - Legal pages render the Markdown in `resources/content/` at build time. English legal routes show the German text with a "German version is binding" note.
 

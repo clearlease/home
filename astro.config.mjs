@@ -3,10 +3,12 @@ import preact from '@astrojs/preact';
 import sitemap from '@astrojs/sitemap';
 import dcPages from './src/dc/vite-plugin.mjs';
 import { SITE_URL, ROUTES } from './src/site.config.mjs';
+import { ressourcenUrlPairs } from './src/lib/articles.mjs';
 
-// hreflang pairs for the sitemap: DE and EN slugs differ, so pair them from the route map.
+// hreflang pairs for the sitemap: DE and EN slugs differ, so pair them from the route map
+// and, for Ressourcen articles and filters, from the content file names.
 const pairs = new Map();
-for (const r of Object.values(ROUTES)) {
+for (const r of [...Object.values(ROUTES), ...ressourcenUrlPairs()]) {
   const de = SITE_URL + r.de;
   const en = SITE_URL + r.en;
   const links = [{ lang: 'de', url: de }, { lang: 'en', url: en }];

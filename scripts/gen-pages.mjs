@@ -2,7 +2,8 @@
 // design from src/designs/<lang>/. Re-run after adding a page to ROUTES:  node scripts/gen-pages.mjs
 import { mkdirSync, writeFileSync, existsSync, rmSync } from 'node:fs';
 import { dirname, relative } from 'node:path';
-import { ROUTES, LANGS } from '../src/site.config.mjs';
+import { ROUTES, LANGS, route } from '../src/site.config.mjs';
+import { FILTERS } from '../src/lib/articles.mjs';
 
 const DESIGN_PAGES = ['Home', 'Plattform', 'Loesungen-Bestandshalter', 'Loesungen-Property', 'Loesungen-Filialisten', 'KI-Teams', 'Trust-Center', 'Ressourcen', 'Unternehmen', 'Gespraech'];
 const LEGAL = ['Impressum', 'Datenschutz', 'AGB'];
@@ -30,9 +31,10 @@ for (const lang of LANGS) {
       baseProps = ` jsonLd={[organization(lang, { founders: true })]}`;
     }
     if (page === 'Ressourcen') {
-      extraImports = `import { ressourcenItems } from '${rel(file, 'src/lib/content.mjs')}';\n`;
+      extraImports = `import { ressourcenItems } from '${rel(file, 'src/lib/content.mjs')}';\nimport { filterUrls, feedPath } from '${rel(file, 'src/lib/articles.mjs')}';\n`;
       extraFront = `const items = await ressourcenItems(lang);\n`;
-      props = ' items={items}';
+      props = ' items={items} filterUrls={filterUrls(lang)}';
+      baseProps = ' feed={feedPath(lang)}';
     }
     write(file, `${header}import Base from '${rel(file, 'src/layouts/Base.astro')}';
 import Page, { meta } from '${rel(file, design)}?dc';
@@ -47,6 +49,7 @@ ${extraFront}---
 
   const shell = `src/designs/${lang}/Shell.dc.html`;
   if (!existsSync(shell)) continue;
+  ressourcenPages(lang, shell);
   for (const key of LEGAL) {
     const file = fileFor(ROUTES[key][lang]);
     const note = lang === 'en'
@@ -68,6 +71,88 @@ const html = legalHtml('${key}');
 `);
   }
 }
+// Ressourcen: one static page per filter, one dynamic route for the articles, one RSS feed.
+function ressourcenPages(lang, shell) {
+  const base = route('Ressourcen', lang);
+  const design = `src/designs/${lang}/Ressourcen.dc.html`;
+  const other = lang === 'de' ? 'en' : 'de';
+  FILTERS(lang).forEach(({ slug, cat }, i) => {
+    const file = fileFor(base + slug + '/');
+    const otherPath = route('Ressourcen', other) + FILTERS(other)[i].slug + '/';
+    write(file, `${header}import Base from '${rel(file, 'src/layouts/Base.astro')}';
+import Page, { meta } from '${rel(file, design)}?dc';
+import '${rel(file, design)}?dccss&lang.css';
+import { ressourcenItems } from '${rel(file, 'src/lib/content.mjs')}';
+import { filterUrls, feedPath } from '${rel(file, 'src/lib/articles.mjs')}';
+import { LABELS } from '${rel(file, 'src/seo.mjs')}';
+const lang = '${lang}';
+const items = await ressourcenItems(lang);
+const paths = { ${lang}: '${base + slug}/', ${other}: '${otherPath}' };
+---
+<Base page="Ressourcen" lang={lang} paths={paths} title={\`${cat} · \${LABELS.Ressourcen[lang]} · clearlea.se\`} crumb="${cat}" description={meta.description} faq={meta.faq} feed={feedPath(lang)}>
+  <Page client:load items={items} filter="${cat}" filterUrls={filterUrls(lang)} />
+</Base>
+`);
+  });
+
+  const file = fileFor(base + '[slug]/').replace('/[slug]/index.astro', '/[slug].astro');
+  const t = lang === 'de'
+    ? { more: 'Mehr erfahren', all: 'Alle Ressourcen', next: (c) => `Weitere ${c}`, cta: 'Gespräch mit Hieronymus' }
+    : { more: 'Learn more', all: 'All resources', next: (c) => `More ${c.toLowerCase()}`, cta: 'Talk to Hieronymus' };
+  write(file, `${header}// Ressourcen articles: Markdown text below the frontmatter in src/content/ressourcen/${lang}/.
+import Base from '${rel(file, 'src/layouts/Base.astro')}';
+import Shell from '${rel(file, shell)}?dc';
+import '${rel(file, shell)}?dccss&lang.css';
+import { ressourcenArticles } from '${rel(file, 'src/lib/content.mjs')}';
+import { feedPath } from '${rel(file, 'src/lib/articles.mjs')}';
+import { newsArticle } from '${rel(file, 'src/lib/schema.mjs')}';
+import { SITE_URL, route } from '${rel(file, 'src/site.config.mjs')}';
+export async function getStaticPaths() {
+  return (await ressourcenArticles('${lang}')).map((a) => ({ params: { slug: a.slug }, props: { a } }));
+}
+const lang = '${lang}';
+const { a } = Astro.props;
+const paths = { ${lang}: a.path, ${other}: a.altPath };
+const ogFile = \`/og/${lang}-ressourcen-\${a.slug}.png\`;
+const next = a.catPath ? ${JSON.stringify(t.next('X'))}.replace('X', ${lang === 'de' ? 'a.cat' : 'a.cat.toLowerCase()'}) : null;
+---
+<Base page="Ressourcen" lang={lang} paths={paths} title={\`\${a.title} · clearlea.se\`} description={a.text} crumb={a.title} ogType="article" ogFile={ogFile} feed={feedPath(lang)} jsonLd={[newsArticle(lang, a, SITE_URL + a.visual.src)]}>
+  <Shell client:load altHref={a.altPath}>
+    <article class="cl-prose">
+      <p class="cl-prose-meta">{a.catPath ? <a href={a.catPath}>{a.cat}</a> : a.cat}<span aria-hidden="true">·</span><time datetime={a.date}>{a.dateLabel}</time></p>
+      <h1>{a.title}</h1>
+      <p class="cl-article-lead">{a.text}</p>
+      <figure class="cl-article-visual"><img src={a.visual.src} alt={a.visual.alt} width="1200" height="500" /></figure>
+      <Fragment set:html={a.html} />
+      {a.moreHref && <p><a href={a.moreHref}>${t.more} →</a></p>}
+      <hr />
+      <p class="cl-article-foot">{next && <a href={a.catPath}>{next}</a>}<a href={route('Ressourcen', lang)}>${t.all}</a><a href={route('Gespraech', lang)}>${t.cta} →</a></p>
+    </article>
+  </Shell>
+</Base>
+`);
+
+  const feed = `src/pages${base}feed.xml.ts`;
+  write(feed, `// GENERATED by scripts/gen-pages.mjs. RSS feed of the Ressourcen items.
+import { ressourcenFeedItems } from '${rel(feed, 'src/lib/content.mjs')}';
+import { rssFeed, feedPath } from '${rel(feed, 'src/lib/articles.mjs')}';
+import { SITE_URL, route } from '${rel(feed, 'src/site.config.mjs')}';
+import { TITLES, DESCRIPTIONS } from '${rel(feed, 'src/seo.mjs')}';
+const lang = '${lang}';
+export async function GET() {
+  const body = rssFeed({
+    title: TITLES.Ressourcen[lang],
+    link: SITE_URL + route('Ressourcen', lang),
+    description: DESCRIPTIONS.Ressourcen?.[lang] ?? TITLES.Ressourcen[lang],
+    lang,
+    self: SITE_URL + feedPath(lang),
+    items: await ressourcenFeedItems(lang),
+  });
+  return new Response(body, { headers: { 'Content-Type': 'application/rss+xml; charset=utf-8' } });
+}
+`);
+}
+
 // 404: GitHub Pages serves /404.html for every unknown path, in German with an English line.
 // Easter egg: the page is a contract history with one document missing from the file.
 write('src/pages/404.astro', `${header}import Base from '../layouts/Base.astro';

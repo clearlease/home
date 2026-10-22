@@ -44,3 +44,20 @@ export function softwareApplication(lang) {
     },
   };
 }
+
+// NewsArticle for a Ressourcen article page.
+export function newsArticle(lang, a, image) {
+  const { '@context': _, ...publisher } = organization(lang);
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'NewsArticle',
+    headline: a.title,
+    description: a.text,
+    datePublished: a.date,
+    inLanguage: lang,
+    url: SITE_URL + a.path,
+    mainEntityOfPage: SITE_URL + a.path,
+    image: [image],
+    publisher,
+  };
+}

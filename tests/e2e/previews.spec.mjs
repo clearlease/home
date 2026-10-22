@@ -5,14 +5,14 @@ import { ALL, LEGAL_PAGES } from './routes.mjs';
 
 test('link-preview metadata on every page', async ({ page, request }) => {
   const problems = [];
-  for (const { page: name, lang, path } of ALL) {
+  for (const { page: name, lang, path, og } of ALL) {
     await page.goto(path);
     const meta = (sel) => page.evaluate((q) => document.querySelector(q)?.getAttribute('content') ?? null, sel);
     const desc = await meta('meta[name=description]');
     const img = await meta('meta[property="og:image"]');
     if (!desc || desc.length > 160) problems.push(`${path}: description ${desc ? desc.length + ' chars' : 'missing'}`);
     if (!LEGAL_PAGES.includes(name)) {
-      if (!img?.endsWith(`/og/${lang}-${name}.png`)) problems.push(`${path}: og:image ${img}`);
+      if (!img?.endsWith(og ?? `/og/${lang}-${name}.png`)) problems.push(`${path}: og:image ${img}`);
     }
     const local = new URL(img).pathname;
     const res = await request.get(local);
