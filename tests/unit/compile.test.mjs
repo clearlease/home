@@ -27,6 +27,13 @@ describe('links', () => {
     expect(code('<a href="[LINKEDIN-HIERONYMUS]">x</a>')).toContain(LINKS.linkedinHieronymus);
   });
 
+  it('resolves [RESSOURCE-nn] to the article in the page language', () => {
+    expect(code('<a href="[RESSOURCE-02]">x</a>')).toContain('/ressourcen/mcp-server-clearlea-se-als-quelle/');
+    expect(code('<a href="[RESSOURCE-02]">x</a>', { lang: 'en' })).toContain('/en/resources/mcp-server-clearlea-se-as-source/');
+    expect(() => code('<a href="[RESSOURCE-99]">x</a>')).toThrow(/no file/);
+    expect(() => code('<a href="[RESSOURCE-04]">x</a>')).toThrow(/no article text/);
+  });
+
   it('refuses links to pages that do not exist', () => {
     expect(() => code('<a href="Gibtsnicht.dc.html">x</a>')).toThrow(/unknown page/);
   });

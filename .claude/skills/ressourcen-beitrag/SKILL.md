@@ -13,7 +13,7 @@ Target: PR open within 10 minutes. CI then tests and, after merge, deploys (abou
 
 - Notion: the claims check needs the "Website Claims & Estimates Register". If no Notion tool answers, tell the founder to connect Notion with `/mcp` now, or to confirm each claim by hand in step 4.
 - Git: `git fetch origin && git switch -c ressourcen/<short-slug> origin/main`. Always branch from a fresh `origin/main`, never from the current branch, so the number in step 2 is free.
-- Say once, every run: the nav "Neu" popover is hardcoded in the designs and does **not** pick up new items. Ask whether this item should replace one there; if yes, that is a separate design edit.
+- Say once, every run: the nav "Neu" popover is hardcoded in the designs and does **not** pick up new items. Ask whether this item should replace one there; if yes, edit the popover entry in every design (`src/designs/{de,en}/*.dc.html`, then `node scripts/make-shell.mjs`), linking it with `href="[RESSOURCE-<nn>]"`.
 
 ## 1. Ask (only what is missing from the request)
 

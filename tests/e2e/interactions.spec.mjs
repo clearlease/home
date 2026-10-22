@@ -256,6 +256,18 @@ test.describe('Ressourcen articles', () => {
     await expect(page.getByRole('tab', { name: 'Produkt-Updates' })).toHaveAttribute('aria-selected', 'true');
   });
 
+  test('the nav "Neu" popover links to the articles, in each language', async ({ page }) => {
+    test.skip(!isDesktop(page), 'the popover sits in the desktop nav');
+    for (const [path, article] of [['/plattform/', '/ressourcen/mcp-server-clearlea-se-als-quelle/'], ['/en/platform/', '/en/resources/workflows-with-9-built-in-guarantees/']]) {
+      await page.goto(path);
+      await page.waitForFunction(() => !document.querySelector('astro-island[ssr]'));
+      await page.locator('header button[aria-controls="news-pop"]').click();
+      await page.locator(`#news-pop a[href="${article}"]`).click();
+      await expect(page).toHaveURL(new RegExp(article.replace(/\//g, '\\/') + '$'));
+      await expect(page.locator('h1')).toBeVisible();
+    }
+  });
+
   test('a filter tab updates the URL without a new history entry', async ({ page }) => {
     await page.goto('/en/resources/');
     await page.waitForFunction(() => !document.querySelector('astro-island[ssr]'));

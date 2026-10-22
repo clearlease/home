@@ -6,13 +6,15 @@
 // - drops <helmet> (its CSS is returned separately), DEV comments and canvas-only attributes;
 // - rewrites links: `Page.dc.html` (+ data-anchor) -> production route for the page language,
 //   legal paths -> localized legal routes, `/en` (in DE files) or `/de` (in EN files) -> this
-//   page in the other language, [APP-URL] / [LINKEDIN-*] -> values from src/site.config.mjs;
+//   page in the other language, [APP-URL] / [LINKEDIN-*] -> values from src/site.config.mjs,
+//   [RESSOURCE-nn] -> the Ressourcen article with number nn in the page language;
 // - rewrites canvas images /_blob/<id> -> /media/<name>.webp|svg.
 import { parse } from 'parse5';
 import { fileURLToPath } from 'node:url';
 import { ROUTES, LEGAL_HREFS, LINKS, route, otherLang, buildDay } from '../site.config.mjs';
 import { mediaPath } from './media.mjs';
 import { isLive } from '../lib/expiry.mjs';
+import { articlePathByNumber } from '../lib/articles.mjs';
 
 const BOOL_ATTRS = new Set(['disabled', 'open', 'checked', 'selected', 'hidden', 'required', 'readonly', 'multiple', 'autofocus', 'novalidate', 'inert']);
 const DROP_ATTRS = new Set(['hint-placeholder-val', 'hint-placeholder-count', 'hint-size', 'data-anchor', 'data-until', 'data-from', 'data-slot']);
@@ -124,6 +126,8 @@ export function compileDC(source, { lang, page, file = page + '.dc.html', runtim
     if (LEGAL_HREFS[href]) return route(LEGAL_HREFS[href], lang);
     if ((lang === 'de' && href === '/en') || (lang === 'en' && href === '/de')) return ROUTES[page] ? route(page, other) : ALT_HREF;
     if (href === '[APP-URL]') return LINKS.appUrl || (warnings.push('[APP-URL] not set'), href);
+    const art = href.match(/^\[RESSOURCE-(\d+)\]$/);
+    if (art) return articlePathByNumber(lang, art[1]);
     const li = href.match(/^\[LINKEDIN(?:-([A-Z]+))?\]$/);
     if (li) {
       const key = li[1] ? 'linkedin' + li[1][0] + li[1].slice(1).toLowerCase() : 'linkedin';

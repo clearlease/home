@@ -4,7 +4,7 @@
 // One item = one Markdown file per language, src/content/ressourcen/<lang>/<nn>-<slug>.md.
 // The same <nn> pairs the German and the English file; <slug> becomes the URL.
 // A file with text below the frontmatter is an article with a page of its own.
-import { readdirSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { marked } from 'marked';
 import { SITE_URL, ROUTES, route } from '../site.config.mjs';
 
@@ -101,6 +101,15 @@ function bodyErrors(e) {
     else if (lang === 'en' && t.href.startsWith('/') && !t.href.startsWith('/en/')) errors.push(`${e.id}: English article links to a German page (${t.href})`);
   });
   return errors;
+}
+
+// `[RESSOURCE-02]` in a design: the article page of item 02 in that language. Throws if
+// there is no such file or it has no article text, so a nav link can never point to a 404.
+export function articlePathByNumber(lang, nn, dir = 'src/content/ressourcen') {
+  const f = readdirSync(`${dir}/${lang}`).find((x) => numOf(x) === nn);
+  if (!f) throw new Error(`[RESSOURCE-${nn}]: no file ${dir}/${lang}/${nn}-*.md`);
+  if (!/^---\n[\s\S]*?\n---\n?\s*\S/.test(readFileSync(`${dir}/${lang}/${f}`, 'utf8'))) throw new Error(`[RESSOURCE-${nn}]: ${lang}/${f} has no article text`);
+  return articlePath(lang, slugOf(f));
 }
 
 // Sitemap hreflang pairs from the file names alone (astro.config.mjs cannot read the collection).

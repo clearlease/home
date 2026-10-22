@@ -48,4 +48,4 @@ Ask Claude Code for "neuer Beitrag" (skill: `.claude/skills/ressourcen-beitrag/`
 
 ## Not automatic
 
-The nav "Neu" popover is hardcoded in every design. New items do not appear there until someone edits the designs.
+The nav "Neu" popover is hardcoded in every design. New items do not appear there until someone edits the designs. To link an entry to an article, write `href="[RESSOURCE-02]"` (the item number): the compiler turns it into the article URL in the page language and stops the build if that item has no article text.

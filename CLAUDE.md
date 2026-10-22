@@ -42,6 +42,7 @@ Compiler features used in the designs:
 
 - `Page.dc.html` links, with optional `data-anchor`, become production routes. `/agb`, `/datenschutz` and `/impressum` are localized.
 - `/en` in a German file, or `/de` in an English file, links to the same page in the other language.
+- `[RESSOURCE-nn]` links to the Ressourcen article with number `nn` in the page language (used by the nav "Neu" popover).
 - `[APP-URL]` and `[LINKEDIN-*]` resolve from `LINKS` in `src/site.config.mjs`: `[LINKEDIN-HIERONYMUS]` reads `linkedinHieronymus`, `[LINKEDIN-FABIAN]` reads `linkedinFabian`. All are set. A `null` value leaves the placeholder in the page, and the link test fails on purpose.
 - `/_blob/<id>` images resolve through the map in `src/dc/media.mjs` to `public/media/`. For a new canvas image, add its id there, then run `node scripts/import-media.mjs <dir>` to write the WebP or SVG file.
 - **Time-limited content (events):** `data-until="YYYY-MM-DD"` keeps an element through that day, and `data-from="YYYY-MM-DD"` adds it from that day on. Example: Neu badge twins with the old and new count. Ressourcen items take `until:`. All of them compare against the Berlin build day (`buildDay()` in `src/site.config.mjs`, logic in `src/lib/expiry.mjs`). The deploy workflow rebuilds nightly. Preview another day with `SITE_BUILD_DATE=YYYY-MM-DD npm run build`. `tests/unit/expiry.test.mjs` checks every dated element. Recipe, the EXPO REAL 2026 example, and what to do when the nightly deploy fails: `docs/events.md`.
