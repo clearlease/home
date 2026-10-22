@@ -41,7 +41,7 @@ date: "2026-10-22"    # today in Berlin: TZ=Europe/Berlin date +%F
 ```
 
 - `neu: true` on at most 3 items per language. Set the new item to `true` and the oldest `neu: true` item to `false`.
-- Image (optional): save it as `public/media/ressourcen/<slug>.webp` (or .jpg/.png), about 1200×500. It is shown at 12:5 and cropped to fit, so keep the subject in the middle. Add to both files `image: "/media/ressourcen/<slug>.webp"` and `imageAlt: "…"`, one sentence on what the picture shows, in that file's language. Both languages may use the same file.
+- Image (optional): save it as PNG, `public/media/ressourcen/<slug>.png`, ideally 2400×1000 (at least 1200×500). It is shown at 12:5 and cropped to fit, so keep the subject in the middle. Add to both files `image: "/media/ressourcen/<slug>.png"` and `imageAlt: "…"`, one sentence on what the picture shows, in that file's language. Both languages may use the same file.
 - Body: 150 to 400 words of Markdown. `##` headings, lists, bold, links. No raw HTML, no images inside the text (use `image:` above). Links inside the body are production URLs in the article's language (`/plattform/` in German, `/en/platform/` in English).
 
 ## 3. German draft

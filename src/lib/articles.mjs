@@ -77,7 +77,8 @@ export function validate(entries) {
       if (RESERVED.has(slugOf(e.id))) errors.push(`${e.id}: slug "${slugOf(e.id)}" is reserved for a filter page or the feed`);
       if (!e.data.date) errors.push(`${e.id}: an article (text below the frontmatter) needs date: YYYY-MM-DD`);
       errors.push(...bodyErrors(e));
-      if (e.data.image && !existsSync('public' + e.data.image)) errors.push(`${e.id}: image ${e.data.image} not found in public/`);
+      if (e.data.image && !e.data.image.endsWith('.png')) errors.push(`${e.id}: article images are PNG (${e.data.image})`);
+      else if (e.data.image && !existsSync('public' + e.data.image)) errors.push(`${e.id}: image ${e.data.image} not found in public/`);
       if (e.data.image && !e.data.imageAlt) errors.push(`${e.id}: an image needs imageAlt (what the picture shows)`);
     }
   }
