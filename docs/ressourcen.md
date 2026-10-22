@@ -14,6 +14,8 @@ The number pairs the two languages. The rest of the file name is the URL slug.
 - **Frontmatter only:** a tile that links to `href` (a page, an anchor such as `#indexrechner`, or an external URL).
 - **Text below the frontmatter:** an article with its own page, `/ressourcen/<slug>/` and `/en/resources/<slug>/`. The tile links there, and `href` becomes the "Mehr erfahren" link at the end. Articles need `date: YYYY-MM-DD`.
 
+Each article page shows a visual under the lead: its own `image:` (a file in `public/`, with `imageAlt`), or a generated brand visual with the category (`public/og/<lang>-ressourcen-<slug>-visual.png`, written by `npm run build` / `npm run og`). Visuals are shown at 12:5 and cropped to fit.
+
 Fields are described in `src/content.config.ts`. Dated items come first in the list (newest first), then undated ones by `order`.
 
 ## What the build checks
@@ -23,6 +25,7 @@ Fields are described in `src/content.config.ts`. Dated items come first in the l
 - a number has no twin in the other language, or appears twice;
 - one language has article text and the other does not;
 - `cat`, `date`, `until` or `neu` differ between the two languages;
+- an article's `image` is missing from `public/` or has no `imageAlt`;
 - an article has no `date`, or its slug is `news`, `produkt-updates`, `werkzeuge`, `product-updates`, `tools` or `feed.xml`;
 - article text contains raw HTML, a `.dc.html` link, or a link into the other language.
 

@@ -250,6 +250,9 @@ test.describe('Ressourcen articles', () => {
     await expect(page).toHaveURL(/\/ressourcen\/mcp-server-clearlea-se-als-quelle\/$/);
     await expect(page.locator('h1')).toHaveText('MCP-Server: clearlea.se als Quelle für Ihre KI');
     await expect(page.locator('.cl-prose-meta time')).toHaveAttribute('datetime', /^\d{4}-\d{2}-\d{2}$/);
+    const visual = page.locator('.cl-article-visual img');
+    await expect(visual).toHaveAttribute('src', '/og/de-ressourcen-mcp-server-clearlea-se-als-quelle-visual.png');
+    expect(await visual.evaluate((img) => img.complete && img.naturalWidth)).toBe(1200);
     await expect(page.locator('a[hreflang=en]').first()).toHaveAttribute('href', '/en/resources/mcp-server-clearlea-se-as-source/');
     await page.getByRole('link', { name: 'Weitere Produkt-Updates' }).click();
     await expect(page).toHaveURL(/\/ressourcen\/produkt-updates\/$/);

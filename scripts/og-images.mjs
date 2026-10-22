@@ -7,14 +7,18 @@ import { parse } from 'parse5';
 import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
 import { ROUTES } from '../src/site.config.mjs';
-import { slugOf, articlePath } from '../src/lib/articles.mjs';
+import { slugOf, articlePath, visualPath } from '../src/lib/articles.mjs';
 
 const PAGES = ['Home', 'Plattform', 'Loesungen-Bestandshalter', 'Loesungen-Property', 'Loesungen-Filialisten', 'KI-Teams', 'Trust-Center', 'Ressourcen', 'Unternehmen', 'Gespraech'];
 const font = (w) => readFileSync(`node_modules/@fontsource/montserrat/files/montserrat-latin-${w}-normal.woff`);
 const fonts = [500, 600, 700].map((weight) => ({ name: 'Montserrat', data: font(weight), weight, style: 'normal' }));
 const logo = 'data:image/svg+xml;base64,' + readFileSync('public/media/clearlease-logo.svg').toString('base64');
 // the brand "c" and its dot, same path and proportions as the hero motif on every page
-const motif = 'data:image/svg+xml;base64,' + Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="4 8 22 15"><path fill="rgba(19,41,61,0.06)" d="m 11.484882,21.769442 q -1.8818515,0 -3.3604495,-0.784105 -1.456195,-0.806508 -2.285106,-2.195494 -0.828911,-1.388986 -0.828911,-3.158823 0,-1.79224 0.828911,-3.158823 0.828911,-1.388986 2.285106,-2.173091 1.478598,-0.7841046 3.3604495,-0.7841046 1.747434,0 3.069211,0.7168956 1.34418,0.694493 2.038673,2.061076 l -2.150688,1.254568 q -0.537672,-0.851314 -1.321777,-1.254568 -0.761702,-0.403254 -1.657822,-0.403254 -1.030538,0 -1.8594485,0.44806 -0.828911,0.44806 -1.299374,1.299374 -0.470463,0.828911 -0.470463,1.993867 0,1.164956 0.470463,2.01627 0.470463,0.828911 1.299374,1.276971 0.8289105,0.44806 1.8594485,0.44806 0.89612,0 1.657822,-0.403254 0.784105,-0.403254 1.321777,-1.254568 l 2.150688,1.254568 q -0.694493,1.34418 -2.038673,2.083479 -1.321777,0.716896 -3.069211,0.716896 z"/><circle cx="20.6" cy="20.3" r="1.5" fill="rgba(19,41,61,0.10)"/></svg>`).toString('base64');
+const motifSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="4 8 22 15"><path fill="rgba(19,41,61,0.06)" d="m 11.484882,21.769442 q -1.8818515,0 -3.3604495,-0.784105 -1.456195,-0.806508 -2.285106,-2.195494 -0.828911,-1.388986 -0.828911,-3.158823 0,-1.79224 0.828911,-3.158823 0.828911,-1.388986 2.285106,-2.173091 1.478598,-0.7841046 3.3604495,-0.7841046 1.747434,0 3.069211,0.7168956 1.34418,0.694493 2.038673,2.061076 l -2.150688,1.254568 q -0.537672,-0.851314 -1.321777,-1.254568 -0.761702,-0.403254 -1.657822,-0.403254 -1.030538,0 -1.8594485,0.44806 -0.828911,0.44806 -1.299374,1.299374 -0.470463,0.828911 -0.470463,1.993867 0,1.164956 0.470463,2.01627 0.470463,0.828911 1.299374,1.276971 0.8289105,0.44806 1.8594485,0.44806 0.89612,0 1.657822,-0.403254 0.784105,-0.403254 1.321777,-1.254568 l 2.150688,1.254568 q -0.694493,1.34418 -2.038673,2.083479 -1.321777,0.716896 -3.069211,0.716896 z"/><circle cx="20.6" cy="20.3" r="1.5" fill="rgba(19,41,61,0.10)"/></svg>`;
+const b64 = (svg) => 'data:image/svg+xml;base64,' + Buffer.from(svg).toString('base64');
+const motif = b64(motifSvg);
+// stronger motif for the article visual, which has no headline competing with it
+const motifStrong = b64(motifSvg.replace('0.06', '0.13').replace('0.10', '0.22'));
 
 const el = (type, style, ...children) => ({ type, props: { style: { display: 'flex', ...style }, children: children.length === 1 ? children[0] : children } });
 const text = (n) => (n.nodeName === '#text' ? n.value : (n.childNodes || []).map(text).join(''));
@@ -28,6 +32,16 @@ function heroFacts(file) {
   const kickerEl = (h1.parentNode.childNodes || []).filter((c) => c.tagName).find((c) => c !== h1 && c.tagName === 'span');
   const kicker = kickerEl ? text(kickerEl).replace(/\s+/g, ' ').trim() : 'clearlea.se';
   return { title, lines: lines.length > 1 ? lines.map((l) => l.replace(/­/g, '')) : [title], kicker };
+}
+
+// Article visual (shown under the lead when an article has no image of its own): motif and category, no text to repeat the H1.
+async function renderVisual(file, kicker) {
+  const tree = el('div', { width: 1200, height: 500, background: '#E7E5DF', position: 'relative', fontFamily: 'Montserrat', color: '#13293d' },
+    { type: 'img', props: { src: motifStrong, width: 940, height: 641, style: { position: 'absolute', right: -140, top: -90 } } },
+    el('div', { position: 'absolute', left: 72, bottom: 64, alignItems: 'center', gap: 14, fontSize: 26, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#1d6485' },
+      el('div', { width: 12, height: 12, borderRadius: 9999, background: '#13293d' }), kicker));
+  const svg = await satori(tree, { width: 1200, height: 500, fonts });
+  writeFileSync(file, new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render().asPng());
 }
 
 async function render(file, { lines, kicker, title, url }) {
@@ -65,6 +79,7 @@ for (const lang of ['de', 'en']) {
     const get = (k) => fm.match(new RegExp(`^${k}:\\s*"?(.*?)"?\\s*$`, 'm'))[1];
     const slug = slugOf(f);
     await render(`public/og/${lang}-ressourcen-${slug}.png`, { kicker: get('cat'), title: get('title'), lines: [get('title')], url: 'clearlea.se' + articlePath(lang, slug).replace(/\/$/, '') });
+    if (!/^image:/m.test(fm)) await renderVisual('public' + visualPath(lang, slug), get('cat'));
     written++;
   }
 }

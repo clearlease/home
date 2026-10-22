@@ -21,6 +21,7 @@ Target: PR open within 10 minutes. CI then tests and, after merge, deploys (abou
 - Category: News, Produkt-Updates or Werkzeuge (EN: News, Product updates, Tools).
 - Further link at the end of the article (a page on the site, e.g. `Plattform.dc.html#workflows`, or an external URL). Optional.
 - End date, only for events and offers that expire (`until: YYYY-MM-DD`; tile and feed disappear after that day, the article page stays).
+- An image for the article page (photo, screenshot, graphic), optional. Without one the build generates a brand visual with the category, so articles in the same category look alike. A real image is better for anything people will share.
 
 ## 2. Files
 
@@ -40,7 +41,8 @@ date: "2026-10-22"    # today in Berlin: TZ=Europe/Berlin date +%F
 ```
 
 - `neu: true` on at most 3 items per language. Set the new item to `true` and the oldest `neu: true` item to `false`.
-- Body: 150 to 400 words of Markdown. `##` headings, lists, bold, links. No raw HTML, no images. Links inside the body are production URLs in the article's language (`/plattform/` in German, `/en/platform/` in English).
+- Image (optional): save it as `public/media/ressourcen/<slug>.webp` (or .jpg/.png), about 1200×500. It is shown at 12:5 and cropped to fit, so keep the subject in the middle. Add to both files `image: "/media/ressourcen/<slug>.webp"` and `imageAlt: "…"`, one sentence on what the picture shows, in that file's language. Both languages may use the same file.
+- Body: 150 to 400 words of Markdown. `##` headings, lists, bold, links. No raw HTML, no images inside the text (use `image:` above). Links inside the body are production URLs in the article's language (`/plattform/` in German, `/en/platform/` in English).
 
 ## 3. German draft
 

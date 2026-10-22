@@ -73,6 +73,12 @@ describe('validate', () => {
     expect(validate(pair('01', d, '[x](/plattform/)', '[x](/plattform/)')).join()).toMatch(/English article links to a German page/);
     expect(validate(pair('01', d, '[x](/plattform/) [y](https://a.b)', '[x](/en/platform/)'))).toEqual([]);
   });
+  it('needs an existing file and alt text for an article image', () => {
+    const d = { date: '2026-10-22' };
+    expect(validate(pair('01', { ...d, image: '/media/nope.webp', imageAlt: 'x' }, 'Text.')).join()).toMatch(/not found in public/);
+    expect(validate(pair('01', { ...d, image: '/media/clearlease-logo.svg' }, 'Text.')).join()).toMatch(/needs imageAlt/);
+    expect(validate(pair('01', { ...d, image: '/media/clearlease-logo.svg', imageAlt: 'Logo' }, 'Text.'))).toEqual([]);
+  });
   it('passes on the real content', () => {
     const real = ['de', 'en'].flatMap((l) => readdirSync(`src/content/ressourcen/${l}`).map((f) => {
       const src = readFileSync(`src/content/ressourcen/${l}/${f}`, 'utf8');
