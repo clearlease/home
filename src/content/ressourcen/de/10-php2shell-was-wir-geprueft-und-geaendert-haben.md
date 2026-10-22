@@ -5,7 +5,7 @@ text: "clearlea.se nutzt kein PHP. Trotzdem haben wir unsere gesamte Infrastrukt
 neu: true
 href: "Trust-Center.dc.html"
 date: "2026-10-22"
-image: "/media/ressourcen/php2shell.webp"
+image: "/media/ressourcen/php2shell.png"
 imageAlt: "Offenes Schloss neben dem Schriftzug PHP2Shell, eingestuft als kritisch mit CVSS 9,2, und den Kennungen CVE-2026-109618 und CVE-2026-109619"
 ---
 

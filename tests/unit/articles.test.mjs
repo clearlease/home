@@ -75,9 +75,10 @@ describe('validate', () => {
   });
   it('needs an existing file and alt text for an article image', () => {
     const d = { date: '2026-10-22' };
-    expect(validate(pair('01', { ...d, image: '/media/nope.webp', imageAlt: 'x' }, 'Text.')).join()).toMatch(/not found in public/);
-    expect(validate(pair('01', { ...d, image: '/media/clearlease-logo.svg' }, 'Text.')).join()).toMatch(/needs imageAlt/);
-    expect(validate(pair('01', { ...d, image: '/media/clearlease-logo.svg', imageAlt: 'Logo' }, 'Text.'))).toEqual([]);
+    expect(validate(pair('01', { ...d, image: '/media/nope.png', imageAlt: 'x' }, 'Text.')).join()).toMatch(/not found in public/);
+    expect(validate(pair('01', { ...d, image: '/media/clearlease-logo.svg', imageAlt: 'x' }, 'Text.')).join()).toMatch(/are PNG/);
+    expect(validate(pair('01', { ...d, image: '/media/clearlease-logo.png' }, 'Text.')).join()).toMatch(/needs imageAlt/);
+    expect(validate(pair('01', { ...d, image: '/media/clearlease-logo.png', imageAlt: 'Logo' }, 'Text.'))).toEqual([]);
   });
   it('passes on the real content', () => {
     const real = ['de', 'en'].flatMap((l) => readdirSync(`src/content/ressourcen/${l}`).map((f) => {
