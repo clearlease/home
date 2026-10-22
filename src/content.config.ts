@@ -21,7 +21,10 @@ const ressourcen = defineCollection({
     // quoted or not: YAML reads an unquoted 2026-10-07 as a Date
     date: day.optional(), // publication day, required for articles
     until: day.optional(),
+    // article visual: a file in public/, e.g. /media/ressourcen/<slug>.webp (shown 12:5, cropped to fit).
+    // Without it the build generates a brand visual. imageAlt describes the picture for screen readers.
     image: z.string().optional(),
+    imageAlt: z.string().optional(),
   }),
 });
 

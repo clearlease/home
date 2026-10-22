@@ -4,7 +4,7 @@
 // One item = one Markdown file per language, src/content/ressourcen/<lang>/<nn>-<slug>.md.
 // The same <nn> pairs the German and the English file; <slug> becomes the URL.
 // A file with text below the frontmatter is an article with a page of its own.
-import { readdirSync, readFileSync } from 'node:fs';
+import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { marked } from 'marked';
 import { SITE_URL, ROUTES, route } from '../site.config.mjs';
 
@@ -26,6 +26,8 @@ export const slugOf = (id) => fileName(id).replace(/^\d+-/, '');
 export const langOf = (id) => id.split('/')[0];
 
 export const articlePath = (lang, slug) => route('Ressourcen', lang) + slug + '/';
+// Generated brand visual for an article without its own image (scripts/og-images.mjs writes it).
+export const visualPath = (lang, slug) => `/og/${lang}-ressourcen-${slug}-visual.png`;
 export const filterPath = (lang, cat) => {
   const i = CATS[lang].indexOf(cat);
   return i >= 0 && i < CAT_SLUGS[lang].length ? route('Ressourcen', lang) + CAT_SLUGS[lang][i] + '/' : null;
@@ -75,6 +77,8 @@ export function validate(entries) {
       if (RESERVED.has(slugOf(e.id))) errors.push(`${e.id}: slug "${slugOf(e.id)}" is reserved for a filter page or the feed`);
       if (!e.data.date) errors.push(`${e.id}: an article (text below the frontmatter) needs date: YYYY-MM-DD`);
       errors.push(...bodyErrors(e));
+      if (e.data.image && !existsSync('public' + e.data.image)) errors.push(`${e.id}: image ${e.data.image} not found in public/`);
+      if (e.data.image && !e.data.imageAlt) errors.push(`${e.id}: an image needs imageAlt (what the picture shows)`);
     }
   }
   for (const [nn, { de, en }] of pairByNumber(entries)) {

@@ -4,7 +4,7 @@ import { marked } from 'marked';
 import { getCollection } from 'astro:content';
 import { buildDay as today } from '../site.config.mjs';
 import { isLive } from './expiry.mjs';
-import { validate, sortItems, hasBody, slugOf, numOf, articlePath, filterPath, resolveHref, pairByNumber } from './articles.mjs';
+import { validate, sortItems, hasBody, slugOf, numOf, articlePath, visualPath, filterPath, resolveHref, pairByNumber } from './articles.mjs';
 
 // All Ressourcen files, checked once per build: a broken item stops the build with every problem listed.
 let checked;
@@ -53,6 +53,8 @@ export async function ressourcenArticles(lang) {
     dateLabel: dayLabel(e.data.date, lang),
     html: marked.parse(e.body),
     moreHref: resolveHref(lang, e.data.href),
+    // own image, or the generated brand visual (decorative, so no alt text)
+    visual: e.data.image ? { src: e.data.image, alt: e.data.imageAlt } : { src: visualPath(lang, slugOf(e.id)), alt: '' },
   }));
 }
 

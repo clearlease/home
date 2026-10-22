@@ -116,12 +116,13 @@ const paths = { ${lang}: a.path, ${other}: a.altPath };
 const ogFile = \`/og/${lang}-ressourcen-\${a.slug}.png\`;
 const next = a.catPath ? ${JSON.stringify(t.next('X'))}.replace('X', ${lang === 'de' ? 'a.cat' : 'a.cat.toLowerCase()'}) : null;
 ---
-<Base page="Ressourcen" lang={lang} paths={paths} title={\`\${a.title} · clearlea.se\`} description={a.text} crumb={a.title} ogType="article" ogFile={ogFile} feed={feedPath(lang)} jsonLd={[newsArticle(lang, a, SITE_URL + ogFile)]}>
+<Base page="Ressourcen" lang={lang} paths={paths} title={\`\${a.title} · clearlea.se\`} description={a.text} crumb={a.title} ogType="article" ogFile={ogFile} feed={feedPath(lang)} jsonLd={[newsArticle(lang, a, SITE_URL + a.visual.src)]}>
   <Shell client:load altHref={a.altPath}>
     <article class="cl-prose">
       <p class="cl-prose-meta">{a.catPath ? <a href={a.catPath}>{a.cat}</a> : a.cat}<span aria-hidden="true">·</span><time datetime={a.date}>{a.dateLabel}</time></p>
       <h1>{a.title}</h1>
       <p class="cl-article-lead">{a.text}</p>
+      <figure class="cl-article-visual"><img src={a.visual.src} alt={a.visual.alt} width="1200" height="500" /></figure>
       <Fragment set:html={a.html} />
       {a.moreHref && <p><a href={a.moreHref}>${t.more} →</a></p>}
       <hr />
