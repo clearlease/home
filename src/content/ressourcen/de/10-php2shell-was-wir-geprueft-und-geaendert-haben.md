@@ -6,7 +6,7 @@ neu: true
 href: "Trust-Center.dc.html"
 date: "2026-10-22"
 image: "/media/ressourcen/php2shell.webp"
-imageAlt: "Grafik zur Sicherheitslücke PHP2Shell mit den Kennungen CVE-2026-109618 und CVE-2026-109619"
+imageAlt: "Offenes Schloss neben dem Schriftzug PHP2Shell, eingestuft als kritisch mit CVSS 9,2, und den Kennungen CVE-2026-109618 und CVE-2026-109619"
 ---
 
 Am 21. Oktober 2026 hat PHP zwei kritische Sicherheitslücken geschlossen, bekannt als „PHP2Shell“ (CVE-2026-109618 und CVE-2026-109619, CVSS 9,2). Sie erlauben Angreifern, ohne Anmeldung eigenen Code auf einem Server auszuführen. Die Details kursierten schon vor der geplanten Veröffentlichung, erste Angriffsversuche gab es noch vor den Patches.
@@ -53,4 +53,3 @@ Fragen zu unserer Sicherheit beantworten wir gern unter [hello@clearlea.se](mail
 - [watchTowr](https://watchtowr.com/intelligence/php-cve-2026-109618-faq/): behoben in PHP 8.5.12, 8.4.27, 8.3.36 und 8.2.35
 - [Cloudflare](https://blog.cloudflare.com/php-vulnerabilities-waf-protection/): betroffen ist PHP 5.4 und neuer
 - [W3Techs](https://w3techs.com/technologies/details/pl-php): Verbreitung von PHP
-- [Cyberkendra](https://www.cyberkendra.com/2026/10/php2shell-cve-2026-109618-cve-2026-109619.html): Titelbild
