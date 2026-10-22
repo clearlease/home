@@ -19,6 +19,10 @@ const PROSE_CSS = `
 .cl-prose th, .cl-prose td { text-align: left; padding: 10px 12px; border-bottom: 1px solid rgba(0, 0, 0, 0.12); vertical-align: top; }
 .cl-prose .cl-prose-note { font-size: 14px; padding: 12px 16px; border-radius: 8px; background: #eff6fa; color: #13293d; margin-bottom: 32px; }
 .cl-prose .cl-prose-meta { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #1d6485; margin-bottom: 16px; }
+.cl-prose .cl-prose-meta a { color: inherit; text-decoration: none; }
+.cl-prose .cl-prose-meta a:hover { text-decoration: underline; }
+.cl-prose .cl-article-lead { font-size: clamp(1.125rem, 1.6vw, 1.25rem); line-height: 1.55; color: #13293d; margin-bottom: 32px; }
+.cl-prose .cl-article-foot { display: flex; flex-wrap: wrap; gap: 12px 24px; font-size: 15px; }
 `;
 
 for (const lang of ['de', 'en']) {

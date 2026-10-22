@@ -239,3 +239,61 @@ test.describe('easter eggs', () => {
     expect(logs.join('\n')).toContain('Sie lesen Quellcode?');
   });
 });
+
+test.describe('Ressourcen articles', () => {
+  test('a tile opens its article, the article links back to its filter', async ({ page }) => {
+    await page.goto('/ressourcen/');
+    await page.waitForFunction(() => !document.querySelector('astro-island[ssr]'));
+    const tile = page.locator('a.cl-card', { hasText: 'MCP-Server' });
+    await expect(tile).toHaveAttribute('href', '/ressourcen/mcp-server-clearlea-se-als-quelle/');
+    await tile.click();
+    await expect(page).toHaveURL(/\/ressourcen\/mcp-server-clearlea-se-als-quelle\/$/);
+    await expect(page.locator('h1')).toHaveText('MCP-Server: clearlea.se als Quelle für Ihre KI');
+    await expect(page.locator('.cl-prose-meta time')).toHaveAttribute('datetime', /^\d{4}-\d{2}-\d{2}$/);
+    await expect(page.locator('a[hreflang=en]').first()).toHaveAttribute('href', '/en/resources/mcp-server-clearlea-se-as-source/');
+    await page.getByRole('link', { name: 'Weitere Produkt-Updates' }).click();
+    await expect(page).toHaveURL(/\/ressourcen\/produkt-updates\/$/);
+    await expect(page.getByRole('tab', { name: 'Produkt-Updates' })).toHaveAttribute('aria-selected', 'true');
+  });
+
+  test('a filter tab updates the URL without a new history entry', async ({ page }) => {
+    await page.goto('/en/resources/');
+    await page.waitForFunction(() => !document.querySelector('astro-island[ssr]'));
+    const before = await page.evaluate(() => history.length);
+    await page.getByRole('tab', { name: 'News' }).click();
+    await expect(page).toHaveURL(/\/en\/resources\/news\/$/);
+    await page.getByRole('tab', { name: 'All' }).click();
+    await expect(page).toHaveURL(/\/en\/resources\/$/);
+    expect(await page.evaluate(() => history.length)).toBe(before);
+  });
+
+  test('both feeds are valid RSS and list the articles', async ({ page, request }) => {
+    for (const [path, article] of [['/ressourcen/feed.xml', '/ressourcen/mcp-server-clearlea-se-als-quelle/'], ['/en/resources/feed.xml', '/en/resources/mcp-server-clearlea-se-as-source/']]) {
+      const res = await request.get(path);
+      expect(res.status()).toBe(200);
+      const xml = await res.text();
+      await page.goto('/');
+      const ok = await page.evaluate((x) => !new DOMParser().parseFromString(x, 'application/xml').querySelector('parsererror'), xml);
+      expect(ok, path).toBe(true);
+      expect(xml).toContain(`<link>https://www.clearlea.se${article}</link>`);
+    }
+  });
+
+  test('the sitemap lists articles with their language twin', async ({ request }) => {
+    const xml = await (await request.get('/sitemap-0.xml')).text();
+    expect(xml).toContain('<loc>https://www.clearlea.se/ressourcen/mcp-server-clearlea-se-als-quelle/</loc>');
+    expect(xml).toContain('hreflang="en" href="https://www.clearlea.se/en/resources/mcp-server-clearlea-se-as-source/"');
+    expect(xml).toContain('<loc>https://www.clearlea.se/en/resources/product-updates/</loc>');
+  });
+});
+
+test.describe('Ressourcen filter pages without JavaScript', () => {
+  test.use({ javaScriptEnabled: false });
+  test('the HTML is already filtered', async ({ page }) => {
+    await page.goto('/ressourcen/news/');
+    await expect(page.getByRole('tab', { name: 'News' })).toHaveAttribute('aria-selected', 'true');
+    const cats = await page.locator('a.cl-card span[style*="uppercase"]').allTextContents();
+    expect(cats.length).toBeGreaterThan(0);
+    expect(cats.every((c) => c.trim() === 'News')).toBe(true);
+  });
+});

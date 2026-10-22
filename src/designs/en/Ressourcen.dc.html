@@ -201,7 +201,7 @@ class Component extends DCLogic {
     var reduce = false;
     try { reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
     this.reduce = reduce;
-    this.setState(Object.assign({ news: false }, { f: 'All' }));
+    this.setState({ news: false });
   }
   componentWillUnmount() {
     if (this.t) clearInterval(this.t);
@@ -218,14 +218,15 @@ class Component extends DCLogic {
       newsExpanded: s.news ? 'true' : 'false',
       toggleNews: function () { self.setState({ news: !(self.state || {}).news }); }
     };
-    var f = s.f || 'All';
+    // props.filter: start tab on a filter page (/ressourcen/news/); props.filterUrls: tab label -> URL
+    var f = s.f || this.props.filter || 'All';
     var TABS = [['All', false], ['News', false], ['Product updates', false], ['Tools', false], ['Guides · soon', true], ['Webinars · soon', true]];
     out.tabs = TABS.map(function (t) {
       var on = t[0] === f, dis = t[1];
       return {
         label: t[0], sel: on ? 'true' : 'false', dis: dis ? 'true' : 'false',
         st: 'min-height: 40px; padding: 0 16px; border-radius: 9999px; font-family: inherit; font-size: 14px;' + (dis ? ' border: 1px dashed rgba(0, 0, 0, 0.2); background: transparent; color: #55636f; font-weight: 500; cursor: default;' : (on ? ' border: 1px solid #13293d; background: #13293d; color: #ffffff; font-weight: 700; cursor: pointer;' : ' border: 1px solid rgba(0, 0, 0, 0.18); background: #ffffff; color: #13293d; font-weight: 600; cursor: pointer;')),
-        pick: function () { if (!dis) self.setState({ f: t[0] }); }
+        pick: function () { if (dis) return; self.setState({ f: t[0] }); var u = (self.props.filterUrls || {})[t[0]]; if (u && window.history.replaceState) window.history.replaceState(null, '', u); }
       };
     });
     out.items = this.items().filter(function (it) { return f === 'All' || it.cat === f; }).map(function (it) {

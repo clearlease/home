@@ -1,9 +1,8 @@
 // Every page, both languages, every viewport project: loads, one H1, metadata, no overflow, no errors.
 import { test, expect } from '@playwright/test';
 import { ALL, LEGAL_PAGES } from './routes.mjs';
-import { ROUTES } from '../../src/site.config.mjs';
 
-for (const { page, lang, path } of ALL) {
+for (const { page, lang, path, alt } of ALL) {
   test(`${lang} ${page} (${path})`, async ({ page: p }) => {
     const errors = [];
     p.on('pageerror', (e) => errors.push(e.message));
@@ -18,7 +17,7 @@ for (const { page, lang, path } of ALL) {
     const canonical = await p.locator('link[rel=canonical]').getAttribute('href');
     expect(canonical).toBe('https://www.clearlea.se' + path);
     const other = lang === 'de' ? 'en' : 'de';
-    expect(await p.locator(`link[rel=alternate][hreflang=${other}]`).getAttribute('href')).toBe('https://www.clearlea.se' + ROUTES[page][other]);
+    expect(await p.locator(`link[rel=alternate][hreflang=${other}]`).getAttribute('href')).toBe('https://www.clearlea.se' + alt);
     if (!LEGAL_PAGES.includes(page)) expect(await p.locator('meta[name=description]').getAttribute('content')).toBeTruthy();
     // no horizontal scrolling at any viewport
     const overflow = await p.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);

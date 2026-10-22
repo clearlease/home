@@ -2,11 +2,12 @@
 // headline on the site's light surface, the brand "c." motif and the logo. They show when a link
 // is shared on LinkedIn, WhatsApp, Teams, Slack, X and in some search features.
 // Runs before every build (npm run build). Output: public/og/<lang>-<Page>.png
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
 import { parse } from 'parse5';
 import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
 import { ROUTES } from '../src/site.config.mjs';
+import { slugOf, articlePath } from '../src/lib/articles.mjs';
 
 const PAGES = ['Home', 'Plattform', 'Loesungen-Bestandshalter', 'Loesungen-Property', 'Loesungen-Filialisten', 'KI-Teams', 'Trust-Center', 'Ressourcen', 'Unternehmen', 'Gespraech'];
 const font = (w) => readFileSync(`node_modules/@fontsource/montserrat/files/montserrat-latin-${w}-normal.woff`);
@@ -29,28 +30,41 @@ function heroFacts(file) {
   return { title, lines: lines.length > 1 ? lines.map((l) => l.replace(/­/g, '')) : [title], kicker };
 }
 
+async function render(file, { lines, kicker, title, url }) {
+  const size = title.length > 60 ? 58 : title.length > 40 ? 66 : 76;
+  const tree = el('div', { width: 1200, height: 630, background: '#F7F7F7', position: 'relative', fontFamily: 'Montserrat', color: '#13293d' },
+    { type: 'img', props: { src: motif, width: 760, height: 518, style: { position: 'absolute', right: -150, top: -40 } } },
+    el('div', { flexDirection: 'column', justifyContent: 'space-between', width: '100%', height: '100%', padding: '72px 80px 64px' },
+      el('div', { flexDirection: 'column', gap: 28 },
+        el('div', { alignItems: 'center', gap: 14, fontSize: 22, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#1d6485' },
+          el('div', { width: 11, height: 11, borderRadius: 9999, background: '#13293d' }), kicker),
+        el('div', { flexDirection: 'column', fontSize: size, fontWeight: 700, lineHeight: 1.04, letterSpacing: '-0.045em', maxWidth: 980 },
+          ...lines.map((l, i) => el('div', { color: lines.length > 1 && i === 0 ? '#55636f' : '#13293d', fontWeight: lines.length > 1 && i === 0 ? 500 : 700 }, l)))),
+      el('div', { alignItems: 'center', justifyContent: 'space-between' },
+        { type: 'img', props: { src: logo, width: 240, height: 40 } },
+        el('div', { fontSize: 22, fontWeight: 500, color: '#55636f' }, url))),
+    el('div', { position: 'absolute', left: 0, bottom: 0, width: 1200, height: 10, background: '#13293d' }));
+  const svg = await satori(tree, { width: 1200, height: 630, fonts });
+  writeFileSync(file, new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render().asPng());
+}
+
 mkdirSync('public/og', { recursive: true });
 let written = 0;
 for (const lang of ['de', 'en']) {
   for (const page of PAGES) {
-    const { lines, kicker, title } = heroFacts(`src/designs/${lang}/${page}.dc.html`);
-    const size = title.length > 60 ? 58 : title.length > 40 ? 66 : 76;
+    const facts = heroFacts(`src/designs/${lang}/${page}.dc.html`);
     const url = 'clearlea.se' + (ROUTES[page][lang] === '/' ? '' : ROUTES[page][lang].replace(/\/$/, ''));
-    const tree = el('div', { width: 1200, height: 630, background: '#F7F7F7', position: 'relative', fontFamily: 'Montserrat', color: '#13293d' },
-      { type: 'img', props: { src: motif, width: 760, height: 518, style: { position: 'absolute', right: -150, top: -40 } } },
-      el('div', { flexDirection: 'column', justifyContent: 'space-between', width: '100%', height: '100%', padding: '72px 80px 64px' },
-        el('div', { flexDirection: 'column', gap: 28 },
-          el('div', { alignItems: 'center', gap: 14, fontSize: 22, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#1d6485' },
-            el('div', { width: 11, height: 11, borderRadius: 9999, background: '#13293d' }), kicker),
-          el('div', { flexDirection: 'column', fontSize: size, fontWeight: 700, lineHeight: 1.04, letterSpacing: '-0.045em', maxWidth: 980 },
-            ...lines.map((l, i) => el('div', { color: lines.length > 1 && i === 0 ? '#55636f' : '#13293d', fontWeight: lines.length > 1 && i === 0 ? 500 : 700 }, l)))),
-        el('div', { alignItems: 'center', justifyContent: 'space-between' },
-          { type: 'img', props: { src: logo, width: 240, height: 40 } },
-          el('div', { fontSize: 22, fontWeight: 500, color: '#55636f' }, url))),
-      el('div', { position: 'absolute', left: 0, bottom: 0, width: 1200, height: 10, background: '#13293d' }));
-    const svg = await satori(tree, { width: 1200, height: 630, fonts });
-    const png = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render().asPng();
-    writeFileSync(`public/og/${lang}-${page}.png`, png);
+    await render(`public/og/${lang}-${page}.png`, { ...facts, url });
+    written++;
+  }
+  // Ressourcen articles (files with text below the frontmatter): category as kicker, title as headline.
+  const dir = `src/content/ressourcen/${lang}`;
+  for (const f of readdirSync(dir)) {
+    const [, fm, body] = readFileSync(`${dir}/${f}`, 'utf8').match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+    if (!body.trim()) continue;
+    const get = (k) => fm.match(new RegExp(`^${k}:\\s*"?(.*?)"?\\s*$`, 'm'))[1];
+    const slug = slugOf(f);
+    await render(`public/og/${lang}-ressourcen-${slug}.png`, { kicker: get('cat'), title: get('title'), lines: [get('title')], url: 'clearlea.se' + articlePath(lang, slug).replace(/\/$/, '') });
     written++;
   }
 }
