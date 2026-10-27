@@ -5,6 +5,8 @@ text: "Was umgelegt werden darf, steht im Mietvertrag. Die Checkliste für Vermi
 neu: true
 href: "Loesungen-Bestandshalter.dc.html"
 date: "2026-10-27"
+image: "/media/ressourcen/nebenkosten-checkliste.png"
+imageAlt: "Eine Zeile Grundsteuer aus der Nebenkostenabrechnung, verbunden mit der passenden Klausel aus Nachtrag 2, § 6, und dem Vermerk „Im Vertrag vereinbart“ (Beispieldaten)"
 ---
 
 Was umgelegt werden darf, entscheidet nicht die Abrechnung. Es entscheidet der gültige Mietvertrag, mit allen Nachträgen. Bei Gewerbemiete gilt: Umlagefähig ist nur, was vereinbart ist. Viele Verträge verweisen dafür auf § 2 BetrKV, andere zählen die Positionen selbst auf.

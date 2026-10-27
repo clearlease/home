@@ -5,6 +5,8 @@ text: "What can be passed on is set by the lease. The checklist for landlords an
 neu: true
 href: "Loesungen-Bestandshalter.dc.html"
 date: "2026-10-27"
+image: "/media/ressourcen/nebenkosten-checkliste.png"
+imageAlt: "A property tax line from a service charge statement, linked to the matching clause in amendment 2, § 6, marked as agreed in the lease (sample data)"
 ---
 
 What can be passed on is not decided by the statement. It is decided by the valid lease, with all its amendments. In commercial leases, only what has been agreed can be recharged. Many leases refer to § 2 BetrKV for this, others list the items themselves.
