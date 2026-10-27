@@ -9,7 +9,7 @@ image: "/media/ressourcen/nebenkosten-checkliste.png"
 imageAlt: "A property tax line from a service charge statement, linked to the matching clause in amendment 2, § 6, marked as agreed in the lease (sample data)"
 ---
 
-What can be passed on is not decided by the statement. It is decided by the valid lease, with all its amendments. In commercial leases, only what has been agreed can be recharged. Many leases refer to § 2 BetrKV for this, others list the items themselves.
+What can be passed on is not decided by the statement. It is decided by the valid lease, with all its amendments. In commercial leases, only what has been agreed can be recharged. Some leases refer to § 2 BetrKV for this, others list the items themselves.
 
 ## If you prepare the statement
 
@@ -26,7 +26,7 @@ Check the same points for each tenancy: Is the item agreed? Do key, area and cap
 
 ## Why this fails across a portfolio
 
-Checking a statement against the lease means knowing the valid state. It is spread across the original lease and its amendments, site by site. With many properties, there is no time for it. The result: Mineko found deviations in 84% of the commercial statements it audited (2026 analysis, only statements that tenants chose to have audited). Where deviations occur, they typically amount to 3 to 4 € per m² and year (clearlea.se estimate).
+Checking a statement against the lease means knowing the valid state. It is spread across the original lease and its amendments, site by site. With many properties, there is no time for it. An analysis by Mineko shows: deviations were found in 84% of the commercial statements it audited (2026 analysis, only statements that tenants chose to have audited). Where deviations occur, they typically amount to 3 to 4 € per m² and year (clearlea.se estimate).
 
 ## What helps
 

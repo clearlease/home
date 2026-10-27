@@ -9,7 +9,7 @@ image: "/media/ressourcen/nebenkosten-checkliste.png"
 imageAlt: "Eine Zeile Grundsteuer aus der Nebenkostenabrechnung, verbunden mit der passenden Klausel aus Nachtrag 2, § 6, und dem Vermerk „Im Vertrag vereinbart“ (Beispieldaten)"
 ---
 
-Was umgelegt werden darf, entscheidet nicht die Abrechnung. Es entscheidet der gültige Mietvertrag, mit allen Nachträgen. Bei Gewerbemiete gilt: Umlagefähig ist nur, was vereinbart ist. Viele Verträge verweisen dafür auf § 2 BetrKV, andere zählen die Positionen selbst auf.
+Was umgelegt werden darf, entscheidet nicht die Abrechnung. Es entscheidet der gültige Mietvertrag, mit allen Nachträgen. Bei Gewerbemiete gilt: Umlagefähig ist nur, was vereinbart ist. Manche Verträge verweisen dafür auf § 2 BetrKV, andere zählen die Positionen selbst auf.
 
 ## Wenn Sie die Abrechnung erstellen
 
@@ -26,7 +26,7 @@ Prüfen Sie dieselben Punkte je Mietverhältnis: Ist die Position vereinbart? Pa
 
 ## Warum das im Bestand scheitert
 
-Eine Abrechnung gegen den Vertrag zu prüfen heißt, den gültigen Stand zu kennen. Der verteilt sich auf Originalvertrag und Nachträge, je Standort. Bei vielen Objekten bleibt dafür keine Zeit. Das Ergebnis: Mineko fand in 84 % der geprüften gewerblichen Abrechnungen Abweichungen (Auswertung 2026, geprüft wurden nur Abrechnungen, die Mieter prüfen ließen). Wo Abweichungen auftreten, liegen sie typischerweise bei 3 bis 4 € pro m² und Jahr (Schätzung clearlea.se).
+Eine Abrechnung gegen den Vertrag zu prüfen heißt, den gültigen Stand zu kennen. Der verteilt sich auf Originalvertrag und Nachträge, je Standort. Bei vielen Objekten bleibt dafür keine Zeit. Eine Auswertung von Mineko zeigt: In 84 % der geprüften gewerblichen Abrechnungen wurden Abweichungen gefunden (Auswertung 2026, geprüft wurden nur Abrechnungen, die Mieter prüfen ließen). Wo Abweichungen auftreten, liegen sie typischerweise bei 3 bis 4 € pro m² und Jahr (Schätzung clearlea.se).
 
 ## Was hilft
 
