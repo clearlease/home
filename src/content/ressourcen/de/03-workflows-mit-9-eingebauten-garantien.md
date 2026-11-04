@@ -3,7 +3,7 @@ order: 3
 cat: "Produkt-Updates"
 title: "Workflows mit 9 eingebauten Garantien"
 text: "Prozesse prüfbar automatisieren: Verantwortliche, Fristen und Eskalation je Schritt."
-neu: true
+neu: false
 href: "Plattform.dc.html#workflows"
 date: "2026-10-22"
 ---
