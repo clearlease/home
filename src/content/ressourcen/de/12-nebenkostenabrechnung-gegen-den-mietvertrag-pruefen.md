@@ -1,6 +1,6 @@
 ---
 cat: "Werkzeuge"
-title: "Nebenkostenabrechnung gegen den Mietvertrag prüfen: die Checkliste"
+title: "Nebenkostenabrechnung in der Gewerbemiete gegen den Vertrag prüfen: die Checkliste"
 text: "Was umgelegt werden darf, steht im Mietvertrag. Die Checkliste für Vermieter und Mieter, mit allen Nachträgen."
 neu: true
 href: "Loesungen-Bestandshalter.dc.html"
