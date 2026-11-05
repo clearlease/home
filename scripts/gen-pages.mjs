@@ -98,7 +98,7 @@ const paths = { ${lang}: '${base + slug}/', ${other}: '${otherPath}' };
   const file = fileFor(base + '[slug]/').replace('/[slug]/index.astro', '/[slug].astro');
   const t = lang === 'de'
     ? { more: 'Mehr erfahren', all: 'Alle Ressourcen', next: (c) => `Weitere ${c}`, cta: 'Gespräch mit Hieronymus' }
-    : { more: 'Learn more', all: 'All resources', next: (c) => `More ${c.toLowerCase()}`, cta: 'Talk to Hieronymus' };
+    : { more: 'Learn more', all: 'All resources', next: (c) => `More ${c}`, cta: 'Talk to Hieronymus' };
   write(file, `${header}// Ressourcen articles: Markdown text below the frontmatter in src/content/ressourcen/${lang}/.
 import Base from '${rel(file, 'src/layouts/Base.astro')}';
 import Shell from '${rel(file, shell)}?dc';
