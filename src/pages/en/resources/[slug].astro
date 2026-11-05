@@ -15,7 +15,7 @@ const lang = 'en';
 const { a } = Astro.props;
 const paths = { en: a.path, de: a.altPath };
 const ogFile = `/og/en-ressourcen-${a.slug}.png`;
-const next = a.catPath ? "More x".replace('X', a.cat.toLowerCase()) : null;
+const next = a.catPath ? "More X".replace('X', a.cat.toLowerCase()) : null;
 ---
 <Base page="Ressourcen" lang={lang} paths={paths} title={`${a.title} · clearlea.se`} description={a.text} crumb={a.title} ogType="article" ogFile={ogFile} feed={feedPath(lang)} jsonLd={[newsArticle(lang, a, SITE_URL + a.visual.src)]}>
   <Shell client:load altHref={a.altPath}>
