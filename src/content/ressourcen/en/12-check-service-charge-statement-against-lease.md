@@ -4,7 +4,7 @@ title: "Checking a service charge statement against the lease: the checklist"
 text: "What can be passed on is set by the lease. The checklist for landlords and tenants, with all amendments."
 neu: true
 href: "Loesungen-Bestandshalter.dc.html"
-date: "2026-11-09"
+date: "2026-11-05"
 image: "/media/ressourcen/nebenkosten-checkliste.png"
 imageAlt: "A property tax line from a service charge statement, linked to the matching clause in amendment 2, § 6, marked as agreed in the lease (sample data)"
 ---

@@ -1,10 +1,10 @@
 ---
 cat: "Werkzeuge"
-title: "Nebenkostenabrechnung gegen den Mietvertrag prüfen: die Checkliste"
+title: "Nebenkostenabrechnung in der Gewerbemiete gegen den Vertrag prüfen: die Checkliste"
 text: "Was umgelegt werden darf, steht im Mietvertrag. Die Checkliste für Vermieter und Mieter, mit allen Nachträgen."
 neu: true
 href: "Loesungen-Bestandshalter.dc.html"
-date: "2026-11-09"
+date: "2026-11-05"
 image: "/media/ressourcen/nebenkosten-checkliste.png"
 imageAlt: "Eine Zeile Grundsteuer aus der Nebenkostenabrechnung, verbunden mit der passenden Klausel aus Nachtrag 2, § 6, und dem Vermerk „Im Vertrag vereinbart“ (Beispieldaten)"
 ---
