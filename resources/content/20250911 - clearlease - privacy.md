@@ -378,19 +378,17 @@ Weitere Informationen zu Widerspruchs- und Beseitigungsmöglichkeiten gegenüber
 
 Cloudflare hat Compliance-Maßnahmen für internationale Datenübermittlungen umgesetzt. Diese gelten für alle weltweiten Aktivitäten, bei denen Cloudflare personenbezogene Daten von natürlichen Personen in der EU verarbeitet. Diese Maßnahmen basieren auf den EU-Standardvertragsklauseln (SCCs). Weitere Informationen finden Sie unter: [https://www.cloudflare.com/cloudflare\_customer\_SCCs-German.pdf](https://www.cloudflare.com/cloudflare_customer_SCCs-German.pdf)
 
-### [cal.com](http://cal.com)
+### Cal.com
 
-Wir bieten auf unserer Website die Option an, Termine über das Tool [cal.com](http://cal.com) zu buchen. Bei Klick auf den Link „Termin vereinbaren“ wirst du auf die Website [cal.com](http://cal.com) des Unternehmens [cal.com](http://cal.com), Inc., San Francisco, USA (nachfolgend “[cal.com](http://cal.com)” genannt) weitergeleitet.
+Termine für ein Gespräch mit uns buchen Sie über den Dienst Cal.com. Anbieter ist Cal.com, Inc., 2261 Market Street #4382, San Francisco, CA 94114, USA.
 
-Bei der Terminvereinbarung ist generell die Angabe von personenbezogenen Daten notwendig, welche dies sind, entnimmst du bitte dem auszufüllenden Formular. Bei Buchung eines Termins über [cal.com](http://cal.com) werden Ihre auf der Website von [cal.com](http://cal.com) eingegebenen Daten von [cal.com](http://cal.com) an uns weitergegeben und von uns gespeichert und verarbeitet, um den Termin durchzuführen.
+Auf unserer Seite „Gespräch“ ist der Buchungskalender von Cal.com direkt eingebunden. Sobald Sie diese Seite öffnen, lädt Ihr Browser den Kalender von Servern von Cal.com. Cal.com erhält dabei technische Daten wie Ihre IP-Adresse, Angaben zu Browser und Gerät sowie die aufgerufene Seite. An einzelnen Stellen verlinken wir zusätzlich direkt auf eine Buchungsseite bei cal.com.
 
-Rechtsgrundlage hierfür ist Art. 6 Abs. 1 S. 1 lit. b DSGVO. Zur Verarbeitung Ihrer Daten durch Calendly verweisen wir auf die Datenschutzerklärung von [cal.com](http://cal.com), abrufbar unter: [Cal.com | Privacy Policy](https://cal.com/privacy)
+Wenn Sie einen Termin buchen, verarbeitet Cal.com Ihre Eingaben im Buchungsformular. Dazu gehören Name, E-Mail-Adresse, Unternehmen, der gewählte Termin und Ihre Angaben zum Anlass des Gesprächs. Wir nutzen diese Daten, um das Gespräch vorzubereiten und mit Ihnen zu führen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO.
 
-Es kann nicht ausgeschlossen werden, dass Ihre Daten in die USA und somit in ein unsicheres Drittland übermittelt werden. Weitere Informationen hierzu findest du hier: [Cal.com | Terms of Service](https://cal.com/terms).
+Cal.com verarbeitet Daten auch in den USA. Cal.com, Inc. ist unter dem EU-U.S. Data Privacy Framework zertifiziert. Die Übermittlung stützt sich deshalb auf Art. 45 DSGVO.
 
-Die Nutzungsbedingungen von [cal.com](http://cal.com), denen wir bei unserer Anmeldung bei [cal.com](http://cal.com) zugestimmt haben, enthält zudem folgendes Datenverarbeitungsaddendum zur Compliance mit HIPAA, DSGVO, GDPR und CCPA: [https://cal.com/privacy](https://cal.com/privacy) mit welchem das Unternehmen [cal.com](http://cal.com) dir im Hinblick auf die Datenübertragung in die USA zusätzlichen Schutz zusagt, um die DSGVO-Vorgaben zu erfüllen. Für die USA bestehen derzeit weder ein Angemessenheitsbeschlusses der EU noch sonst geeignete Garantien. Der Schutz deiner Daten kann im Zielland USA nicht gewährleistet werden. In den USA besteht aktuell kein der EU gleichwertiges Datenschutzniveau. Daher geht die Übermittlung mit entsprechenden Risiken einher. Insbesondere bestehen keine Garantien im Hinblick auf das Unterbleiben von Zugriffen auf Ihre übermittelten Daten durch staatliche Stellen. So kann es z.B. nicht ausgeschlossen werden, dass US-Behörden auf Grundlage von Abschnitt 702 des Foreign Intelligence Surveillance Act (kurz FISA; zu Deutsch etwa “Gesetz zur Überwachung in der Auslandsaufklärung”, ein Gesetz, das die Auslandsaufklärung und Spionageabwehr der Vereinigten Staaten regelt) auf Ihre Daten zugreifen. Wir weisen dich in diesem Zusammenhang ausdrücklich darauf hin, dass dir als EU-Bürger insoweit keine effektive Rechtsschutzmöglichkeit gegen die Verarbeitung deiner Daten durch US-Behörden auf Grundlage des FISA zur Verfügung steht. Wenn Sie die Buchung eines Termins über Calendly vornehmen, so tust du dies in Kenntnis dieser Risiken, die du dadurch auch bewusst in Kauf nimmst.
-
-
+Mehr dazu finden Sie in der Datenschutzerklärung von Cal.com unter [https://cal.com/privacy](https://cal.com/privacy) und in den Nutzungsbedingungen unter [https://cal.com/terms](https://cal.com/terms).
 
 ## eCommerce und Zahlungsanbieter
 
