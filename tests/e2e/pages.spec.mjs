@@ -16,7 +16,7 @@ for (const { page, lang, path, alt } of ALL) {
     await expect(p).toHaveTitle(/clearlea\.se/);
     const canonical = await p.locator('link[rel=canonical]').getAttribute('href');
     expect(canonical).toBe('https://www.clearlea.se' + path);
-    const other = lang === 'de' ? 'en' : 'de';
+    const other = lang === 'de' ? 'en' : lang === 'en' ? 'de' : 'en'; // fr: its switch sibling is English
     expect(await p.locator(`link[rel=alternate][hreflang=${other}]`).getAttribute('href')).toBe('https://www.clearlea.se' + alt);
     if (!LEGAL_PAGES.includes(page)) expect(await p.locator('meta[name=description]').getAttribute('content')).toBeTruthy();
     // no horizontal scrolling at any viewport

@@ -62,7 +62,7 @@ test('agent.md and llms.txt are served and identical', async ({ request }) => {
 test('every page links to agent.md in the footer and in <head>', async ({ page }) => {
   for (const { path, lang } of ALL) {
     await page.goto(path);
-    await expect(page.locator('footer a[href="/agent.md"]'), path).toHaveText(lang === 'de' ? 'Für KI-Agenten' : 'For AI agents');
+    await expect(page.locator('footer a[href="/agent.md"]'), path).toHaveText({ de: 'Für KI-Agenten', en: 'For AI agents', fr: 'Pour les agents IA' }[lang]);
     await expect(page.locator('link[rel=alternate][href="/agent.md"]'), path).toHaveCount(1);
   }
 });

@@ -1,0 +1,1094 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Accueil · clearlea.se</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;display=swap">
+<style>
+body { margin: 0; background: #F7F7F7; font-family: Montserrat, "Segoe UI", system-ui, sans-serif; color: #13293d; -webkit-font-smoothing: antialiased; }
+a { color: #13293d; } a:hover { color: #1d6485; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible { outline: 2px solid #247ba0; outline-offset: 2px; }
+.cl-navlinks a, .cl-navlinks button.cl-ddbtn { color: #13293d; text-decoration: none; white-space: nowrap; }
+.cl-navlinks > button { white-space: nowrap; } .cl-navlinks a:hover, .cl-navlinks button.cl-ddbtn:hover { color: #1d6485; }
+.cl-card { transition: transform 200ms cubic-bezier(0.25, 0.8, 0.5, 1), box-shadow 200ms cubic-bezier(0.25, 0.8, 0.5, 1); }
+.cl-card:hover { transform: translateY(-2px); box-shadow: 0 9px 17px rgba(12, 18, 28, 0.12); }
+.cl-dd { position: relative; display: flex; align-items: center; }
+.cl-ddbtn { display: inline-flex; align-items: center; gap: 6px; border: 0; background: transparent; padding: 0; font-family: inherit; font-size: 15px; font-weight: 500; cursor: pointer; }
+.cl-dd-menu { position: absolute; top: 100%; left: -24px; padding-top: 18px; display: none; z-index: 40; }
+.cl-dd:hover .cl-dd-menu, .cl-dd:focus-within .cl-dd-menu { display: block; }
+.cl-dd-panel { width: 380px; background: #ffffff; border-radius: 12px; box-shadow: 0 18px 45px rgba(12, 18, 28, 0.18); border: 1px solid rgba(0, 0, 0, 0.08); padding: 8px; display: flex; flex-direction: column; gap: 2px; animation: clIn 160ms cubic-bezier(0.25, 0.8, 0.5, 1); }
+.cl-dd-panel a { display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; border-radius: 8px; text-decoration: none; }
+.cl-dd-panel a:hover { background: #F7F7F7; color: #13293d; }
+.cl-wftrack { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.cl-wftrack span, h1, h2, h3 { overflow-wrap: break-word; -webkit-hyphens: auto; hyphens: auto; }
+.cl-redact { border-radius: 6px; padding: 0 6px; background: #13293d; color: transparent; cursor: help; transition: background 260ms cubic-bezier(0.25, 0.8, 0.5, 1), color 260ms cubic-bezier(0.25, 0.8, 0.5, 1); }
+.cl-redact:hover, .cl-redact:focus-visible { background: #eff6fa; color: #13293d; }
+.cl-chipbtn { transition: background 160ms, color 160ms; }
+.cl-logo { filter: grayscale(1) contrast(1.1); mix-blend-mode: multiply; opacity: 0.8; transition: filter 200ms, opacity 200ms; }
+.cl-logo:hover { filter: none; opacity: 1; }
+@keyframes clToast { 0% { opacity: 0; transform: translateY(14px) scale(0.96); } 60% { opacity: 1; transform: translateY(-3px) scale(1.01); } 100% { opacity: 1; transform: none; } }
+@keyframes clCell { from { background: rgba(36, 123, 160, 0.30); } to { background: rgba(36, 123, 160, 0.10); } }
+@keyframes clPulse { 0% { box-shadow: 0 0 0 0 rgba(36, 123, 160, 0.45); } 100% { box-shadow: 0 0 0 14px rgba(36, 123, 160, 0); } }
+@keyframes clBlink { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+@keyframes clTravel { from { left: 0%; } to { left: 100%; } }
+@keyframes clFloat { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-18px, 22px); } }
+.cl-pick { cursor: pointer; transition: background 160ms, box-shadow 160ms; }
+@keyframes clIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.cl-mnav { display: none; } .cl-mnav > summary::-webkit-details-marker { display: none; } .cl-show-sm { display: none; }
+@media (max-width: 1240px) { .cl-hide-lg { display: none !important; } }
+@media (max-width: 1040px) { .cl-navlinks { display: none !important; } .cl-mnav { display: block; } }
+@media (max-width: 600px) { .cl-hide-sm { display: none !important; } .cl-show-sm { display: inline !important; } }
+@media (max-width: 900px) { .cl-wftrack { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+@media (max-width: 520px) { .cl-wftrack { grid-template-columns: minmax(0, 1fr) !important; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+.cl-demo-mob { display: none; }
+.cl-demo-mobi { display: none; }
+.cl-demo-note { position: absolute; right: clamp(8px, 2vw, 24px); width: min(420px, calc(100% - 16px)); z-index: 2; }
+@media (max-width: 760px) { .cl-demo-desk { display: none !important; } .cl-demo-mob { display: block; } .cl-demo-mobi { display: inline-block; } .cl-demo-small { font-size: 12px !important; } .cl-demo-tap { min-height: 44px !important; } .cl-demo-hint { display: block !important; line-height: 1.45; } .cl-demo-hint > span { display: inline; } .cl-demo-hint > span:first-child { display: inline-block; margin-right: 8px; vertical-align: 2px; } .cl-demo-hint > span:last-child { margin-left: 6px; } .cl-chiprow .cl-doc { max-width: 210px; } .cl-chiprow { -webkit-mask-image: linear-gradient(90deg, #000 80%, transparent); mask-image: linear-gradient(90deg, #000 80%, transparent); } .cl-demo-note { position: static; width: auto; padding: 0 16px 16px; } .cl-chiprow { flex-wrap: nowrap !important; overflow-x: auto; scrollbar-width: none; margin: -6px -20px; padding: 6px 20px; } .cl-chiprow:focus-within { -webkit-mask-image: none; mask-image: none; } .cl-chiprow::-webkit-scrollbar { display: none; } }
+.cl-doc { transition: transform 160ms cubic-bezier(0.25, 0.8, 0.5, 1), box-shadow 160ms; }
+@media (hover: hover) and (pointer: fine) { .cl-doc:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(12, 18, 28, 0.10); } }
+.cl-glass { position: absolute; aspect-ratio: 1 / 1; transform: translate(-50%, -50%); border-radius: 9999px; background: rgba(19, 41, 61, 0.08); pointer-events: auto; cursor: pointer; display: flex; align-items: center; justify-content: center; overflow: hidden; transition: transform 520ms cubic-bezier(0.34, 1.56, 0.64, 1), background 420ms, box-shadow 420ms; }
+.cl-glass::after { content: ""; position: absolute; inset: 0; border-radius: 9999px; opacity: 0; background: conic-gradient(from 0deg, rgba(36, 123, 160, 0) 0deg, rgba(36, 123, 160, 0.18) 90deg, rgba(255, 255, 255, 0) 180deg, rgba(36, 123, 160, 0.14) 270deg, rgba(36, 123, 160, 0) 360deg); transition: opacity 420ms; }
+.cl-glass:hover { transform: translate(-50%, -50%) scale(1.14); background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.98) 0 6%, rgba(255, 255, 255, 0.6) 13%, rgba(239, 246, 250, 0.55) 36%, rgba(169, 205, 225, 0.45) 68%, rgba(19, 41, 61, 0.38) 100%); box-shadow: inset -12px -16px 30px rgba(19, 41, 61, 0.28), inset 10px 12px 24px rgba(255, 255, 255, 0.75), 0 26px 44px rgba(12, 18, 28, 0.2); animation: clWobble 2.6s ease-in-out infinite; }
+.cl-glass:hover::after { opacity: 1; animation: clSwirl 4s linear infinite; }
+.cl-glass-txt { position: relative; z-index: 1; opacity: 0; transform: scale(0.8); transition: opacity 280ms 160ms, transform 420ms 160ms; font-size: clamp(9px, 0.8vw, 12px); line-height: 1.25; text-align: center; color: #13293d; }
+.cl-glass:hover .cl-glass-txt { opacity: 1; transform: none; }
+@keyframes clTipA { from { opacity: 0; transform: translateY(5px) scale(0.96); } to { opacity: 1; transform: none; } }
+@keyframes clTipB { from { opacity: 0; transform: translateY(5px) scale(0.96); } to { opacity: 1; transform: none; } }
+@keyframes clSwirl { to { transform: rotate(360deg); } }
+@keyframes clWobble { 0%, 100% { transform: translate(-50%, -50%) scale(1.14); } 50% { transform: translate(-50%, -52%) scale(1.16); } }
+@media (max-width: 700px) { .cl-glass { pointer-events: none; } }
+@keyframes clDoc { from { opacity: 0; transform: translateX(-12px); } to { opacity: 1; transform: none; } }
+
+/* French: longer nav labels, so the burger menu starts earlier */
+@media (max-width: 1240px) { .cl-navlinks { display: none !important; } .cl-mnav { display: block; } }
+</style>
+</helmet>
+
+
+
+<div style="display: flex; flex-direction: column; min-width: 0; background: #F7F7F7">
+
+
+<header style="position: sticky; top: 0; z-index: 30; background: rgba(247, 247, 247, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 0, 0, 0.08)">
+  <div style="position: relative; max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px">
+    <a href="Home.dc.html" aria-label="clearlea.se, accueil" style="display: flex; align-items: center"><img src="/_blob/3fe7a8b82ce8052f386ce3a43a0a6a77" alt="clearlea.se" width="156" height="26" style="display: block; height: 26px; width: auto"></a>
+    <nav class="cl-navlinks" aria-label="Navigation principale" style="display: flex; align-items: center; gap: 22px; font-size: 15px; font-weight: 500">
+      <a href="Plattform.dc.html">Plateforme</a>
+      <div class="cl-dd"><button type="button" class="cl-ddbtn" aria-haspopup="true">Solutions<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button><div class="cl-dd-menu"><div class="cl-dd-panel"><a href="Loesungen-Bestandshalter.dc.html"><span style="font-size: 15px; font-weight: 700; color: #13293d">Propriétaires &amp; Asset Management</span><span style="font-size: 13px; line-height: 1.4; color: #55636f; font-weight: 500">Un état en vigueur pour chaque bien. Avec justificatif.</span></a><a href="Loesungen-Property.dc.html"><span style="font-size: 15px; font-weight: 700; color: #13293d">Property &amp; Facility Management</span><span style="font-size: 13px; line-height: 1.4; color: #55636f; font-weight: 500">Nouveaux mandats opérationnels en quelques jours.</span></a><a href="Loesungen-Filialisten.dc.html"><span style="font-size: 15px; font-weight: 700; color: #13293d">Enseignes multi-sites &amp; entreprises</span><span style="font-size: 13px; line-height: 1.4; color: #55636f; font-weight: 500">Chaque décompte de charges contrôlé, chaque échéance sous contrôle.</span></a><a href="KI-Teams.dc.html" style="border-top: 1px solid rgba(0, 0, 0, 0.08); border-radius: 0 0 8px 8px; margin-top: 4px"><span style="font-size: 15px; font-weight: 700; color: #13293d">Pour les équipes IA &amp; IT</span><span style="font-size: 13px; line-height: 1.4; color: #55636f; font-weight: 500">Une source à laquelle votre IA peut se fier.</span></a></div></div></div>
+      <a href="KI-Teams.dc.html">Équipes IA</a>
+      <a href="Trust-Center.dc.html">Trust Center</a>
+      <a href="Ressourcen.dc.html">Ressources</a>
+      <button type="button" onClick="{{toggleNews}}" aria-expanded="{{newsExpanded}}" aria-controls="news-pop" style="display: flex; align-items: center; gap: 6px; border: 0; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 5px 10px 5px 12px"><span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase">Nouveau</span><span aria-label="3 actualités" style="min-width: 18px; height: 18px; border-radius: 9999px; background: #1b6384; color: #ffffff; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">3</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+    </nav>
+    <div style="display: flex; align-items: center; gap: 16px; flex-shrink: 0">
+      <a href="/de" class="cl-hide-sm" aria-label="Version allemande" style="font-size: 14px; font-weight: 600; color: #55636f; text-decoration: none">DE</a>
+      <a href="/en" class="cl-hide-sm" aria-label="Version anglaise" style="font-size: 14px; font-weight: 600; color: #55636f; text-decoration: none">EN</a>
+      <a href="[APP-URL]" class="cl-hide-lg" style="font-size: 14px; font-weight: 600; color: #13293d; text-decoration: none; white-space: nowrap">Connexion</a>
+      <a href="Gespraech.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 9999px; background: #13293d; color: #ffffff; font-size: 14px; font-weight: 600; text-decoration: none; white-space: nowrap"><span class="cl-hide-sm">Prendre RDV</span><span class="cl-show-sm">Échange</span></a>
+      <details class="cl-mnav"><summary aria-label="Menu" style="list-style: none; cursor: pointer; width: 44px; height: 44px; border-radius: 9999px; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.16)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#13293d" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg></summary>
+        <div style="position: absolute; top: 64px; left: 16px; right: 16px; background: #ffffff; border-radius: 12px; box-shadow: 0 18px 45px rgba(12, 18, 28, 0.18); border: 1px solid rgba(0, 0, 0, 0.08); padding: 12px; display: flex; flex-direction: column; gap: 2px; z-index: 50"><a href="Plattform.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; font-size: 16px; font-weight: 600; text-decoration: none; color: #13293d">Plateforme</a><a href="Loesungen-Bestandshalter.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; font-size: 16px; font-weight: 600; text-decoration: none; color: #13293d">Propriétaires &amp; Asset Management</a><a href="Loesungen-Property.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; font-size: 16px; font-weight: 600; text-decoration: none; color: #13293d">Property &amp; Facility Management</a><a href="Loesungen-Filialisten.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; font-size: 16px; font-weight: 600; text-decoration: none; color: #13293d">Enseignes multi-sites &amp; entreprises</a><a href="KI-Teams.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; font-size: 16px; font-weight: 600; text-decoration: none; color: #13293d">Pour les équipes IA &amp; IT</a><a href="Trust-Center.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; font-size: 16px; font-weight: 600; text-decoration: none; color: #13293d">Trust Center</a><a href="Ressourcen.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; font-size: 16px; font-weight: 600; text-decoration: none; color: #13293d">Ressources &amp; actualités</a><a href="Unternehmen.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; font-size: 16px; font-weight: 600; text-decoration: none; color: #13293d">Entreprise</a><a href="[APP-URL]" style="display: block; padding: 12px 14px; font-size: 15px; font-weight: 600; color: #55636f; text-decoration: none">Connexion</a><a href="/de" style="display: block; padding: 12px 14px; font-size: 15px; font-weight: 600; color: #55636f; text-decoration: none">Deutsch</a><a href="/en" style="display: block; padding: 12px 14px; font-size: 15px; font-weight: 600; color: #55636f; text-decoration: none">English</a></div>
+      </details>
+    </div>
+    <sc-if value="{{news}}" hint-placeholder-val="{{false}}">
+      <div id="news-pop" role="dialog" aria-label="Actualités" style="position: absolute; top: 64px; right: clamp(16px, 4vw, 48px); width: min(720px, calc(100% - 32px)); background: #ffffff; border-radius: 12px; box-shadow: 0 18px 45px rgba(12, 18, 28, 0.18); border: 1px solid rgba(0, 0, 0, 0.08); padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 14px; animation: clIn 200ms cubic-bezier(0.25, 0.8, 0.5, 1)">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Nouveau chez clearlea.se</span><a href="Ressourcen.dc.html" style="font-size: 13px; font-weight: 600; text-decoration: none">Toutes les actualités →</a></div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 12px">
+          <a href="[RESSOURCE-02]" style="display: flex; flex-direction: column; gap: 8px; background: #eff6fa; border-radius: 8px; padding: 16px; text-decoration: none; color: #13293d"><span style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #1b6384">Produit</span><span style="font-size: 15px; font-weight: 700; line-height: 1.3">Serveur MCP : clearlea.se comme source pour votre IA</span><span style="font-size: 13px; line-height: 1.45; color: #43586c">Votre assistant IA interroge l’état en vigueur, avec justificatif.</span></a>
+          <a href="[RESSOURCE-03]" style="display: flex; flex-direction: column; gap: 8px; background: #F7F7F7; border-radius: 8px; padding: 16px; text-decoration: none; color: #13293d"><span style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Produit</span><span style="font-size: 15px; font-weight: 700; line-height: 1.3">Workflows avec 9 garanties intégrées</span><span style="font-size: 13px; line-height: 1.45; color: #43586c">Automatisez des processus vérifiables, étape par étape.</span></a>
+          <a href="[RESSOURCE-11]" style="display: flex; flex-direction: column; gap: 8px; background: #F7F7F7; border-radius: 8px; padding: 16px; text-decoration: none; color: #13293d"><span style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Actualités</span><span style="font-size: 15px; font-weight: 700; line-height: 1.3">clearlea.se est RICS Tech Network Solution Provider</span><span style="font-size: 13px; line-height: 1.45; color: #43586c">La technologie pour les professionnels de l’immobilier, au même endroit.</span></a>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+</header>
+
+
+
+
+
+<section aria-labelledby="hero-title" style="position: relative; overflow: hidden; padding-top: clamp(56px, 8vw, 104px); padding-bottom: clamp(72px, 8vw, 104px)">
+  <div aria-hidden="true" style="position: absolute; top: -40px; right: -120px; width: min(980px, 90vw); aspect-ratio: 22 / 15; pointer-events: none; z-index: 1"><svg viewBox="4 8 22 15" style="position: absolute; inset: 0; width: 100%; height: 100%"><path fill="rgba(19, 41, 61, 0.045)" d="m 11.484882,21.769442 q -1.8818515,0 -3.3604495,-0.784105 -1.456195,-0.806508 -2.285106,-2.195494 -0.828911,-1.388986 -0.828911,-3.158823 0,-1.79224 0.828911,-3.158823 0.828911,-1.388986 2.285106,-2.173091 1.478598,-0.7841046 3.3604495,-0.7841046 1.747434,0 3.069211,0.7168956 1.34418,0.694493 2.038673,2.061076 l -2.150688,1.254568 q -0.537672,-0.851314 -1.321777,-1.254568 -0.761702,-0.403254 -1.657822,-0.403254 -1.030538,0 -1.8594485,0.44806 -0.828911,0.44806 -1.299374,1.299374 -0.470463,0.828911 -0.470463,1.993867 0,1.164956 0.470463,2.01627 0.470463,0.828911 1.299374,1.276971 0.8289105,0.44806 1.8594485,0.44806 0.89612,0 1.657822,-0.403254 0.784105,-0.403254 1.321777,-1.254568 l 2.150688,1.254568 q -0.694493,1.34418 -2.038673,2.083479 -1.321777,0.716896 -3.069211,0.716896 z"></path></svg><span class="cl-glass" onMouseEnter="{{glassIn}}" onMouseLeave="{{glassOut}}" onClick="{{glassNext}}" style="left: 75.4545%; top: 82%; width: 13.6364%"><span class="cl-glass-txt"><span style="{{tipSt}}"><span style="display: block; font-size: 0.85em; color: #43586c">{{tip.k}}</span><span style="display: block; font-weight: 700">{{tip.t}}</span><span style="display: block">{{tip.s}}</span></span></span></span></div>
+
+  <div style="position: relative; max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box">
+    <div style="display: flex; flex-direction: column; gap: 28px; max-width: 940px">
+      <span style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #1d6485"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 9999px; background: #13293d"></span>Operations intelligence pour l’immobilier d’entreprise</span>
+      <h1 id="hero-title" style="margin: 0; font-size: clamp(2.75rem, 7vw, 5.5rem); line-height: 1.02; letter-spacing: -0.045em; font-weight: 700; color: #13293d; display: flex; flex-direction: column">
+        <span style="color: #55636f; font-weight: 500">Le chaos entre.</span>
+        <span>La clarté sort.</span>
+        <span>Étape suivante incluse.</span>
+      </h1>
+      <p style="margin: 0; font-size: clamp(1.125rem, 1.6vw, 1.375rem); line-height: 1.5; color: #43586c; max-width: 50ch; text-wrap: pretty"><span style="color: #13293d; font-weight: 600">Pour les propriétaires, les gestionnaires immobiliers et les entreprises avec de nombreux sites :</span> clearlea.se lit chaque bail avec tous ses avenants, montre ce qui demande votre attention et prend en charge la routine dans des workflows IA vérifiables.</p>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+        <a href="Gespraech.dc.html" style="display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 26px; border-radius: 9999px; background: #13293d; color: #ffffff; font-size: 16px; font-weight: 600; text-decoration: none">Prendre RDV<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></a>
+        <a href="#demo" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 24px; border-radius: 9999px; border: 1px solid rgba(0, 0, 0, 0.24); color: #13293d; font-size: 16px; font-weight: 600; text-decoration: none">Essayez vous-même</a>
+      </div>
+      <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #55636f">30 minutes avec notre cofondateur. Vous repartez avec un premier workflow pour votre équipe.</p>
+    </div>
+
+    <div id="demo" style="margin-top: clamp(48px, 6vw, 72px); display: flex; flex-direction: column; gap: 14px">
+      <div class="cl-demo-hint" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
+        <span aria-hidden="true" style="flex: none; width: 8px; height: 8px; border-radius: 9999px; background: #247ba0; animation: clBlink 1.6s ease-in-out infinite"></span>
+        <span style="font-size: 15px; font-weight: 600; color: #13293d">Essayez : faites glisser un document dans la liste des biens.</span>
+        <span style="font-size: 14px; color: #55636f">Ou touchez-le.</span>
+      </div>
+      <div onMouseEnter="{{pause}}" onMouseLeave="{{resume}}" onFocusIn="{{pause}}" onFocusOut="{{resume}}" style="background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.12); border-radius: 12px; box-shadow: 0 18px 45px rgba(12, 18, 28, 0.10); overflow: hidden">
+
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 14px 20px; border-bottom: 1px solid rgba(0, 0, 0, 0.08)">
+            <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap" role="tablist" aria-label="Affichage">
+              <button type="button" class="cl-demo-tap" role="tab" aria-selected="{{tabTableSel}}" onClick="{{showTable}}" style="{{tabTableSt}}">Liste des biens</button>
+              <button type="button" class="cl-demo-tap" role="tab" aria-selected="{{tabTasksSel}}" onClick="{{showTasks}}" style="{{tabTasksSt}}">Mes tâches<span class="cl-demo-mobi" style="margin-left: 8px; min-width: 20px; height: 20px; box-sizing: border-box; padding: 0 6px; border-radius: 9999px; background: #fdf0e3; color: #84410d; font-size: 12px; font-weight: 700; line-height: 20px; text-align: center">{{openCount}}</span></button>
+              <span class="cl-demo-desk" style="font-size: 13px; color: #55636f; margin-left: 8px">Portefeuille retail · 248 baux</span>
+            </div>
+            <button type="button" class="cl-demo-desk" onClick="{{showTasks}}" style="{{attnSt}}">{{attnLabel}}</button>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px 20px; box-sizing: border-box; background: #F7F7F7; border-bottom: 1px solid rgba(0, 0, 0, 0.08)">
+            <div class="cl-chiprow" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+              <span class="cl-demo-desk" style="flex: none; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f; margin-right: 4px">Nouveaux documents</span>
+              <sc-for list="{{docs}}" as="d" hint-placeholder-count="5">
+              <button type="button" class="cl-doc" draggable="true" onDragStart="{{d.dragStart}}" onClick="{{d.run}}" aria-label="{{d.aria}}" style="{{d.st}}">
+                <span style="display: flex; align-items: center; gap: 8px; min-width: 0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path></svg><span style="display: flex; flex-direction: column; gap: 2px; min-width: 0; text-align: left"><span style="font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{d.label}}</span><span class="cl-demo-small" style="font-size: 11px; color: #55636f">{{d.kind}}</span></span></span>
+                <sc-if value="{{d.processed}}" hint-placeholder-val="{{false}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-label="traités" style="flex-shrink: 0"><path d="m5 12 5 5L20 7"></path></svg></sc-if>
+              </button>
+            </sc-for>
+            </div>
+          <div aria-live="polite" class="cl-demo-desk" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; min-height: 30px">
+            <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Réception</span>
+            <sc-if value="{{isIdle}}" hint-placeholder-val="{{false}}">
+              <span style="font-size: 13px; color: #55636f">Les nouveaux documents arrivent ici, depuis votre GED, votre messagerie ou un import.</span>
+            </sc-if>
+            <sc-if value="{{hasDoc}}" hint-placeholder-val="{{true}}">
+              <span style="display: inline-flex; align-items: center; gap: 8px; background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.12); border-radius: 8px; padding: 6px 12px; font-size: 13px; font-weight: 600; color: #13293d; animation: clDoc 320ms cubic-bezier(0.25, 0.8, 0.5, 1)">{{c.doc}}</span>
+              <sc-for list="{{steps}}" as="s" hint-placeholder-count="3">
+                <span style="{{s.st}}"><sc-if value="{{s.ok}}" hint-placeholder-val="{{true}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"></path></svg></sc-if>{{s.label}}</span>
+              </sc-for>
+            </sc-if>
+          </div>
+          </div>
+
+          <div style="position: relative">
+            <sc-if value="{{viewTable}}" hint-placeholder-val="{{true}}">
+              <div class="cl-demo-desk" role="region" aria-label="Liste des biens" onDragOver="{{dragOver}}" onDragLeave="{{dragLeave}}" onDrop="{{drop}}" style="{{dropSt}}">
+                <div role="table" aria-label="Liste des biens, données d’exemple">
+                  <div role="row" style="display: grid; grid-template-columns: 1.5fr 1.3fr 1fr; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #55636f">
+                    <span role="columnheader" style="padding: 12px 16px">Bien · Locataire</span>
+                    <span role="columnheader" style="padding: 12px 16px">Bail</span>
+                    <span role="columnheader" style="padding: 12px 16px">Historique du contrat</span>
+                  </div>
+                  <sc-for list="{{rows}}" as="row" hint-placeholder-count="5">
+                    <div role="row" style="{{row.st}}">
+                      <sc-for list="{{row.cells}}" as="cell" hint-placeholder-count="3">
+                        <div role="cell" style="{{cell.st}}">
+                          <sc-if value="{{cell.isText}}" hint-placeholder-val="{{true}}">
+                            <span style="display: flex; flex-wrap: wrap; align-items: center; gap: 2px 5px"><sc-for list="{{cell.l1}}" as="p" hint-placeholder-count="1"><sc-if value="{{p.plain}}" hint-placeholder-val="{{true}}"><span style="{{p.st}}">{{p.text}}</span></sc-if><sc-if value="{{p.changed}}" hint-placeholder-val="{{false}}"><span style="display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px"><span style="color: #55636f; text-decoration: line-through; font-size: 13px">{{p.old}}</span><span style="font-weight: 700; color: #13293d">{{p.neu}}</span><span title="{{p.qsTitle}}" style="display: inline-flex; align-items: flex-end; gap: 2px; height: 13px"><sc-for list="{{p.sig}}" as="g" hint-placeholder-count="4"><span style="{{g.st}}"></span></sc-for></span></span></sc-if></sc-for></span>
+                            <span style="display: flex; flex-wrap: wrap; align-items: center; gap: 2px 5px; font-size: 13px; color: #55636f"><sc-for list="{{cell.l2}}" as="p" hint-placeholder-count="1"><sc-if value="{{p.plain}}" hint-placeholder-val="{{true}}"><span style="{{p.st}}">{{p.text}}</span></sc-if><sc-if value="{{p.changed}}" hint-placeholder-val="{{false}}"><span style="display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px"><span style="color: #55636f; text-decoration: line-through; font-size: 13px">{{p.old}}</span><span style="font-weight: 700; color: #13293d">{{p.neu}}</span><span title="{{p.qsTitle}}" style="display: inline-flex; align-items: flex-end; gap: 2px; height: 13px"><sc-for list="{{p.sig}}" as="g" hint-placeholder-count="4"><span style="{{g.st}}"></span></sc-for></span></span></sc-if></sc-for></span>
+                          </sc-if>
+                          <sc-if value="{{cell.isHist}}" hint-placeholder-val="{{false}}">
+                            <span style="display: flex; align-items: center; gap: 8px"><span style="display: flex; align-items: center; gap: 3px"><sc-for list="{{cell.bars}}" as="bar" hint-placeholder-count="4"><span style="{{bar.st}}"></span></sc-for></span><span style="font-size: 12px; color: #55636f; white-space: nowrap">{{cell.histLabel}}</span></span>
+                          </sc-if>
+                          <sc-if value="{{cell.hasChip}}" hint-placeholder-val="{{false}}"><span style="align-self: flex-start; font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 2px 9px; white-space: nowrap">{{cell.chip}}</span></sc-if>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+              <div class="cl-demo-mob" aria-live="polite" style="padding: 16px; box-sizing: border-box">
+                <div style="background: #F7F7F7; border-radius: 8px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px">
+                    <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="font-size: 16px; font-weight: 700; line-height: 1.3; color: #13293d">{{mob.obj}}</span><span style="font-size: 12px; color: #55636f">{{mob.sub}}</span></span>
+                    <span style="flex-shrink: 0; padding-top: 4px"><span style="display: flex; align-items: center; gap: 3px"><sc-for list="{{mob.bars}}" as="bar" hint-placeholder-count="4"><span style="{{bar.st}}"></span></sc-for></span></span>
+                  </div>
+                  <sc-if value="{{mob.proc}}" hint-placeholder-val="{{false}}">
+                    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px">
+                      <span style="display: inline-flex; align-items: center; gap: 8px; background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.12); border-radius: 8px; padding: 6px 12px; font-size: 13px; font-weight: 600; color: #13293d; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; animation: clDoc 320ms cubic-bezier(0.25, 0.8, 0.5, 1)">{{c.doc}}</span>
+                      <sc-for list="{{steps}}" as="s" hint-placeholder-count="3">
+                        <span style="{{s.st}}"><sc-if value="{{s.ok}}" hint-placeholder-val="{{true}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"></path></svg></sc-if>{{s.label}}</span>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{mob.showFields}}" hint-placeholder-val="{{true}}">
+                    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+                      <sc-for list="{{mob.fields}}" as="f" hint-placeholder-count="4">
+                        <div style="{{f.st}}">
+                          <span class="cl-demo-small" style="font-size: 11px; color: #55636f">{{f.label}}</span>
+                          <span style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px"><sc-for list="{{f.segs}}" as="p" hint-placeholder-count="1"><sc-if value="{{p.plain}}" hint-placeholder-val="{{true}}"><span style="{{p.st}}">{{p.text}}</span></sc-if><sc-if value="{{p.changed}}" hint-placeholder-val="{{false}}"><span style="display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px"><span style="color: #55636f; text-decoration: line-through; font-size: 13px">{{p.old}}</span><span style="font-weight: 700; color: #13293d">{{p.neu}}</span><span title="{{p.qsTitle}}" style="display: inline-flex; align-items: flex-end; gap: 2px; height: 13px"><sc-for list="{{p.sig}}" as="g" hint-placeholder-count="4"><span style="{{g.st}}"></span></sc-for></span></span></sc-if></sc-for></span>
+                          <sc-if value="{{f.hasChip}}" hint-placeholder-val="{{false}}"><span style="align-self: flex-start; font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 2px 9px; max-width: 100%; box-sizing: border-box; overflow-wrap: anywhere">{{f.chip}}</span></sc-if>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{mob.hasChip}}" hint-placeholder-val="{{false}}"><span style="align-self: flex-start; font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 2px 9px; white-space: nowrap">{{mob.chip}}</span></sc-if>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{viewTasks}}" hint-placeholder-val="{{false}}">
+              <ul aria-label="Mes tâches" style="list-style: none; margin: 0; padding: 8px 20px 20px; display: flex; flex-direction: column; min-height: 320px">
+                <sc-for list="{{tasks}}" as="t" hint-placeholder-count="3">
+                  <li style="{{t.st}}">
+                    <span aria-hidden="true" style="flex-shrink: 0; width: 32px; height: 32px; border-radius: 9999px; background: #E7E5DF; color: #13293d; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center">{{t.owner}}</span>
+                    <span style="display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1 1 auto"><span style="{{t.titleSt}}">{{t.title}}</span><span style="font-size: 13px; color: #55636f">{{t.obj}} · {{t.ownerName}} · échéance {{t.due}}</span></span>
+                    <sc-if value="{{t.open}}" hint-placeholder-val="{{true}}"><button type="button" class="cl-demo-tap" onClick="{{t.finish}}" style="min-height: 36px; padding: 0 16px; border-radius: 9999px; border: 1px solid rgba(0, 0, 0, 0.24); background: #ffffff; color: #13293d; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer">Terminer</button></sc-if>
+                    <sc-if value="{{t.closed}}" hint-placeholder-val="{{false}}"><span style="font-size: 13px; font-weight: 600; color: #2e7d32">Terminé · consigné</span></sc-if>
+                  </li>
+                </sc-for>
+              </ul>
+            </sc-if>
+
+            <div class="cl-demo-note" style="{{noteSt}}">
+              <sc-if value="{{showToast}}" hint-placeholder-val="{{true}}">
+                <div role="status" style="background: #13293d; color: #ffffff; border-radius: 12px; box-shadow: 0 18px 45px rgba(12, 18, 28, 0.32); padding: 18px 20px; display: flex; flex-direction: column; gap: 14px; animation: clToast 420ms cubic-bezier(0.25, 0.8, 0.5, 1)">
+                  <div style="display: flex; align-items: flex-start; gap: 12px">
+                    <span aria-hidden="true" style="flex-shrink: 0; width: 34px; height: 34px; border-radius: 9999px; background: #247ba0; color: #ffffff; display: flex; align-items: center; justify-content: center; animation: clPulse 1.4s ease-out 2"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h10"></path><path d="M4 12h16"></path><path d="M4 17h7"></path><circle cx="18" cy="7" r="2"></circle></svg></span>
+                    <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+                      <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.04em; color: rgba(255, 255, 255, 0.72)">{{c.kicker}}</span>
+                      <span style="font-size: 17px; font-weight: 700; line-height: 1.3">{{c.title}}</span>
+                      <span style="font-size: 14px; line-height: 1.45; color: rgba(255, 255, 255, 0.82)">{{c.meta}}</span>
+                    </div>
+                  </div>
+                  <div style="display: flex; justify-content: flex-end">
+                    <button type="button" class="cl-demo-tap" onClick="{{act}}" style="min-height: 42px; padding: 0 20px; border: 0; border-radius: 9999px; background: #ffffff; color: #13293d; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer">{{c.action}}</button>
+                  </div>
+                </div>
+              </sc-if>
+              <sc-if value="{{showDone}}" hint-placeholder-val="{{false}}">
+                <div role="status" style="background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.08); border-radius: 12px; box-shadow: 0 18px 45px rgba(12, 18, 28, 0.18); padding: 16px 18px; display: flex; align-items: center; gap: 12px; animation: clToast 320ms cubic-bezier(0.25, 0.8, 0.5, 1)">
+                  <span aria-hidden="true" style="flex-shrink: 0; width: 32px; height: 32px; border-radius: 9999px; background: #eaf4ea; color: #2e7d32; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"></path></svg></span>
+                  <div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 600; color: #13293d">Terminé</span><span style="font-size: 13px; color: #43586c">Consigné dans la piste d’audit · par vous · à l’instant</span></div>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span style="font-size: 12px; line-height: 1.45; color: #55636f">Données d’exemple. Traitement réel : un décompte de charges en environ 45 secondes.</span>
+    </div>
+  </div>
+</section>
+
+
+<section aria-label="Clients et chiffres clés" style="border-top: 1px solid rgba(0, 0, 0, 0.08); padding-block: clamp(48px, 6vw, 72px)">
+  <div style="max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; display: flex; flex-direction: column; gap: 40px">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 32px; align-items: start">
+      <div style="display: flex; flex-direction: column; gap: 12px">
+        <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Utilisé dans la zone DACH, par exemple chez</span>
+        <img src="/_blob/eb8782b39769d456ca7f4f68bc673c4d" alt="GARBE Industrial Real Estate" width="120" height="45" loading="lazy" style="display: block; height: 45px; width: auto; max-width: 100%; max-height: 100%; object-fit: contain; align-self: flex-start; margin-left: -2px">
+        <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #43586c">La plupart de nos clients préfèrent ne pas être nommés.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <span style="font-size: clamp(2.25rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums">98 %</span>
+        <span style="font-size: 15px; line-height: 1.5; color: #43586c">de précision, apprend de chaque correction</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <span style="font-size: clamp(2.25rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums">3 jours</span>
+        <span style="font-size: 15px; line-height: 1.5; color: #43586c">au lieu de 10 semaines d’intégration de portefeuille</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <span style="font-size: clamp(2.25rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums">45 s</span>
+        <span style="font-size: 15px; line-height: 1.5; color: #43586c">par décompte de charges</span>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 20px; border-top: 1px solid rgba(0, 0, 0, 0.08); padding-top: 28px">
+      <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Reconnus &amp; connectés</span>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px 32px">
+        <img class="cl-logo" src="/_blob/e6908b7065227635261e9f638742d54e" alt="ZIA Innovation 2026" width="76" height="38" loading="lazy" style="display: block; height: 38px; width: auto; max-width: 100%; max-height: 100%; object-fit: contain">
+        <img class="cl-logo" src="/_blob/a2503e88d93dd8ab06c79621c25f6a45" alt="German PropTech Initiative" width="59" height="35" loading="lazy" style="display: block; height: 35px; width: auto; max-width: 100%; max-height: 100%; object-fit: contain">
+        <img class="cl-logo" src="/_blob/bfc3584943b9f4d161695d905351bd7f" alt="Handelsimmobilien Kongress" width="74" height="30" loading="lazy" style="display: block; height: 30px; width: auto; max-width: 100%; max-height: 100%; object-fit: contain">
+        <img class="cl-logo" src="/_blob/900f377862b89424ab310658c99bc652" alt="KI Park" width="73" height="29" loading="lazy" style="display: block; height: 29px; width: auto; max-width: 100%; max-height: 100%; object-fit: contain">
+        <img class="cl-logo" src="/_blob/0033c8c59c88f27ecb24ffeda8aefb6a" alt="AI Nation" width="65" height="65" loading="lazy" style="display: block; height: 65px; width: auto; max-width: 100%; max-height: 100%; object-fit: contain">
+        <img src="/media/badge-rics-tech-network.svg" alt="RICS Tech Network Solution Provider" width="206" height="62" loading="lazy" style="display: block; height: 62px; width: auto; flex-shrink: 0; padding-inline: 14px">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section aria-labelledby="problem-title" style="background: #ffffff; padding-block: clamp(72px, 9vw, 120px)">
+  <div style="max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: clamp(40px, 6vw, 80px); align-items: start">
+    <div style="display: flex; flex-direction: column; gap: 24px">
+      <span style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #1d6485"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 9999px; background: #13293d"></span>Le problème</span>
+      <h2 id="problem-title" style="margin: 0; font-size: clamp(2rem, 3.8vw, 3.25rem); line-height: 1.06; letter-spacing: -0.035em; font-weight: 700; text-wrap: balance">La vérité se trouve dans l’avenant 7.</h2>
+      <p style="margin: 0; font-size: 18px; line-height: 1.6; color: #43586c; max-width: 56ch">Bail, avenants, résiliations, décomptes de charges, factures, listes Excel et e-mails : l’état en vigueur d’un bail est dispersé sur des dizaines de documents. Celui qui décide le fait souvent sur des informations obsolètes. Et une erreur de la première année se répercute sur toute la durée du bail.</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 24px; padding-top: 8px">
+        <div style="display: flex; flex-direction: column; gap: 6px; border-top: 2px solid #13293d; padding-top: 16px">
+          <span style="font-size: 40px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums">84 %</span>
+          <span style="font-size: 15px; line-height: 1.5; color: #43586c">des décomptes de charges commerciaux audités contiennent des erreurs.</span>
+          <span style="font-size: 12px; color: #55636f">Source : Mineko, analyse 2026</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px; border-top: 2px solid #13293d; padding-top: 16px">
+          <span style="font-size: 40px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums">14 ans</span>
+          <span style="font-size: 15px; line-height: 1.5; color: #43586c">d’impact pour une erreur commise la première année d’un bail de 15 ans.</span>
+          <span style="font-size: 12px; color: #55636f">Source : CCIM Institute</span>
+        </div>
+      </div>
+      <p style="margin: 0; font-size: 20px; line-height: 1.45; font-weight: 600; color: #13293d; max-width: 34ch">Operations intelligence, c’est : l’état en vigueur est là avant que quiconque ne le cherche.</p>
+    </div>
+
+    <div aria-label="Exemple : historique du contrat d’un bail" style="background: #F7F7F7; border-radius: 12px; padding: clamp(20px, 3vw, 32px); display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; padding-bottom: 6px">
+        <span style="font-size: 15px; font-weight: 700">Historique du contrat · Friedrichstraße 112</span>
+        <span style="font-size: 13px; color: #55636f">8 documents · de 2014 à aujourd’hui</span>
+      </div>
+      <div style="display: flex; flex-direction: column; border-left: 2px solid rgba(19, 41, 61, 0.2); margin-left: 6px">
+        <div style="position: relative; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 0 12px 22px; border-bottom: 1px solid rgba(0, 0, 0, 0.06)"><span aria-hidden="true" style="position: absolute; left: -6px; top: 17px; width: 10px; height: 10px; border-radius: 9999px; background: #13293d"></span><span style="font-size: 14px; font-weight: 600">Bail · 2014</span><span style="font-size: 14px; color: #43586c">Fin du bail 31/12/2024 · 1 360 m²</span></div>
+        <div style="position: relative; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 0 12px 22px; border-bottom: 1px solid rgba(0, 0, 0, 0.06)"><span aria-hidden="true" style="position: absolute; left: -6px; top: 17px; width: 10px; height: 10px; border-radius: 9999px; background: #13293d"></span><span style="font-size: 14px; font-weight: 600">Avenant 1 · 2016</span><span style="font-size: 14px; color: #43586c">Surface +120 m²</span></div>
+        <div style="position: relative; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 0 12px 22px; border-bottom: 1px solid rgba(0, 0, 0, 0.06)"><span aria-hidden="true" style="position: absolute; left: -5px; top: 18px; width: 8px; height: 8px; border-radius: 9999px; background: #F7F7F7; box-shadow: inset 0 0 0 2px rgba(19, 41, 61, 0.35)"></span><span style="font-size: 14px; font-weight: 600; color: #55636f">Avenants 2 à 5 · 2017 à 2022</span><span style="font-size: 14px; color: #55636f">4 documents, dont la résiliation partielle de l’entrepôt</span></div>
+        <div style="position: relative; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 0 12px 22px; border-bottom: 1px solid rgba(0, 0, 0, 0.06)"><span aria-hidden="true" style="position: absolute; left: -6px; top: 17px; width: 10px; height: 10px; border-radius: 9999px; background: #13293d"></span><span style="font-size: 14px; font-weight: 600">Avenant 6 · 2024</span><span style="font-size: 14px; color: #43586c">Fin du bail 31/12/2031</span></div>
+        <div style="position: relative; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 0 12px 22px"><span aria-hidden="true" style="position: absolute; left: -7px; top: 16px; width: 12px; height: 12px; border-radius: 9999px; background: #247ba0"></span><span style="font-size: 14px; font-weight: 600">Avenant 7 · 2025</span><span style="font-size: 14px; color: #43586c">Loyer à partir du 01/01/2026 : 19 200 €</span></div>
+      </div>
+      <div style="background: #ffffff; border-radius: 8px; padding: 18px 20px; margin-top: 8px; display: flex; flex-direction: column; gap: 12px; box-shadow: inset 0 0 0 1.5px #247ba0">
+        <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #1d6485">État en vigueur aujourd’hui</span>
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap"><span style="font-size: 15px"><span style="color: #43586c">Fin du bail</span> <span style="font-weight: 700">31/12/2031</span></span><span style="font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 3px 10px">Avenant 6 · § 2</span></div>
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap"><span style="font-size: 15px"><span style="color: #43586c">Loyer net</span> <span style="font-weight: 700">19 200 €</span></span><span style="font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 3px 10px">Avenant 7 · § 1</span></div>
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap"><span style="font-size: 15px"><span style="color: #43586c">Surface louée</span> <span style="font-weight: 700">1 480 m²</span></span><span style="font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 3px 10px">Avenant 1 · § 3</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="so-funktionierts" aria-labelledby="how-title" style="padding-block: clamp(72px, 9vw, 120px)">
+  <div style="max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; display: flex; flex-direction: column; gap: 48px">
+    <div style="display: flex; flex-direction: column; gap: 20px; max-width: 820px">
+      <span style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #1d6485"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 9999px; background: #13293d"></span>Comment ça marche</span>
+      <h2 id="how-title" style="margin: 0; font-size: clamp(2rem, 3.8vw, 3.25rem); line-height: 1.06; letter-spacing: -0.035em; font-weight: 700; text-wrap: balance">Trois couches. Un état en vigueur. Chaque étape suivante.</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 24px">
+      <article style="background: #ffffff; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; gap: 18px">
+        <div aria-hidden="true" style="height: 220px; border-radius: 8px; background: #F7F7F7; padding: 18px; box-sizing: border-box; display: flex; align-items: center; gap: 14px">
+          <div style="display: flex; flex-direction: column; gap: 8px; flex: 0 0 auto">
+            <span style="font-size: 12px; font-weight: 600; background: #ffffff; border-radius: 6px; padding: 6px 10px">GED</span>
+            <span style="font-size: 12px; font-weight: 600; background: #ffffff; border-radius: 6px; padding: 6px 10px">Messagerie</span>
+            <span style="font-size: 12px; font-weight: 600; background: #ffffff; border-radius: 6px; padding: 6px 10px">Data room</span>
+            <span style="font-size: 12px; font-weight: 600; background: #ffffff; border-radius: 6px; padding: 6px 10px">Import · API</span>
+          </div>
+          <div style="flex: 1 1 auto; display: flex; align-items: center; min-width: 24px"><span style="flex: 1 1 auto; height: 2px; background: rgba(19, 41, 61, 0.25)"></span><span style="width: 8px; height: 8px; border-radius: 9999px; background: #247ba0"></span></div>
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 0 1 auto; min-width: 0">
+            <span style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #1d6485">Classé</span>
+            <span style="font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 3px 10px">Bail</span>
+            <span style="font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 3px 10px">Avenant</span>
+            <span style="font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 3px 10px">Charges locatives</span>
+            <span style="font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 3px 10px">Rapport de maintenance</span>
+            <span style="font-size: 11px; color: #55636f">+ environ 250 autres</span>
+          </div>
+        </div>
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">01 · Le chaos entre</span>
+        <h3 style="margin: 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 700">Intégration &amp; documents</h3>
+        <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #43586c">Les documents arrivent comme ils arrivent : depuis votre GED, votre messagerie, une data room, un import ou via API. clearlea.se classe chaque document dans l’une des quelque 250 catégories et lit les informations dont vous avez besoin. C’est vous qui décidez lesquelles.</p>
+      </article>
+      <article style="background: #ffffff; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; gap: 18px">
+        <div aria-hidden="true" style="height: 220px; border-radius: 8px; background: #F7F7F7; padding: 18px; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px">
+          <div style="background: #ffffff; border-radius: 8px; padding: 12px 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px; box-shadow: inset 0 0 0 1.5px #247ba0">
+            <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #55636f">Loyer net</span><span style="font-size: 18px; font-weight: 700">19 200 €</span></span>
+            <span style="display: flex; align-items: center; gap: 8px"><span style="display: inline-flex; align-items: flex-end; gap: 2px; height: 13px"><span style="width: 3px; height: 4px; border-radius: 1px; background: #247ba0"></span><span style="width: 3px; height: 7px; border-radius: 1px; background: #247ba0"></span><span style="width: 3px; height: 10px; border-radius: 1px; background: #247ba0"></span><span style="width: 3px; height: 13px; border-radius: 1px; background: #247ba0"></span></span><span style="font-size: 11px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 2px 8px">Avenant 7 · § 1</span></span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px; border-left: 2px solid rgba(19, 41, 61, 0.2); margin-left: 8px; padding-left: 14px">
+            <span style="font-size: 12px; color: #55636f">Bail 2014 : 14 900 €</span>
+            <span style="font-size: 12px; color: #55636f">Avenant 2, 2017 : 16 300 €</span>
+            <span style="font-size: 12px; color: #55636f">Courrier d’indexation 2023 : 17 850 €</span>
+            <span style="font-size: 12px; font-weight: 600; color: #13293d">Avenant 7, 2025 : 19 200 €</span>
+          </div>
+        </div>
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">02 · La clarté sort</span>
+        <h3 style="margin: 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 700">Données patrimoniales avec historique</h3>
+        <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #43586c">Pour chaque donnée, l’état en vigueur à travers le bail, les avenants et les résiliations, avec historique et source jusqu’à la clause. 98 % de précision. L’indice QA indique la qualité de chaque nouvelle valeur, et le système apprend de chaque correction.</p>
+      </article>
+      <article style="background: #ffffff; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; gap: 18px">
+        <div aria-hidden="true" style="height: 220px; border-radius: 8px; background: #F7F7F7; padding: 18px; box-sizing: border-box; display: flex; flex-direction: column; gap: 10px">
+          <div style="display: flex; gap: 8px">
+            <span style="flex: 1 1 0; background: #ffffff; border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 11px; color: #55636f">À traiter</span><span style="font-size: 20px; font-weight: 700; color: #84410d">3</span></span>
+            <span style="flex: 1 1 0; background: #ffffff; border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 11px; color: #55636f">Traité automatiquement</span><span style="font-size: 20px; font-weight: 700; color: #2e7d32">41</span></span>
+          </div>
+          <div style="background: #ffffff; border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 10px">
+            <span style="font-size: 12px; font-weight: 600">Contrôle de facture · étape 4 sur 5</span>
+            <span style="position: relative; display: block; height: 2px; background: rgba(19, 41, 61, 0.15); margin: 4px 4px">
+              <span style="position: absolute; left: 0; top: -3px; width: 8px; height: 8px; border-radius: 9999px; background: #13293d"></span>
+              <span style="position: absolute; left: 25%; top: -3px; width: 8px; height: 8px; border-radius: 9999px; background: #247ba0"></span>
+              <span style="position: absolute; left: 50%; top: -3px; width: 8px; height: 8px; border-radius: 9999px; background: #13293d"></span>
+              <span style="position: absolute; left: 75%; top: -5px; width: 12px; height: 12px; border-radius: 9999px; background: #ffffff; box-shadow: inset 0 0 0 3px #ed6c02"></span>
+              <span style="position: absolute; left: calc(100% - 8px); top: -3px; width: 8px; height: 8px; border-radius: 9999px; background: #E2E2E2"></span>
+            </span>
+            <span style="display: flex; align-items: center; gap: 8px"><span style="width: 22px; height: 22px; border-radius: 9999px; background: #E7E5DF; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center">MW</span><span style="font-size: 12px; color: #43586c">En attente de validation par M. Weber</span></span>
+          </div>
+        </div>
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">03 · Étape suivante incluse</span>
+        <h3 style="margin: 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 700">Cockpit &amp; workflows</h3>
+        <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #43586c">Le cockpit montre ce qui demande votre attention. Les workflows prennent en charge la routine : étape par étape, avec un responsable nommé et une validation là où elle compte.</p>
+      </article>
+    </div>
+    <a href="Plattform.dc.html" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600; color: #13293d; text-decoration: none">La plateforme en détail<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></a>
+  </div>
+</section>
+
+
+<section id="rollen" aria-labelledby="router-title" style="background: #E7E5DF; padding-block: clamp(72px, 9vw, 120px)">
+  <div style="max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; display: flex; flex-direction: column; gap: 40px">
+    <div style="display: flex; flex-direction: column; gap: 20px; max-width: 820px">
+      <span style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #13293d"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 9999px; background: #13293d"></span>Pour qui</span>
+      <h2 id="router-title" style="margin: 0; font-size: clamp(2rem, 3.8vw, 3.25rem); line-height: 1.06; letter-spacing: -0.035em; font-weight: 700; text-wrap: balance">Conçu pour tous ceux qui travaillent avec des baux.</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 16px">
+      <a href="Loesungen-Bestandshalter.dc.html" class="cl-card" style="background: #ffffff; border-radius: 12px; padding: 28px; min-height: 280px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; text-decoration: none; color: #13293d">
+        <span style="display: flex; flex-direction: column; gap: 14px"><span style="font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #55636f">Propriétaires &amp; Asset Management</span><span style="font-size: 23px; line-height: 1.2; font-weight: 700; letter-spacing: -0.02em">Un état en vigueur pour chaque bien. Avec justificatif.</span><span style="font-size: 15px; line-height: 1.55; color: #43586c">Transparence du portefeuille, due diligence et reporting, sans fouilles archéologiques dans Excel.</span></span>
+        <span style="font-size: 15px; font-weight: 600">En savoir plus →</span>
+      </a>
+      <a href="Loesungen-Property.dc.html" class="cl-card" style="background: #ffffff; border-radius: 12px; padding: 28px; min-height: 280px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; text-decoration: none; color: #13293d">
+        <span style="display: flex; flex-direction: column; gap: 14px"><span style="font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #55636f">Property &amp; Facility Management</span><span style="font-size: 23px; line-height: 1.2; font-weight: 700; letter-spacing: -0.02em">Nouveau mandat ? Opérationnel en quelques jours.</span><span style="font-size: 15px; line-height: 1.55; color: #43586c">Aucune indexation de loyer oubliée, moins de litiges sur les décomptes de charges.</span></span>
+        <span style="font-size: 15px; font-weight: 600">En savoir plus →</span>
+      </a>
+      <a href="Loesungen-Filialisten.dc.html" class="cl-card" style="background: #ffffff; border-radius: 12px; padding: 28px; min-height: 280px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; text-decoration: none; color: #13293d">
+        <span style="display: flex; flex-direction: column; gap: 14px"><span style="font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #55636f">Enseignes multi-sites &amp; entreprises</span><span style="font-size: 23px; line-height: 1.2; font-weight: 700; letter-spacing: -0.02em">Chaque décompte de charges contrôlé. Chaque échéance sous contrôle.</span><span style="font-size: 15px; line-height: 1.55; color: #43586c">Une vue centrale de tous les sites, y compris au-delà des frontières.</span></span>
+        <span style="font-size: 15px; font-weight: 600">En savoir plus →</span>
+      </a>
+      <a href="KI-Teams.dc.html" class="cl-card" style="background: #ffffff; border-radius: 12px; padding: 28px; min-height: 280px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; text-decoration: none; color: #13293d">
+        <span style="display: flex; flex-direction: column; gap: 14px"><span style="font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #1d6485">Équipes IA &amp; IT</span><span style="font-size: 23px; line-height: 1.2; font-weight: 700; letter-spacing: -0.02em">Gardez votre stratégie IA.</span><span style="font-size: 15px; line-height: 1.55; color: #43586c">Une source à laquelle vos agents peuvent se fier. Avec un contrôle central plutôt que la dispersion.</span></span>
+        <span style="font-size: 15px; font-weight: 600">En savoir plus →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<section id="workflows" aria-labelledby="wf-title" style="background: #ffffff; padding-block: clamp(72px, 9vw, 120px)">
+  <div style="max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; display: flex; flex-direction: column; gap: 48px">
+    <div style="display: flex; flex-direction: column; gap: 20px; max-width: 880px">
+      <span style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #1d6485"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 9999px; background: #13293d"></span>Automatisation maîtrisée</span>
+      <h2 id="wf-title" style="margin: 0; font-size: clamp(2rem, 3.8vw, 3.25rem); line-height: 1.06; letter-spacing: -0.035em; font-weight: 700; text-wrap: balance">Pas d’agents que l’on lâche en espérant que ça marche.</h2>
+      <p style="margin: 0; font-size: 18px; line-height: 1.6; color: #43586c; max-width: 62ch">Les workflows décomposent un processus en étapes claires. L’IA travaille au sein des étapes, une personne nommée en est responsable et valide là où cela compte. Chaque étape a un responsable, une échéance et un chemin d’escalade. Ainsi, les processus traversent les services, voire les frontières de l’entreprise, et restent vérifiables pour l’audit interne et la conformité.</p>
+    </div>
+
+    <div style="background: #F7F7F7; border-radius: 12px; display: flex; flex-direction: column; overflow: hidden">
+      <div role="group" aria-label="Bibliothèque de workflows" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; box-sizing: border-box; padding: 18px clamp(20px, 2.4vw, 32px); border-bottom: 1px solid rgba(0, 0, 0, 0.06)">
+        <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f; margin-right: 8px">Bibliothèque de workflows</span>
+        <sc-for list="{{wfList}}" as="w" hint-placeholder-count="7">
+          <button type="button" onClick="{{w.pick}}" aria-pressed="{{w.pressed}}" style="{{w.st}}"><span>{{w.name}}</span><span style="{{w.tagSt}}">{{w.tag}}</span></button>
+        </sc-for>
+      </div>
+      <div style="min-width: 0; box-sizing: border-box; padding: clamp(20px, 2.4vw, 32px); display: flex; flex-direction: column; gap: 22px">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap">
+          <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 22px; font-weight: 700; letter-spacing: -0.02em">{{wf.name}}</span><span style="font-size: 14px; color: #55636f">{{wf.trigger}}</span></div>
+          <span style="{{wf.tagSt}}">{{wf.tag}}</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f; margin-right: 4px">Intervenants</span><sc-for list="{{wf.teams}}" as="tm" hint-placeholder-count="3"><span style="{{tm.st}}">{{tm.name}}</span></sc-for></div>
+        <div style="position: relative; padding-top: 4px">
+          <span aria-hidden="true" style="position: absolute; left: 6px; right: 6px; top: 9px; height: 2px; background: rgba(19, 41, 61, 0.18)"></span>
+          <span aria-hidden="true" style="position: absolute; left: 6px; right: 6px; top: 4px; height: 12px; pointer-events: none"><span style="position: absolute; top: 0; width: 12px; height: 12px; margin-left: -6px; border-radius: 9999px; background: #247ba0; box-shadow: 0 0 0 6px rgba(36, 123, 160, 0.18); animation: clTravel 6s linear infinite"></span></span>
+          <ol class="cl-wftrack" aria-label="Étapes du workflow sélectionné" style="{{wfGridSt}}">
+            <sc-for list="{{wf.steps}}" as="s" hint-placeholder-count="6">
+              <li style="display: flex; flex-direction: column; gap: 14px; min-width: 0; animation: clIn 260ms cubic-bezier(0.25, 0.8, 0.5, 1)">
+                <span aria-hidden="true" style="{{s.dotSt}}"></span>
+                <span style="{{s.cardSt}}">
+                  <span style="{{s.typeSt}}">{{s.type}}</span>
+                  <span style="font-size: 15px; font-weight: 600; line-height: 1.3; color: #13293d">{{s.title}}</span>
+                  <span style="display: flex; align-items: center; gap: 6px"><span style="{{s.ownerSt}}">{{s.ini}}</span><span style="font-size: 12px; color: #55636f; line-height: 1.35">{{s.owner}}</span></span>
+                  <sc-if value="{{s.hasDue}}" hint-placeholder-val="{{false}}"><span style="display: flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; color: #13293d"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>{{s.due}}</span></sc-if>
+                  <sc-if value="{{s.hasEsc}}" hint-placeholder-val="{{false}}"><span style="display: flex; align-items: flex-start; gap: 5px; font-size: 12px; line-height: 1.35; color: #84410d"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg><span>{{s.esc}}</span></span></sc-if>
+                  <sc-if value="{{s.pilot}}" hint-placeholder-val="{{false}}"><span style="align-self: flex-start; margin-top: auto; font-size: 11px; font-weight: 600; color: #13293d; border: 1px solid rgba(0, 0, 0, 0.24); border-radius: 9999px; padding: 1px 7px">Pilote</span></sc-if>
+                </span>
+              </li>
+            </sc-for>
+          </ol>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; border-top: 1px solid rgba(0, 0, 0, 0.08); padding-top: 18px">
+          <sc-if value="{{wf.hasMetric}}" hint-placeholder-val="{{false}}"><span style="font-size: 32px; font-weight: 700; letter-spacing: -0.03em; line-height: 1">{{wf.metric}}</span></sc-if>
+          <span style="font-size: 15px; line-height: 1.5; color: #43586c">{{wf.result}}</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 12px; color: #55636f"><span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 9999px; background: #247ba0"></span>Étape IA</span><span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 9999px; background: #ffffff; box-shadow: inset 0 0 0 2.5px #ed6c02"></span>Décision</span><span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 9999px; background: #13293d"></span>Système ou personne</span><span style="display: inline-flex; align-items: center; gap: 6px"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>Échéance</span><span style="display: inline-flex; align-items: center; gap: 6px; color: #84410d"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg>Escalade</span></div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: 24px; align-items: stretch">
+      <div style="display: flex; flex-direction: column; gap: 20px">
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <h3 style="margin: 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 700">9 garanties intégrées pour chaque automatisation</h3>
+          <span style="font-size: 15px; line-height: 1.5; color: #43586c">Intégré dans le code, pas dans le prompt. C’est pourquoi même des agents peuvent travailler sous contrôle strict.</span>
+        </div>
+        <ul style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 10px 20px">
+          <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.45"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px"><path d="m5 12 5 5L20 7"></path></svg>Aucune modification sans validation</li>
+          <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.45"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px"><path d="m5 12 5 5L20 7"></path></svg>Aucune action exécutée deux fois</li>
+          <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.45"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px"><path d="m5 12 5 5L20 7"></path></svg>Aucune décision sur des données obsolètes</li>
+          <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.45"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px"><path d="m5 12 5 5L20 7"></path></svg>Les dossiers clos restent inchangés</li>
+          <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.45"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px"><path d="m5 12 5 5L20 7"></path></svg>Piste d’audit complète : qui, quand, pourquoi</li>
+          <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.45"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px"><path d="m5 12 5 5L20 7"></path></svg>Séparation stricte des clients, droits minimaux</li>
+          <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.45"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px"><path d="m5 12 5 5L20 7"></path></svg>Suppression RGPD sans perdre la piste d’audit</li>
+          <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.45"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px"><path d="m5 12 5 5L20 7"></path></svg>Aucun workflow défectueux n’est mis en service</li>
+          <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.45"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px"><path d="m5 12 5 5L20 7"></path></svg>L’IA ne contourne jamais les règles</li>
+        </ul>
+      </div>
+      <figure style="margin: 0; background: #F7F7F7; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; gap: 18px">
+        <figcaption style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 18px; font-weight: 700">Pourquoi des étapes plutôt que de longues chaînes</span><span style="font-size: 15px; line-height: 1.5; color: #43586c">Avec 95 % de précision par étape pour un agent IA, il ne reste qu’environ 60 % de qualité globale après dix étapes. C’est pourquoi chaque étape de clearlea.se a son propre point de contrôle.</span></figcaption>
+        <div role="img" aria-label="Diagramme à barres : la qualité globale passe de 95 pour cent après une étape à 60 pour cent après dix étapes" style="display: flex; align-items: flex-end; gap: 8px; height: 190px; padding-top: 8px">
+          <sc-for list="{{lusser}}" as="b" hint-placeholder-count="10">
+            <div style="flex: 1 1 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 6px; height: 100%">
+              <span style="font-size: 11px; font-weight: 600; color: #43586c; font-variant-numeric: tabular-nums">{{b.v}}</span>
+              <span style="{{b.st}}"></span>
+              <span style="font-size: 11px; color: #55636f">{{b.n}}</span>
+            </div>
+          </sc-for>
+        </div>
+        <span style="font-size: 12px; line-height: 1.5; color: #55636f">Étapes consécutives, qualité globale en %. Les agents IA résolvent 58 % des tâches en une étape, mais seulement 35 % des workflows en plusieurs étapes. Sources : loi de Lusser ; Salesforce AI Research, CRMArena-Pro (2025)</span>
+      </figure>
+    </div>
+  </div>
+</section>
+
+
+<section id="ki" aria-labelledby="ki-title" style="padding-block: clamp(72px, 9vw, 120px)">
+  <div style="max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; display: flex; flex-direction: column; gap: 40px">
+    <div style="display: flex; flex-direction: column; gap: 20px; max-width: 860px">
+      <span style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #1d6485"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 9999px; background: #13293d"></span>Pour les équipes avec une stratégie IA</span>
+      <h2 id="ki-title" style="margin: 0; font-size: clamp(2rem, 3.8vw, 3.25rem); line-height: 1.06; letter-spacing: -0.035em; font-weight: 700; text-wrap: balance">La réponse est là avant que vous ne posiez la question.</h2>
+      <p style="margin: 0; font-size: 18px; line-height: 1.6; color: #43586c; max-width: 60ch">Un agent IA lit ce que vous lui donnez et devine le reste. clearlea.se tient l’état en vigueur à disposition, avec historique et justificatifs. Votre propre IA l’interroge via MCP : une requête au lieu de documents entiers.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: 24px">
+      <div style="background: #ffffff; border-radius: 12px; border: 1px solid rgba(0, 0, 0, 0.08); padding: 24px; display: flex; flex-direction: column; gap: 14px; min-height: 480px; box-sizing: border-box">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap"><span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span style="font-size: 15px; font-weight: 700">Agent IA généraliste</span><span style="display: flex; align-items: center; gap: 4px" aria-label="par exemple Copilot, ChatGPT ou Claude"><span title="Copilot (emplacement du logo officiel)" style="width: 24px; height: 24px; border-radius: 9999px; background: #F3F3F3; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); font-size: 8px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">CP</span><span title="ChatGPT (emplacement du logo officiel)" style="width: 24px; height: 24px; border-radius: 9999px; background: #F3F3F3; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); font-size: 8px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">GPT</span><span title="Claude (emplacement du logo officiel)" style="width: 24px; height: 24px; border-radius: 9999px; background: #F3F3F3; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); font-size: 8px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">CL</span></span></span><span style="font-size: 12px; font-weight: 600; color: #43586c; background: #F3F3F3; border-radius: 9999px; padding: 3px 10px">5 fichiers importés</span></div>
+        <div style="align-self: flex-end; max-width: 85%; background: #F3F3F3; border-radius: 12px; padding: 12px 14px; font-size: 15px; line-height: 1.45">Quand le bail de la Friedrichstraße 112 prend-il fin ?</div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <sc-for list="{{kiLeft}}" as="l" hint-placeholder-count="4"><span style="{{l.st}}">{{l.label}}</span></sc-for>
+        </div>
+        <sc-if value="{{kiLeftAnswer}}" hint-placeholder-val="{{true}}">
+          <div style="display: flex; flex-direction: column; gap: 10px; animation: clIn 260ms cubic-bezier(0.25, 0.8, 0.5, 1)">
+            <div style="align-self: flex-start; max-width: 90%; border: 1px solid rgba(0, 0, 0, 0.08); border-radius: 12px; padding: 12px 14px; font-size: 15px; line-height: 1.45">Selon le bail, la location court jusqu’au 31/12/2024 et est reconduite tacitement depuis.</div>
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: #84410d; background: #fdf0e3; border-radius: 8px; padding: 10px 12px"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0"><path d="M12 9v4"></path><path d="M12 17h.01"></path><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path></svg>Faux : l’avenant 6 ne figurait pas parmi les fichiers.</div>
+          </div>
+        </sc-if>
+        <div style="margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; border-top: 1px solid rgba(0, 0, 0, 0.08); padding-top: 14px"><span style="font-size: 13px; color: #55636f">Exemple de calcul</span><span style="{{kiLeftCostSt}}">{{kiLeftCost}}</span></div>
+      </div>
+      <div style="background: #ffffff; border-radius: 12px; border: 1px solid #a9cde1; padding: 24px; display: flex; flex-direction: column; gap: 14px; min-height: 480px; box-sizing: border-box">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
+          <span style="font-size: 15px; font-weight: 700">Votre IA avec clearlea.se</span>
+          <span style="display: flex; align-items: center; gap: 6px"><span style="font-size: 12px; color: #55636f">Compatible avec</span><span style="display: flex; align-items: center; gap: 4px"><span title="Copilot (emplacement du logo officiel)" style="width: 24px; height: 24px; border-radius: 9999px; background: #F3F3F3; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); font-size: 8px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">CP</span><span title="ChatGPT (emplacement du logo officiel)" style="width: 24px; height: 24px; border-radius: 9999px; background: #F3F3F3; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); font-size: 8px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">GPT</span><span title="Claude (emplacement du logo officiel)" style="width: 24px; height: 24px; border-radius: 9999px; background: #F3F3F3; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); font-size: 8px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">CL</span></span></span>
+        </div>
+        <div style="align-self: flex-end; max-width: 85%; background: #F3F3F3; border-radius: 12px; padding: 12px 14px; font-size: 15px; line-height: 1.45">Quand le bail de la Friedrichstraße 112 prend-il fin ?</div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <sc-for list="{{kiRight}}" as="l" hint-placeholder-count="1"><span style="{{l.st}}">{{l.label}}</span></sc-for>
+        </div>
+        <sc-if value="{{kiRightAnswer}}" hint-placeholder-val="{{true}}">
+          <div style="align-self: flex-start; width: min(100%, 440px); box-sizing: border-box; border: 1px solid rgba(0, 0, 0, 0.08); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 12px; animation: clIn 260ms cubic-bezier(0.25, 0.8, 0.5, 1)">
+            <span style="font-size: 15px; line-height: 1.45">Jusqu’au <span style="font-weight: 700">31/12/2031</span>, prolongé par l’avenant 6.</span>
+            <div style="display: flex; flex-direction: column; gap: 8px; border-left: 2px solid rgba(19, 41, 61, 0.2); padding-left: 14px">
+              <span style="font-size: 13px; color: #43586c">Bail 2014 : jusqu’au 31/12/2024</span>
+              <span style="font-size: 13px; color: #43586c">Avenant 3 · 2019 : jusqu’au 31/12/2026</span>
+              <span style="font-size: 13px; font-weight: 600; color: #13293d">Avenant 6 · 2024 : jusqu’au 31/12/2031</span>
+            </div>
+            <span style="align-self: flex-start; font-size: 12px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 3px 10px">Source : avenant 6 · § 2</span>
+            <sc-if value="{{kiSuggest}}" hint-placeholder-val="{{true}}">
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; background: #F7F7F7; border-radius: 8px; padding: 10px 12px; animation: clIn 260ms cubic-bezier(0.25, 0.8, 0.5, 1)"><span style="font-size: 13px; color: #13293d">Démarrer le workflow « Contrôler la reconduction » ?</span><span style="font-size: 12px; font-weight: 700; color: #ffffff; background: #13293d; border-radius: 9999px; padding: 6px 12px">Démarrer</span></div>
+            </sc-if>
+          </div>
+        </sc-if>
+        <div style="margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; border-top: 1px solid rgba(0, 0, 0, 0.08); padding-top: 14px"><span style="font-size: 13px; color: #55636f">Exemple de calcul</span><span style="{{kiRightCostSt}}">{{kiRightCost}}</span></div>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap"><span style="font-size: 14px; color: #43586c">Même modèle à gauche et à droite. La différence, c’est l’accès à des données vérifiées.</span><button type="button" onClick="{{kiReplay}}" style="min-height: 40px; padding: 0 18px; border-radius: 9999px; border: 1px solid rgba(0, 0, 0, 0.24); background: transparent; color: #13293d; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer">Rejouer</button></div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 24px; border-top: 1px solid rgba(0, 0, 0, 0.08); padding-top: 32px">
+      <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 17px; font-weight: 700">Sans import, sans prompt engineering</span><span style="font-size: 15px; line-height: 1.55; color: #43586c">La réponse vérifiée est déjà dans le tableau. Votre IA n’a qu’à l’interroger.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 17px; font-weight: 700">Gain de temps et de tokens</span><span style="font-size: 15px; line-height: 1.55; color: #43586c">Une requête au lieu de documents entiers dans la fenêtre de contexte.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 17px; font-weight: 700">Un contrôle central plutôt que la dispersion</span><span style="font-size: 15px; line-height: 1.55; color: #43586c">Droits, journalisation et validations pour chaque IA de votre organisation, au même endroit.</span></div>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+      <span style="font-size: 14px; line-height: 1.5; color: #43586c; max-width: 70ch">Les solutions d’IA spécialisées, achetées, réussissent environ deux fois plus souvent que les développements internes (67 % contre 33 %). <span style="color: #55636f">Source : MIT Project NANDA, The GenAI Divide (2025)</span></span>
+      <a href="KI-Teams.dc.html" style="display: inline-flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600; color: #13293d; text-decoration: none">Pour les équipes IA &amp; IT<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></a>
+    </div>
+  </div>
+</section>
+
+
+<section aria-labelledby="praxis-title" style="background: #ffffff; padding-block: clamp(72px, 9vw, 120px)">
+  <div style="max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; display: flex; flex-direction: column; gap: 48px">
+    <div style="display: flex; flex-direction: column; gap: 20px; max-width: 860px">
+      <span style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #1d6485"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 9999px; background: #13293d"></span>Des cas concrets</span>
+      <h2 id="praxis-title" style="margin: 0; font-size: clamp(2rem, 3.8vw, 3.25rem); line-height: 1.06; letter-spacing: -0.035em; font-weight: 700; text-wrap: balance">Chaque histoire est un workflow.</h2>
+      <p style="margin: 0; font-size: 18px; line-height: 1.6; color: #43586c; max-width: 60ch">Vous voyez non seulement le résultat, mais aussi ce qui tournerait dans votre organisation.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 20px">
+      <article style="background: #F7F7F7; border-radius: 12px; padding: 32px; display: flex; flex-direction: column; gap: 20px">
+        <span style="align-self: flex-start; font-size: 12px; font-weight: 600; color: #13293d; background: #ffffff; border-radius: 9999px; padding: 4px 12px">Un cas concret</span>
+        <div style="display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-size: 24px; line-height: 1.25; font-weight: 700">Prestataire de gestion locative</h3><span style="font-size: 15px; line-height: 1.5; color: #43586c">Intégration du portefeuille de quatre enseignes, chacune avec plusieurs centaines de sites</span></div>
+        <ol style="list-style: none; margin: 0 0 0 5px; padding: 0; display: flex; flex-direction: column; border-left: 2px solid rgba(19, 41, 61, 0.2)">
+          <li style="position: relative; font-size: 14px; padding: 6px 0 6px 20px"><span aria-hidden="true" style="position: absolute; left: -6px; top: 11px; width: 10px; height: 10px; border-radius: 9999px; background: #13293d"></span>Data room transmise</li>
+          <li style="position: relative; font-size: 14px; padding: 6px 0 6px 20px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap"><span aria-hidden="true" style="position: absolute; left: -6px; top: 11px; width: 10px; height: 10px; border-radius: 9999px; background: #247ba0"></span>Documents classés<span style="font-size: 11px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 1px 7px">IA</span></li>
+          <li style="position: relative; font-size: 14px; padding: 6px 0 6px 20px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap"><span aria-hidden="true" style="position: absolute; left: -6px; top: 11px; width: 10px; height: 10px; border-radius: 9999px; background: #247ba0"></span>Baux et avenants saisis<span style="font-size: 11px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 1px 7px">IA</span></li>
+          <li style="position: relative; font-size: 14px; padding: 6px 0 6px 20px"><span aria-hidden="true" style="position: absolute; left: -6px; top: 11px; width: 10px; height: 10px; border-radius: 9999px; background: #13293d"></span>Qualité contrôlée et validée</li>
+          <li style="position: relative; font-size: 14px; padding: 6px 0 6px 20px"><span aria-hidden="true" style="position: absolute; left: -6px; top: 11px; width: 10px; height: 10px; border-radius: 9999px; background: #13293d"></span>Échéances et contrôle des charges proposés en service à ses clients</li>
+        </ol>
+        <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-top: auto; border-top: 1px solid rgba(0, 0, 0, 0.08); padding-top: 18px"><span style="font-size: 40px; font-weight: 700; letter-spacing: -0.03em; line-height: 1">3 jours</span><span style="font-size: 15px; color: #43586c">au lieu de 10 semaines</span></div>
+      </article>
+      <article style="background: #F7F7F7; border-radius: 12px; padding: 32px; display: flex; flex-direction: column; gap: 20px">
+        <span style="align-self: flex-start; font-size: 12px; font-weight: 600; color: #13293d; background: #ffffff; border-radius: 9999px; padding: 4px 12px">Un cas concret</span>
+        <div style="display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; line-height: 1"><img src="/_blob/eb8782b39769d456ca7f4f68bc673c4d" alt="GARBE Industrial Real Estate" width="93" height="35" loading="lazy" style="display: block; height: 35px; width: auto; max-width: 100%; max-height: 100%; object-fit: contain"></h3><span style="font-size: 15px; line-height: 1.5; color: #43586c">Les factures entrantes en workflow, jusqu’à l’entrepôt de données</span></div>
+        <ol style="list-style: none; margin: 0 0 0 5px; padding: 0; display: flex; flex-direction: column; border-left: 2px solid rgba(19, 41, 61, 0.2)">
+          <li style="position: relative; font-size: 14px; padding: 6px 0 6px 20px"><span aria-hidden="true" style="position: absolute; left: -6px; top: 11px; width: 10px; height: 10px; border-radius: 9999px; background: #13293d"></span>Facture reçue</li>
+          <li style="position: relative; font-size: 14px; padding: 6px 0 6px 20px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap"><span aria-hidden="true" style="position: absolute; left: -6px; top: 11px; width: 10px; height: 10px; border-radius: 9999px; background: #247ba0"></span>Classé et rattaché au bail<span style="font-size: 11px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 1px 7px">IA</span></li>
+          <li style="position: relative; font-size: 14px; padding: 6px 0 6px 20px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap"><span aria-hidden="true" style="position: absolute; left: -6px; top: 11px; width: 10px; height: 10px; border-radius: 9999px; background: #247ba0"></span>Catégories de coûts classées selon DIN<span style="font-size: 11px; font-weight: 600; color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 1px 7px">IA</span></li>
+          <li style="position: relative; font-size: 14px; padding: 6px 0 6px 20px"><span aria-hidden="true" style="position: absolute; left: -6px; top: 11px; width: 10px; height: 10px; border-radius: 9999px; background: #13293d"></span>Validation métier donnée</li>
+          <li style="position: relative; font-size: 14px; padding: 6px 0 6px 20px"><span aria-hidden="true" style="position: absolute; left: -6px; top: 11px; width: 10px; height: 10px; border-radius: 9999px; background: #13293d"></span>Export vers l’entrepôt de données</li>
+        </ol>
+        <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-top: auto; border-top: 1px solid rgba(0, 0, 0, 0.08); padding-top: 18px"><span style="font-size: 40px; font-weight: 700; letter-spacing: -0.03em; line-height: 1">10 s</span><span style="font-size: 15px; color: #43586c">par facture</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<section aria-labelledby="trust-title" style="padding-block: clamp(72px, 9vw, 120px)">
+  <div style="max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; display: flex; flex-direction: column; gap: 48px">
+    <div style="display: flex; flex-direction: column; gap: 20px; max-width: 860px">
+      <span style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #1d6485"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 9999px; background: #13293d"></span>Souveraineté &amp; sécurité</span>
+      <h2 id="trust-title" style="margin: 0; font-size: clamp(2rem, 3.8vw, 3.25rem); line-height: 1.06; letter-spacing: -0.035em; font-weight: 700; text-wrap: balance">Vos données, vos règles. Dans votre propre infrastructure si vous le souhaitez.</h2>
+      <p style="margin: 0; font-size: 18px; line-height: 1.6; color: #43586c; max-width: 60ch">Pour les achats, la sécurité informatique et la protection des données : les réponses essentielles avant même que vous ne demandiez.</p>
+    </div>
+    <ol aria-label="Modèles de déploiement" style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); gap: 16px">
+      <li style="background: #ffffff; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 14px"><span aria-hidden="true" style="display: flex; gap: 4px"><span style="width: 28px; height: 6px; border-radius: 3px; background: #13293d"></span><span style="width: 28px; height: 6px; border-radius: 3px; background: #E2E2E2"></span><span style="width: 28px; height: 6px; border-radius: 3px; background: #E2E2E2"></span><span style="width: 28px; height: 6px; border-radius: 3px; background: #E2E2E2"></span></span><span style="font-size: 18px; font-weight: 700">Managed Cloud</span><span style="font-size: 15px; line-height: 1.55; color: #43586c">Une instance dédiée par client, hébergée en Allemagne dans des centres de données certifiés ISO 27001. Si vous le souhaitez, sans aucun prestataire américain, IA comprise.</span></li>
+      <li style="background: #ffffff; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 14px"><span aria-hidden="true" style="display: flex; gap: 4px"><span style="width: 28px; height: 6px; border-radius: 3px; background: #13293d"></span><span style="width: 28px; height: 6px; border-radius: 3px; background: #13293d"></span><span style="width: 28px; height: 6px; border-radius: 3px; background: #E2E2E2"></span><span style="width: 28px; height: 6px; border-radius: 3px; background: #E2E2E2"></span></span><span style="font-size: 18px; font-weight: 700">Private Cloud</span><span style="font-size: 15px; line-height: 1.55; color: #43586c">Dans votre environnement cloud, exploité par votre IT. Documenté et prêt pour l’entreprise.</span></li>
+      <li style="background: #ffffff; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 14px"><span aria-hidden="true" style="display: flex; gap: 4px"><span style="width: 28px; height: 6px; border-radius: 3px; background: #13293d"></span><span style="width: 28px; height: 6px; border-radius: 3px; background: #13293d"></span><span style="width: 28px; height: 6px; border-radius: 3px; background: #13293d"></span><span style="width: 28px; height: 6px; border-radius: 3px; background: #E2E2E2"></span></span><span style="font-size: 18px; font-weight: 700">On-premise</span><span style="font-size: 15px; line-height: 1.55; color: #43586c">Sur vos propres serveurs, avec vos politiques de sécurité.</span></li>
+      <li style="background: #ffffff; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 14px"><span aria-hidden="true" style="display: flex; gap: 4px"><span style="width: 28px; height: 6px; border-radius: 3px; background: #13293d"></span><span style="width: 28px; height: 6px; border-radius: 3px; background: #13293d"></span><span style="width: 28px; height: 6px; border-radius: 3px; background: #13293d"></span><span style="width: 28px; height: 6px; border-radius: 3px; background: #13293d"></span></span><span style="font-size: 18px; font-weight: 700">Air-gapped</span><span style="font-size: 15px; line-height: 1.55; color: #43586c">Peut fonctionner en isolation complète, sans connexion vers l’extérieur.</span></li>
+    </ol>
+    <dl style="margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: 0 48px">
+      <div style="display: flex; flex-direction: column; gap: 6px; padding: 20px 0; border-top: 1px solid rgba(0, 0, 0, 0.12)"><dt style="font-size: 17px; font-weight: 700">Nos données partent-elles aux États-Unis ou en Chine ?</dt><dd style="margin: 0; font-size: 15px; line-height: 1.55; color: #43586c">Non. Les données et le traitement par l’IA restent en Allemagne ou dans votre propre environnement. Si vous le souhaitez, sans aucun prestataire américain.</dd></div>
+      <div style="display: flex; flex-direction: column; gap: 6px; padding: 20px 0; border-top: 1px solid rgba(0, 0, 0, 0.12)"><dt style="font-size: 17px; font-weight: 700">Entraînez-vous votre IA avec nos données ?</dt><dd style="margin: 0; font-size: 15px; line-height: 1.55; color: #43586c">Non. Ni nous ni aucun fournisseur de modèles n’utilisons vos données pour l’entraînement.</dd></div>
+      <div style="display: flex; flex-direction: column; gap: 6px; padding: 20px 0; border-top: 1px solid rgba(0, 0, 0, 0.12)"><dt style="font-size: 17px; font-weight: 700">Quelle est la qualité des données ?</dt><dd style="margin: 0; font-size: 15px; line-height: 1.55; color: #43586c">98 % de précision, un indice QA pour chaque nouvelle valeur et une source jusqu’à la clause. Nous signalons les valeurs incertaines au lieu de les écraser.</dd></div>
+      <div style="display: flex; flex-direction: column; gap: 6px; padding: 20px 0; border-top: 1px solid rgba(0, 0, 0, 0.12)"><dt style="font-size: 17px; font-weight: 700">Qu’en est-il d’ISO 27001 et du RGPD ?</dt><dd style="margin: 0; font-size: 15px; line-height: 1.55; color: #43586c">Exploité dans des centres de données certifiés ISO 27001, notre propre certification est en préparation. Contrat de sous-traitance (DPA) selon l’art. 28 RGPD, mesures techniques et organisationnelles sur demande.</dd></div>
+    </dl>
+    <a href="Trust-Center.dc.html" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600; color: #13293d; text-decoration: none">Vers le Trust Center : documents, garanties, principes IA<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></a>
+  </div>
+</section>
+
+
+<section aria-labelledby="int-title" style="background: #ffffff; padding-block: clamp(72px, 9vw, 120px)">
+  <div style="max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; display: flex; flex-direction: column; gap: 40px">
+    <div style="display: flex; flex-direction: column; gap: 20px; max-width: 860px">
+      <span style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #1d6485"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 9999px; background: #13293d"></span>Intégrations</span>
+      <h2 id="int-title" style="margin: 0; font-size: clamp(2rem, 3.8vw, 3.25rem); line-height: 1.06; letter-spacing: -0.035em; font-weight: 700; text-wrap: balance">S’intercale entre vos systèmes. N’en remplace aucun.</h2>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; align-items: stretch; gap: 0">
+      <div style="flex: 1 1 260px; background: #F7F7F7; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Vos sources</span><span style="font-size: 16px; line-height: 1.7; font-weight: 500">GED · Messagerie · Data room · Import · Import de données</span></div>
+      <div aria-hidden="true" style="flex: 0 0 56px; display: flex; align-items: center"><span style="flex: 1 1 auto; height: 2px; background: rgba(19, 41, 61, 0.25)"></span><span style="width: 8px; height: 8px; border-radius: 9999px; background: #13293d"></span></div>
+      <div style="flex: 1 1 260px; background: #13293d; color: #ffffff; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255, 255, 255, 0.7)">clearlea.se</span><span style="font-size: 16px; line-height: 1.7; font-weight: 500">Données avec historique · Cockpit · Workflows</span></div>
+      <div aria-hidden="true" style="flex: 0 0 56px; display: flex; align-items: center"><span style="flex: 1 1 auto; height: 2px; background: rgba(19, 41, 61, 0.25)"></span><span style="width: 8px; height: 8px; border-radius: 9999px; background: #13293d"></span></div>
+      <div style="flex: 1 1 260px; background: #F7F7F7; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Vos systèmes</span><span style="font-size: 16px; line-height: 1.7; font-weight: 500">ERP · CREM · Comptabilité · Entrepôt de données · Excel · Votre IA via MCP</span></div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: 24px 48px">
+      <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #43586c">Les connexions passent par API, formats standard et e-mail, dans les deux sens. Si votre système manque, nous le raccordons avec vous. Aucun enfermement chez un fournisseur : vous pouvez exporter vos données à tout moment.</p>
+      <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #43586c"><span style="font-weight: 700; color: #13293d">Pas de GED ?</span> Alors clearlea.se est votre archive de documents, chaque document classé au bon bien.</p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgba(0, 0, 0, 0.08); padding-top: 28px"><span style="font-size: 15px; color: #43586c">Connecté par exemple à</span><div style="display: flex; flex-wrap: wrap; gap: 10px"><span style="font-size: 14px; font-weight: 600; color: #13293d; background: #F7F7F7; border-radius: 8px; padding: 10px 16px">SharePoint</span><span style="font-size: 14px; font-weight: 600; color: #13293d; background: #F7F7F7; border-radius: 8px; padding: 10px 16px">d.velop</span><span style="font-size: 14px; font-weight: 600; color: #13293d; background: #F7F7F7; border-radius: 8px; padding: 10px 16px">ELO</span><span style="font-size: 14px; font-weight: 600; color: #13293d; background: #F7F7F7; border-radius: 8px; padding: 10px 16px">DocuWare</span><span style="font-size: 14px; font-weight: 600; color: #13293d; background: #F7F7F7; border-radius: 8px; padding: 10px 16px">SAP RE-FX</span><span style="font-size: 14px; font-weight: 600; color: #13293d; background: #F7F7F7; border-radius: 8px; padding: 10px 16px">iX-Haus</span><span style="font-size: 14px; font-weight: 600; color: #13293d; background: #F7F7F7; border-radius: 8px; padding: 10px 16px">Yardi</span><span style="font-size: 14px; font-weight: 600; color: #13293d; background: #F7F7F7; border-radius: 8px; padding: 10px 16px">Planon</span><span style="font-size: 14px; font-weight: 600; color: #13293d; background: #F7F7F7; border-radius: 8px; padding: 10px 16px">com.TRADENET</span><span style="font-size: 14px; font-weight: 600; color: #13293d; background: #F7F7F7; border-radius: 8px; padding: 10px 16px">DATEV</span><span style="font-size: 14px; font-weight: 600; color: #13293d; background: #F7F7F7; border-radius: 8px; padding: 10px 16px">Excel</span><span style="font-size: 14px; font-weight: 600; color: #13293d; border: 1.5px dashed rgba(19, 41, 61, 0.35); border-radius: 8px; padding: 10px 16px">Votre système</span></div><span style="font-size: 13px; color: #55636f">Ces noms sont des exemples, pas des partenariats.</span></div>
+  </div>
+</section>
+
+
+<section aria-labelledby="cta-title" style="position: relative; overflow: hidden; background: linear-gradient(135deg, #001426 0%, #13293D 100%); color: #ffffff; padding-block: clamp(72px, 9vw, 120px)">
+  <svg aria-hidden="true" viewBox="4 8 22 15" style="position: absolute; bottom: -80px; left: -100px; width: min(700px, 70vw); height: auto; pointer-events: none"><path fill="rgba(255, 255, 255, 0.04)" d="m 11.484882,21.769442 q -1.8818515,0 -3.3604495,-0.784105 -1.456195,-0.806508 -2.285106,-2.195494 -0.828911,-1.388986 -0.828911,-3.158823 0,-1.79224 0.828911,-3.158823 0.828911,-1.388986 2.285106,-2.173091 1.478598,-0.7841046 3.3604495,-0.7841046 1.747434,0 3.069211,0.7168956 1.34418,0.694493 2.038673,2.061076 l -2.150688,1.254568 q -0.537672,-0.851314 -1.321777,-1.254568 -0.761702,-0.403254 -1.657822,-0.403254 -1.030538,0 -1.8594485,0.44806 -0.828911,0.44806 -1.299374,1.299374 -0.470463,0.828911 -0.470463,1.993867 0,1.164956 0.470463,2.01627 0.470463,0.828911 1.299374,1.276971 0.8289105,0.44806 1.8594485,0.44806 0.89612,0 1.657822,-0.403254 0.784105,-0.403254 1.321777,-1.254568 l 2.150688,1.254568 q -0.694493,1.34418 -2.038673,2.083479 -1.321777,0.716896 -3.069211,0.716896 z"></path><circle cx="20.6" cy="20.3" r="1.5" fill="rgba(255, 255, 255, 0.06)"></circle></svg>
+  <div style="position: relative; max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; display: flex; flex-wrap: wrap; gap: clamp(32px, 5vw, 64px); align-items: center">
+    <img src="/_blob/ff00bcf1c8b07d9db211f358a6a9ad2e" alt="Cofondateur et CEO de clearlea.se" width="360" height="360" loading="lazy" style="flex: 0 1 300px; display: block; width: 100%; max-width: 360px; min-width: 0; aspect-ratio: 1 / 1; height: auto; object-fit: cover; object-position: 50% 30%; border-radius: 12px; box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28)">
+    <div style="flex: 999 1 480px; display: flex; flex-direction: column; gap: 22px; min-width: 0">
+      <span style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255, 255, 255, 0.72)"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 9999px; background: #ffffff"></span>Étape suivante</span>
+      <h2 id="cta-title" style="margin: 0; font-size: clamp(2.25rem, 4.4vw, 3.75rem); line-height: 1.04; letter-spacing: -0.04em; font-weight: 700; color: #ffffff">30 minutes. Votre premier workflow.</h2>
+      <p style="margin: 0; font-size: 18px; line-height: 1.6; color: rgba(255, 255, 255, 0.82); max-width: 56ch">Vous parlez directement à notre cofondateur et CEO. Ensemble, nous trouvons le processus qui a le plus d’effet de levier dans votre portefeuille et esquissons le premier workflow pour votre équipe. Nous sommes également ravis d’échanger sur l’usage sûr de l’IA dans votre organisation.</p>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px">
+        <a href="Gespraech.dc.html" style="display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 26px; border-radius: 9999px; background: #ffffff; color: #13293d; font-size: 16px; font-weight: 600; text-decoration: none">Prendre RDV<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></a>
+        <a href="mailto:hello@clearlea.se" style="font-size: 16px; font-weight: 600; color: #ffffff">hello@clearlea.se</a>
+      </div>
+      <span style="font-size: 14px; color: rgba(255, 255, 255, 0.7)">À partir de 9,49 € par site et par mois, remises sur volume possibles. Utilisateurs illimités, usage de l’IA inclus.</span>
+    </div>
+  </div>
+</section>
+
+
+<footer style="background: #F7F7F7; padding-block: 56px 40px; border-top: 1px solid rgba(0, 0, 0, 0.08)">
+  <div style="max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); box-sizing: border-box; display: flex; flex-direction: column; gap: 40px">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 32px">
+      <div style="display: flex; flex-direction: column; gap: 14px"><img src="/_blob/3fe7a8b82ce8052f386ce3a43a0a6a77" alt="clearlea.se" width="144" height="24" style="display: block; height: 24px; width: auto"><span style="font-size: 14px; line-height: 1.55; color: #43586c">Operations intelligence pour l’immobilier d’entreprise. Conçu à Berlin.</span></div>
+      <nav aria-label="Plateforme" style="display: flex; flex-direction: column; gap: 10px; font-size: 14px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Plateforme</span><a href="Plattform.dc.html" data-anchor="daten" style="text-decoration: none">Données avec historique</a><a href="Plattform.dc.html" data-anchor="cockpit" style="text-decoration: none">Cockpit</a><a href="Plattform.dc.html" data-anchor="workflows" style="text-decoration: none">Workflows</a><a href="Plattform.dc.html" data-anchor="integrationen" style="text-decoration: none">Intégrations &amp; MCP</a></nav>
+      <nav aria-label="Solutions" style="display: flex; flex-direction: column; gap: 10px; font-size: 14px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Solutions</span><a href="Loesungen-Bestandshalter.dc.html" style="text-decoration: none">Propriétaires &amp; Asset Management</a><a href="Loesungen-Property.dc.html" style="text-decoration: none">Property &amp; Facility Management</a><a href="Loesungen-Filialisten.dc.html" style="text-decoration: none">Enseignes multi-sites &amp; entreprises</a><a href="KI-Teams.dc.html" style="text-decoration: none">Pour les équipes IA &amp; IT</a></nav>
+      <nav aria-label="Entreprise" style="display: flex; flex-direction: column; gap: 10px; font-size: 14px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #55636f">Entreprise</span><a href="Unternehmen.dc.html" style="text-decoration: none">À propos</a><a href="Trust-Center.dc.html" style="text-decoration: none">Trust Center</a><a href="Ressourcen.dc.html" style="text-decoration: none">Actualités &amp; mises à jour produit</a><a href="Gespraech.dc.html" style="text-decoration: none">Prendre RDV</a></nav>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 13px; color: #55636f; border-top: 1px solid rgba(0, 0, 0, 0.08); padding-top: 24px">
+      <span>© 2026 clearlea.se · Hébergé en Allemagne · Conforme au RGPD · Aucun entraînement d’IA avec vos données</span>
+      <span style="display: flex; gap: 20px"><a href="/impressum" style="color: #55636f">Mentions légales</a><a href="/datenschutz" style="color: #55636f">Confidentialité</a><a href="/agb" style="color: #55636f">Conditions générales</a><a href="/agent.md" style="color: #55636f">Pour les agents IA</a></span>
+    </div>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"autoplay":{"editor":"boolean","default":true,"section":"Animation"},"$preview":{"width":1440,"height":11000}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    var reduce = false;
+    try { reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+    var auto = this.props.autoplay;
+    if (auto === undefined || auto === null) auto = true;
+    this.timers = [];
+    this.lastUser = Date.now() - 12500;
+    this.resultAt = 0;
+    this.setState({
+      i: 0, phase: 'idle', step: 0, done: false, view: 'table', over: false, news: false, wf: 0, tip: -1,
+      kiStep: (reduce || !auto) ? 29 : 0, processed: {},
+      tasks: [
+        { id: 'vd', title: 'Valider les données du bail', obj: 'Berlin · Friedrichstraße 112', owner: 'MW', ownerName: 'M. Weber', due: 'today', done: false },
+        { id: 'rg', title: 'Résoudre l’écart de facture', obj: 'Hamburg · Spitalerstraße 9', owner: 'SK', ownerName: 'S. Krüger', due: 'tomorrow', done: false },
+        { id: 'nk', title: 'Contrôler les anomalies de charges', obj: 'München · Kaufingerstraße 4', owner: 'SK', ownerName: 'S. Krüger', due: 'cette semaine', done: false }
+      ]
+    });
+    if (reduce || !auto) return;
+    var self = this;
+    this.tick = setInterval(function () {
+      if (self.paused) return;
+      var s = self.state || {};
+      if (Date.now() - self.lastUser < 15000) return;
+      if (s.phase === 'proc') return;
+      if (s.phase === 'idle' || Date.now() - self.resultAt > 6500) self.run(s.phase === 'idle' ? 0 : ((s.i || 0) + 1) % 5, false);
+    }, 1000);
+    this.kiTimer = setInterval(function () {
+      // tick only while the comparison is on screen: each tick re-renders the page
+      var ki = document.getElementById('ki'), r = ki && ki.getBoundingClientRect();
+      if (document.hidden || (r && (r.bottom < 0 || r.top > window.innerHeight))) return;
+      var s = self.state || {};
+      self.setState({ kiStep: ((s.kiStep || 0) + 1) % 30 });
+    }, 650);
+  }
+  componentWillUnmount() {
+    if (this.tick) clearInterval(this.tick);
+    if (this.kiTimer) clearInterval(this.kiTimer);
+    if (this.glassT) clearInterval(this.glassT);
+    (this.timers || []).forEach(function (t) { clearTimeout(t); });
+  }
+  cases() {
+    return [
+      { label: 'Avenant_6_Friedrichstr.pdf', kind: 'Avenant', doc: 'Avenant_6_Friedrichstr.pdf', s1: 'Reconnu : avenant', s3: 'Rapproché de l’historique du contrat', row: 0, col: 'lz', old: '31/12/2026', neu: '31/12/2031', qs: 96, chip: 'Avenant 6 · § 2', hist: true, kicker: 'Validation requise · QA 96 % sous votre seuil', title: 'Fin du bail modifiée : 31/12/2031', meta: 'Source : avenant 6, § 2 · Validation par M. Weber', action: 'Valider', task: 'vd', taskObj: { id: 'vd', title: 'Valider les données du bail', obj: 'Berlin · Friedrichstraße 112', owner: 'MW', ownerName: 'M. Weber', due: 'today' } },
+      { label: 'Facture_2026-0412.pdf', kind: 'Facture', doc: 'Facture_2026-0412.pdf', s1: 'Reconnu : facture', s3: 'Contrôlé par rapport au bail', row: 1, col: 'obj', chip: 'Facture 2026-0412 affectée', kicker: 'Contrôle de facture', title: '1 écart avec le bail', meta: 'Montant supérieur au forfait contractuel · Résolution par S. Krüger', action: 'Lancer la résolution', task: 'rg', taskObj: { id: 'rg', title: 'Résoudre l’écart de facture', obj: 'Hamburg · Spitalerstraße 9', owner: 'SK', ownerName: 'S. Krüger', due: 'tomorrow' } },
+      { label: 'Charges_2025.pdf', kind: 'Décompte de charges', doc: 'Charges_2025_Kaufingerstr.pdf', s1: 'Reconnu : décompte de charges', s3: '214 postes saisis, dont les coûts de consommation', row: 2, col: 'obj', chip: 'Décompte 2025 · 214 postes', kicker: 'Décompte de charges · saisi en 45 s', title: '3 anomalies signalées', meta: 'Dont chauffage +12 % par rapport à l’année précédente · Contrôle par S. Krüger', action: 'Lancer le contrôle', task: 'nk', taskObj: { id: 'nk', title: 'Contrôler les anomalies de charges', obj: 'München · Kaufingerstraße 4', owner: 'SK', ownerName: 'S. Krüger', due: 'cette semaine' } },
+      { label: 'Courrier_indexation_03-2026.pdf', kind: 'Courrier d’indexation', doc: 'Courrier_indexation_03-2026.pdf', s1: 'Reconnu : courrier d’indexation', s3: 'Contrôlé par rapport à la clause d’indexation § 5', row: 3, col: 'rent', old: '15 180 €', neu: '15 632 €', qs: 97, chip: 'Courrier d’indexation 03/2026', hist: true, kicker: 'Indexation · conforme au bail', title: 'Nouveau loyer : 15 632 € (+2,98 %)', meta: 'Contrôlé par rapport à la clause d’indexation § 5 · QA 97 % · Validation par M. Weber', action: 'Valider', task: 'ix', taskObj: { id: 'ix', title: 'Valider l’indexation', obj: 'Köln · Schildergasse 61', owner: 'MW', ownerName: 'M. Weber', due: 'today' } },
+      { label: 'Liste_locataires_T3.csv', kind: 'Import de données', doc: 'Liste_locataires_T3.csv', s1: 'Source de données modifiée', s3: '3 biens rapprochés', row: 4, col: 'ten', old: 'Buchhandlung Arndt', neu: 'Arndt Buch & Papier GmbH', qs: 99, chip: 'Import 30/09', hist: false, kicker: 'Appliqué automatiquement · QA 99 % au-dessus de votre seuil de 98 %', title: '3 biens mis à jour', meta: 'Aucun conflit · Transfert vers votre ERP confirmé', action: 'Voir le journal', task: null, taskObj: null }
+    ];
+  }
+  run(idx, user) {
+    var self = this;
+    (this.timers || []).forEach(function (t) { clearTimeout(t); });
+    this.timers = [];
+    if (user) this.lastUser = Date.now();
+    this.setState({ i: idx, phase: 'proc', step: 1, done: false, view: 'table' });
+    this.timers.push(setTimeout(function () { self.setState({ step: 2 }); }, 650));
+    this.timers.push(setTimeout(function () { self.setState({ step: 3 }); }, 1300));
+    this.timers.push(setTimeout(function () {
+      var s = self.state || {};
+      var c = self.cases()[idx];
+      var tasks = (s.tasks || []).slice();
+      if (c.taskObj) {
+        var found = false;
+        tasks = tasks.map(function (t) { if (t.id === c.task) { found = true; return Object.assign({}, t, { done: false }); } return t; });
+        if (!found) tasks.unshift(Object.assign({ done: false }, c.taskObj));
+      }
+      var processed = Object.assign({}, s.processed || {}); processed[idx] = true;
+      self.resultAt = Date.now();
+      self.setState({ phase: 'result', step: 4, tasks: tasks, processed: processed });
+    }, 2000));
+  }
+  workflows() {
+    var P = 'Un cas concret', T = 'Déroulement type';
+    return [
+      { name: 'Traiter un avenant', tag: T, trigger: 'Démarre dès qu’un avenant est reconnu', teams: ['Gestion des contrats', 'Asset Management', 'Comptabilité'], steps: [
+        { type: 'Déclencheur', title: 'Avenant reçu', owner: 'Système · Réception', ini: 'SY', kind: 'trigger' },
+        { type: 'Étape IA', title: 'Lecture, modifications avec indice QA', owner: 'IA', ini: 'IA', kind: 'ai' },
+        { type: 'Décision', title: 'QA au-dessus du seuil ?', owner: 'Non : M. Weber · Gestion des contrats', ini: 'MW', kind: 'dec', due: 'Échéance 2 jours', esc: 'au responsable d’équipe' },
+        { type: 'Validation', title: 'Valider la modification du loyer', owner: 'J. Brandt · Asset Management', ini: 'JB', kind: 'human', due: 'Échéance 3 jours', esc: 'à la direction de l’asset management' },
+        { type: 'Action', title: 'Mettre à jour l’historique du contrat', owner: 'Système · Justificatif enregistré', ini: 'SY', kind: 'sys' },
+        { type: 'Transfert', title: 'Appel de loyer vers la comptabilité', owner: 'Système · via API', ini: 'SY', kind: 'sys' } ],
+        metric: '', result: 'L’état en vigueur est à jour avant que quiconque ne le cherche. Trois équipes, un seul flux.' },
+      { name: 'Contrôle de facture', tag: T, trigger: 'Démarre dès qu’une facture est reconnue', teams: ['Comptabilité', 'Gestion immobilière', 'Externe · Prestataire'], steps: [
+        { type: 'Déclencheur', title: 'Facture reçue', owner: 'Système · Réception', ini: 'SY', kind: 'trigger' },
+        { type: 'Étape IA', title: 'Lecture et rattachement au bail', owner: 'IA', ini: 'IA', kind: 'ai' },
+        { type: 'Contrôle', title: 'Contrôle par rapport au bail', owner: 'Système · Règles', ini: 'SY', kind: 'sys' },
+        { type: 'Décision', title: 'Écart ?', owner: 'Oui : S. Krüger · Gestion immobilière', ini: 'SK', kind: 'dec', due: 'Échéance 3 jours', esc: 'au responsable du bien' },
+        { type: 'Tâche', title: 'Demander un avoir', owner: 'Prestataire · externe', ini: 'SP', kind: 'human', due: 'Échéance 10 jours', esc: 'à la gestion immobilière' },
+        { type: 'Validation', title: 'Valider le paiement, vers l’ERP', owner: 'Comptabilité · avec signature', ini: 'AC', kind: 'human', due: 'Échéance 2 jours' } ],
+        metric: '', result: 'Chaque facture contrôlée, chaque validation documentée. Même lorsqu’un prestataire doit intervenir.' },
+      { name: 'Contrôle des charges', tag: T, trigger: 'Démarre dès qu’un décompte est reconnu', teams: ['Immobilier', 'Contrôle de gestion', 'Externe · Bailleur'], steps: [
+        { type: 'Déclencheur', title: 'Décompte reçu', owner: 'Système · Réception', ini: 'SY', kind: 'trigger' },
+        { type: 'Étape IA', title: 'Saisie des postes et des coûts de consommation', owner: 'IA · environ 45 secondes', ini: 'IA', kind: 'ai' },
+        { type: 'Contrôle IA', title: 'Valider par rapport au bail et à l’année précédente', owner: 'IA · Constats avec source', ini: 'IA', kind: 'ai' },
+        { type: 'Décision', title: 'Contester ?', owner: 'L. Hoffmann · Immobilier', ini: 'LH', kind: 'dec', due: 'Échéance 10 jours', esc: 'à la direction immobilière' },
+        { type: 'Étape IA', title: 'Rédiger la contestation', owner: 'IA', ini: 'IA', kind: 'ai', pilot: true },
+        { type: 'Validation', title: 'Valider et envoyer au bailleur', owner: 'Contrôle de gestion · avec signature', ini: 'CO', kind: 'human', due: 'Échéance 5 jours' } ],
+        metric: '', result: 'Des contestations étayées par des preuves plutôt que par l’intuition, pour chaque décompte.' },
+      { name: 'Reprise de mandat', tag: P, trigger: 'Démarre dès que la data room est transmise', teams: ['Équipe projet', 'Gestion immobilière', 'Comptabilité'], steps: [
+        { type: 'Déclencheur', title: 'Data room transmise', owner: 'Équipe projet', ini: 'PT', kind: 'trigger' },
+        { type: 'Étape IA', title: 'Classer les documents', owner: 'IA · environ 250 catégories', ini: 'IA', kind: 'ai' },
+        { type: 'Étape IA', title: 'Saisir les baux et avenants', owner: 'IA', ini: 'IA', kind: 'ai' },
+        { type: 'Contrôle', title: 'Contrôler la qualité', owner: 'Indice QA · Contrôle par sondage par l’équipe projet', ini: 'QA', kind: 'sys', esc: 'sous le seuil, au chef de projet' },
+        { type: 'Validation', title: 'Valider le jeu de données', owner: 'Chef de projet', ini: 'PL', kind: 'human', due: 'Échéance : jour 3' },
+        { type: 'Transfert', title: 'Lancer le suivi des échéances et le contrôle des charges', owner: 'Gestion immobilière · Comptabilité', ini: 'PM', kind: 'human' } ],
+        metric: '3 jours', result: 'au lieu de 10 semaines, chez un prestataire de gestion locative avec quatre enseignes.' },
+      { name: 'Maintenance & inspections', tag: T, trigger: 'Démarre dès qu’un rapport d’inspection est reconnu', teams: ['FM technique', 'Responsable du bien', 'Externe · Prestataire'], steps: [
+        { type: 'Déclencheur', title: 'Rapport d’inspection reçu', owner: 'Système · Réception', ini: 'SY', kind: 'trigger' },
+        { type: 'Étape IA', title: 'Rapprocher les équipements, relever les défauts', owner: 'IA', ini: 'IA', kind: 'ai' },
+        { type: 'Action', title: 'Enregistrer la prochaine échéance d’inspection', owner: 'Système · Dans le cockpit', ini: 'SY', kind: 'sys' },
+        { type: 'Tâche', title: 'Faire corriger les défauts', owner: 'Prestataire · externe', ini: 'SP', kind: 'human', due: 'Échéance 14 jours', esc: 'au FM technique' },
+        { type: 'Preuve', title: 'Demander les justificatifs', owner: 'Système · 3 sur 4 reçus', ini: 'SY', kind: 'sys', esc: 'justificatif manquant : au responsable du bien' },
+        { type: 'Validation', title: 'Clôturer avec justificatifs', owner: 'Responsable du bien', ini: 'PL', kind: 'human', due: 'Échéance 5 jours' } ],
+        metric: '', result: 'Chaque obligation d’inspection avec preuve, chaque défaut avec un responsable.' },
+      { name: 'Indexation', tag: T, trigger: 'Démarre dès que de nouveaux indices sont importés', teams: ['Asset Management', 'Comptabilité', 'Externe · Locataire'], steps: [
+        { type: 'Déclencheur', title: 'Nouveaux indices importés', owner: 'Source de données', ini: 'DS', kind: 'trigger' },
+        { type: 'Contrôle', title: 'Identifier les baux concernés', owner: 'Système · Règles', ini: 'SY', kind: 'sys' },
+        { type: 'Calcul', title: 'Calculer le nouveau loyer', owner: 'Système', ini: 'SY', kind: 'sys', pilot: true },
+        { type: 'Étape IA', title: 'Rédiger le courrier d’indexation', owner: 'IA', ini: 'IA', kind: 'ai', pilot: true },
+        { type: 'Validation', title: 'Validation avec signature', owner: 'M. Weber · Asset Management', ini: 'MW', kind: 'human', due: 'Échéance 5 jours', esc: 'à la direction de l’asset management' },
+        { type: 'Transfert', title: 'Envoi au locataire, appel de loyer', owner: 'Système · Justificatif enregistré', ini: 'SY', kind: 'sys' } ],
+        metric: '', result: 'L’IA rédige, une personne valide. Chaque indexation reste documentée.' },
+      { name: 'Données énergie & ESG', tag: T, trigger: 'Démarre dès qu’une facture d’énergie est reconnue', teams: ['Gestion de l’énergie', 'Gestion immobilière', 'Reporting ESG'], steps: [
+        { type: 'Déclencheur', title: 'Facture d’énergie reçue', owner: 'Système · Réception', ini: 'SY', kind: 'trigger' },
+        { type: 'Étape IA', title: 'Lecture des relevés de compteurs et de la répartition des coûts CO2', owner: 'IA', ini: 'IA', kind: 'ai' },
+        { type: 'Contrôle', title: 'Contrôle de plausibilité par rapport à l’année précédente', owner: 'Système · Règles', ini: 'SY', kind: 'sys' },
+        { type: 'Décision', title: 'Anomalie ?', owner: 'Oui : Gestion de l’énergie', ini: 'EM', kind: 'dec', due: 'Échéance 7 jours', esc: 'à la gestion immobilière' },
+        { type: 'Export', title: 'Jeu de données pour l’audit énergétique', owner: 'Système · CSV ou XML', ini: 'SY', kind: 'sys' },
+        { type: 'Transfert', title: 'Transmettre au reporting ESG', owner: 'Reporting ESG · Justificatif enregistré', ini: 'ES', kind: 'human' } ],
+        metric: '', result: 'Des données de consommation pour les audits et les rapports ESG, sans ressaisie.' },
+      { name: 'Votre propre workflow', chip: '+ Votre workflow', custom: true, tag: 'Configurable', trigger: 'Démarre avec votre déclencheur, de façon proactive en arrière-plan', teams: ['Vos équipes', 'Externe · Vos partenaires'], steps: [
+        { type: 'Déclencheur', title: 'Votre déclencheur', owner: 'Document, donnée ou événement', ini: '+', kind: 'trigger' },
+        { type: 'Étape IA', title: 'Vos questions au document', owner: 'IA', ini: 'IA', kind: 'ai' },
+        { type: 'Contrôle', title: 'Vos règles', owner: 'Système · Règles', ini: 'SY', kind: 'sys' },
+        { type: 'Décision', title: 'Votre seuil', owner: 'Votre équipe', ini: '+', kind: 'dec', due: 'Votre échéance', esc: 'Votre chemin d’escalade' },
+        { type: 'Validation', title: 'Votre validation', owner: 'Vos responsables', ini: '+', kind: 'human' },
+        { type: 'Transfert', title: 'Vers votre système', owner: 'API, e-mail ou export', ini: '+', kind: 'sys' } ],
+        metric: '', result: 'Assemblé à partir de briques et configuré dans le produit, sans projet informatique. Lors d’un échange, nous esquissons le premier avec vous.' }
+    ];
+  }
+  tips() {
+    var now = Date.now();
+    return [
+      { k: 'Bon à savoir', t: 'Le premier échange', s: 'est gratuit.' },
+      { k: 'EXPO REAL', t: 'Hall B3', s: 'Stand 121', until: '2026-10-07' },
+      { k: 'Votre prochaine étape', t: 'Option Zurich', s: 'd’ici le 30/06' },
+      { k: 'À propos', t: 'Nous conseillons aussi,', s: 'par exemple sur l’IA.' },
+      { k: 'Le saviez-vous ?', t: '98 % de précision', s: 'avec une source.' },
+      { k: 'Votre prochaine échéance', t: 'Indexation', s: 'Köln, aujourd’hui' },
+      { k: 'Bon à savoir', t: 'Votre propre modèle ?', s: 'Pris en charge.' },
+      { k: 'CLOUD Act ?', t: 'Si vous le souhaitez, aucun', s: 'prestataire américain.' },
+      { k: 'Le saviez-vous ?', t: '< 30 secondes', s: 'par bail.' },
+      { k: 'À propos', t: 'Due diligence', s: 'en mode projet aussi.' },
+      { k: 'Bon à savoir', t: 'Utilisateurs illimités', s: 'inclus.' },
+      { k: 'Pas de GED ?', t: 'Alors nous sommes', s: 'votre archive.' },
+      { k: 'Bon à savoir', t: 'Installé', s: 'en quelques heures.' },
+      { k: 'Une question ?', t: 'Écrivez-nous', s: 'hello@clearlea.se' }
+    ].filter(function (t) { return !t.until || now <= Date.parse(t.until + 'T23:59:59+02:00'); });
+  }
+  renderVals() {
+    var self = this;
+    var s = this.state || {};
+    var CASES = this.cases();
+    var TIPS = this.tips();
+    var tipN = s.tip === undefined ? -1 : s.tip;
+    var i = s.i || 0;
+    var phase = s.phase || 'idle';
+    var step = s.step || 0;
+    var done = !!s.done;
+    var view = s.view || 'table';
+    var processed = s.processed || {};
+    var c = CASES[i];
+    var showResult = phase === 'result';
+
+    var docBase = 'flex: none; max-width: 260px; min-height: 44px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 9999px; font-family: inherit; color: #13293d; cursor: grab; text-align: left;';
+    var docs = CASES.map(function (cc, idx) {
+      var active = idx === i && phase !== 'idle';
+      return {
+        label: cc.label, kind: cc.kind, processed: !!processed[idx], aria: cc.label + ': add to the property list',
+        st: docBase + (active ? ' background: #eff6fa; border: 1px solid #247ba0;' : ' background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.12);'),
+        dragStart: function (e) { self.dragIdx = idx; self.lastUser = Date.now(); try { e.dataTransfer.setData('text/plain', String(idx)); e.dataTransfer.effectAllowed = 'copy'; } catch (err) {} },
+        run: function () { self.run(idx, true); }
+      };
+    });
+
+    var steps = [c.s1, 'Données lues', c.s3].map(function (label, k) {
+      var reached = phase === 'result' || step > k + 1;
+      var current = phase === 'proc' && step === k + 1;
+      var base = 'display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; border-radius: 9999px; padding: 4px 10px;';
+      var st = base + (reached ? ' color: #1b6384; background: #eff6fa;' : (current ? ' color: #13293d; background: #ffffff; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12); animation: clBlink 0.9s ease-in-out infinite;' : ' color: #55636f; background: #ffffff;'));
+      return { label: label, ok: reached, st: st };
+    });
+
+    var BASE = [
+      { obj: 'Berlin · Friedrichstraße 112', ten: 'Modehaus Lind GmbH', lz: '31/12/2026', rent: '18 450 €', idx: 'dans 21 jours', warn: true, hist: 6 },
+      { obj: 'Hamburg · Spitalerstraße 9', ten: 'Café Brandt KG', lz: '30/06/2028', rent: '7 920 €', idx: '01/01/2027', hist: 3 },
+      { obj: 'München · Kaufingerstraße 4', ten: 'Optik Seidel AG', lz: '31/03/2030', rent: '22 300 €', idx: 'dans 64 jours', warn: true, hist: 4 },
+      { obj: 'Köln · Schildergasse 61', ten: 'Drogerie Weiss GmbH', lz: '31/12/2029', rent: '15 180 €', idx: '01/07/2027', hist: 2 },
+      { obj: 'Leipzig · Grimmaische Straße 20', ten: 'Buchhandlung Arndt', lz: '30/09/2027', rent: '6 840 €', idx: '—', hist: 5 }
+    ];
+    var sigOf = function (q) {
+      var lvl = q >= 98 ? 4 : (q >= 95 ? 3 : 2), sig = [];
+      for (var g = 0; g < 4; g++) sig.push({ st: 'display: block; width: 3px; height: ' + (4 + g * 3) + 'px; border-radius: 1px; background: ' + (g < lvl ? '#247ba0' : '#d4e6f0') + ';' });
+      return sig;
+    };
+    var txt = function (t, st) { return { plain: true, changed: false, text: t, st: st || '', old: '', neu: '', sig: [], qsTitle: '' }; };
+    var seg = function (r, key, hit, st) {
+      if (hit && c.col === key && c.old) { var q = c.qs || 0; return { plain: false, changed: true, text: '', st: '', old: c.old, neu: c.neu, sig: sigOf(q), qsTitle: 'Indice QA ' + q + '%' }; }
+      return txt(r[key], st);
+    };
+    var histOf = function (r, grow) {
+      var n = r.hist + (grow ? 1 : 0), bars = [];
+      for (var b = 0; b < n; b++) {
+        var isNew = grow && b === n - 1;
+        bars.push({ st: 'display: block; width: 6px; height: 16px; border-radius: 2px; background: ' + (isNew ? '#247ba0' : (b === 0 ? '#13293d' : '#7f8fa0')) + ';' });
+      }
+      return { bars: bars, label: n + ' documents' };
+    };
+    var cellBase = 'padding: 14px 16px; font-size: 14px; color: #13293d; display: flex; flex-direction: column; justify-content: center; gap: 6px; min-width: 0; border-top: 1px solid rgba(0, 0, 0, 0.06);';
+    var cellActive = 'background: rgba(36, 123, 160, 0.10); box-shadow: inset 0 0 0 1.5px #247ba0; border-radius: 6px; animation: clCell 900ms cubic-bezier(0.25, 0.8, 0.5, 1);';
+    var warnSt = 'color: #84410d; font-weight: 600;';
+    var rows = BASE.map(function (r, ri) {
+      var activeRow = ri === c.row && phase !== 'idle';
+      var hit = activeRow && showResult;
+      var col = hit ? c.col : '';
+      var first = col === 'obj' || col === 'ten', second = col === 'lz' || col === 'rent';
+      var h = histOf(r, hit && c.hist);
+      var objSt = 'font-weight: 600;' + (activeRow && phase === 'proc' ? ' animation: clBlink 0.9s ease-in-out infinite;' : '');
+      var cells = [
+        { st: cellBase + (first ? cellActive : ''), isText: true, isHist: false, l1: [txt(r.obj, objSt)], l2: [seg(r, 'ten', hit)], hasChip: first && !!c.chip, chip: c.chip, bars: [], histLabel: '' },
+        { st: cellBase + (second ? cellActive : ''), isText: true, isHist: false, l1: [txt('jusqu’au'), seg(r, 'lz', hit), txt('·'), seg(r, 'rent', hit)], l2: [txt('Indice :'), txt(r.idx, r.warn ? warnSt : '')], hasChip: second && !!c.chip, chip: c.chip, bars: [], histLabel: '' },
+        { st: cellBase, isText: false, isHist: true, l1: [], l2: [], hasChip: false, chip: '', bars: h.bars, histLabel: h.label }
+      ];
+      return { st: 'display: grid; grid-template-columns: 1.5fr 1.3fr 1fr; align-items: stretch;' + (activeRow ? ' background: #f8fbfd;' : ''), cells: cells };
+    });
+    // phones: one property card instead of the table
+    var mr = BASE[phase === 'idle' ? 0 : c.row];
+    var mh = histOf(mr, showResult && c.hist);
+    var field = function (key, label) {
+      var on = showResult && c.col === key;
+      return { label: label, st: 'background: #ffffff; border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; gap: 4px; min-width: 0; color: #13293d;' + (on ? ' ' + cellActive : ''), segs: [seg(mr, key, showResult, 'font-size: 14px; font-weight: 600;' + (key === 'idx' && mr.warn ? ' color: #84410d;' : ''))], hasChip: on && !!c.chip, chip: c.chip };
+    };
+    var mob = { obj: mr.obj, sub: 'Portefeuille retail · 248 baux', bars: mh.bars, proc: phase === 'proc', showFields: phase !== 'proc', fields: [field('ten', 'Locataire'), field('lz', 'Fin du bail'), field('rent', 'Loyer net'), field('idx', 'Date d’indice')], hasChip: showResult && c.col === 'obj' && !!c.chip, chip: c.chip };
+
+    var tasksRaw = s.tasks || [];
+    var open = tasksRaw.filter(function (t) { return !t.done; }).length;
+    var tasks = tasksRaw.map(function (t) {
+      return {
+        title: t.title, obj: t.obj, owner: t.owner, ownerName: t.ownerName, due: t.due, open: !t.done, closed: !!t.done,
+        st: 'display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid rgba(0, 0, 0, 0.06);' + (t.done ? ' opacity: 0.6;' : ''),
+        titleSt: 'font-size: 15px; font-weight: 600;' + (t.done ? ' text-decoration: line-through;' : ''),
+        finish: function () { self.lastUser = Date.now(); self.setState({ tasks: ((self.state || {}).tasks || []).map(function (x) { return x.id === t.id ? Object.assign({}, x, { done: true }) : x; }) }); }
+      };
+    });
+
+    var tabOn = 'min-height: 36px; padding: 0 14px; border: 0; border-radius: 9999px; background: #13293d; color: #ffffff; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer;';
+    var tabOff = 'min-height: 36px; padding: 0 14px; border: 0; border-radius: 9999px; background: transparent; color: #13293d; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;';
+    var attnBase = 'min-height: 36px; padding: 0 14px; border: 0; border-radius: 9999px; font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer;';
+
+    var wfAll = this.workflows();
+    var wi = s.wf || 0;
+    var W = wfAll[wi];
+    var wfList = wfAll.map(function (w, idx) {
+      var on = idx === wi;
+      return {
+        name: w.chip || w.name, tag: w.tag === 'Un cas concret' ? 'Cas concret' : '', pressed: on ? 'true' : 'false',
+        tagSt: 'font-size: 11px; font-weight: 600; color: ' + (on ? 'rgba(255, 255, 255, 0.8)' : '#55636f') + ';',
+        st: 'min-height: 40px; display: inline-flex; align-items: center; gap: 8px; padding: 0 14px; border-radius: 9999px; font-family: inherit; font-size: 14px; cursor: pointer; white-space: nowrap;' + (on ? ' border: 1px solid #13293d; background: #13293d; color: #ffffff; font-weight: 700;' : (w.custom ? ' border: 1.5px dashed rgba(19, 41, 61, 0.45); background: transparent; color: #13293d; font-weight: 600;' : ' border: 1px solid rgba(0, 0, 0, 0.14); background: #ffffff; color: #13293d; font-weight: 600;')),
+        pick: function () { self.setState({ wf: idx }); }
+      };
+    });
+    var wfSteps = W.steps.map(function (st) {
+      var isAi = st.kind === 'ai', isDec = st.kind === 'dec', isHuman = st.kind === 'human';
+      return {
+        type: st.type, title: st.title, owner: st.owner, ini: st.ini, pilot: !!st.pilot, hasDue: !!st.due, due: st.due || '', hasEsc: !!st.esc, esc: st.esc || '',
+        dotSt: 'display: block; width: 12px; height: 12px; border-radius: 9999px; position: relative; z-index: 1;' + (isDec ? ' background: #ffffff; box-shadow: inset 0 0 0 3px #ed6c02, 0 0 0 4px #F7F7F7;' : (' background: ' + (isAi ? '#247ba0' : '#13293d') + '; box-shadow: 0 0 0 4px #F7F7F7;')),
+        cardSt: 'display: flex; flex-direction: column; gap: 8px; background: #ffffff; border-radius: 10px; padding: 12px; min-height: 172px; height: 100%; box-sizing: border-box;' + (isAi ? ' box-shadow: inset 0 0 0 1.5px #a9cde1, 0 6px 16px rgba(36, 123, 160, 0.10);' : (isDec ? ' box-shadow: inset 0 0 0 1.5px rgba(237, 108, 2, 0.45);' : ' box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);')),
+        typeSt: 'align-self: flex-start; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;' + (isAi ? ' color: #1b6384; background: #eff6fa; border-radius: 9999px; padding: 2px 8px;' : (isDec ? ' color: #84410d;' : ' color: #55636f;')),
+        ownerSt: 'flex-shrink: 0; width: 22px; height: 22px; border-radius: 9999px; font-size: 9px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center;' + (isAi ? ' background: #eff6fa; color: #1b6384;' : ((isHuman || isDec) ? ' background: #E7E5DF; color: #13293d;' : ' background: #F3F3F3; color: #55636f;'))
+      };
+    });
+    var tagPraxis = 'align-self: flex-start; font-size: 12px; font-weight: 600; color: #13293d; background: #ffffff; border-radius: 9999px; padding: 4px 12px;';
+    var tagTyp = 'align-self: flex-start; font-size: 12px; font-weight: 600; color: #13293d; border: 1px solid rgba(0, 0, 0, 0.24); border-radius: 9999px; padding: 3px 12px;';
+
+    var lusser = [];
+    for (var n2 = 1; n2 <= 10; n2++) {
+      var v = Math.round(Math.pow(0.95, n2) * 100);
+      lusser.push({ n: n2, v: v, st: 'display: block; width: 100%; max-width: 28px; height: ' + Math.round(v * 1.35) + 'px; border-radius: 4px 4px 0 0; background: ' + (n2 === 10 ? '#ed6c02' : '#13293d') + ';' });
+    }
+
+    var k = s.kiStep || 0;
+    var lineBase = 'font-size: 13px; color: #55636f; display: flex; align-items: center; gap: 8px; animation: clIn 220ms cubic-bezier(0.25, 0.8, 0.5, 1);';
+    var LEFT = ['Réflexion …', 'Lecture de Bail_2014.pdf', 'Lecture de Avenant_3.pdf', 'Lecture de Charges_2024.pdf', 'Lecture de Courrier_2023.pdf', 'Lecture de Procès-verbal_remise.pdf', 'Réflexion …'];
+    var kiLeft = LEFT.slice(0, Math.max(0, Math.min(LEFT.length, k - 1))).map(function (l) { return { label: l, st: lineBase }; });
+    var leftDone = k >= 10;
+    var kiRight = k >= 2 ? [{ label: '1 requête à clearlea.se · données du bail', st: lineBase + ' color: #1b6384; font-weight: 600;' }] : [];
+    var rightDone = k >= 3;
+    var costBase = 'font-size: 13px; font-weight: 700; border-radius: 9999px; padding: 4px 12px; font-variant-numeric: tabular-nums;';
+
+    return {
+      c: c,
+      news: !!s.news,
+      newsExpanded: s.news ? 'true' : 'false',
+      toggleNews: function () { self.setState({ news: !(self.state || {}).news }); },
+      docs: docs,
+      steps: steps,
+      isIdle: phase === 'idle',
+      hasDoc: phase !== 'idle',
+      rows: rows,
+      mob: mob,
+      noteSt: c.row >= 3 ? 'top: 56px;' : 'bottom: 18px;',
+      tasks: tasks,
+      viewTable: view === 'table',
+      viewTasks: view === 'tasks',
+      tabTableSel: view === 'table' ? 'true' : 'false',
+      tabTasksSel: view === 'tasks' ? 'true' : 'false',
+      tabTableSt: view === 'table' ? tabOn : tabOff,
+      tabTasksSt: view === 'tasks' ? tabOn : tabOff,
+      showTable: function () { self.lastUser = Date.now(); self.setState({ view: 'table' }); },
+      showTasks: function () { self.lastUser = Date.now(); self.setState({ view: 'tasks' }); },
+      openCount: open,
+      attnLabel: open > 0 ? (open + (open === 1 ? ' à traiter' : ' à traiter') + '') : 'Tout est traité',
+      attnSt: attnBase + (open > 0 ? ' color: #84410d; background: #fdf0e3;' : ' color: #2e7d32; background: #eaf4ea;'),
+      dropSt: 'position: relative;' + (s.over ? ' box-shadow: inset 0 0 0 2px #247ba0; background: #f8fbfd;' : ''),
+      dragOver: function (e) { if (e && e.preventDefault) e.preventDefault(); if (!(self.state || {}).over) self.setState({ over: true }); },
+      dragLeave: function () { if ((self.state || {}).over) self.setState({ over: false }); },
+      drop: function (e) { if (e && e.preventDefault) e.preventDefault(); self.setState({ over: false }); if (self.dragIdx !== undefined && self.dragIdx !== null) self.run(self.dragIdx, true); },
+      showToast: showResult && !done,
+      showDone: showResult && done,
+      act: function () {
+        self.lastUser = Date.now() - 9000;
+        var st = self.state || {};
+        var cc = self.cases()[st.i || 0];
+        var tk = (st.tasks || []).map(function (t) { return cc.task && t.id === cc.task ? Object.assign({}, t, { done: true }) : t; });
+        self.setState({ done: true, tasks: tk });
+      },
+      pause: function () { self.paused = true; },
+      resume: function () { self.paused = false; },
+      wfList: wfList,
+      wf: { name: W.name, trigger: W.trigger, tag: W.tag, tagSt: W.tag === 'Un cas concret' ? tagPraxis : tagTyp, steps: wfSteps, hasMetric: !!W.metric, metric: W.metric, result: W.result, teams: (W.teams || []).map(function (t) { var ext = t.indexOf('Extern') === 0; return { name: t, st: ext ? 'font-size: 12px; font-weight: 600; color: #43586c; border: 1px dashed rgba(19, 41, 61, 0.4); border-radius: 9999px; padding: 2px 10px; white-space: nowrap;' : 'font-size: 12px; font-weight: 600; color: #13293d; background: #ffffff; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1); border-radius: 9999px; padding: 3px 10px; white-space: nowrap;' }; }) },
+      wfGridSt: 'grid-template-columns: repeat(' + W.steps.length + ', minmax(0, 1fr)); gap: 10px;',
+      lusser: lusser,
+      kiLeft: kiLeft,
+      kiLeftAnswer: leftDone,
+      kiLeftCost: leftDone ? '≈ 120 000 tokens · ≈ 0,40 € · 48 s' : (k >= 2 ? 'en cours …' : 'en attente'),
+      kiLeftCostSt: costBase + (leftDone ? ' color: #84410d; background: #fdf0e3;' : ' color: #55636f; background: #F3F3F3;'),
+      kiRight: kiRight,
+      kiRightAnswer: rightDone,
+      kiSuggest: k >= 4,
+      kiRightCost: rightDone ? '≈ 2 000 tokens · ≈ 0,01 € · 3 s' : (k >= 2 ? 'en cours …' : 'en attente'),
+      kiRightCostSt: costBase + (rightDone ? ' color: #2e7d32; background: #eaf4ea;' : ' color: #55636f; background: #F3F3F3;'),
+      kiReplay: function () { self.setState({ kiStep: 0 }); },
+      tip: TIPS[Math.max(0, tipN) % TIPS.length],
+      tipSt: 'display: block; animation: ' + (tipN % 2 ? 'clTipA' : 'clTipB') + ' 420ms cubic-bezier(0.25, 0.8, 0.5, 1);',
+      glassIn: function () {
+        if (self.glassOn) return;
+        self.glassOn = true;
+        var adv = function () { self.setState({ tip: ((self.state || {}).tip === undefined ? -1 : (self.state || {}).tip) + 1 }); };
+        adv();
+        if (self.glassT) clearInterval(self.glassT);
+        self.glassT = setInterval(adv, 2800);
+      },
+      glassOut: function () { self.glassOn = false; if (self.glassT) { clearInterval(self.glassT); self.glassT = null; } },
+      glassNext: function () { self.setState({ tip: ((self.state || {}).tip || 0) + 1 }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

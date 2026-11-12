@@ -4,6 +4,7 @@ export const TITLES = {
   Home: {
     de: 'clearlea.se · Operations Intelligence für Gewerbeimmobilien',
     en: 'clearlea.se · Operations Intelligence for Commercial Real Estate',
+    fr: 'clearlea.se · Operations Intelligence pour l’immobilier d’entreprise',
   },
   Plattform: {
     de: 'Plattform: Daten mit Historie, Cockpit und KI-Workflows · clearlea.se',
@@ -54,6 +55,7 @@ export const DESCRIPTIONS = {
   Home: {
     de: 'clearlea.se liest jeden Mietvertrag mit allen Nachträgen, zeigt, was Aufmerksamkeit braucht, und erledigt Routine in auditierbaren KI-Workflows.',
     en: 'clearlea.se reads every lease with all its amendments, shows what needs attention next and handles the routine in auditable AI workflows.',
+    fr: 'clearlea.se lit chaque bail avec tous ses avenants, montre ce qui demande votre attention et prend en charge la routine dans des workflows IA vérifiables.',
   },
   Plattform: {
     de: 'Daten mit Historie, ein Cockpit für das, was Aufmerksamkeit braucht, und KI-Workflows mit Verantwortlichen. Angebunden an Ihre Systeme.',
@@ -87,7 +89,7 @@ export const DESCRIPTIONS = {
 
 // Short page names for breadcrumbs in search results.
 export const LABELS = {
-  Home: { de: 'Startseite', en: 'Home' },
+  Home: { de: 'Startseite', en: 'Home', fr: 'Accueil' },
   Plattform: { de: 'Plattform', en: 'Platform' },
   'Loesungen-Bestandshalter': { de: 'Bestandshalter & Asset Management', en: 'Owners & Asset Management' },
   'Loesungen-Property': { de: 'Property & Facility Management', en: 'Property & Facility Management' },

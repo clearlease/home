@@ -11,7 +11,7 @@
 // - rewrites canvas images /_blob/<id> -> /media/<name>.webp|svg.
 import { parse } from 'parse5';
 import { fileURLToPath } from 'node:url';
-import { ROUTES, LEGAL_HREFS, LINKS, route, otherLang, buildDay } from '../site.config.mjs';
+import { ROUTES, LEGAL_HREFS, LINKS, route, buildDay } from '../site.config.mjs';
 import { mediaPath } from './media.mjs';
 import { isLive } from '../lib/expiry.mjs';
 import { articlePathByNumber } from '../lib/articles.mjs';
@@ -115,7 +115,8 @@ export function compileDC(source, { lang, page, file = page + '.dc.html', runtim
   const warnings = [];
   const slotImports = new Set();
   const today = buildDay();
-  const other = otherLang(lang);
+  // A link to /de, /en or /fr is a language switch, unless it points at the page's own language.
+  const langSwitchTarget = (href) => { const t = /^\/(de|en|fr)$/.test(href || '') ? href.slice(1) : null; return t && t !== lang ? t : null; };
 
   function rewriteHref(href, anchor) {
     const pageLink = href.match(/^([\w-]+)\.dc\.html(#.*)?$/);
@@ -124,10 +125,11 @@ export function compileDC(source, { lang, page, file = page + '.dc.html', runtim
       return route(pageLink[1], lang) + (anchor ? '#' + anchor : pageLink[2] || '');
     }
     if (LEGAL_HREFS[href]) return route(LEGAL_HREFS[href], lang);
-    if ((lang === 'de' && href === '/en') || (lang === 'en' && href === '/de')) return ROUTES[page] ? route(page, other) : ALT_HREF;
+    const sw = langSwitchTarget(href);
+    if (sw) return ROUTES[page] ? route(page, sw) : ALT_HREF;
     if (href === '[APP-URL]') return LINKS.appUrl || (warnings.push('[APP-URL] not set'), href);
     const art = href.match(/^\[RESSOURCE-(\d+)\]$/);
-    if (art) return articlePathByNumber(lang, art[1]);
+    if (art) return articlePathByNumber(lang === 'fr' ? 'en' : lang, art[1]);
     const li = href.match(/^\[LINKEDIN(?:-([A-Z]+))?\]$/);
     if (li) {
       const key = li[1] ? 'linkedin' + li[1][0] + li[1].slice(1).toLowerCase() : 'linkedin';
@@ -161,9 +163,8 @@ export function compileDC(source, { lang, page, file = page + '.dc.html', runtim
     }
     // the language switch link carries hreflang for crawlers and screen readers
     const href = attr(node, 'href');
-    if (node.tagName === 'a' && ((lang === 'de' && href === '/en') || (lang === 'en' && href === '/de'))) {
-      entries.push(`"hreflang":${JSON.stringify(other)}`, `"lang":${JSON.stringify(other)}`);
-    }
+    const swLang = node.tagName === 'a' && langSwitchTarget(href);
+    if (swLang) entries.push(`"hreflang":${JSON.stringify(swLang)}`, `"lang":${JSON.stringify(swLang)}`);
     return entries.length ? `{${entries.join(',')}}` : 'null';
   }
 
