@@ -9,7 +9,7 @@ import { textOf } from './lib/html.mjs';
 const PAGES = ['Home', 'Plattform', 'Loesungen-Bestandshalter', 'Loesungen-Property', 'Loesungen-Filialisten', 'KI-Teams', 'Trust-Center', 'Ressourcen', 'Unternehmen', 'Gespraech'];
 const flat = (html) => textOf(html).replace(/\s+/g, ' ');
 let failed = 0;
-for (const lang of ['de', 'en']) {
+for (const lang of ['de', 'en', 'fr']) {
   for (const page of PAGES) {
     if (!existsSync(`src/designs/${lang}/${page}.dc.html`)) continue;
     const r = ROUTES[page][lang];

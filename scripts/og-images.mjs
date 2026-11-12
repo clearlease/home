@@ -64,13 +64,15 @@ async function render(file, { lines, kicker, title, url }) {
 
 mkdirSync('public/og', { recursive: true });
 let written = 0;
-for (const lang of ['de', 'en']) {
-  for (const page of PAGES) {
+for (const lang of ['de', 'en', 'fr']) {
+  // French exists for the homepage only
+  for (const page of lang === 'fr' ? ['Home'] : PAGES) {
     const facts = heroFacts(`src/designs/${lang}/${page}.dc.html`);
     const url = 'clearlea.se' + (ROUTES[page][lang] === '/' ? '' : ROUTES[page][lang].replace(/\/$/, ''));
     await render(`public/og/${lang}-${page}.png`, { ...facts, url });
     written++;
   }
+  if (lang === 'fr') continue;
   // Ressourcen articles (files with text below the frontmatter): category as kicker, title as headline.
   const dir = `src/content/ressourcen/${lang}`;
   for (const f of readdirSync(dir)) {

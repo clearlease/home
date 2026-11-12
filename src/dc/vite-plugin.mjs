@@ -1,6 +1,6 @@
 // Vite plugin: `import Page, { meta } from './designs/de/Home.dc.html?dc'` returns the compiled
 // Preact page; `import './designs/de/Home.dc.html?dccss&lang.css'` returns its <helmet> CSS.
-// The page language is taken from the folder (designs/de, designs/en).
+// The page language is taken from the folder (designs/de, designs/en, designs/fr).
 import { readFileSync } from 'node:fs';
 import { basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -9,7 +9,7 @@ import { compileDC, SLOTS } from './compile.mjs';
 const RUNTIME = fileURLToPath(new URL('./runtime.js', import.meta.url));
 
 function compileFile(file) {
-  const lang = /[\\/]designs[\\/]en[\\/]/.test(file) ? 'en' : 'de';
+  const lang = file.match(/[\\/]designs[\\/](en|fr)[\\/]/)?.[1] ?? 'de';
   const page = basename(file, '.dc.html');
   const out = compileDC(readFileSync(file, 'utf8'), { lang, page, file: `${lang}/${page}.dc.html`, runtimeId: '@dc/runtime', slotId: (n) => '@dc/slot/' + n });
   for (const w of new Set(out.warnings)) console.warn(`[dc] ${lang}/${page}: ${w}`);

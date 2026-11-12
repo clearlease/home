@@ -170,3 +170,24 @@ Closing call to action (the navy block at the end of most pages):
 | Ab 9,49 € pro Standort und Monat, Mengenrabatt möglich. Beliebig viele Nutzer, KI-Nutzung inklusive. | From €9.49 per site per month, volume discounts available. Unlimited users, AI usage included. |
 | Mitgründer und CEO von clearlea.se (alt) | Co-founder and CEO of clearlea.se |
 | Hieronymus Deutsch, Mitgründer und CEO von clearlea.se (alt) | Hieronymus Deutsch, co-founder and CEO of clearlea.se |
+
+## French (homepage only)
+
+`src/designs/fr/Home.dc.html` is a translation of the English homepage (German is the source of truth where they differ). Every other page stays German and English. A French page links to the English pages (`/en/...`) for everything that has no French version; the switcher on the French homepage offers DE and EN, and only the DE and EN homepage offer FR. `node scripts/check-i18n.mjs Home` checks the French file against the English one: same structure, same numbers, no English number formats, no normal space before `: ; ? ! % €`, no leftover English.
+
+Rules: formal "vous"; no em or en dashes; `clearlea.se` lowercase; product and brand names stay (workflow, cockpit, Trust Center, Property & Facility Management); fictional names and cities in the mocks stay (Köln, M. Weber). Formats: `98 %`, `9,49 €`, `19 200 €`, `1 480 m²` with a no-break space (U+00A0) before `%`, `€`, `:`, `;`, `?`, `!` and between thousands; dates as `31/12/2031`. A longer label may need an earlier breakpoint: the French CSS may only append rules after the English CSS (the check enforces it).
+
+| English | French |
+|---|---|
+| lease / amendment | bail / avenant |
+| current valid state | état en vigueur |
+| evidence, source | justificatif, source |
+| property / tenant / landlord | bien / locataire / bailleur |
+| service charge statement / audit | décompte de charges / contrôle des charges |
+| deadline | échéance |
+| approval / approve | validation / valider |
+| QA index | indice QA |
+| mandate onboarding | reprise de mandat |
+| DMS | GED |
+| GDPR | RGPD |
+| Book a call | Prendre RDV |
