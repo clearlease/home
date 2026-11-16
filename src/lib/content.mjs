@@ -4,6 +4,7 @@ import { marked } from 'marked';
 import { getCollection } from 'astro:content';
 import { buildDay as today } from '../site.config.mjs';
 import { isLive } from './expiry.mjs';
+import { watermark } from './watermark.mjs';
 import { validate, sortItems, hasBody, slugOf, numOf, articlePath, visualPath, filterPath, resolveHref, pairByNumber } from './articles.mjs';
 
 // All Ressourcen files, checked once per build: a broken item stops the build with every problem listed.
@@ -71,5 +72,6 @@ const LEGAL_FILES = {
   AGB: 'resources/content/20250616 - 0938uhr - clearlease - terms.md',
 };
 export function legalHtml(key) {
-  return marked.parse(readFileSync(LEGAL_FILES[key], 'utf8'));
+  const html = marked.parse(readFileSync(LEGAL_FILES[key], 'utf8'));
+  return key === 'Datenschutz' ? watermark(html) : html;
 }
