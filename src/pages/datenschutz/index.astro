@@ -6,7 +6,7 @@ import '../../designs/de/Shell.dc.html?dccss&lang.css';
 import { legalHtml } from '../../lib/content.mjs';
 import { route } from '../../site.config.mjs';
 const lang = 'de';
-const html = legalHtml('Datenschutz');
+const html = legalHtml('Datenschutz', lang);
 ---
 <Base page="Datenschutz" lang={lang}>
   <Shell client:load altHref={route('Datenschutz', 'en')}>

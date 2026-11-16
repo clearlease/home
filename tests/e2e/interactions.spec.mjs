@@ -189,10 +189,14 @@ test.describe('Unterseiten', () => {
     await expect(page.getByText('2.200,00 €')).toBeVisible();
   });
 
-  test('Gespräch: the Cal.com booking calendar loads', async ({ page }) => {
+  test('Gespräch: the Cal.com booking calendar loads on click only', async ({ page }) => {
     test.skip(!!process.env.OFFLINE, 'needs network');
     await page.goto('/gespraech/');
     await ready(page);
+    // Click to load: nothing comes from Cal.com before the visitor asks for the calendar.
+    await expect(page.locator('[data-cal-embed] iframe')).toHaveCount(0);
+    expect(await page.evaluate(() => performance.getEntriesByType('resource').some((r) => r.name.includes('cal.com')))).toBe(false);
+    await page.getByRole('button', { name: 'Kalender anzeigen' }).click();
     await expect(page.locator('[data-cal-embed] iframe')).toBeAttached({ timeout: 20_000 });
   });
 });

@@ -1,4 +1,4 @@
-## Angaben gemäß § 5TMG
+## Angaben gemäß § 5 DDG
 
 [clearlea.se](http://clearlea.se) Immobiliensoftware UG (haftungsbeschränkt)
 
@@ -20,9 +20,9 @@ Website: [clearlea.se](http://clearlea.se)
 
 Wir bemühen uns die Inhalte unserer Seite aktuell zu halten. Trotz sorgfältiger Bearbeitung bleibt eine Haftung ausgeschlossen.
 
-Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.
+Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.
 
-Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen. Bei bekannt werden von Rechtsverletzungen, werden wir diese Inhalte umgehend entfernen. Eine diesbezügliche Haftung übernehmen wir erst ab dem Zeitpunkt der Kenntnis einer möglichen Rechtsverletzung.
+Nach Art. 4 bis 6 und Art. 8 der Verordnung (EU) 2022/2065 (Digital Services Act) sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen. Bei bekannt werden von Rechtsverletzungen, werden wir diese Inhalte umgehend entfernen. Eine diesbezügliche Haftung übernehmen wir erst ab dem Zeitpunkt der Kenntnis einer möglichen Rechtsverletzung.
 
 **Haftung für Links**
 
@@ -40,13 +40,7 @@ Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Komm
 
 Der Nutzung der im Zuge der Impressumspflicht und der weiteren veröffentlichten Kontaktdaten durch Dritte bspw. zur Übersendung von unangeforderter Werbung und Informationsmaterialien wird widersprochen. Wir behalten uns rechtliche Schritte im Falle der unverlangten Zusendung von Werbeinformationen, etwa durch Spam-Mails, vor.
 
-### EU-Streitschlichtung
-
-Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: [https://ec.europa.eu/consumers/odr/](https://ec.europa.eu/consumers/odr/).
-
-Unsere E-Mail-Adresse finden Sie oben im Impressum.
-
-Verbraucherstreitbeilegung/Universalschlichtungsstelle
+### Verbraucherstreitbeilegung
 
 Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
 
