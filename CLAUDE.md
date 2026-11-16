@@ -63,6 +63,7 @@ Compiler features used in the designs:
 - Ressourcen items live in `src/content/ressourcen/<lang>/<nn>-<slug>.md`, paired across languages by `<nn>`. The frontmatter is described in `src/content.config.ts`. Text below the frontmatter makes an article page (`/ressourcen/<slug>/`); without it the card links to `href`. Filter pages and an RSS feed are generated too. Add `until:` for time-limited items (see `docs/events.md`). Rules, checks and URLs: `docs/ressourcen.md`. New items: the `ressourcen-beitrag` skill.
 - **AI agents:** AI search bots, assistants and training crawlers may read the whole site. `public/robots.txt` blocks only scrapers and data resellers without search or AI visibility (Bytespider and similar). `/agent.md` and `/llms.txt` serve one curated summary from `src/agent/agent.md`, which every footer links to. Keep it in line with the page copy and the claims register.
 - Legal pages render the Markdown in `resources/content/` at build time. English legal routes show the German text with a "German version is binding" note.
+- The Datenschutz page carries an invisible watermark added at build time (`src/lib/watermark.mjs`): Cyrillic twins of a, c, e, o, p and four-per-em spaces, at least one every 20 words. Never "fix" them in the built page, and keep the Markdown source free of them. Check a suspected copy with `node scripts/watermark-check.mjs <url or file>`.
 
 ### Design system
 
