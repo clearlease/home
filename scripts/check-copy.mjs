@@ -17,8 +17,8 @@ for (const lang of ['de', 'en', 'fr']) {
     if (!existsSync(built)) { console.log(`MISSING  ${lang} ${page}: ${built}`); failed++; continue; }
     const designHtml = execFileSync('node', ['scripts/render-design.mjs', lang, page, '--html'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'], maxBuffer: 64 << 20 });
     const want = flat(designHtml).trim();
-    // The Cal.com slot renders a loading fallback that is not part of the design.
-    const text = flat(readFileSync(built, 'utf8')).replace(/ (Kalender wird geladen …|Loading the calendar …) (Freie Termine auf cal\.com ansehen|See free slots on cal\.com)/g, '');
+    // The Cal.com slot renders a click-to-load notice that is not part of the design.
+    const text = flat(readFileSync(built, 'utf8')).replace(/ (Der Kalender kommt von Cal\.com\. Erst mit Ihrem Klick lädt Ihr Browser Daten von dort\.|The calendar comes from Cal\.com\. Your browser loads data from there only after you click\.) (Datenschutz|Privacy) (Kalender anzeigen|Show calendar)( (Freie Termine auf cal\.com ansehen|See free slots on cal\.com))?/g, '');
     // The Ressourcen feed comes from Markdown at build time, so compare that page up to the feed.
     const cut = page === 'Ressourcen' ? want.slice(0, Math.max(0, want.indexOf(lang === 'de' ? 'Alle' : 'All'))) : want;
     if (!text.includes(cut.trim())) {

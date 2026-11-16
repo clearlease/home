@@ -1,5 +1,5 @@
 // Build-time content helpers used by the generated pages.
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { marked } from 'marked';
 import { getCollection } from 'astro:content';
 import { buildDay as today } from '../site.config.mjs';
@@ -71,7 +71,12 @@ const LEGAL_FILES = {
   Datenschutz: 'resources/content/20250911 - clearlease - privacy.md',
   AGB: 'resources/content/20250616 - 0938uhr - clearlease - terms.md',
 };
-export function legalHtml(key) {
-  const html = marked.parse(readFileSync(LEGAL_FILES[key], 'utf8'));
+// A translation sits next to the German file as `<name>.en.md`. Without one, English routes show the German text.
+export const legalFile = (key, lang = 'de') => {
+  const translated = LEGAL_FILES[key].replace(/\.md$/, `.${lang}.md`);
+  return lang !== 'de' && existsSync(translated) ? translated : LEGAL_FILES[key];
+};
+export function legalHtml(key, lang = 'de') {
+  const html = marked.parse(readFileSync(legalFile(key, lang), 'utf8'));
   return key === 'Datenschutz' ? watermark(html) : html;
 }

@@ -1,12 +1,13 @@
 // Writes one Astro page per route and language (src/pages/**). Each page mounts a compiled
 // design from src/designs/<lang>/. Re-run after adding a page to ROUTES:  node scripts/gen-pages.mjs
-import { mkdirSync, writeFileSync, existsSync, rmSync } from 'node:fs';
+import { mkdirSync, writeFileSync, existsSync, rmSync, readdirSync } from 'node:fs';
 import { dirname, relative } from 'node:path';
 import { ROUTES, LANGS, route } from '../src/site.config.mjs';
 import { FILTERS } from '../src/lib/articles.mjs';
 
 const DESIGN_PAGES = ['Home', 'Plattform', 'Loesungen-Bestandshalter', 'Loesungen-Property', 'Loesungen-Filialisten', 'KI-Teams', 'Trust-Center', 'Ressourcen', 'Unternehmen', 'Gespraech'];
 const LEGAL = ['Impressum', 'Datenschutz', 'AGB'];
+const LEGAL_SLUG = { Impressum: 'inprint', Datenschutz: 'privacy', AGB: 'terms' }; // file name endings in resources/content
 
 const fileFor = (path) => 'src/pages' + (path.endsWith('/') ? path + 'index' : path) + '.astro';
 const rel = (from, to) => { const r = relative(dirname(from), to); return r.startsWith('.') ? r : './' + r; };
@@ -52,20 +53,22 @@ ${extraFront}---
   ressourcenPages(lang, shell);
   for (const key of LEGAL) {
     const file = fileFor(ROUTES[key][lang]);
-    const note = lang === 'en'
-      ? `<p class="cl-prose-note" lang="en">This document is available in German only. The German version is legally binding.</p>`
-      : '';
+    // Same rule as legalFile() in src/lib/content.mjs: a `<name>.en.md` next to the German file is the translation.
+    const translated = lang !== 'de' && readdirSync('resources/content').some((f) => f.endsWith(`- ${LEGAL_SLUG[key]}.${lang}.md`));
+    const note = lang !== 'en' ? ''
+      : translated ? `<p class="cl-prose-note" lang="en">This is a translation for your convenience. The German version is legally binding.</p>`
+      : `<p class="cl-prose-note" lang="en">This document is available in German only. The German version is legally binding.</p>`;
     write(file, `${header}import Base from '${rel(file, 'src/layouts/Base.astro')}';
 import Shell from '${rel(file, shell)}?dc';
 import '${rel(file, shell)}?dccss&lang.css';
 import { legalHtml } from '${rel(file, 'src/lib/content.mjs')}';
 import { route } from '${rel(file, 'src/site.config.mjs')}';
 const lang = '${lang}';
-const html = legalHtml('${key}');
+const html = legalHtml('${key}', lang);
 ---
 <Base page="${key}" lang={lang}>
   <Shell client:load altHref={route('${key}', '${lang === 'de' ? 'en' : 'de'}')}>
-    <div class="cl-prose">${note}<div lang="de" set:html={html} /></div>
+    <div class="cl-prose">${note}<div lang="${translated ? lang : 'de'}" set:html={html} /></div>
   </Shell>
 </Base>
 `);
