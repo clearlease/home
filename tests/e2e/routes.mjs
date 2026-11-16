@@ -6,6 +6,8 @@ export const LEGAL_PAGES = ['Impressum', 'Datenschutz', 'AGB'];
 // alt: the other language's URL, og: the preview image (default /og/<lang>-<page>.png)
 export const ALL = [];
 for (const lang of ['de', 'en']) for (const page of [...DESIGN_PAGES, ...LEGAL_PAGES]) ALL.push({ page, lang, path: ROUTES[page][lang], alt: ROUTES[page][lang === 'de' ? 'en' : 'de'] });
+// French exists for the homepage only; its switch link to the nearest sibling is English.
+ALL.push({ page: 'Home', lang: 'fr', path: ROUTES.Home.fr, alt: ROUTES.Home.en });
 
 // Ressourcen filter pages and article pages (files with text below the frontmatter).
 const files = (lang) => readdirSync(`src/content/ressourcen/${lang}`).map((f) => ({ f, src: readFileSync(`src/content/ressourcen/${lang}/${f}`, 'utf8') }));

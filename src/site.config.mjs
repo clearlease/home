@@ -13,7 +13,8 @@ export const LINKS = {
   calDemo: 'https://cal.com/deutsch/demo',
 };
 
-export const LANGS = ['de', 'en'];
+// 'fr' exists for the homepage only (ROUTES.Home.fr). Every other French link falls back to the English page.
+export const LANGS = ['de', 'en', 'fr'];
 
 // The day a build runs, in Berlin. `data-until` (designs) and `until:` (Ressourcen) compare
 // against it. SITE_BUILD_DATE=YYYY-MM-DD overrides it, e.g. to preview an expiry.
@@ -21,7 +22,7 @@ export const buildDay = () => process.env.SITE_BUILD_DATE || new Date().toLocale
 
 // page key = canvas file name without .dc.html
 export const ROUTES = {
-  Home: { de: '/', en: '/en/' },
+  Home: { de: '/', en: '/en/', fr: '/fr/' },
   Plattform: { de: '/plattform/', en: '/en/platform/' },
   'Loesungen-Bestandshalter': { de: '/loesungen/bestandshalter/', en: '/en/solutions/owners/' },
   'Loesungen-Property': { de: '/loesungen/property-management/', en: '/en/solutions/property-management/' },
@@ -43,7 +44,8 @@ export const LEGAL_HREFS = { '/impressum': 'Impressum', '/datenschutz': 'Datensc
 export const route = (key, lang) => {
   const r = ROUTES[key];
   if (!r) throw new Error(`No route for page "${key}"`);
-  return r[lang];
+  return r[lang] ?? r.en;
 };
 
-export const otherLang = (lang) => (lang === 'de' ? 'en' : 'de');
+// The language a page's switch link points to (fr: English, its closest sibling). Pages with three languages list all of them in `paths`.
+export const otherLang = (lang) => (lang === 'de' ? 'en' : lang === 'fr' ? 'en' : 'de');

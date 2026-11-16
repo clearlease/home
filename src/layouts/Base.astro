@@ -7,19 +7,19 @@ import '@fontsource/montserrat/600.css';
 import '@fontsource/montserrat/700.css';
 import '../styles/enhance.css';
 import { existsSync } from 'node:fs';
-import { SITE_URL, route, otherLang } from '../site.config.mjs';
+import { SITE_URL, ROUTES, route } from '../site.config.mjs';
 import { TITLES, DESCRIPTIONS, LABELS } from '../seo.mjs';
 
 interface Props {
   page: string;
-  lang: 'de' | 'en';
+  lang: 'de' | 'en' | 'fr';
   description?: string;
   faq?: { q: string; a: string }[];
   jsonLd?: object[];
   noindex?: boolean;
   // Pages outside ROUTES (Ressourcen articles and filters) pass their own URLs and texts.
   // `paths` drives canonical and hreflang; `title` and `description` then win over seo.mjs.
-  paths?: { de: string; en: string };
+  paths?: { de: string; en: string; fr?: string };
   title?: string;
   crumb?: string;
   ogType?: string;
@@ -30,10 +30,11 @@ const { page, lang, faq = [], jsonLd = [], noindex = false, paths, crumb, ogType
 const title = (paths && Astro.props.title) || (TITLES[page]?.[lang] ?? 'clearlea.se');
 const description = (paths && Astro.props.description) || (DESCRIPTIONS[page]?.[lang] ?? Astro.props.description ?? '');
 const abs = (p: string) => SITE_URL + p;
-const own = paths ?? { de: route(page, 'de'), en: route(page, 'en') };
+// Languages a page exists in: de and en everywhere, fr on the homepage only (ROUTES.Home.fr).
+const own: Record<string, string> = paths ?? { de: route(page, 'de'), en: route(page, 'en'), ...(ROUTES[page]?.fr ? { fr: ROUTES[page].fr } : {}) };
 const canonical = abs(own[lang]);
-const alternate = abs(own[otherLang(lang)]);
 const deUrl = abs(own.de);
+const LOCALE: Record<string, string> = { de: 'de_DE', en: 'en_GB', fr: 'fr_FR' };
 // per-page link-preview image (scripts/og-images.mjs), else the generic one
 const ogFile = Astro.props.ogFile ?? `/og/${lang}-${page}.png`;
 const ogImage = SITE_URL + (existsSync('public' + ogFile) ? ogFile : '/og-image.png');
@@ -69,13 +70,12 @@ if (faq.length) {
     {description && <meta name="description" content={description} />}
     {noindex && <meta name="robots" content="noindex, follow" />}
     {!noindex && <link rel="canonical" href={canonical} />}
-    {!noindex && <link rel="alternate" hreflang={lang} href={canonical} />}
-    {!noindex && <link rel="alternate" hreflang={otherLang(lang)} href={alternate} />}
+    {!noindex && Object.entries(own).map(([l, p]) => <link rel="alternate" hreflang={l} href={abs(p)} />)}
     {!noindex && <link rel="alternate" hreflang="x-default" href={deUrl} />}
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="clearlea.se" />
-    <meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'en_GB'} />
-    <meta property="og:locale:alternate" content={lang === 'de' ? 'en_GB' : 'de_DE'} />
+    <meta property="og:locale" content={LOCALE[lang]} />
+    {Object.keys(own).filter((l) => l !== lang).map((l) => <meta property="og:locale:alternate" content={LOCALE[l]} />)}
     <meta property="og:title" content={title} />
     {description && <meta property="og:description" content={description} />}
     <meta property="og:url" content={canonical} />

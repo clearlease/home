@@ -12,8 +12,9 @@ for (const r of [...Object.values(ROUTES), ...ressourcenUrlPairs()]) {
   const de = SITE_URL + r.de;
   const en = SITE_URL + r.en;
   const links = [{ lang: 'de', url: de }, { lang: 'en', url: en }];
-  pairs.set(de, links);
-  pairs.set(en, links);
+  // fr exists for the homepage only (ROUTES.Home.fr); every language version lists all of them.
+  if (r.fr) links.push({ lang: 'fr', url: SITE_URL + r.fr });
+  for (const l of links) pairs.set(l.url, links);
 }
 
 export default defineConfig({
